@@ -371,6 +371,45 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
 .fiche-seealso a { color: #2563eb; text-decoration: none; cursor: pointer; margin: 0 4px; }
 .fiche-seealso a:hover { text-decoration: underline; }
 
+/* Tutorials */
+.tuto-card { background: white; border-radius: 16px; padding: 28px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); margin-bottom: 20px; border-left: 5px solid #2563eb; }
+.tuto-card h3 { color: #1e3a5f; font-size: 1.15rem; margin-bottom: 6px; }
+.tuto-card .tuto-desc { color: #64748b; font-size: 0.9rem; margin-bottom: 20px; }
+.tuto-step { background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 12px; padding: 18px; margin-bottom: 14px; transition: border-color 0.3s; }
+.tuto-step.active { border-color: #2563eb; background: #eff6ff; }
+.tuto-step.correct { border-color: #16a34a; background: #f0fdf4; }
+.tuto-step.wrong { border-color: #dc2626; background: #fef2f2; }
+.tuto-step.locked { opacity: 0.5; pointer-events: none; }
+.tuto-step-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.tuto-step-num { width: 28px; height: 28px; border-radius: 50%; background: #2563eb; color: white; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700; flex-shrink: 0; }
+.tuto-step.correct .tuto-step-num { background: #16a34a; }
+.tuto-step.wrong .tuto-step-num { background: #dc2626; }
+.tuto-step-title { font-weight: 600; font-size: 0.95rem; color: #1e293b; }
+.tuto-step p { font-size: 0.9rem; margin-bottom: 10px; color: #475569; }
+.tuto-input { padding: 10px 14px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 0.95rem; width: 120px; text-align: center; }
+.tuto-input:focus { border-color: #2563eb; outline: none; }
+.tuto-btn-check { background: #2563eb; color: white; border: none; padding: 8px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.85rem; margin-left: 10px; }
+.tuto-btn-check:hover { background: #1d4ed8; }
+.tuto-feedback { margin-top: 10px; padding: 10px 14px; border-radius: 8px; font-size: 0.85rem; display: none; }
+.tuto-feedback.show { display: block; }
+.tuto-feedback.ok { background: #f0fdf4; border: 1px solid #bbf7d0; color: #166534; }
+.tuto-feedback.ko { background: #fef2f2; border: 1px solid #fecaca; color: #991b1b; }
+.tuto-scenario { background: #f8fafc; border-left: 4px solid #2563eb; padding: 14px; border-radius: 0 10px 10px 0; margin-bottom: 16px; font-size: 0.9rem; color: #475569; }
+.tuto-options { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0; }
+.tuto-opt { padding: 8px 16px; border: 2px solid #e2e8f0; border-radius: 8px; cursor: pointer; font-size: 0.85rem; font-weight: 500; transition: all 0.15s; }
+.tuto-opt:hover { border-color: #93c5fd; background: #eff6ff; }
+.tuto-opt.selected { border-color: #2563eb; background: #dbeafe; color: #1e40af; }
+.tuto-opt.correct-opt { border-color: #16a34a; background: #dcfce7; color: #166534; }
+.tuto-opt.wrong-opt { border-color: #dc2626; background: #fee2e2; color: #991b1b; }
+.tuto-progress { display: flex; gap: 6px; margin-bottom: 20px; }
+.tuto-progress-dot { width: 12px; height: 12px; border-radius: 50%; background: #e2e8f0; }
+.tuto-progress-dot.done { background: #16a34a; }
+.tuto-progress-dot.current { background: #2563eb; }
+.tuto-progress-dot.failed { background: #dc2626; }
+.tuto-congrats { text-align: center; padding: 24px; background: linear-gradient(135deg, #f0fdf4, #dcfce7); border-radius: 12px; margin-top: 16px; }
+.tuto-congrats h4 { color: #166534; font-size: 1.2rem; margin-bottom: 8px; }
+.tuto-reset { background: #64748b; color: white; border: none; padding: 8px 20px; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 0.85rem; margin-top: 12px; }
+
 @media (max-width: 900px) {
   .dash-overview { grid-template-columns: 1fr; }
   .chapter-cards-grid { grid-template-columns: 1fr; }
@@ -446,6 +485,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
       <button class="subtab-btn active" onclick="switchApprentissageSubtab('fiches',this)">Fiches de revision</button>
       <button class="subtab-btn" onclick="switchApprentissageSubtab('flashcards',this)">Flashcards</button>
       <button class="subtab-btn" onclick="switchApprentissageSubtab('aide',this)">Aide-memoire</button>
+      <button class="subtab-btn" onclick="switchApprentissageSubtab('tutos',this)">Tutos</button>
     </div>
 
     <!-- ==================== FICHES DE REVISION ==================== -->
@@ -1743,6 +1783,8 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
 
     </div><!-- end subtab-aide -->
 
+    <div id="subtab-tutos" style="display:none;"></div>
+
   </div><!-- end homeTab-apprentissage -->
 
 </div>
@@ -3021,9 +3063,11 @@ function switchApprentissageSubtab(id, btn) {
   document.getElementById('subtab-fiches').style.display = id === 'fiches' ? 'block' : 'none';
   document.getElementById('subtab-flashcards').style.display = id === 'flashcards' ? 'block' : 'none';
   document.getElementById('subtab-aide').style.display = id === 'aide' ? 'block' : 'none';
+  document.getElementById('subtab-tutos').style.display = id === 'tutos' ? 'block' : 'none';
   document.querySelectorAll('.apprentissage-subtabs .subtab-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   if (id === 'flashcards' && !window._fcInitialized) { initFlashcards(); window._fcInitialized = true; }
+  if (id === 'tutos' && !window._tutosInitialized) { renderTutos(); window._tutosInitialized = true; }
 }
 
 function toggleFiche(header) {
@@ -4406,6 +4450,293 @@ const LO_DESCRIPTIONS = {
   "FL-6.1.1": "Categories d'outils",
   "FL-6.2.1": "Avantages et risques de l'automatisation"
 };
+
+// ============================================================
+// TUTORIALS
+// ============================================================
+
+const TUTORIALS = [
+  {
+    id: 'ep',
+    title: 'Partitions d\'equivalence (EP)',
+    chapter: 4,
+    desc: 'Apprenez a identifier les partitions et calculer la couverture EP',
+    scenario: 'Un formulaire demande l\'age du passager. Les regles sont :\n- Moins de 2 ans : bebe (gratuit)\n- De 2 a 11 ans : enfant (50% reduction)\n- De 12 a 64 ans : adulte (plein tarif)\n- 65 ans et plus : senior (30% reduction)\n\nIdentifiez les partitions d\'equivalence.',
+    steps: [
+      { q: 'Combien de partitions VALIDES y a-t-il ?', type: 'input', answer: '4', hint: 'Comptez les plages d\'age distinctes avec un comportement different.', feedback_ok: 'Exact ! 4 partitions valides : bebe (0-1), enfant (2-11), adulte (12-64), senior (65+).', feedback_ko: 'Il y a 4 partitions valides : bebe (0-1), enfant (2-11), adulte (12-64), senior (65+). Chaque plage avec un comportement different = une partition.' },
+      { q: 'En ajoutant les partitions INVALIDES, combien de partitions au total ?', type: 'input', answer: '5', hint: 'Pensez aux valeurs que le systeme devrait rejeter (age negatif par exemple).', feedback_ok: 'Correct ! Les 4 valides + 1 invalide (age negatif, ex: -1). Total = 5 partitions.', feedback_ko: 'Il y a 5 partitions : les 4 valides + 1 invalide (age negatif). Note : on considere generalement qu\'il n\'y a pas de borne superieure invalide sauf si specifie.' },
+      { q: 'Quel representant choisiriez-vous pour la partition "enfant" ?', type: 'options', options: ['1','5','11','12'], answer: '5', feedback_ok: 'Oui ! 5 est dans la partition enfant (2-11). N\'importe quelle valeur entre 2 et 11 convient.', feedback_ko: 'Un representant de la partition enfant (2-11) doit etre entre 2 et 11. La valeur 5 convient.' },
+      { q: 'Vous avez les cas de test suivants : age=-1, age=5, age=30. Quelle est la couverture EP (en %) ?', type: 'input', answer: '60', hint: 'Couverture = partitions testees / total partitions \u00d7 100. Comptez quelles partitions sont couvertes.', feedback_ok: 'Parfait ! 3 partitions couvertes (invalide, enfant, adulte) sur 5 = 60%.', feedback_ko: '3 partitions couvertes sur 5 : invalide (-1), enfant (5), adulte (30). Bebe et senior ne sont pas couverts. 3/5 = 60%.' },
+      { q: 'Quel(s) cas de test ajouter pour atteindre 100% ? (choisissez 2)', type: 'multi', options: ['age = 0','age = 3','age = 50','age = 70'], answer: ['age = 0','age = 70'], feedback_ok: 'Exactement ! age=0 couvre bebe (0-1), age=70 couvre senior (65+). Couverture = 5/5 = 100%.', feedback_ko: 'Il manque bebe (0-1) et senior (65+). Il faut age=0 (ou 1) pour bebe, et age=70 (ou 65+) pour senior.' }
+    ]
+  },
+  {
+    id: 'bva',
+    title: 'Analyse des valeurs limites (BVA)',
+    chapter: 4,
+    desc: 'Apprenez a identifier les valeurs limites et calculer la couverture BVA 2-valeurs',
+    scenario: 'Un systeme de controle de temperature accepte des valeurs entieres.\n- Moins de 0\u00b0C : "Gel"\n- De 0 a 100\u00b0C : "Normal"\n- Plus de 100\u00b0C : "Surchauffe"\n\nAppliquez l\'analyse des valeurs limites a 2 valeurs.',
+    steps: [
+      { q: 'Combien de frontieres y a-t-il entre les partitions ?', type: 'input', answer: '2', hint: 'Une frontiere = l\'endroit ou le comportement change.', feedback_ok: 'Exact ! 2 frontieres : une a 0\u00b0C (entre Gel et Normal) et une a 100\u00b0C (entre Normal et Surchauffe).', feedback_ko: 'Il y a 2 frontieres : a 0\u00b0C (Gel/Normal) et a 100\u00b0C (Normal/Surchauffe).' },
+      { q: 'Pour la frontiere a 0\u00b0C, quelles sont les 2 valeurs limites BVA ?', type: 'options', options: ['-2 et -1','-1 et 0','0 et 1','-1 et 1'], answer: '-1 et 0', feedback_ok: 'Correct ! BVA 2-valeurs : une valeur de chaque cote de la frontiere = -1 (Gel) et 0 (Normal).', feedback_ko: 'Pour BVA 2-valeurs a la frontiere 0 : on prend -1 (dernier du Gel) et 0 (premier du Normal).' },
+      { q: 'Pour la frontiere a 100\u00b0C, quelles sont les 2 valeurs limites BVA ?', type: 'options', options: ['99 et 100','100 et 101','99 et 101','98 et 102'], answer: '100 et 101', feedback_ok: 'Exact ! 100 (dernier du Normal) et 101 (premier de Surchauffe).', feedback_ko: 'BVA 2-valeurs a la frontiere 100 : 100 (dernier de Normal) et 101 (premier de Surchauffe).' },
+      { q: 'Combien de valeurs limites au total pour un BVA 2-valeurs complet ?', type: 'input', answer: '4', hint: '2 frontieres \u00d7 2 valeurs par frontiere = ?', feedback_ok: 'Correct ! 2 frontieres \u00d7 2 valeurs = 4 valeurs limites : {-1, 0, 100, 101}.', feedback_ko: '2 frontieres \u00d7 2 valeurs par frontiere = 4 valeurs limites : -1, 0, 100, 101.' },
+      { q: 'Vous testez avec les valeurs -1, 0 et 100. Quelle est la couverture BVA 2-valeurs ?', type: 'input', answer: '75', hint: '3 valeurs limites testees sur 4 au total.', feedback_ok: 'Parfait ! 3 valeurs limites couvertes sur 4 = 75%. Il manque 101.', feedback_ko: '3 valeurs limites sur 4 = 75%. Les valeurs testees couvrent -1, 0, 100. Il manque 101 (Surchauffe).' }
+    ]
+  },
+  {
+    id: 'decision',
+    title: 'Tables de decision',
+    chapter: 4,
+    desc: 'Apprenez a lire une table de decision et identifier quelle regle couvre un cas de test',
+    scenario: 'Systeme de reduction en ligne :\n\nConditions :\n- C1: Membre du club ? (Oui/Non)\n- C2: Commande > 50\u20ac ? (Oui/Non)\n\nTable de decision :\n| | R1 | R2 | R3 | R4 |\n|---|---|---|---|---|\n| Membre ? | Oui | Oui | Non | Non |\n| Commande > 50\u20ac ? | Oui | Non | Oui | Non |\n| Reduction 20% | X | | | |\n| Reduction 10% | | X | X | |\n| Pas de reduction | | | | X |',
+    steps: [
+      { q: 'Combien de regles contient cette table de decision ?', type: 'input', answer: '4', hint: 'Chaque colonne Rx est une regle.', feedback_ok: 'Exact ! 4 regles (R1 a R4), une par combinaison de conditions.', feedback_ko: 'Il y a 4 regles : R1, R2, R3, R4. Chaque colonne = une regle.' },
+      { q: 'Cas de test : client membre, commande de 35\u20ac. Quelle regle est couverte ?', type: 'options', options: ['R1','R2','R3','R4'], answer: 'R2', feedback_ok: 'Correct ! Membre=Oui, >50\u20ac=Non \u2192 ca correspond a R2 (reduction 10%).', feedback_ko: 'Membre=Oui + Commande>50\u20ac=Non \u2192 R2. On cherche la colonne ou les deux conditions correspondent.' },
+      { q: 'Cas de test : non-membre, commande de 80\u20ac. Quelle regle ?', type: 'options', options: ['R1','R2','R3','R4'], answer: 'R3', feedback_ok: 'Exact ! Non-membre + >50\u20ac = R3 (reduction 10%).', feedback_ko: 'Membre=Non + >50\u20ac=Oui \u2192 R3.' },
+      { q: 'Vous avez teste R2 et R3. Quelle est la couverture de la table ?', type: 'input', answer: '50', hint: '2 regles testees sur 4 au total.', feedback_ok: 'Correct ! 2/4 = 50% de couverture.', feedback_ko: '2 regles couvertes sur 4 = 50%.' },
+      { q: 'Quel cas de test couvrirait R1 ?', type: 'options', options: ['Membre, 30\u20ac','Non-membre, 60\u20ac','Membre, 60\u20ac','Non-membre, 30\u20ac'], answer: 'Membre, 60\u20ac', feedback_ok: 'Parfait ! Membre=Oui + >50\u20ac=Oui \u2192 R1 (reduction 20%).', feedback_ko: 'R1 = Membre=Oui ET >50\u20ac=Oui. Seul "Membre, 60\u20ac" correspond.' }
+    ]
+  },
+  {
+    id: 'state',
+    title: 'Transitions d\'etat',
+    chapter: 4,
+    desc: 'Apprenez a tracer un chemin dans un diagramme d\'etats et calculer la couverture',
+    scenario: 'Systeme de commande en ligne avec 4 etats :\n- S1: Panier (etat initial)\n- S2: Commande validee\n- S3: En livraison\n- S4: Terminee (etat final)\n\nTransitions valides :\n- S1 \u2192 S2 : Valider (evenement A)\n- S2 \u2192 S3 : Expedier (evenement B)\n- S3 \u2192 S4 : Livrer (evenement C)\n- S2 \u2192 S1 : Annuler (evenement D)\n- S3 \u2192 S1 : Retourner (evenement E)\n\nTotal : 5 transitions valides.',
+    steps: [
+      { q: 'Combien de transitions valides y a-t-il au total ?', type: 'input', answer: '5', hint: 'Comptez les fleches dans le diagramme.', feedback_ok: 'Exact ! 5 transitions : A(S1\u2192S2), B(S2\u2192S3), C(S3\u2192S4), D(S2\u2192S1), E(S3\u2192S1).', feedback_ko: '5 transitions valides : Valider, Expedier, Livrer, Annuler, Retourner.' },
+      { q: 'Sequence de test : Valider, Expedier, Livrer. Combien de transitions couvertes ?', type: 'input', answer: '3', hint: 'Tracez le chemin : S1\u2192S2\u2192S3\u2192S4.', feedback_ok: 'Correct ! S1\u2192S2 (A), S2\u2192S3 (B), S3\u2192S4 (C) = 3 transitions.', feedback_ko: 'Le chemin S1\u2192S2\u2192S3\u2192S4 couvre 3 transitions sur 5.' },
+      { q: 'Quelle est la couverture de transitions avec ce test (en %) ?', type: 'input', answer: '60', hint: '3 transitions couvertes sur 5 au total.', feedback_ok: 'Exact ! 3/5 = 60%.', feedback_ko: '3 transitions sur 5 = 60%.' },
+      { q: 'Quel 2eme cas de test ajouterez-vous pour couvrir les 2 transitions manquantes ?', type: 'options', options: ['Valider, Annuler','Valider, Expedier, Retourner','Valider, Annuler, Valider, Expedier, Retourner','Les transitions D et E ne peuvent pas etre couvertes ensemble'], answer: 'Valider, Annuler, Valider, Expedier, Retourner', feedback_ok: 'Parfait ! S1\u2192S2 (A), S2\u2192S1 (D=Annuler), S1\u2192S2 (A), S2\u2192S3 (B), S3\u2192S1 (E=Retourner). Couvre D et E !', feedback_ko: 'Il faut : Valider(S1\u2192S2), Annuler(S2\u2192S1), Valider(S1\u2192S2), Expedier(S2\u2192S3), Retourner(S3\u2192S1). Cela couvre les transitions D et E manquantes.' },
+      { q: 'Apres les 2 cas de test, quelle est la couverture totale ?', type: 'input', answer: '100', hint: 'Les 5 transitions sont maintenant couvertes.', feedback_ok: 'Bravo ! 5/5 = 100% de couverture des transitions valides.', feedback_ko: '5 transitions couvertes sur 5 = 100%. Le premier test couvrait A,B,C et le second couvre D,E.' }
+    ]
+  },
+  {
+    id: 'estimation',
+    title: 'Estimation a 3 points',
+    chapter: 5,
+    desc: 'Maitrisez la formule d\'estimation et evitez les pieges',
+    scenario: 'L\'equipe doit estimer le temps de test pour 5 fonctionnalites.\nPour chaque fonctionnalite, les estimations sont :\n- Optimiste (a) : 2 heures\n- Plus probable (m) : 4 heures\n- Pessimiste (b) : 12 heures',
+    steps: [
+      { q: 'Quelle est la formule d\'estimation a 3 points ?', type: 'options', options: ['E = (a + m + b) / 3','E = (a + 4m + b) / 6','E = (a + 2m + b) / 4','E = (a + b) / 2'], answer: 'E = (a + 4m + b) / 6', feedback_ok: 'Exact ! E = (a + 4m + b) / 6. Le cas probable est pondere 4 fois.', feedback_ko: 'La formule est E = (a + 4m + b) / 6. Le cas le plus probable (m) a un poids de 4.' },
+      { q: 'Calculez E pour UNE fonctionnalite (en heures, nombre entier ou decimal) :', type: 'input', answer: '5', hint: 'E = (2 + 4\u00d74 + 12) / 6 = ?', feedback_ok: 'Correct ! E = (2 + 16 + 12) / 6 = 30 / 6 = 5 heures.', feedback_ko: 'E = (2 + 4\u00d74 + 12) / 6 = (2 + 16 + 12) / 6 = 30 / 6 = 5 heures.' },
+      { q: 'Quel est le temps total estime pour les 5 fonctionnalites ?', type: 'input', answer: '25', hint: '5 heures \u00d7 5 fonctionnalites = ?', feedback_ok: 'Parfait ! 5h \u00d7 5 = 25 heures au total.', feedback_ko: '5 heures par fonctionnalite \u00d7 5 fonctionnalites = 25 heures.' },
+      { q: 'Si les estimations changent a : a=1h, m=3h, b=8h, quelle est la nouvelle estimation pour 1 fonctionnalite ?', type: 'input', answer: '3.5', hint: 'E = (1 + 4\u00d73 + 8) / 6', feedback_ok: 'Exact ! E = (1 + 12 + 8) / 6 = 21/6 = 3.5 heures.', feedback_ko: 'E = (1 + 4\u00d73 + 8) / 6 = 21/6 = 3.5 heures.' }
+    ]
+  },
+  {
+    id: 'risk',
+    title: 'Calcul du risque',
+    chapter: 5,
+    desc: 'Maitrisez la formule niveau = probabilite \u00d7 impact',
+    scenario: 'Dans un projet, l\'equipe evalue les risques produit.\nFormule : Niveau de risque = Probabilite \u00d7 Impact',
+    steps: [
+      { q: 'Probabilite = 40%, Impact = 5000\u20ac. Quel est le niveau de risque ?', type: 'input', answer: '2000', hint: 'Niveau = 0.40 \u00d7 5000 = ?', feedback_ok: 'Correct ! 0.40 \u00d7 5000 = 2000\u20ac.', feedback_ko: 'Niveau = 0.40 \u00d7 5000 = 2000\u20ac.' },
+      { q: 'Niveau de risque = 1500\u20ac, Probabilite = 30%. Quel est l\'impact ?', type: 'input', answer: '5000', hint: 'Impact = Niveau / Probabilite = 1500 / 0.30', feedback_ok: 'Exact ! 1500 / 0.30 = 5000\u20ac.', feedback_ko: 'Impact = Niveau / Probabilite = 1500 / 0.30 = 5000\u20ac.' },
+      { q: 'Niveau = 3000\u20ac, Impact = 10000\u20ac. Quelle est la probabilite (en %) ?', type: 'input', answer: '30', hint: 'Probabilite = Niveau / Impact \u00d7 100', feedback_ok: 'Parfait ! 3000/10000 = 0.30 = 30%.', feedback_ko: 'Probabilite = 3000 / 10000 = 0.30 = 30%.' },
+      { q: 'Quel risque est le plus eleve : A (proba=80%, impact=1000\u20ac) ou B (proba=20%, impact=8000\u20ac) ?', type: 'options', options: ['A (800\u20ac)','B (1600\u20ac)','Ils sont egaux','On ne peut pas comparer'], answer: 'B (1600\u20ac)', feedback_ok: 'Correct ! A = 800\u20ac, B = 1600\u20ac. Le risque B est plus eleve malgre une probabilite plus faible.', feedback_ko: 'A = 0.80\u00d71000 = 800\u20ac. B = 0.20\u00d78000 = 1600\u20ac. B est plus risque.' }
+    ]
+  }
+];
+
+function renderTutos() {
+  const container = document.getElementById('subtab-tutos');
+  let html = '<h2 style="color:#1e3a5f;margin-bottom:20px;">Exercices guides pas a pas</h2>';
+  html += '<p style="color:#64748b;margin-bottom:24px;">Chaque exercice vous guide etape par etape. Repondez a chaque question pour debloquer la suivante.</p>';
+
+  TUTORIALS.forEach(tuto => {
+    html += `<div class="tuto-card" id="tuto-${tuto.id}">
+      <h3>${tuto.title}</h3>
+      <div class="tuto-desc">Chapitre ${tuto.chapter} | ${tuto.steps.length} etapes | ${tuto.desc}</div>
+      <div class="tuto-scenario">${tuto.scenario.replace(/\n/g, '<br>')}</div>
+      <div class="tuto-progress" id="tuto-progress-${tuto.id}"></div>
+      <div id="tuto-steps-${tuto.id}"></div>
+      <div id="tuto-congrats-${tuto.id}"></div>
+      <button class="tuto-reset" onclick="resetTuto('${tuto.id}')">Recommencer cet exercice</button>
+    </div>`;
+  });
+
+  container.innerHTML = html;
+
+  TUTORIALS.forEach(tuto => {
+    const state = loadTutoState(tuto.id);
+    renderTutoSteps(tuto, state);
+  });
+}
+
+function loadTutoState(tutoId) {
+  try {
+    return JSON.parse(localStorage.getItem('istqb_tuto_' + tutoId) || '{}');
+  } catch { return {}; }
+}
+
+function saveTutoState(tutoId, state) {
+  localStorage.setItem('istqb_tuto_' + tutoId, JSON.stringify(state));
+}
+
+function resetTuto(tutoId) {
+  localStorage.removeItem('istqb_tuto_' + tutoId);
+  const tuto = TUTORIALS.find(t => t.id === tutoId);
+  renderTutoSteps(tuto, {});
+}
+
+function renderTutoSteps(tuto, state) {
+  const completedSteps = state.completed || [];
+  const currentStep = completedSteps.length;
+  const allDone = currentStep >= tuto.steps.length;
+
+  let progHtml = '';
+  tuto.steps.forEach((_, i) => {
+    let cls = 'tuto-progress-dot';
+    if (i < currentStep) cls += ' done';
+    else if (i === currentStep) cls += ' current';
+    progHtml += `<div class="${cls}"></div>`;
+  });
+  document.getElementById('tuto-progress-' + tuto.id).innerHTML = progHtml;
+
+  let stepsHtml = '';
+  tuto.steps.forEach((step, i) => {
+    let stepCls = 'tuto-step';
+    if (i < currentStep) stepCls += ' correct';
+    else if (i === currentStep) stepCls += ' active';
+    else stepCls += ' locked';
+
+    stepsHtml += `<div class="${stepCls}" id="tuto-step-${tuto.id}-${i}">
+      <div class="tuto-step-header">
+        <div class="tuto-step-num">${i < currentStep ? '&#10003;' : i + 1}</div>
+        <div class="tuto-step-title">${step.q}</div>
+      </div>`;
+
+    if (i <= currentStep) {
+      if (step.type === 'input') {
+        const prevAnswer = i < currentStep ? (state.answers && state.answers[i]) || '' : '';
+        stepsHtml += `<div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;">
+          <input class="tuto-input" id="tuto-input-${tuto.id}-${i}" value="${prevAnswer}"
+            ${i < currentStep ? 'disabled' : ''} placeholder="Votre reponse"
+            onkeydown="if(event.key==='Enter')checkTutoStep('${tuto.id}',${i})">
+          ${i === currentStep ? `<button class="tuto-btn-check" onclick="checkTutoStep('${tuto.id}',${i})">Verifier</button>` : ''}
+          ${step.hint && i === currentStep ? `<div style="font-size:0.8rem;color:#94a3b8;margin-top:4px;width:100%;"><em>Indice : ${step.hint}</em></div>` : ''}
+        </div>`;
+      } else if (step.type === 'options') {
+        stepsHtml += '<div class="tuto-options">';
+        step.options.forEach(opt => {
+          let optCls = 'tuto-opt';
+          if (i < currentStep) {
+            if (opt === step.answer) optCls += ' correct-opt';
+            else if (state.answers && state.answers[i] === opt && opt !== step.answer) optCls += ' wrong-opt';
+          }
+          const disabled = i < currentStep ? 'style="pointer-events:none;"' : '';
+          stepsHtml += `<div class="${optCls}" ${disabled} onclick="selectTutoOpt('${tuto.id}',${i},this,'${opt.replace(/'/g, "\\'")}')">${opt}</div>`;
+        });
+        stepsHtml += '</div>';
+        if (i === currentStep) {
+          stepsHtml += `<button class="tuto-btn-check" onclick="checkTutoStep('${tuto.id}',${i})" style="margin-top:8px;">Verifier</button>`;
+        }
+      } else if (step.type === 'multi') {
+        stepsHtml += '<div class="tuto-options" id="tuto-multi-' + tuto.id + '-' + i + '">';
+        step.options.forEach(opt => {
+          let optCls = 'tuto-opt';
+          if (i < currentStep) {
+            if (step.answer.includes(opt)) optCls += ' correct-opt';
+            else if (state.answers && state.answers[i] && state.answers[i].includes(opt)) optCls += ' wrong-opt';
+          }
+          const disabled = i < currentStep ? 'style="pointer-events:none;"' : '';
+          stepsHtml += `<div class="${optCls}" ${disabled} onclick="toggleTutoMulti(this)">${opt}</div>`;
+        });
+        stepsHtml += '</div>';
+        if (i === currentStep) {
+          stepsHtml += `<div style="font-size:0.8rem;color:#94a3b8;margin-top:4px;"><em>Selectionnez 2 reponses puis cliquez Verifier.</em></div>`;
+          stepsHtml += `<button class="tuto-btn-check" onclick="checkTutoStep('${tuto.id}',${i})" style="margin-top:8px;">Verifier</button>`;
+        }
+      }
+
+      if (i < currentStep) {
+        const wasCorrectFirst = state.firstTry && state.firstTry[i];
+        const fb = wasCorrectFirst ? step.feedback_ok : step.feedback_ko;
+        stepsHtml += `<div class="tuto-feedback show ok">${fb}</div>`;
+      } else {
+        stepsHtml += `<div class="tuto-feedback" id="tuto-fb-${tuto.id}-${i}"></div>`;
+      }
+    }
+
+    stepsHtml += '</div>';
+  });
+
+  document.getElementById('tuto-steps-' + tuto.id).innerHTML = stepsHtml;
+
+  if (allDone) {
+    const firstTryCount = state.firstTry ? Object.values(state.firstTry).filter(v => v).length : 0;
+    document.getElementById('tuto-congrats-' + tuto.id).innerHTML = `
+      <div class="tuto-congrats">
+        <h4>Exercice termine !</h4>
+        <p>${firstTryCount}/${tuto.steps.length} reponses correctes du premier coup.</p>
+        ${firstTryCount === tuto.steps.length ? '<p style="color:#16a34a;font-weight:700;">Parfait ! Vous maitrisez cette technique.</p>' : '<p style="color:#f59e0b;">Recommencez pour viser le sans-faute !</p>'}
+      </div>`;
+  } else {
+    document.getElementById('tuto-congrats-' + tuto.id).innerHTML = '';
+  }
+}
+
+function selectTutoOpt(tutoId, stepIdx, el, value) {
+  el.parentNode.querySelectorAll('.tuto-opt').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+  el.dataset.value = value;
+}
+
+function toggleTutoMulti(el) {
+  el.classList.toggle('selected');
+}
+
+function checkTutoStep(tutoId, stepIdx) {
+  const tuto = TUTORIALS.find(t => t.id === tutoId);
+  const step = tuto.steps[stepIdx];
+  const state = loadTutoState(tutoId);
+  if (!state.completed) state.completed = [];
+  if (!state.answers) state.answers = {};
+  if (!state.firstTry) state.firstTry = {};
+
+  let userAnswer;
+  let isCorrect = false;
+
+  if (step.type === 'input') {
+    const input = document.getElementById('tuto-input-' + tutoId + '-' + stepIdx);
+    userAnswer = input.value.trim();
+    isCorrect = userAnswer === step.answer;
+  } else if (step.type === 'options') {
+    const selected = document.querySelector('#tuto-step-' + tutoId + '-' + stepIdx + ' .tuto-opt.selected');
+    userAnswer = selected ? selected.textContent.trim() : '';
+    isCorrect = userAnswer === step.answer;
+  } else if (step.type === 'multi') {
+    const selectedEls = document.querySelectorAll('#tuto-multi-' + tutoId + '-' + stepIdx + ' .tuto-opt.selected');
+    userAnswer = Array.from(selectedEls).map(el => el.textContent.trim());
+    isCorrect = userAnswer.length === step.answer.length && step.answer.every(a => userAnswer.includes(a));
+  }
+
+  const fb = document.getElementById('tuto-fb-' + tutoId + '-' + stepIdx);
+
+  if (isCorrect) {
+    state.answers[stepIdx] = userAnswer;
+    if (state.firstTry[stepIdx] === undefined) state.firstTry[stepIdx] = true;
+    state.completed.push(stepIdx);
+    saveTutoState(tutoId, state);
+    renderTutoSteps(tuto, state);
+    const nextStep = document.getElementById('tuto-step-' + tutoId + '-' + (stepIdx + 1));
+    if (nextStep) setTimeout(() => nextStep.scrollIntoView({ behavior: 'smooth', block: 'center' }), 200);
+  } else {
+    if (state.firstTry[stepIdx] === undefined) state.firstTry[stepIdx] = false;
+    saveTutoState(tutoId, state);
+    fb.className = 'tuto-feedback show ko';
+    fb.innerHTML = step.feedback_ko;
+    if (step.type === 'options') {
+      const opts = document.querySelectorAll('#tuto-step-' + tutoId + '-' + stepIdx + ' .tuto-opt');
+      opts.forEach(o => {
+        if (o.textContent.trim() === step.answer) o.classList.add('correct-opt');
+        else if (o.classList.contains('selected')) o.classList.add('wrong-opt');
+      });
+    }
+  }
+}
 
 // ============================================================
 // INIT
