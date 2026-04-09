@@ -357,6 +357,20 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
 .fiche-diagram { margin: 20px 0; text-align: center; overflow-x: auto; }
 .fiche-diagram svg { max-width: 100%; height: auto; }
 
+.fiche-method { margin: 16px 0; padding: 18px; background: linear-gradient(135deg, #eff6ff, #f0fdf4); border: 2px solid #2563eb; border-radius: 12px; }
+.fiche-method h5 { color: #1e3a5f; font-size: 0.95rem; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+.fiche-method h5::before { content: "\1F4CB"; }
+.fiche-method ol { padding-left: 20px; margin: 8px 0; }
+.fiche-method ol li { margin-bottom: 6px; font-size: 0.9rem; }
+.fiche-method .method-example { background: white; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px; margin-top: 10px; font-size: 0.85rem; }
+.fiche-method .method-example strong { color: #2563eb; }
+.fiche-trap { margin: 12px 0; padding: 14px; background: #fef2f2; border-left: 4px solid #dc2626; border-radius: 0 10px 10px 0; font-size: 0.85rem; }
+.fiche-trap strong { color: #dc2626; }
+.fiche-seealso { margin: 16px 0; padding: 12px 16px; background: #f8fafc; border: 1px dashed #94a3b8; border-radius: 10px; font-size: 0.82rem; color: #475569; }
+.fiche-seealso strong { color: #1e3a5f; margin-right: 6px; }
+.fiche-seealso a { color: #2563eb; text-decoration: none; cursor: pointer; margin: 0 4px; }
+.fiche-seealso a:hover { text-decoration: underline; }
+
 @media (max-width: 900px) {
   .dash-overview { grid-template-columns: 1fr; }
   .chapter-cards-grid { grid-template-columns: 1fr; }
@@ -483,6 +497,21 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
             <li><strong>Defaillance :</strong> Evenement ou le systeme ne fait pas ce qu'il devrait</li>
           </ul>
           <div class="fiche-highlight">Un defaut n'entraine pas toujours une defaillance. Une defaillance peut aussi venir de l'environnement (radiation, pollution).</div>
+<div class="fiche-method">
+  <h5>Comment identifier erreur/defaut/defaillance dans un scenario d'examen</h5>
+  <ol>
+    <li>Reperer l'<strong>action humaine incorrecte</strong> → c'est l'erreur</li>
+    <li>Reperer le <strong>produit d'activite impacte</strong> (code, doc, spec) → le defaut est LA-DEDANS</li>
+    <li>Reperer le <strong>comportement observable incorrect</strong> du systeme en execution → c'est la defaillance</li>
+    <li>Chercher le <strong>pourquoi profond</strong> de l'erreur humaine (fatigue, pression...) → c'est la cause racine</li>
+  </ol>
+  <div class="method-example">
+    <strong>Exemple :</strong> Un dev fatigue (cause racine) ecrit ">" au lieu de ">=" (erreur). Le code contient la mauvaise condition (defaut). Le systeme refuse 18 ans alors qu'il devrait accepter (defaillance).
+  </div>
+  <div class="fiche-trap">
+    <strong>Piege courant :</strong> L'amende recue par l'entreprise n'est PAS une defaillance du systeme — c'est une consequence. La defaillance c'est le comportement incorrect du logiciel.
+  </div>
+</div>
 
           <h4>Les 7 principes du test</h4>
           <table>
@@ -514,6 +543,20 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
               <circle cx="260" cy="190" r="45" fill="#2563eb"/><text x="260" y="185" text-anchor="middle" fill="white" font-size="11" font-weight="bold">7</text><text x="260" y="199" text-anchor="middle" fill="white" font-size="11" font-weight="bold">Principes</text>
             </svg>
           </div>
+<div class="fiche-method">
+  <h5>Comment choisir le bon principe dans une question d'examen</h5>
+  <ol>
+    <li>La question parle de <strong>repeter les memes tests</strong> sans trouver de nouveaux defauts → <strong>Usure des tests</strong> (paradoxe du pesticide)</li>
+    <li>La question parle d'un systeme <strong>sans bug mais qui ne satisfait pas les utilisateurs</strong> → <strong>Absence-of-defects fallacy</strong></li>
+    <li>La question parle de <strong>prioriser les tests</strong> car tout tester est impossible → <strong>Test exhaustif impossible</strong></li>
+    <li>La question parle de <strong>trouver plus de defauts dans certains modules</strong> → <strong>Regroupement des defauts</strong> (Pareto)</li>
+    <li>La question mentionne <strong>tester tot, shift-left, cout de correction</strong> → <strong>Tester tot</strong></li>
+    <li>La question compare des <strong>approches differentes selon le domaine</strong> (medical vs jeu) → <strong>Contexte</strong></li>
+  </ol>
+  <div class="fiche-trap">
+    <strong>Piege :</strong> "Tests wear out" et "Absence-of-defects" sont les 2 principes les plus confondus. Wear out = les TESTS s'usent (il faut varier). Absence = le PRODUIT sans bug peut etre inutile (il faut valider les besoins).
+  </div>
+</div>
 
           <h4>Les activites de test</h4>
           <table>
@@ -581,6 +624,12 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
             <tr><td>Peuvent remettre en question les hypotheses du developpeur</td><td>Consideres comme un goulot d'etranglement</td></tr>
             <tr><td>Verifient les interpretations des specifications</td><td>Les developpeurs perdent le sens de la responsabilite qualite</td></tr>
           </table>
+<div class="fiche-seealso">
+  <strong>Voir aussi :</strong>
+  <a onclick="document.querySelector('.fiche-ch2 .fiche-header').click();setTimeout(()=>document.querySelector('.fiche-ch2').scrollIntoView({behavior:'smooth'}),100)">Ch.2 Cycle de vie et niveaux de test</a> |
+  <a onclick="document.querySelector('.fiche-ch3 .fiche-header').click();setTimeout(()=>document.querySelector('.fiche-ch3').scrollIntoView({behavior:'smooth'}),100)">Ch.3 Test statique (revue des produits d'activite)</a> |
+  <a onclick="document.querySelector('.fiche-ch5 .fiche-header').click();setTimeout(()=>document.querySelector('.fiche-ch5').scrollIntoView({behavior:'smooth'}),100)">Ch.5 Roles : gestionnaire de test</a>
+</div>
           <button class="btn-teste" onclick="startChapterMiniQuiz(1)">Teste-toi sur ce chapitre (10 questions)</button>
         </div>
       </div>
@@ -719,6 +768,21 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
             <li><strong>Regression :</strong> Verifier qu'un changement n'a pas cause de nouveaux defauts dans le code existant</li>
           </ul>
           <div class="fiche-highlight">Confirmation = re-tester ce qui a echoue. Regression = re-tester ce qui marchait. Ce sont des activites DIFFERENTES !</div>
+<div class="fiche-method">
+  <h5>Comment distinguer confirmation et regression dans un scenario</h5>
+  <ol>
+    <li>Identifier les tests qui avaient <strong>echoue</strong> a l'execution precedente</li>
+    <li>Ces tests, re-executes apres correction → ce sont des tests de <strong>confirmation</strong></li>
+    <li>Identifier les tests qui avaient <strong>reussi</strong> a l'execution precedente</li>
+    <li>Ces tests, re-executes pour verifier qu'ils passent toujours → ce sont des tests de <strong>regression</strong></li>
+  </ol>
+  <div class="method-example">
+    <strong>Exemple :</strong> Execution 1 : TC1=FAIL, TC2=PASS. Apres correction, Execution 2 : TC1 est re-teste (confirmation), TC2 est re-teste (regression).
+  </div>
+  <div class="fiche-trap">
+    <strong>Piege :</strong> Si TC1 echoue ENCORE a l'Execution 2, puis est re-teste a l'Execution 3, c'est ENCORE de la confirmation (pas de la regression).
+  </div>
+</div>
 
           <h4>Test de maintenance : 3 declencheurs</h4>
           <ul>
@@ -726,6 +790,23 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
             <li><strong>Changement d'environnement :</strong> Migration de plateforme, nouvelle base de donnees</li>
             <li><strong>Retrait (retirement) :</strong> Systeme mis hors service, migration des donnees a tester</li>
           </ul>
+<div class="fiche-method">
+  <h5>Comment identifier un declencheur de maintenance</h5>
+  <ol>
+    <li>Le systeme existant est <strong>modifie</strong> (correction, amelioration, hotfix) → <strong>Modification</strong></li>
+    <li>L'<strong>environnement change</strong> (nouvel OS, nouvelle DB, migration cloud) → <strong>Changement d'environnement</strong></li>
+    <li>Le systeme est <strong>retire/desactive</strong> (migration de donnees, archivage) → <strong>Retrait</strong></li>
+  </ol>
+  <div class="fiche-trap">
+    <strong>Piege :</strong> Developper une NOUVELLE fonctionnalite (user story) n'est PAS de la maintenance — c'est du developpement normal suivi de tests de regression. La maintenance concerne un systeme DEJA en production.
+  </div>
+</div>
+<div class="fiche-seealso">
+  <strong>Voir aussi :</strong>
+  <a onclick="document.querySelector('.fiche-ch1 .fiche-header').click();setTimeout(()=>document.querySelector('.fiche-ch1').scrollIntoView({behavior:'smooth'}),100)">Ch.1 Activites de test et testware</a> |
+  <a onclick="document.querySelector('.fiche-ch4 .fiche-header').click();setTimeout(()=>document.querySelector('.fiche-ch4').scrollIntoView({behavior:'smooth'}),100)">Ch.4 Techniques boite noire/blanche a chaque niveau</a> |
+  <a onclick="document.querySelector('.fiche-ch5 .fiche-header').click();setTimeout(()=>document.querySelector('.fiche-ch5').scrollIntoView({behavior:'smooth'}),100)">Ch.5 Planification et estimation</a>
+</div>
           <button class="btn-teste" onclick="startChapterMiniQuiz(2)">Teste-toi sur ce chapitre (10 questions)</button>
         </div>
       </div>
@@ -771,6 +852,22 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
             <tr><td>4. Communication et analyse</td><td>Discuter des defauts trouves, analyser, evaluer et decider du statut de chaque anomalie</td></tr>
             <tr><td>5. Correction et rapport</td><td>Creer les rapports de defauts, corriger les defauts trouves, rapporter les metriques</td></tr>
           </table>
+<div class="fiche-method">
+  <h5>Comment retenir l'ordre du processus de revue</h5>
+  <ol>
+    <li><strong>P</strong>lanification — on decide QUOI revoir, QUI participe, QUAND</li>
+    <li><strong>I</strong>nitiation — on DISTRIBUE le document aux reviseurs</li>
+    <li><strong>R</strong>evue individuelle — chacun EXAMINE seul le document</li>
+    <li><strong>C</strong>ommunication — on se REUNIT pour discuter des anomalies</li>
+    <li><strong>C</strong>orrection — on CORRIGE les defauts et on RAPPORTE</li>
+  </ol>
+  <div class="method-example">
+    <strong>Moyen mnemotechnique :</strong> <strong>P-I-R-C-C</strong> = "PIRaté ça Corrige !" — Planifier, Initier, Revoir, Communiquer, Corriger.
+  </div>
+  <div class="fiche-trap">
+    <strong>Piege :</strong> La question decrit les 5 activites dans le desordre et te demande la bonne sequence. Identifie chaque description : "distribuer les documents" = Initiation (pas Planification !).
+  </div>
+</div>
 
           <h4>Roles dans la revue</h4>
           <table>
@@ -805,6 +902,11 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
             <li>Pas de comportements indiquant l'ennui, l'exasperation ou l'hostilite</li>
           </ul>
           <div class="fiche-highlight">Attention : lors des revues, on trouve des DEFAUTS, pas des defaillances ! Les defaillances apparaissent uniquement lors de l'execution (test dynamique).</div>
+<div class="fiche-seealso">
+  <strong>Voir aussi :</strong>
+  <a onclick="document.querySelector('.fiche-ch1 .fiche-header').click();setTimeout(()=>document.querySelector('.fiche-ch1').scrollIntoView({behavior:'smooth'}),100)">Ch.1 Defaut vs defaillance (les revues trouvent des defauts, pas des defaillances)</a> |
+  <a onclick="document.querySelector('.fiche-ch4 .fiche-header').click();setTimeout(()=>document.querySelector('.fiche-ch4').scrollIntoView({behavior:'smooth'}),100)">Ch.4 Test statique = complement des techniques dynamiques</a>
+</div>
           <button class="btn-teste" onclick="startChapterMiniQuiz(3)">Teste-toi sur ce chapitre (10 questions)</button>
         </div>
       </div>
@@ -831,6 +933,21 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
           </ul>
           <div class="fiche-chain">Couverture EP = partitions testees / total partitions x 100%</div>
           <p>Exemple : champ age 18-65. Partitions : &lt;18 (invalide), 18-65 (valide), &gt;65 (invalide). 3 partitions au total.</p>
+<div class="fiche-method">
+  <h5>Comment resoudre un exercice EP en 4 etapes</h5>
+  <ol>
+    <li><strong>Identifier la variable</strong> d'entree et ses contraintes (ex: "age entre 18 et 65")</li>
+    <li><strong>Lister les partitions</strong> : une valide (18-65), les invalides (&lt;18, &gt;65). S'il y a des sous-regles, creer des partitions supplementaires</li>
+    <li><strong>Choisir un representant</strong> par partition (n'importe quelle valeur dans la plage : 25 pour 18-65, 10 pour &lt;18, 70 pour &gt;65)</li>
+    <li><strong>Compter :</strong> couverture = partitions testees / total partitions x 100%</li>
+  </ol>
+  <div class="method-example">
+    <strong>Exemple :</strong> D = CY - BY. Partitions : D&lt;0 (erreur), 0&lt;=D&lt;18 (etudiant), 18&lt;=D&lt;65 (normal), D&gt;=65 (retraite) = 4 partitions. Si 2 sont deja couvertes, il faut 2 tests supplementaires.
+  </div>
+  <div class="fiche-trap">
+    <strong>Piege :</strong> Lis bien les bornes ! "depasse 100$" signifie &gt;100, pas &gt;=100. "entre 0 et 2 inclus" signifie 0, 1 et 2 sont dans la partition.
+  </div>
+</div>
 
           <h4>BVA 2 valeurs (par defaut dans le syllabus)</h4>
           <ul>
@@ -848,6 +965,22 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
             <li>Total : 2 frontieres x 3 valeurs = 6 valeurs limites (en eliminant les doublons)</li>
           </ul>
           <div class="fiche-chain">Couverture BVA = valeurs limites testees / total valeurs limites x 100%</div>
+<div class="fiche-method">
+  <h5>Comment resoudre un exercice BVA en 3 etapes</h5>
+  <ol>
+    <li><strong>Identifier les frontieres</strong> entre partitions (la ou le comportement change)</li>
+    <li><strong>Pour BVA 2-valeurs :</strong> pour chaque frontiere, prendre la valeur juste en-dessous et juste au-dessus (ex: frontiere a 18 → tester 17 et 18)</li>
+    <li><strong>Pour BVA 3-valeurs :</strong> pour chaque frontiere, prendre la frontiere + 1 de chaque cote (ex: frontiere a 18 → tester 17, 18, 19)</li>
+  </ol>
+  <div class="method-example">
+    <strong>Exemple BVA 2-val :</strong> Partitions &lt;0, 0-2, &gt;2. Frontieres a 0 et 2.<br>
+    Frontiere 0 : tester -1 et 0. Frontiere 2 : tester 2 et 3.<br>
+    Total : 4 valeurs limites = {-1, 0, 2, 3}. Si tu testes les 4 → 100% couverture BVA.
+  </div>
+  <div class="fiche-trap">
+    <strong>Piege :</strong> Ne confonds pas BVA 2-valeurs et 3-valeurs ! Le syllabus utilise 2-valeurs par defaut. Si la question dit "two-value BVA", c'est 2 valeurs par frontiere, pas 3.
+  </div>
+</div>
           <div class="fiche-diagram">
             <svg viewBox="0 0 700 140" xmlns="http://www.w3.org/2000/svg" style="max-width:700px;width:100%">
               <!-- Axis line -->
@@ -891,6 +1024,18 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
           </ul>
           <div class="fiche-chain">Couverture table de decision = regles testees / total regles x 100%</div>
           <div class="fiche-highlight">Pour identifier quelle regle couvre un cas de test : verifier la combinaison de conditions et trouver la colonne correspondante.</div>
+<div class="fiche-method">
+  <h5>Comment resoudre un exercice de table de decision</h5>
+  <ol>
+    <li><strong>Lire le cas de test</strong> : extraire les valeurs de chaque condition (ex: "19 ans, non inscrit, sans experience")</li>
+    <li><strong>Mapper chaque condition</strong> a la ligne correspondante de la table (Age=19-65, Inscrit=NON, Exp=0-4)</li>
+    <li><strong>Trouver la colonne</strong> ou TOUTES les conditions correspondent → c'est la regle couverte</li>
+    <li><strong>Pour la couverture :</strong> compter combien de colonnes/regles sont couvertes par l'ensemble des cas de test</li>
+  </ol>
+  <div class="method-example">
+    <strong>Exemple :</strong> TC: homme de 66 ans, non inscrit. Dans la table : Age &gt;65, Inscrit=NON. Chercher la colonne avec &gt;65 et NON → c'est R4.
+  </div>
+</div>
           <div class="fiche-diagram">
             <svg viewBox="0 0 420 170" xmlns="http://www.w3.org/2000/svg" style="max-width:420px;width:100%">
               <!-- Header row -->
@@ -990,6 +1135,24 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
               <text x="280" y="20" text-anchor="middle" font-size="11" fill="#334155" font-weight="bold">Modifier</text>
             </svg>
           </div>
+<div class="fiche-method">
+  <h5>Comment resoudre un exercice de transitions d'etat</h5>
+  <ol>
+    <li><strong>Dessiner le graphe</strong> a partir de la table : etats = cercles, transitions = fleches avec evenements</li>
+    <li><strong>Lister toutes les transitions valides</strong> (compter les fleches distinctes)</li>
+    <li><strong>Tracer le chemin</strong> du cas de test en suivant les evenements un par un depuis l'etat initial</li>
+    <li><strong>Compter les transitions distinctes couvertes</strong> par le chemin</li>
+    <li><strong>Verifier la faisabilite :</strong> apres un etat final (End), plus aucune transition n'est possible !</li>
+  </ol>
+  <div class="method-example">
+    <strong>Exemple :</strong> Sequence "Available, ChangeRoom, NotAvailable, Available, Pay"<br>
+    S1→S2 (Available) → S2→S1 (ChangeRoom) → S1→S3 (NotAvailable) → S3→S2 (Available) → S2→S4 (Pay)<br>
+    = 5 transitions distinctes couvertes sur 7 = 71% couverture.
+  </div>
+  <div class="fiche-trap">
+    <strong>Piege :</strong> Un meme evenement peut correspondre a des transitions DIFFERENTES selon l'etat de depart ! "Available" depuis S1 (→S2) n'est PAS la meme transition que "Available" depuis S3 (→S2).
+  </div>
+</div>
 
           <h4>Couverture des instructions</h4>
           <ul>
@@ -1048,6 +1211,18 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
               <text x="20" y="170" font-size="9" fill="#991b1b" font-weight="bold">= seulement 50% branches!</text>
             </svg>
           </div>
+<div class="fiche-method">
+  <h5>Comment verifier la couverture d'instructions et de branches</h5>
+  <ol>
+    <li><strong>Tracer le chemin</strong> du cas de test dans le code (quelles lignes sont executees)</li>
+    <li><strong>Instructions :</strong> cocher chaque ligne executee. Couverture = lignes cochees / total lignes</li>
+    <li><strong>Branches :</strong> pour chaque IF/decision, verifier si le chemin VRAI et le chemin FAUX ont ete empruntes</li>
+    <li><strong>Rappel :</strong> 100% branches garantit 100% instructions. L'inverse est FAUX.</li>
+  </ol>
+  <div class="fiche-trap">
+    <strong>Piege :</strong> Un IF sans ELSE a quand meme 2 branches (vrai et faux). Si tu ne testes que le cas vrai, tu as 100% instructions mais seulement 50% branches.
+  </div>
+</div>
 
           <h4>Error guessing (Supposition d'erreurs)</h4>
           <ul>
@@ -1082,6 +1257,12 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
             <li><strong>INVEST :</strong> Independent, Negotiable, Valuable, Estimable, Small, Testable</li>
             <li><strong>Given/When/Then :</strong> Given [contexte initial], When [action], Then [resultat attendu]</li>
           </ul>
+<div class="fiche-seealso">
+  <strong>Voir aussi :</strong>
+  <a onclick="document.querySelector('.fiche-ch2 .fiche-header').click();setTimeout(()=>document.querySelector('.fiche-ch2').scrollIntoView({behavior:'smooth'}),100)">Ch.2 Les techniques s'appliquent a differents niveaux de test</a> |
+  <a onclick="document.querySelector('.fiche-ch5 .fiche-header').click();setTimeout(()=>document.querySelector('.fiche-ch5').scrollIntoView({behavior:'smooth'}),100)">Ch.5 Couverture = critere de sortie</a> |
+  <a onclick="document.querySelector('.fiche-ch1 .fiche-header').click();setTimeout(()=>document.querySelector('.fiche-ch1').scrollIntoView({behavior:'smooth'}),100)">Ch.1 Les 7 principes guident le choix des techniques</a>
+</div>
           <button class="btn-teste" onclick="startChapterMiniQuiz(4)">Teste-toi sur ce chapitre (10 questions)</button>
         </div>
       </div>
@@ -1118,6 +1299,22 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
             <tr><td>Planning poker (consensus)</td><td>Chaque membre estime independamment, puis discussion jusqu'au consensus</td></tr>
           </table>
           <div class="fiche-chain">E = (optimiste + 4 x plus probable + pessimiste) / 6</div>
+<div class="fiche-method">
+  <h5>Comment calculer l'estimation 3 points</h5>
+  <ol>
+    <li><strong>Identifier</strong> les 3 valeurs : a (optimiste), m (plus probable), b (pessimiste)</li>
+    <li><strong>Appliquer la formule :</strong> E = (a + 4×m + b) / 6</li>
+    <li><strong>Multiplier</strong> par le nombre d'elements (cas de test, taches, etc.)</li>
+  </ol>
+  <div class="method-example">
+    <strong>Exemple :</strong> Meilleur cas = 1h, probable = 3h, pire = 8h.<br>
+    E = (1 + 4×3 + 8) / 6 = (1 + 12 + 8) / 6 = 21 / 6 = 3.5h par cas de test.<br>
+    Pour 4 cas de test : 3.5 × 4 = <strong>14 heures</strong>.
+  </div>
+  <div class="fiche-trap">
+    <strong>Piege :</strong> N'oublie pas de multiplier par le nombre d'elements ! L'erreur classique est de donner 3.5h (un seul cas) au lieu de 14h (les 4).
+  </div>
+</div>
 
           <h4>Priorisation des cas de test</h4>
           <ul>
@@ -1198,6 +1395,18 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
 
           <h4>Gestion des risques</h4>
           <div class="fiche-chain">Risque = Probabilite x Impact</div>
+<div class="fiche-method">
+  <h5>Comment calculer le risque</h5>
+  <ol>
+    <li><strong>Formule :</strong> Niveau de risque = Probabilite × Impact</li>
+    <li>Si on te donne le niveau et la probabilite → <strong>Impact = Niveau / Probabilite</strong></li>
+    <li>Si on te donne le niveau et l'impact → <strong>Probabilite = Niveau / Impact</strong></li>
+  </ol>
+  <div class="method-example">
+    <strong>Exemple :</strong> Niveau = 1000$, Probabilite = 50% (= 0.5).<br>
+    Impact = 1000 / 0.5 = <strong>2000$</strong>.
+  </div>
+</div>
           <table>
             <tr><th>Risque produit (qualite)</th><th>Risque projet (gestion)</th></tr>
             <tr><td>Le logiciel ne fait pas ce qu'il devrait</td><td>Le projet est en retard ou depasse le budget</td></tr>
@@ -1227,6 +1436,12 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
 
           <h4>Gestion de configuration</h4>
           <p>Suivi et controle des produits d'activite de test (testware). Permet de : identifier et versionner tous les elements, etablir des baselines, reproduire des etats anterieurs, maintenir la tracabilite entre les elements.</p>
+<div class="fiche-seealso">
+  <strong>Voir aussi :</strong>
+  <a onclick="document.querySelector('.fiche-ch4 .fiche-header').click();setTimeout(()=>document.querySelector('.fiche-ch4').scrollIntoView({behavior:'smooth'}),100)">Ch.4 Couverture comme critere de sortie</a> |
+  <a onclick="document.querySelector('.fiche-ch2 .fiche-header').click();setTimeout(()=>document.querySelector('.fiche-ch2').scrollIntoView({behavior:'smooth'}),100)">Ch.2 Niveaux de test = structure de la planification</a> |
+  <a onclick="document.querySelector('.fiche-ch1 .fiche-header').click();setTimeout(()=>document.querySelector('.fiche-ch1').scrollIntoView({behavior:'smooth'}),100)">Ch.1 Roles testeur vs gestionnaire</a>
+</div>
           <button class="btn-teste" onclick="startChapterMiniQuiz(5)">Teste-toi sur ce chapitre (10 questions)</button>
         </div>
       </div>
@@ -1306,6 +1521,12 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
             <li>Competences techniques requises pour l'equipe</li>
             <li>Dependance a un outil specifique (vendor lock-in)</li>
           </ul>
+<div class="fiche-seealso">
+  <strong>Voir aussi :</strong>
+  <a onclick="document.querySelector('.fiche-ch4 .fiche-header').click();setTimeout(()=>document.querySelector('.fiche-ch4').scrollIntoView({behavior:'smooth'}),100)">Ch.4 Outils de conception/implementation des tests</a> |
+  <a onclick="document.querySelector('.fiche-ch5 .fiche-header').click();setTimeout(()=>document.querySelector('.fiche-ch5').scrollIntoView({behavior:'smooth'}),100)">Ch.5 Outils de gestion des tests</a> |
+  <a onclick="document.querySelector('.fiche-ch2 .fiche-header').click();setTimeout(()=>document.querySelector('.fiche-ch2').scrollIntoView({behavior:'smooth'}),100)">Ch.2 DevOps et CI/CD</a>
+</div>
           <button class="btn-teste" onclick="startChapterMiniQuiz(6)">Teste-toi sur ce chapitre (10 questions)</button>
         </div>
       </div>
