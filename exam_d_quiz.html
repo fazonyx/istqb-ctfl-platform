@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ISTQB CTFL - Examen D</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f0f4f8; color: #1a202c; line-height: 1.6; }
+
+/* Header */
+.header { background: linear-gradient(135deg, #1e3a5f, #2563eb); color: white; padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+.header h1 { font-size: 1.1rem; font-weight: 600; }
+.timer { font-size: 1.3rem; font-weight: 700; font-variant-numeric: tabular-nums; background: rgba(255,255,255,0.15); padding: 6px 16px; border-radius: 8px; }
+.timer.warning { background: #dc2626; animation: pulse 1s infinite; }
+@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.7; } }
+
+/* Start screen */
+.start-screen { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 90vh; text-align: center; padding: 24px; }
+.start-screen h2 { font-size: 2.2rem; color: #1e3a5f; margin-bottom: 8px; }
+.start-screen .subtitle { font-size: 1.1rem; color: #64748b; margin-bottom: 32px; }
+.start-screen .info { display: flex; gap: 32px; margin-bottom: 40px; flex-wrap: wrap; justify-content: center; }
+.start-screen .info-card { background: white; padding: 20px 28px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+.info-card .num { font-size: 2rem; font-weight: 700; color: #2563eb; }
+.info-card .label { font-size: 0.85rem; color: #64748b; }
+.btn-start { background: linear-gradient(135deg, #2563eb, #1d4ed8); color: white; border: none; padding: 16px 48px; font-size: 1.2rem; font-weight: 600; border-radius: 12px; cursor: pointer; transition: transform 0.15s, box-shadow 0.15s; }
+.btn-start:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(37,99,235,0.4); }
+
+/* Layout */
+.exam-container { display: none; max-width: 960px; margin: 0 auto; padding: 24px; }
+.exam-container.active { display: block; }
+
+/* Nav grid */
+.nav-grid { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 24px; justify-content: center; }
+.nav-btn { width: 38px; height: 38px; border: 2px solid #cbd5e1; background: white; border-radius: 8px; font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all 0.15s; display: flex; align-items: center; justify-content: center; }
+.nav-btn:hover { border-color: #2563eb; background: #eff6ff; }
+.nav-btn.answered { background: #2563eb; color: white; border-color: #2563eb; }
+.nav-btn.current { border-color: #f59e0b; box-shadow: 0 0 0 3px rgba(245,158,11,0.3); }
+.nav-btn.correct { background: #16a34a; color: white; border-color: #16a34a; }
+.nav-btn.incorrect { background: #dc2626; color: white; border-color: #dc2626; }
+
+/* Question card */
+.question-card { background: white; border-radius: 16px; padding: 32px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); margin-bottom: 20px; }
+.q-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+.q-number { font-size: 0.85rem; font-weight: 700; color: #2563eb; background: #eff6ff; padding: 4px 12px; border-radius: 20px; }
+.q-lo { font-size: 0.75rem; color: #94a3b8; }
+.q-scenario { background: #f8fafc; border-left: 4px solid #2563eb; padding: 16px; margin-bottom: 16px; border-radius: 0 8px 8px 0; font-size: 0.95rem; color: #475569; white-space: pre-line; }
+.q-text { font-size: 1.05rem; font-weight: 600; margin-bottom: 20px; color: #1e293b; }
+.q-instruction { font-size: 0.8rem; color: #94a3b8; margin-bottom: 12px; font-style: italic; }
+
+/* Options */
+.option { display: flex; align-items: flex-start; gap: 12px; padding: 14px 16px; margin-bottom: 8px; border: 2px solid #e2e8f0; border-radius: 10px; cursor: pointer; transition: all 0.15s; }
+.option:hover { border-color: #93c5fd; background: #f0f7ff; }
+.option.selected { border-color: #2563eb; background: #eff6ff; }
+.option input { margin-top: 3px; accent-color: #2563eb; cursor: pointer; }
+.option label { cursor: pointer; font-size: 0.95rem; flex: 1; }
+.option.correct-answer { border-color: #16a34a; background: #f0fdf4; }
+.option.wrong-answer { border-color: #dc2626; background: #fef2f2; }
+
+/* Justification */
+.justification { display: none; margin-top: 16px; padding: 16px; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 10px; font-size: 0.9rem; color: #166534; line-height: 1.7; }
+.justification.wrong { background: #fef2f2; border-color: #fecaca; color: #991b1b; }
+.justification strong { display: block; margin-bottom: 6px; }
+
+/* Controls */
+.controls { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+.btn { padding: 10px 24px; border: none; border-radius: 10px; font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: all 0.15s; }
+.btn-prev, .btn-next { background: #2563eb; color: white; }
+.btn-prev:hover, .btn-next:hover { background: #1d4ed8; }
+.btn-prev:disabled, .btn-next:disabled { background: #cbd5e1; cursor: not-allowed; }
+.btn-finish { background: #dc2626; color: white; }
+.btn-finish:hover { background: #b91c1c; }
+.btn-retry { background: #2563eb; color: white; margin-top: 20px; padding: 14px 40px; font-size: 1.1rem; }
+
+/* Results */
+.results-screen { display: none; max-width: 960px; margin: 0 auto; padding: 24px; }
+.results-screen.active { display: block; }
+.score-card { text-align: center; background: white; border-radius: 16px; padding: 40px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); margin-bottom: 24px; }
+.score-card .score { font-size: 4rem; font-weight: 800; }
+.score-card .score.pass { color: #16a34a; }
+.score-card .score.fail { color: #dc2626; }
+.score-card .verdict { font-size: 1.3rem; margin-top: 8px; font-weight: 600; }
+.score-card .details { color: #64748b; margin-top: 8px; }
+.progress-bar { width: 100%; height: 12px; background: #e2e8f0; border-radius: 6px; overflow: hidden; margin-top: 16px; }
+.progress-fill { height: 100%; border-radius: 6px; transition: width 0.5s; }
+
+/* Analysis section */
+.analysis-section { background: white; border-radius: 16px; padding: 32px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); margin-bottom: 24px; }
+.analysis-section h2 { font-size: 1.4rem; color: #1e3a5f; margin-bottom: 20px; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; }
+.analysis-section h3 { font-size: 1.1rem; color: #334155; margin: 20px 0 12px; }
+.chapter-row { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid #f1f5f9; }
+.chapter-row:last-child { border-bottom: none; }
+.chapter-name { flex: 1; font-size: 0.9rem; font-weight: 600; color: #1e293b; min-width: 200px; }
+.chapter-score { font-size: 0.85rem; font-weight: 700; min-width: 60px; text-align: right; }
+.chapter-bar { flex: 2; height: 10px; background: #e2e8f0; border-radius: 5px; overflow: hidden; }
+.chapter-bar-fill { height: 100%; border-radius: 5px; transition: width 0.6s; }
+.chapter-score.good { color: #16a34a; }
+.chapter-score.medium { color: #f59e0b; }
+.chapter-score.bad { color: #dc2626; }
+.tag { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: 600; margin: 2px; }
+.tag-danger { background: #fef2f2; color: #dc2626; border: 1px solid #fecaca; }
+.tag-warning { background: #fffbeb; color: #d97706; border: 1px solid #fde68a; }
+.tag-success { background: #f0fdf4; color: #16a34a; border: 1px solid #bbf7d0; }
+.tag-info { background: #eff6ff; color: #2563eb; border: 1px solid #bfdbfe; }
+.advice-card { background: #fffbeb; border: 1px solid #fde68a; border-radius: 12px; padding: 16px; margin: 8px 0; }
+.advice-card.critical { background: #fef2f2; border-color: #fecaca; }
+.advice-card.ok { background: #f0fdf4; border-color: #bbf7d0; }
+.advice-card strong { display: block; margin-bottom: 4px; }
+.error-type-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 12px 0; }
+@media (max-width: 640px) { .error-type-grid { grid-template-columns: 1fr; } .chapter-row { flex-wrap: wrap; } }
+.error-type-card { border-radius: 12px; padding: 16px; text-align: center; }
+.error-type-card .num { font-size: 2rem; font-weight: 800; }
+.error-type-card .lbl { font-size: 0.8rem; margin-top: 4px; }
+.revision-item { padding: 10px 16px; margin: 6px 0; border-radius: 10px; background: #f8fafc; border-left: 4px solid #dc2626; font-size: 0.9rem; }
+.revision-item.medium { border-left-color: #f59e0b; }
+.revision-item .prio { font-weight: 700; margin-right: 8px; }
+.tabs { display: flex; gap: 4px; margin-bottom: 20px; flex-wrap: wrap; }
+.tab { padding: 8px 20px; border: 2px solid #e2e8f0; background: white; border-radius: 10px; font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 0.15s; }
+.tab.active { background: #2563eb; color: white; border-color: #2563eb; }
+.tab:hover:not(.active) { border-color: #93c5fd; background: #f0f7ff; }
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+/* Responsive */
+@media (max-width: 640px) {
+  .header { flex-direction: column; gap: 8px; }
+  .question-card { padding: 20px; }
+  .nav-btn { width: 32px; height: 32px; font-size: 0.7rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- START SCREEN -->
+<div id="startScreen" class="start-screen">
+  <h2>ISTQB CTFL v4.0</h2>
+  <p class="subtitle">Examen blanc D - Foundation Level</p>
+  <div class="info">
+    <div class="info-card"><div class="num">40</div><div class="label">Questions</div></div>
+    <div class="info-card"><div class="num">60</div><div class="label">Minutes</div></div>
+    <div class="info-card"><div class="num">65%</div><div class="label">Seuil de reussite</div></div>
+  </div>
+  <button class="btn-start" onclick="startExam()">Demarrer l'examen</button>
+</div>
+
+<!-- HEADER -->
+<div class="header" id="examHeader" style="display:none;">
+  <h1>ISTQB CTFL - Examen D</h1>
+  <div class="timer" id="timer">60:00</div>
+</div>
+
+<!-- EXAM -->
+<div class="exam-container" id="examContainer">
+  <div class="nav-grid" id="navGrid"></div>
+  <div id="questionArea"></div>
+  <div class="controls">
+    <button class="btn btn-prev" id="btnPrev" onclick="navigate(-1)">Precedent</button>
+    <span id="pageIndicator" style="color:#64748b; font-size:0.85rem;"></span>
+    <button class="btn btn-next" id="btnNext" onclick="navigate(1)">Suivant</button>
+  </div>
+  <div style="text-align:center; margin-top: 24px;">
+    <button class="btn btn-finish" onclick="finishExam()">Terminer l'examen</button>
+  </div>
+</div>
+
+<!-- RESULTS -->
+<div class="results-screen" id="resultsScreen">
+  <div class="score-card" id="scoreCard"></div>
+  <!-- Tabs -->
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('analyse')">Analyse</button>
+    <button class="tab" onclick="switchTab('revision')">Plan de revision</button>
+    <button class="tab" onclick="switchTab('review')">Detail des reponses</button>
+  </div>
+
+  <!-- Tab: Analyse -->
+  <div id="tab-analyse" class="tab-content active">
+    <div class="analysis-section" id="chapterAnalysis"></div>
+    <div class="analysis-section" id="errorTypeAnalysis"></div>
+    <div class="analysis-section" id="klevelAnalysis"></div>
+  </div>
+
+  <!-- Tab: Plan de revision -->
+  <div id="tab-revision" class="tab-content">
+    <div class="analysis-section" id="revisionPlan"></div>
+  </div>
+
+  <!-- Tab: Detail reponses -->
+  <div id="tab-review" class="tab-content">
+    <div id="navGridResults" class="nav-grid" style="margin-bottom:24px;"></div>
+    <div id="reviewArea"></div>
+  </div>
+
+  <div style="text-align:center; display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top: 24px;">
+    <button class="btn btn-retry" onclick="copyResults()" style="background:#f59e0b;">Copier mes resultats</button>
+    <button class="btn btn-retry" onclick="clearState(); location.reload()">Recommencer</button>
+  </div>
+</div>
+
+<script>
+const questions = [
+  {
+    id: 1, lo: "FL-1.1.1", k: "K1", pts: 1, multi: false,
+    text: "Quel est un objectif typique du test ?",
+    options: [
+      "Trouver et corriger les defauts dans l'objet de test",
+      "Maintenir des communications efficaces avec les developpeurs",
+      "Valider que les exigences legales ont ete respectees",
+      "Construire la confiance dans la qualite de l'objet de test"
+    ],
+    correct: [3],
+    justification: "Construire la confiance dans la qualite s'obtient en executant des tests qui passent. Trouver des defauts est un objectif du test, mais corriger les defauts n'est pas une activite de test (a). Communiquer avec les devs est utile mais pas un objectif primaire (b). Verifier les exigences legales est de la verification, pas de la validation (c)."
+  },
+  {
+    id: 2, lo: "FL-1.2.3", k: "K2", pts: 1, multi: false,
+    scenario: "Un designer cree une interface qui ne prend pas en compte les utilisateurs handicapes (fatigue). Le programmeur l'implemente mais, sous pression temporelle severe, omet la gestion d'exceptions pour les calculs de bonus. Les handicapes se plaignent, l'entreprise recoit une amende. Personne ne remarque les erreurs de calcul de bonus.",
+    text: "Quel enonce est CORRECT ?",
+    options: [
+      "Le mauvais calcul de bonus est un defaut qui se produit occasionnellement",
+      "L'amende recue pour ne pas avoir pris en compte les handicapes est une defaillance",
+      "Le programmeur travaillant sous pression temporelle severe est une cause racine",
+      "La conception de l'interface contient une erreur du designer"
+    ],
+    correct: [2],
+    justification: "La pression temporelle est la cause racine de l'erreur du programmeur (c). Le mauvais calcul est une defaillance du systeme, pas un defaut (a). L'amende est la consequence, pas une defaillance du systeme (b). L'interface contient un defaut de conception, pas une 'erreur du designer' (d)."
+  },
+  {
+    id: 3, lo: "FL-1.3.1", k: "K2", pts: 1, multi: false,
+    scenario: "Des conditions de test sont utilisees par les testeurs pour generer des cas de test et executer des tests. Bien que les conditions de test restent les memes, les cas de test varient a chaque fois.",
+    text: "Quel principe de test est applique a travers la variation des cas de test ?",
+    options: [
+      "Les tests s'usent (Tests wear out)",
+      "L'illusion de l'absence de defauts",
+      "Tester tot economise du temps et de l'argent",
+      "Les defauts se regroupent"
+    ],
+    correct: [0],
+    justification: "Le principe 'les tests s'usent' (paradoxe du pesticide) signifie que repeter les memes tests sur un code inchange a peu de chances de decouvrir de nouveaux defauts. En variant les cas de test, on reduit ce risque d'usure."
+  },
+  {
+    id: 4, lo: "FL-1.4.1", k: "K2", pts: 1, multi: false,
+    scenario: "Taches de test :\n1. Deriver des cas de test a partir de conditions de test\n2. Identifier le testware reutilisable\n3. Organiser les cas de test en procedures de test\n4. Evaluer la base de test et l'objet de test\n\nActivites de test :\nA. Analyse de test\nB. Conception de test\nC. Implementation de test\nD. Completion de test",
+    text: "Quelle association est la MEILLEURE ?",
+    options: [
+      "1B, 2A, 3D, 4C",
+      "1B, 2D, 3C, 4A",
+      "1C, 2A, 3B, 4D",
+      "1C, 2D, 3A, 4B"
+    ],
+    correct: [1],
+    justification: "Analyse (A) : evaluer la base/objet de test = tache 4. Conception (B) : deriver des cas de test = tache 1. Implementation (C) : organiser en procedures = tache 3. Completion (D) : identifier le testware reutilisable = tache 2. Donc 1B, 2D, 3C, 4A."
+  },
+  {
+    id: 5, lo: "FL-1.4.3", k: "K2", pts: 1, multi: false,
+    scenario: "Testware :\ni. Rapport de completion de test\nii. Donnees en base pour inputs et resultats attendus\niii. Liste des elements pour l'environnement de test\niv. Sequences documentees de cas de test dans l'ordre d'execution\nv. Cas de test",
+    text: "Quel testware est produit par l'implementation de test ?",
+    options: [
+      "ii, iv",
+      "iii, v",
+      "i, ii, v",
+      "i, iii, iv"
+    ],
+    correct: [0],
+    justification: "L'implementation produit : procedures de test (iv), scripts automatises, suites, donnees de test (ii), calendrier d'execution. Les cas de test (v) et exigences d'environnement (iii) viennent de la conception. Le rapport de completion (i) vient de la completion."
+  },
+  {
+    id: 6, lo: "FL-1.4.5", k: "K2", pts: 1, multi: false,
+    text: "Quelle tache est la PLUS susceptible d'etre effectuee par un role de gestion de test ?",
+    options: [
+      "Evaluer la base de test et l'objet de test",
+      "Definir les exigences d'environnement de test",
+      "Evaluer la testabilite de l'objet de test",
+      "Creer le rapport de completion de test"
+    ],
+    correct: [3],
+    justification: "Le role de gestion s'occupe de planification, suivi/controle et completion. Creer le rapport de completion est une tache de gestion. Les options a, b, c sont des taches du role de testeur (analyse, conception)."
+  },
+  {
+    id: 7, lo: "FL-1.5.2", k: "K1", pts: 1, multi: false,
+    text: "Quel est un avantage de l'approche equipe entiere (whole team) ?",
+    options: [
+      "Communication amelioree entre les membres de l'equipe",
+      "Responsabilite individuelle reduite pour la qualite",
+      "Deploiement plus rapide vers les utilisateurs finaux",
+      "Collaboration reduite avec les utilisateurs metier externes"
+    ],
+    correct: [0],
+    justification: "L'approche whole team favorise la communication et collaboration robustes entre les membres. Chaque individu reste responsable de la qualite (b faux). Ca ne garantit pas un deploiement plus rapide (c) ni ne reduit la collaboration externe (d)."
+  },
+  {
+    id: 8, lo: "FL-1.5.3", k: "K2", pts: 1, multi: false,
+    scenario: "Benefices et inconvenients de l'independance du test :\ni. Les testeurs travaillent dans un lieu different des developpeurs\nii. Les testeurs remettent en question les hypotheses des programmeurs\niii. Une dynamique conflictuelle s'est etablie entre testeurs et developpeurs\niv. Les developpeurs se sont convaincus que les testeurs sont principalement responsables de la qualite\nv. Les testeurs ont des biais differents de ceux des developpeurs",
+    text: "Lesquels sont le PLUS susceptibles d'etre consideres comme des avantages ?",
+    options: [
+      "i, iv",
+      "ii, v",
+      "i, iii, iv",
+      "ii, iii, v"
+    ],
+    correct: [1],
+    justification: "Les avantages sont : remettre en question les hypotheses (ii) et avoir des biais/perspectives differents (v). L'isolement geographique (i), la confrontation (iii) et le transfert de responsabilite (iv) sont des inconvenients."
+  },
+  {
+    id: 9, lo: "FL-2.1.2", k: "K1", pts: 1, multi: false,
+    text: "Quelle bonne pratique de test s'applique a tous les cycles de vie du developpement logiciel ?",
+    options: [
+      "Chaque niveau de test a des objectifs specifiques et distincts",
+      "L'implementation et l'execution des tests pour un niveau donne devraient commencer pendant la phase de developpement correspondante",
+      "Les testeurs devraient commencer la conception des tests des que les brouillons des produits de travail deviennent disponibles",
+      "Chaque activite de test dynamique a une activite de test statique correspondante"
+    ],
+    correct: [0],
+    justification: "Chaque niveau teste un objet different (composant vs systeme complet), donc des objectifs distincts evitent la duplication. L'analyse/conception commencent tot, pas l'implementation/execution (b). Il faut une base agreee, pas un brouillon (c). Pas de symetrie systematique statique/dynamique (d)."
+  },
+  {
+    id: 10, lo: "FL-2.1.3", k: "K1", pts: 1, multi: false,
+    text: "Lequel est un exemple d'approche 'test-first' du developpement ?",
+    options: [
+      "Behavior-Driven Development (BDD)",
+      "Test Level Driven Development",
+      "Function-Driven Development",
+      "Performance-Driven Development"
+    ],
+    correct: [0],
+    justification: "BDD (Behavior-Driven Development) est un exemple bien connu d'approche test-first. Les autres options ne sont pas des approches test-first reconnues."
+  },
+  {
+    id: 11, lo: "FL-2.1.4", k: "K2", pts: 1, multi: false,
+    text: "Quel defi est le PLUS susceptible d'etre rencontre lors de l'implementation de DevOps ?",
+    options: [
+      "S'assurer que les caracteristiques de qualite non-fonctionnelles ne sont pas negligees",
+      "Gerer des environnements de test en changement continu",
+      "Le besoin de plus de testeurs manuels avec une experience adequate",
+      "Mettre en place l'automatisation des tests dans le pipeline de livraison"
+    ],
+    correct: [3],
+    justification: "DevOps ameliore la visibilite des qualites non-fonctionnelles (a faux). Le CI/CD facilite la stabilite des environnements (b faux). DevOps reduit le besoin de tests manuels (c faux). Le vrai defi est de definir le pipeline et mettre en place/maintenir l'automatisation (d)."
+  },
+  {
+    id: 12, lo: "FL-2.1.6", k: "K2", pts: 1, multi: false,
+    text: "Quelle description correspond le MIEUX aux retrospectives ?",
+    options: [
+      "Elles permettent aux membres d'identifier ceux qui n'ont pas pleinement contribue a la qualite",
+      "Elles donnent aux testeurs l'occasion d'identifier les activites reussies a conserver lors de futures ameliorations",
+      "Elles permettent aux membres agiles de se plaindre de la direction et des clients dans un cadre bienveillant",
+      "Elles permettent aux membres agiles de discuter du plan et des decisions techniques pour la prochaine iteration"
+    ],
+    correct: [1],
+    justification: "Les retros discutent de ce qui a bien fonctionne et de ce qui peut etre ameliore (b). Ce n'est pas pour pointer du doigt (a), se plaindre (c), ni planifier la prochaine iteration (d - ca c'est l'iteration planning)."
+  },
+  {
+    id: 13, lo: "FL-2.2.2", k: "K2", pts: 1, multi: false,
+    text: "Quel test est le PLUS susceptible d'etre effectue dans le cadre du test fonctionnel ?",
+    options: [
+      "Le test verifie que la fonction de tri met les elements en ordre croissant",
+      "Le test verifie que le tri se termine en moins d'une seconde",
+      "Le test verifie la facilite de changer le tri de croissant a decroissant",
+      "Le test verifie que le tri fonctionne encore correctement sur une architecture 64-bit"
+    ],
+    correct: [0],
+    justification: "Verifier l'exactitude fonctionnelle (ordre correct) = test fonctionnel. Performance (b) = non-fonctionnel. Modifiabilite (c) = maintenabilite non-fonctionnelle. Portabilite (d) = non-fonctionnel."
+  },
+  {
+    id: 14, lo: "FL-2.3.1", k: "K2", pts: 1, multi: false,
+    text: "Lequel est le PLUS susceptible d'etre un declencheur de test de maintenance d'un systeme de change ?",
+    options: [
+      "Les developpeurs ont rapporte que le changement etait difficile et les testeurs veulent verifier",
+      "L'option de remboursement a ete retiree car elle ne remboursait pas toujours le bon montant aux clients",
+      "L'equipe agile developpe une user story ajoutant une fonctionnalite de fidelite client",
+      "Le support linguistique a ete utilise pour activer les transactions en anglais et en langue locale"
+    ],
+    correct: [1],
+    justification: "Les 3 declencheurs de maintenance : modification du systeme, changement d'environnement, retrait du systeme. Le retrait de l'option de remboursement (correction) est une modification (b). L'option a concerne la maintenabilite. L'option c est du developpement. L'option d est de la reconfiguration."
+  },
+  {
+    id: 15, lo: "FL-3.1.1", k: "K1", pts: 1, multi: false,
+    text: "Lequel NE PEUT PAS etre examine par le test statique ?",
+    options: [
+      "Contrat",
+      "Plan de test",
+      "Code chiffre (encrypte)",
+      "Charte de test"
+    ],
+    correct: [2],
+    justification: "Le test statique necessite que le produit soit interpretable par un humain ou un outil. Un code chiffre ne peut etre ni lu par un humain ni analyse par la plupart des outils."
+  },
+  {
+    id: 16, lo: "FL-3.1.2", k: "K2", pts: 1, multi: false,
+    text: "Quel enonce sur la valeur du test statique est CORRECT ?",
+    options: [
+      "Les types de defauts trouves par le test statique sont differents de ceux du test dynamique",
+      "Le test dynamique peut detecter les types de defauts du test statique plus d'autres supplementaires",
+      "Le test dynamique peut identifier certains defauts trouvables par le test statique mais pas tous",
+      "Le test statique peut identifier les types de defauts du test dynamique plus d'autres supplementaires"
+    ],
+    correct: [2],
+    justification: "3 categories : defauts detectables uniquement par le statique (code mort, patterns), par les deux (defaut observable en revue ET causant une defaillance), et uniquement par le dynamique (performance, memoire). Donc le dynamique ne couvre pas tout ce que le statique trouve (c)."
+  },
+  {
+    id: 17, lo: "FL-3.2.2", k: "K2", pts: 1, multi: false,
+    scenario: "Descriptions d'activites de revue :\n1. Les anomalies detectees sont deliberees, et des decisions sont prises sur leur statut, propriete et prochaines etapes\n2. Les defauts sont enregistres, et les mises a jour necessaires sont effectuees avant l'acceptation du produit de travail\n3. Les reviseurs emploient des techniques pour formuler des suggestions et questions et reperer des anomalies\n4. L'objectif de la revue et son calendrier sont etablis\n5. Les participants recoivent acces a l'element revise",
+    text: "Quelle est la sequence CORRECTE des activites de revue ?",
+    options: [
+      "4 - 3 - 5 - 2 - 1",
+      "4 - 5 - 3 - 1 - 2",
+      "5 - 4 - 1 - 3 - 2",
+      "5 - 4 - 3 - 2 - 1"
+    ],
+    correct: [1],
+    justification: "Ordre ISO/IEC 20246 : Planification (4) -> Initiation de la revue (5) -> Revue individuelle (3) -> Communication et analyse (1) -> Correction et rapport (2)."
+  },
+  {
+    id: 18, lo: "FL-3.2.3", k: "K1", pts: 1, multi: false,
+    text: "Quel participant au processus de revue est responsable de s'assurer que les reunions se deroulent efficacement et que chacun peut s'exprimer librement ?",
+    options: [
+      "Manager",
+      "Moderateur",
+      "President",
+      "Responsable de la revue"
+    ],
+    correct: [1],
+    justification: "Le moderateur (facilitateur) gere le temps, mediation des discussions et cree un environnement sur. Le manager alloue les ressources. Le 'president' n'est pas un role reconnu. Le review leader supervise le processus."
+  },
+  {
+    id: 19, lo: "FL-4.1.1", k: "K2", pts: 1, multi: false,
+    scenario: "Vous effectuez des tests systeme d'une application web e-commerce avec l'exigence suivante :\n\nREQ 05-017. Si le cout total des achats depasse 100$, le client obtient une reduction de 5% sur les achats suivants. Sinon, le client ne recoit pas de reduction.",
+    text: "Quelles techniques de test seront les PLUS utiles pour concevoir des cas de test ?",
+    options: [
+      "Techniques de test boite blanche",
+      "Techniques de test boite noire",
+      "Techniques de test basees sur l'experience",
+      "Techniques de test basees sur le risque"
+    ],
+    correct: [1],
+    justification: "L'exigence specifie un comportement (regle metier avec frontiere a 100$). Les techniques boite noire (BVA, tables de decision) sont les plus adaptees. 'Techniques basees sur le risque' n'est pas un type reconnu (d)."
+  },
+  {
+    id: 20, lo: "FL-4.2.1", k: "K3", pts: 1, multi: true,
+    scenario: "Le systeme de cinema calcule le type de reduction selon l'annee de naissance (BY) et l'annee courante (CY) :\nD = CY - BY\n- Si D < 0 : message d'erreur\n- Si 0 <= D < 18 : reduction etudiant\n- Si 18 <= D < 65 : pas de reduction\n- Si D >= 65 : reduction retraite\n\nVotre suite de tests contient deja :\n- BY=1990, CY=2020 : pas de reduction (D=30)\n- BY=2030, CY=2029 : message d'erreur (D=-1)",
+    text: "Quelles donnees de test ajouter pour couvrir toutes les partitions d'equivalence valides ? (2 reponses)",
+    options: [
+      "BY=2001, CY=2065 (D=64)",
+      "BY=1900, CY=1965 (D=65)",
+      "BY=1965, CY=1900 (D=-65)",
+      "BY=2011, CY=2029 (D=18)",
+      "BY=2000, CY=2000 (D=0)"
+    ],
+    correct: [1, 4],
+    justification: "Partitions non couvertes : 'reduction etudiant' (0<=D<18) et 'reduction retraite' (D>=65). b) D=65 -> retraite. e) D=0 -> etudiant. Les autres correspondent a des partitions deja couvertes."
+  },
+  {
+    id: 21, lo: "FL-4.2.2", k: "K3", pts: 1, multi: false,
+    scenario: "Systeme de controle de temperature pour chambre froide horticole. Temperature en degres Celsius entiers :\n- Entre 0 et 2 inclus : 'temperature OK'\n- Plus bas : 'temperature trop basse'\n- Plus haut : 'temperature trop haute'",
+    text: "Avec l'analyse des valeurs limites a 2 valeurs (two-value BVA), quel ensemble offre la meilleure couverture ?",
+    options: [
+      "-1, 3",
+      "0, 2",
+      "-1, 0, 2, 3",
+      "-2, 0, 2, 4"
+    ],
+    correct: [2],
+    justification: "Avec BVA a 2 valeurs, les valeurs limites sont : -1, 0 (frontiere basse) et 2, 3 (frontiere haute). L'ensemble {-1, 0, 2, 3} couvre toutes les limites. L'option d utilise -2 et 4 qui ne sont pas des valeurs limites."
+  },
+  {
+    id: 22, lo: "FL-4.2.3", k: "K3", pts: 1, multi: false,
+    scenario: "Table de decision :\n       R1    R2    R3    R4    R5    R6    R7\nAge    0-18  19-65 19-65 >65   0-18  19-65 >65\nExp    -     0-4   >4    -     -     -     -\nInscrit? NON  NON   NON   NON   OUI   OUI   OUI\nCateg  A     A     B     B     B     D     C\n\nCas de test existants :\n- TC1 : 19 ans, non inscrit, sans exp -> categorie A (R2)\n- TC2 : 65 ans, non inscrite, 5 ans d'exp -> categorie B (R3)\n- TC3 : 66 ans, inscrit, sans exp -> categorie C (R7)\n- TC4 : 65 ans, inscrite, 4 ans d'exp -> categorie D (R6)",
+    text: "Quel cas de test, ajoute a l'ensemble existant, augmentera la couverture de la table de decision ?",
+    options: [
+      "Homme de 66 ans, non inscrit, sans experience -> categorie B",
+      "Femme de 55 ans, non inscrite, 2 ans d'experience -> categorie A",
+      "Femme de 19 ans, inscrite, 5 ans d'experience -> categorie D",
+      "Aucun cas supplementaire ne peut augmenter la couverture deja atteinte"
+    ],
+    correct: [0],
+    justification: "TC1=R2, TC2=R3, TC3=R7, TC4=R6. Regles non couvertes : R1, R4, R5. L'option a correspond a R4 (>65, non inscrit). L'option b = R2 (deja couvert). L'option c = R6 (deja couvert). L'option d est fausse car 3 regles restent non couvertes."
+  },
+  {
+    id: 23, lo: "FL-4.2.4", k: "K3", pts: 1, multi: false,
+    scenario: "Test de transitions d'etat pour un systeme de reservation d'hotel :\n\nEtats : S1=Demande, S2=Confirme, S3=Liste d'attente, S4=Fin\n\nTransitions :\nS1 + Available -> S2\nS1 + NotAvailable -> S3\nS2 + ChangeRoom -> S1\nS2 + Cancel -> S4\nS2 + Pay -> S4\nS3 + Available -> S2\nS3 + Cancel -> S4\n\nTous les cas de test commencent a l'etat 'Demande' (S1).",
+    text: "Quel cas de test (sequence d'evenements) atteint la couverture de transitions valides la plus elevee ?",
+    options: [
+      "NotAvailable, Available, ChangeRoom, NotAvailable, Cancel",
+      "Available, ChangeRoom, NotAvailable, Available, Pay",
+      "Available, ChangeRoom, Available, ChangeRoom, NotAvailable",
+      "NotAvailable, Cancel, ChangeRoom, Available, Pay"
+    ],
+    correct: [1],
+    justification: "b) couvre 5 transitions sur 7 : S1->S2 (Available), S2->S1 (ChangeRoom), S1->S3 (NotAvailable), S3->S2 (Available), S2->S4 (Pay). a) couvre 4/7. c) couvre 3/7. d) est infaisable (Cancel mene a l'etat Fin)."
+  },
+  {
+    id: 24, lo: "FL-4.3.1", k: "K2", pts: 1, multi: false,
+    scenario: "Votre suite de tests S pour un programme P atteint 100% de couverture d'instructions. Elle contient 3 cas de test, chacun atteignant 50% de couverture d'instructions.",
+    text: "Quel enonce est CORRECT ?",
+    options: [
+      "Executer S causera toutes les defaillances possibles dans P",
+      "S atteint 100% de couverture de branches pour P",
+      "Chaque instruction executable dans P contenant un defaut a ete executee au moins une fois",
+      "Apres retrait d'un cas de test, les 2 restants atteignent encore 100% de couverture d'instructions"
+    ],
+    correct: [2],
+    justification: "100% couverture d'instructions = chaque instruction executee au moins une fois (c). Un defaut execute ne cause pas forcement une defaillance (a). 100% instructions != 100% branches (b). Le cas retire peut couvrir des instructions uniques (d)."
+  },
+  {
+    id: 25, lo: "FL-4.3.3", k: "K2", pts: 1, multi: false,
+    text: "Pourquoi le test boite blanche facilite-t-il la detection de defauts meme quand la specification est vague, obsolete ou incomplete ?",
+    options: [
+      "Les cas de test sont concus a partir de la structure de l'objet de test plutot que de la specification",
+      "Pour chaque technique boite blanche, la couverture peut etre bien definie et facilement mesuree",
+      "Les techniques boite blanche sont bien concues pour detecter les omissions dans les exigences",
+      "Les techniques boite blanche peuvent etre utilisees en test statique et dynamique"
+    ],
+    correct: [0],
+    justification: "Le test boite blanche se base sur le code (structure interne), pas sur la spec. Il peut trouver du code supplementaire non desire. Il ne detecte PAS les omissions dans les exigences (c est faux)."
+  },
+  {
+    id: 26, lo: "FL-4.4.1", k: "K2", pts: 1, multi: false,
+    text: "Lequel N'EST PAS anticipe par le testeur lors de la prediction d'erreurs (error guessing) ?",
+    options: [
+      "Le developpeur a mal compris la formule dans la user story pour calculer les interets",
+      "Le developpeur a ecrit 'FA = A*(1+IR^N)' au lieu de 'FA = A*(1+IR)^N' dans le code source",
+      "Le developpeur a manque le seminaire sur la nouvelle legislation des taux d'interets composes",
+      "La precision du calcul d'interets par le systeme n'est pas assez precise"
+    ],
+    correct: [2],
+    justification: "L'error guessing anticipe des erreurs (a), defauts (b) et defaillances (d). Manquer un seminaire est une cause racine potentielle, pas une erreur/defaut/defaillance, et est difficile a anticiper pour le testeur."
+  },
+  {
+    id: 27, lo: "FL-4.4.2", k: "K2", pts: 1, multi: false,
+    text: "Quel enonce est vrai concernant le test exploratoire ?",
+    options: [
+      "Les cas de test sont concus avant le debut de la session de test exploratoire",
+      "Le testeur peut effectuer l'execution des tests, mais pas la conception",
+      "Les resultats du test exploratoire sont de bons predicteurs du nombre de defauts restants",
+      "Pendant le test exploratoire, le testeur peut utiliser des techniques de test boite noire"
+    ],
+    correct: [3],
+    justification: "En test exploratoire, les tests sont concus, executes et evalues simultanement (a et b faux). Les resultats dependent de l'experience du testeur et ne sont pas fiables pour la prediction (c). Le testeur peut utiliser toute technique utile (d)."
+  },
+  {
+    id: 28, lo: "FL-4.5.1", k: "K2", pts: 1, multi: false,
+    text: "Quelle pratique collaborative d'ecriture de user stories permet a l'equipe une comprehension commune de ce qui doit etre livre ?",
+    options: [
+      "Planning poker, pour que l'equipe s'accorde sur l'effort necessaire",
+      "Revues, pour detecter les incoherences et contradictions",
+      "Planification d'iteration, pour prioriser les user stories a plus haute valeur metier",
+      "Conversation, pour que les membres comprennent comment le logiciel sera utilise"
+    ],
+    correct: [3],
+    justification: "La Conversation (le C de Card-Conversation-Confirmation) explique comment le logiciel sera utilise et permet de definir des criteres d'acceptation significatifs, donnant une vision partagee."
+  },
+  {
+    id: 29, lo: "FL-4.5.3", k: "K3", pts: 1, multi: false,
+    scenario: "User story :\nEn tant que client, je veux pouvoir filtrer les resultats par fourchette de prix pour trouver des produits dans mon budget.\n\nCriteres d'acceptation :\n1. Le filtre doit fonctionner pour toutes les versions >= 3.0\n2. Le filtre doit permettre de definir un prix min et max\n3. Les resultats doivent se mettre a jour dynamiquement\n\nPrecondition : 2 produits disponibles - A (100$) et B (110$).",
+    text: "Quel est le MEILLEUR exemple de cas de test pour cette user story ?",
+    options: [
+      "Definir le filtre entre 90$ et 100$ -> produit A seulement. Changer le max a 110$ -> produits A et B",
+      "Verifier les prix min/max par defaut (100$ et 110$). Ajouter un produit C a 120$. Rafraichir -> le max par defaut change a 120$",
+      "Definir le filtre entre 90$ et 115$ -> A et B. Changer la devise USD en EUR -> la fourchette se convertit correctement",
+      "Tester sur Edge, Chrome et Opera avec filtre entre 90$ et 110$ -> A et B avec le meme rendu"
+    ],
+    correct: [0],
+    justification: "Seul a) teste les criteres 2 (definir une fourchette de prix) et 3 (mise a jour dynamique). Les autres ne sont pas lies aux criteres d'acceptation de cette user story."
+  },
+  {
+    id: 30, lo: "FL-5.1.3", k: "K2", pts: 1, multi: true,
+    text: "Lesquels definissent le MIEUX des criteres de SORTIE dans un projet de test ? (2 reponses)",
+    options: [
+      "Le budget est approuve",
+      "Le budget est epuise",
+      "La base de test est disponible",
+      "Les cas de test ont atteint au moins 80% de couverture d'instructions",
+      "Tous les analystes de test sont certifies ISTQB Foundation Level"
+    ],
+    correct: [1, 3],
+    justification: "Les criteres de sortie definissent quand arreter. L'epuisement du budget (b) et un seuil de couverture (d) sont des criteres de sortie typiques. Les options a, c, e sont des criteres d'entree."
+  },
+  {
+    id: 31, lo: "FL-5.1.4", k: "K3", pts: 1, multi: false,
+    scenario: "L'equipe veut estimer le temps necessaire pour qu'un testeur execute 4 cas de test. Mesures pour un seul cas de test :\n- Meilleur cas : 1 heure\n- Pire cas : 8 heures\n- Cas le plus probable : 3 heures\n\nLa technique d'estimation a 3 points est utilisee.",
+    text: "Quelle est l'estimation finale du temps necessaire pour executer les 4 cas de test ?",
+    options: [
+      "14 heures",
+      "3,5 heures",
+      "16 heures",
+      "12 heures"
+    ],
+    correct: [0],
+    justification: "Formule : E = (a + 4m + b) / 6 = (1 + 4*3 + 8) / 6 = 21/6 = 3,5h par cas. Total = 3,5 * 4 = 14 heures."
+  },
+  {
+    id: 32, lo: "FL-5.1.5", k: "K3", pts: 1, multi: false,
+    scenario: "Matrice de tracabilite cas de test / exigences (X = couvert) :\n\n        Req1 Req2 Req3 Req4 Req5 Req6 Req7\nTC1      X         X    X                   X\nTC2           X    X                    \nTC3                               X    X\nTC4           X\n\nVous voulez prioriser par couverture additionnelle et executer les 4 cas.",
+    text: "Quel cas de test doit etre execute en DERNIER ?",
+    options: [
+      "TC1",
+      "TC2",
+      "TC3",
+      "TC4"
+    ],
+    correct: [1],
+    justification: "TC1 couvre 4 req (le plus) -> 1er. Restent Req2, 5, 6. TC3 couvre Req5, 6 (2 des restantes) -> 2eme. Reste Req2. TC4 couvre Req2 -> 3eme. TC2 est donc execute en dernier."
+  },
+  {
+    id: 33, lo: "FL-5.1.7", k: "K2", pts: 1, multi: false,
+    text: "Comment les quadrants de test peuvent-ils etre benefiques pour le test ?",
+    options: [
+      "Ils aident a la planification en divisant le processus en 4 phases correspondant aux 4 niveaux de test",
+      "Ils aident a evaluer la couverture de haut niveau a partir de la couverture bas niveau",
+      "Ils aident les parties prenantes non techniques a comprendre les differents types de test et leur pertinence par niveau",
+      "Ils aident les equipes agiles a developper une strategie de communication basee sur 4 types psychologiques"
+    ],
+    correct: [2],
+    justification: "Les quadrants montrent les relations entre types de test, les activites supportees (support equipe vs critique produit) et le point de vue (metier vs technique). Ce n'est pas lie aux niveaux de test (a), a la couverture (b), ni a la psychologie (d)."
+  },
+  {
+    id: 34, lo: "FL-5.2.1", k: "K1", pts: 1, multi: false,
+    scenario: "Pour un risque donne, le niveau de risque est de 1 000$ et la probabilite est estimee a 50%.",
+    text: "Quel est l'impact du risque ?",
+    options: [
+      "500$",
+      "2 000$",
+      "50 000$",
+      "200$"
+    ],
+    correct: [1],
+    justification: "Niveau de risque = Probabilite x Impact. Donc Impact = Niveau / Probabilite = 1000$ / 0,5 = 2000$."
+  },
+  {
+    id: 35, lo: "FL-5.2.2", k: "K2", pts: 1, multi: true,
+    text: "Lesquels sont des risques PRODUIT ? (2 reponses)",
+    options: [
+      "Derive du perimetre (scope creep)",
+      "Mauvaise architecture",
+      "Reduction des couts",
+      "Mauvais support des outils",
+      "Temps de reponse trop long"
+    ],
+    correct: [1, 4],
+    justification: "Les risques produit se rapportent aux caracteristiques du produit : mauvaise architecture (b) et temps de reponse trop long (e). Derive du perimetre (a), reduction des couts (c) et mauvais support outils (d) sont des risques projet."
+  },
+  {
+    id: 36, lo: "FL-5.3.2", k: "K2", pts: 1, multi: false,
+    text: "Lequel N'EST PAS un objectif valide d'un rapport de test ?",
+    options: [
+      "Suivre la progression des tests et identifier les zones necessitant attention",
+      "Fournir des informations sur les tests executes, leurs resultats et les defauts trouves",
+      "Fournir des informations sur chaque defaut, comme les etapes pour le reproduire",
+      "Fournir des informations sur les tests prevus pour la prochaine periode"
+    ],
+    correct: [2],
+    justification: "Fournir des informations detaillees sur chaque defaut (etapes de reproduction) est l'objectif d'un rapport de defaut, pas d'un rapport de test. Les options a, b et d sont des objectifs valides du rapport de test."
+  },
+  {
+    id: 37, lo: "FL-5.4.1", k: "K2", pts: 1, multi: false,
+    scenario: "Un utilisateur signale une defaillance. L'equipe support demande le numero de version. A partir de ce numero, l'equipe reconstitue tous les fichiers de la release, permettant au developpeur d'analyser, trouver le defaut et le corriger.",
+    text: "Qu'est-ce qui a permis a l'equipe de realiser cette activite ?",
+    options: [
+      "Gestion des risques",
+      "Suivi et controle des tests",
+      "Approche equipe entiere",
+      "Gestion de configuration"
+    ],
+    correct: [3],
+    justification: "La gestion de configuration identifie, controle et suit les elements de configuration. Elle permet de revenir a une baseline anterieure pour reproduire des resultats anterieurs."
+  },
+  {
+    id: 38, lo: "FL-5.5.1", k: "K3", pts: 1, multi: false,
+    scenario: "Rapport de defaut pour un systeme de pret de livres :\nID: 001 | Titre: Impossible de rendre un livre | Severite: Haute | Priorite: [vide]\nEnvironnement: Windows 10, Google Chrome\nDescription: En tentant de rendre un livre, le systeme n'enregistre pas le retour et le livre reste emprunte.\nEtapes: 1) Login en tant qu'utilisateur ayant emprunte un livre. 2) Cliquer sur 'Retour du livre'. 3) Le systeme n'enregistre pas le retour.\nResultat attendu: Le livre devrait etre retourne.\nResultat reel: Le livre reste emprunte.\nPieces jointes: [vide]",
+    text: "Qu'est-ce qui aiderait le PLUS le developpeur a reproduire la defaillance rapidement ?",
+    options: [
+      "Ajouter des infos sur quels utilisateurs et quels livres sont concernes dans la section 'Description'",
+      "Remplir la valeur manquante du champ 'Priorite'",
+      "Ajouter des dumps memoire et snapshots de base de donnees apres chaque etape dans les 'Pieces jointes'",
+      "Repeter le meme cas de test sur differents environnements avec des rapports separes"
+    ],
+    correct: [0],
+    justification: "Connaitre les donnees d'entree specifiques (quel utilisateur, quel livre) permet de reproduire la defaillance plus rapidement. La priorite (b) n'aide pas a reproduire. Les dumps (c) sont trop volumineux et rendent le rapport moins lisible."
+  },
+  {
+    id: 39, lo: "FL-6.1.1", k: "K2", pts: 1, multi: false,
+    scenario: "Categories d'outils de test :\ni. Outils de collaboration\nii. Outils DevOps\niii. Outils de gestion\niv. Outils de test non-fonctionnel\nv. Outils de conception et implementation de test",
+    text: "Les outils de quelles categories facilitent le PLUS l'execution des tests ?",
+    options: [
+      "i, v",
+      "ii, iv",
+      "i, iii, v",
+      "ii, iii, iv"
+    ],
+    correct: [1],
+    justification: "Les outils DevOps (CI/CD, pipeline - ii) et les outils de test non-fonctionnel (performance - iv) facilitent l'execution. Les outils de collaboration (i), gestion (iii) et conception (v) ne facilitent pas directement l'execution."
+  },
+  {
+    id: 40, lo: "FL-6.2.1", k: "K1", pts: 1, multi: false,
+    text: "Lequel est le PLUS susceptible d'etre un risque de l'automatisation des tests ?",
+    options: [
+      "La detection de defauts supplementaires de haute severite",
+      "Fournir des mesures trop complexes pour les humains",
+      "Incompatibilite avec la plateforme de developpement",
+      "Reduction substantielle des temps d'execution des tests"
+    ],
+    correct: [2],
+    justification: "Si l'automatisation est incompatible avec la plateforme, elle ne peut pas s'integrer. Les options a, b et d sont des benefices de l'automatisation, pas des risques."
+  }
+];
+
+let currentQ = 0;
+let answers = {};
+let timerInterval = null;
+let timeLeft = 60 * 60; // 60 min
+let examFinished = false;
+
+// ===== PERSISTENCE localStorage =====
+const STORAGE_KEY = 'istqb_exam_d';
+function saveState() {
+  const state = { answers, currentQ, timeLeft, examFinished, startedAt: Date.now() };
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch(e) {}
+}
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return null;
+    return JSON.parse(raw);
+  } catch(e) { return null; }
+}
+function clearState() {
+  try { localStorage.removeItem(STORAGE_KEY); } catch(e) {}
+}
+
+// Auto-restore on page load
+(function restoreIfNeeded() {
+  const state = loadState();
+  if (!state || state.examFinished) return;
+  // Restore exam in progress
+  answers = state.answers || {};
+  currentQ = state.currentQ || 0;
+  timeLeft = state.timeLeft || 3600;
+  examFinished = false;
+  // Show exam UI
+  document.getElementById('startScreen').style.display = 'none';
+  document.getElementById('examHeader').style.display = 'flex';
+  document.getElementById('examContainer').classList.add('active');
+  buildNavGrid();
+  showQuestion(currentQ);
+  startTimer();
+})();
+
+function startExam() {
+  clearState();
+  answers = {};
+  currentQ = 0;
+  timeLeft = 3600;
+  examFinished = false;
+  document.getElementById('startScreen').style.display = 'none';
+  document.getElementById('examHeader').style.display = 'flex';
+  document.getElementById('examContainer').classList.add('active');
+  buildNavGrid();
+  showQuestion(0);
+  startTimer();
+}
+
+function startTimer() {
+  timerInterval = setInterval(() => {
+    timeLeft--;
+    if (timeLeft <= 0) {
+      clearInterval(timerInterval);
+      finishExam();
+      return;
+    }
+    const m = Math.floor(timeLeft / 60);
+    const s = timeLeft % 60;
+    const el = document.getElementById('timer');
+    el.textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+    if (timeLeft <= 300) el.classList.add('warning');
+    if (timeLeft % 10 === 0) saveState(); // sauvegarde toutes les 10 sec
+  }, 1000);
+}
+
+function buildNavGrid() {
+  const grid = document.getElementById('navGrid');
+  grid.innerHTML = '';
+  questions.forEach((q, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'nav-btn' + (i === currentQ ? ' current' : '') + (answers[i] !== undefined ? ' answered' : '');
+    btn.textContent = i + 1;
+    btn.onclick = () => showQuestion(i);
+    grid.appendChild(btn);
+  });
+}
+
+function updateNavGrid() {
+  const btns = document.querySelectorAll('#navGrid .nav-btn');
+  btns.forEach((btn, i) => {
+    btn.className = 'nav-btn' + (i === currentQ ? ' current' : '') + (answers[i] !== undefined ? ' answered' : '');
+  });
+}
+
+function showQuestion(idx) {
+  currentQ = idx;
+  const q = questions[idx];
+  const area = document.getElementById('questionArea');
+
+  let scenarioHtml = q.scenario ? `<div class="q-scenario">${q.scenario}</div>` : '';
+  let inputType = q.multi ? 'checkbox' : 'radio';
+  let instruction = q.multi ? 'Selectionnez DEUX options.' : 'Selectionnez UNE option.';
+  let selectedSet = answers[idx] !== undefined ? (Array.isArray(answers[idx]) ? answers[idx] : [answers[idx]]) : [];
+
+  let optionsHtml = q.options.map((opt, oi) => {
+    let checked = selectedSet.includes(oi) ? 'checked' : '';
+    let sel = selectedSet.includes(oi) ? ' selected' : '';
+    let letter = String.fromCharCode(97 + oi);
+    return `<div class="option${sel}" onclick="selectOption(${idx}, ${oi}, ${q.multi}, this)">
+      <input type="${inputType}" name="q${idx}" value="${oi}" ${checked} tabindex="-1">
+      <label>${letter}) ${opt}</label>
+    </div>`;
+  }).join('');
+
+  area.innerHTML = `
+    <div class="question-card">
+      <div class="q-header">
+        <span class="q-number">Question ${q.id} / 40</span>
+        <span class="q-lo">${q.lo} | ${q.k} | ${q.pts} pt</span>
+      </div>
+      ${scenarioHtml}
+      <div class="q-text">${q.text}</div>
+      <div class="q-instruction">${instruction}</div>
+      ${optionsHtml}
+    </div>`;
+
+  document.getElementById('btnPrev').disabled = idx === 0;
+  document.getElementById('btnNext').disabled = idx === questions.length - 1;
+  document.getElementById('pageIndicator').textContent = `${idx + 1} / ${questions.length}`;
+  updateNavGrid();
+}
+
+function selectOption(qIdx, optIdx, multi, el) {
+  if (examFinished) return;
+  if (multi) {
+    let current = answers[qIdx] !== undefined ? [...answers[qIdx]] : [];
+    const pos = current.indexOf(optIdx);
+    if (pos > -1) current.splice(pos, 1);
+    else current.push(optIdx);
+    answers[qIdx] = current.length > 0 ? current : undefined;
+    if (answers[qIdx] === undefined) delete answers[qIdx];
+  } else {
+    answers[qIdx] = optIdx;
+  }
+  saveState();
+  showQuestion(qIdx);
+}
+
+function navigate(dir) {
+  const next = currentQ + dir;
+  if (next >= 0 && next < questions.length) showQuestion(next);
+}
+
+function finishExam() {
+  if (examFinished) return;
+  const unanswered = questions.length - Object.keys(answers).length;
+  if (unanswered > 0 && !confirm(`Il reste ${unanswered} question(s) sans reponse.\nVoulez-vous vraiment terminer ?`)) return;
+
+  examFinished = true;
+  clearInterval(timerInterval);
+  saveState();
+  document.getElementById('examContainer').classList.remove('active');
+  document.getElementById('resultsScreen').classList.add('active');
+
+  let correct = 0;
+  const results = questions.map((q, i) => {
+    const ans = answers[i];
+    let isCorrect = false;
+    if (q.multi) {
+      const sel = ans !== undefined ? [...ans].sort() : [];
+      const cor = [...q.correct].sort();
+      isCorrect = sel.length === cor.length && sel.every((v, j) => v === cor[j]);
+    } else {
+      isCorrect = ans === q.correct[0];
+    }
+    if (isCorrect) correct++;
+    return { question: q, answered: ans, isCorrect };
+  });
+
+  const pct = Math.round((correct / questions.length) * 100);
+  const pass = pct >= 65;
+  const elapsed = 3600 - timeLeft;
+  const em = Math.floor(elapsed / 60);
+  const es = elapsed % 60;
+
+  document.getElementById('scoreCard').innerHTML = `
+    <div class="score ${pass ? 'pass' : 'fail'}">${pct}%</div>
+    <div class="verdict">${pass ? 'REUSSI !' : 'ECHEC'}</div>
+    <div class="details">${correct} / ${questions.length} correct${correct > 1 ? 's' : ''} | Temps : ${em}m ${es}s | Seuil : 65%</div>
+    <div class="progress-bar"><div class="progress-fill" style="width:${pct}%; background:${pass ? '#16a34a' : '#dc2626'};"></div></div>
+  `;
+
+  // Results nav grid
+  const rGrid = document.getElementById('navGridResults');
+  rGrid.innerHTML = '';
+  results.forEach((r, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'nav-btn ' + (r.isCorrect ? 'correct' : 'incorrect');
+    btn.textContent = i + 1;
+    btn.onclick = () => document.getElementById('review-' + i).scrollIntoView({ behavior: 'smooth', block: 'center' });
+    rGrid.appendChild(btn);
+  });
+
+  // Review details
+  const reviewArea = document.getElementById('reviewArea');
+  reviewArea.innerHTML = results.map((r, i) => {
+    const q = r.question;
+    const selSet = r.answered !== undefined ? (Array.isArray(r.answered) ? r.answered : [r.answered]) : [];
+    let scenarioHtml = q.scenario ? `<div class="q-scenario">${q.scenario}</div>` : '';
+
+    let optionsHtml = q.options.map((opt, oi) => {
+      let letter = String.fromCharCode(97 + oi);
+      let cls = '';
+      const isSelected = selSet.includes(oi);
+      const isCorrect = q.correct.includes(oi);
+      if (isCorrect) cls = ' correct-answer';
+      else if (isSelected && !isCorrect) cls = ' wrong-answer';
+      let icon = isCorrect ? ' &#10003;' : (isSelected && !isCorrect ? ' &#10007;' : '');
+      return `<div class="option${cls}"><label>${letter}) ${opt}${icon}</label></div>`;
+    }).join('');
+
+    let justCls = r.isCorrect ? '' : ' wrong';
+    return `
+      <div class="question-card" id="review-${i}">
+        <div class="q-header">
+          <span class="q-number">${r.isCorrect ? '&#10003;' : '&#10007;'} Question ${q.id}</span>
+          <span class="q-lo">${q.lo} | ${q.k}</span>
+        </div>
+        ${scenarioHtml}
+        <div class="q-text">${q.text}</div>
+        ${optionsHtml}
+        <div class="justification${justCls}" style="display:block;">
+          <strong>${r.isCorrect ? 'Correct !' : 'Incorrect'} - Reponse attendue : ${q.correct.map(c => String.fromCharCode(97 + c)).join(', ')}</strong>
+          ${q.justification}
+        </div>
+      </div>`;
+  }).join('');
+
+  // Build analysis
+  buildAnalysis(results);
+}
+
+function switchTab(name) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  document.querySelector(`.tab[onclick="switchTab('${name}')"]`).classList.add('active');
+}
+
+const chapters = {
+  '1': { name: 'Ch.1 - Fondamentaux du test', los: ['FL-1.1.1','FL-1.2.3','FL-1.3.1','FL-1.4.1','FL-1.4.3','FL-1.4.5','FL-1.5.2','FL-1.5.3'] },
+  '2': { name: 'Ch.2 - Test dans le cycle de vie', los: ['FL-2.1.2','FL-2.1.3','FL-2.1.4','FL-2.1.6','FL-2.2.2','FL-2.3.1'] },
+  '3': { name: 'Ch.3 - Test statique', los: ['FL-3.1.1','FL-3.1.2','FL-3.2.2','FL-3.2.3'] },
+  '4': { name: 'Ch.4 - Techniques de test', los: ['FL-4.1.1','FL-4.2.1','FL-4.2.2','FL-4.2.3','FL-4.2.4','FL-4.3.1','FL-4.3.3','FL-4.4.1','FL-4.4.2','FL-4.5.1','FL-4.5.3'] },
+  '5': { name: 'Ch.5 - Gestion des tests', los: ['FL-5.1.3','FL-5.1.4','FL-5.1.5','FL-5.1.7','FL-5.2.1','FL-5.2.2','FL-5.3.2','FL-5.4.1','FL-5.5.1'] },
+  '6': { name: 'Ch.6 - Outils de test', los: ['FL-6.1.1','FL-6.2.1'] }
+};
+
+// K-level difficulty labels
+const kLabels = { 'K1': 'Se souvenir', 'K2': 'Comprendre', 'K3': 'Appliquer' };
+
+// Heuristics for error type classification
+// K1 questions wrong = inattention (should just remember)
+// Multi-select questions where you got 1 out of 2 right = inattention
+// K3 questions wrong = lacune technique (need practice)
+function classifyErrors(results) {
+  const inattention = [];
+  const lacune = [];
+  const nonRepondu = [];
+
+  results.forEach((r, i) => {
+    if (r.isCorrect) return;
+    const q = r.question;
+    const ans = r.answered;
+
+    // Non repondu
+    if (ans === undefined || (Array.isArray(ans) && ans.length === 0)) {
+      nonRepondu.push({ idx: i, q });
+      return;
+    }
+
+    // Heuristique inattention
+    let isInattention = false;
+
+    // K1 = juste se souvenir, si rate c'est probablement de l'inattention
+    if (q.k === 'K1') isInattention = true;
+
+    // Multi-select : si une des reponses est correcte mais pas l'ensemble
+    if (q.multi && Array.isArray(ans)) {
+      const correctSet = new Set(q.correct);
+      const gotSomeRight = ans.some(a => correctSet.has(a));
+      const gotSomeWrong = ans.some(a => !correctSet.has(a));
+      const missedSome = q.correct.some(c => !ans.includes(c));
+      if (gotSomeRight && (gotSomeWrong || missedSome)) isInattention = true;
+    }
+
+    // Si le candidat a choisi une option tres proche (index adjacent) de la bonne reponse
+    if (!q.multi && typeof ans === 'number') {
+      const correctIdx = q.correct[0];
+      if (Math.abs(ans - correctIdx) === 1) isInattention = true;
+    }
+
+    if (isInattention) {
+      inattention.push({ idx: i, q });
+    } else {
+      lacune.push({ idx: i, q });
+    }
+  });
+
+  return { inattention, lacune, nonRepondu };
+}
+
+function buildAnalysis(results) {
+  // ====== CHAPTER ANALYSIS ======
+  const chapterStats = {};
+  for (const [ch, info] of Object.entries(chapters)) {
+    chapterStats[ch] = { name: info.name, total: 0, correct: 0, wrong: [], los: info.los };
+  }
+  results.forEach((r, i) => {
+    const lo = r.question.lo;
+    for (const [ch, info] of Object.entries(chapters)) {
+      if (info.los.includes(lo)) {
+        chapterStats[ch].total++;
+        if (r.isCorrect) chapterStats[ch].correct++;
+        else chapterStats[ch].wrong.push(r.question.id);
+        break;
+      }
+    }
+  });
+
+  let chapterHtml = '<h2>Performance par chapitre</h2>';
+  for (const [ch, s] of Object.entries(chapterStats)) {
+    const pct = s.total > 0 ? Math.round((s.correct / s.total) * 100) : 0;
+    const cls = pct >= 75 ? 'good' : pct >= 50 ? 'medium' : 'bad';
+    const barColor = pct >= 75 ? '#16a34a' : pct >= 50 ? '#f59e0b' : '#dc2626';
+    const wrongStr = s.wrong.length > 0 ? ` (erreurs Q${s.wrong.join(', Q')})` : '';
+    chapterHtml += `
+      <div class="chapter-row">
+        <div class="chapter-name">${s.name}</div>
+        <div class="chapter-bar"><div class="chapter-bar-fill" style="width:${pct}%; background:${barColor};"></div></div>
+        <div class="chapter-score ${cls}">${s.correct}/${s.total} (${pct}%)</div>
+      </div>
+      ${s.wrong.length > 0 ? `<div style="font-size:0.8rem; color:#94a3b8; padding-left:16px; margin-bottom:8px;">Erreurs : Q${s.wrong.join(', Q')}</div>` : ''}
+    `;
+  }
+  document.getElementById('chapterAnalysis').innerHTML = chapterHtml;
+
+  // ====== ERROR TYPE ANALYSIS ======
+  const { inattention, lacune, nonRepondu } = classifyErrors(results);
+  const totalWrong = results.filter(r => !r.isCorrect).length;
+  const totalCorrect = results.filter(r => r.isCorrect).length;
+
+  let errorHtml = '<h2>Diagnostic des erreurs</h2>';
+  errorHtml += '<div class="error-type-grid">';
+  errorHtml += `<div class="error-type-card" style="background:#f0fdf4; border:2px solid #bbf7d0;">
+    <div class="num" style="color:#16a34a;">${totalCorrect}</div><div class="lbl">Reponses correctes</div></div>`;
+  errorHtml += `<div class="error-type-card" style="background:#fef2f2; border:2px solid #fecaca;">
+    <div class="num" style="color:#dc2626;">${totalWrong}</div><div class="lbl">Reponses incorrectes</div></div>`;
+  errorHtml += `<div class="error-type-card" style="background:#fffbeb; border:2px solid #fde68a;">
+    <div class="num" style="color:#d97706;">${inattention.length}</div><div class="lbl">Erreurs d'inattention probables</div></div>`;
+  errorHtml += `<div class="error-type-card" style="background:#eff6ff; border:2px solid #bfdbfe;">
+    <div class="num" style="color:#2563eb;">${lacune.length}</div><div class="lbl">Lacunes de connaissance</div></div>`;
+  errorHtml += '</div>';
+
+  if (inattention.length > 0) {
+    errorHtml += `<div class="advice-card">
+      <strong>Erreurs d'inattention probables (Q${inattention.map(e => e.q.id).join(', Q')})</strong>
+      Ce sont des questions K1 (memorisation) ou des questions multi-reponses ou tu as eu partiellement bon, ou tu as choisi une option tres proche de la bonne.
+      <br><strong>Conseil :</strong> Lis chaque question et TOUTES les options jusqu'au bout avant de repondre. Attention aux mots-cles : "PLUS probable", "NE PAS", "CORRECT", "INCORRECT". Prends 10 secondes de relecture.
+    </div>`;
+  }
+
+  if (lacune.length > 0) {
+    errorHtml += `<div class="advice-card critical">
+      <strong>Lacunes de connaissance (Q${lacune.map(e => e.q.id).join(', Q')})</strong>
+      Ce sont des questions K2/K3 ou ta reponse est significativement differente de la bonne. Ce sont de vrais manques de comprehension a travailler.
+    </div>`;
+  }
+
+  if (nonRepondu.length > 0) {
+    errorHtml += `<div class="advice-card critical">
+      <strong>Non repondues (Q${nonRepondu.map(e => e.q.id).join(', Q')})</strong>
+      ${nonRepondu.length} question(s) sans reponse. A l'examen, il n'y a pas de penalite : reponds TOUJOURS, meme au hasard.
+    </div>`;
+  }
+
+  // K-level breakdown
+  const kStats = { K1: {t:0,c:0}, K2: {t:0,c:0}, K3: {t:0,c:0} };
+  results.forEach(r => {
+    const k = r.question.k;
+    kStats[k].t++;
+    if (r.isCorrect) kStats[k].c++;
+  });
+  errorHtml += '<h3>Performance par niveau cognitif</h3>';
+  for (const [k, s] of Object.entries(kStats)) {
+    if (s.t === 0) continue;
+    const pct = Math.round((s.c / s.t) * 100);
+    const cls = pct >= 75 ? 'good' : pct >= 50 ? 'medium' : 'bad';
+    const barColor = pct >= 75 ? '#16a34a' : pct >= 50 ? '#f59e0b' : '#dc2626';
+    errorHtml += `<div class="chapter-row">
+      <div class="chapter-name">${k} - ${kLabels[k]}</div>
+      <div class="chapter-bar"><div class="chapter-bar-fill" style="width:${pct}%; background:${barColor};"></div></div>
+      <div class="chapter-score ${cls}">${s.c}/${s.t} (${pct}%)</div>
+    </div>`;
+  }
+
+  document.getElementById('errorTypeAnalysis').innerHTML = errorHtml;
+
+  // ====== REVISION PLAN ======
+  let revHtml = '<h2>Plan de revision cible</h2>';
+
+  // Sort chapters by worst score first
+  const sortedChapters = Object.entries(chapterStats)
+    .map(([ch, s]) => ({ ch, ...s, pct: s.total > 0 ? Math.round((s.correct / s.total) * 100) : 100 }))
+    .sort((a, b) => a.pct - b.pct);
+
+  let prio = 1;
+  sortedChapters.forEach(s => {
+    if (s.pct >= 100) return; // skip perfect
+    const urgency = s.pct < 50 ? 'URGENT' : s.pct < 75 ? 'A CONSOLIDER' : 'BIEN';
+    const cls = s.pct < 50 ? '' : 'medium';
+    if (s.pct >= 75) return; // don't list good ones
+
+    revHtml += `<div class="revision-item ${cls}">
+      <span class="prio">#${prio}</span>
+      <strong>${s.name}</strong> - ${urgency} (${s.pct}%)
+      <br>Questions ratees : Q${s.wrong.join(', Q')}
+      <br><em>`;
+
+    // Specific advice per chapter
+    const tips = {
+      '1': 'Revoir : objectifs du test, erreur/defaut/defaillance/cause racine, 7 principes, activites de test (analyse/conception/implementation/completion), roles testing vs management, whole team, independance.',
+      '2': 'Revoir : bonnes pratiques SDLC, test-first (TDD/BDD), niveaux de test, DevOps, retros, types de test (fonctionnel/non-fonctionnel), declencheurs de maintenance.',
+      '3': 'Revoir : quoi tester en statique, valeur du test statique vs dynamique, processus de revue (5 etapes dans l\'ordre), roles dans la revue (moderateur, review leader, manager).',
+      '4': 'Revoir : boite noire vs blanche vs experience, partitions d\'equivalence, BVA 2-valeurs, tables de decision, transitions d\'etat, couverture d\'instructions/branches, error guessing, test exploratoire, user stories (Card/Conversation/Confirmation).',
+      '5': 'Revoir : criteres d\'entree/sortie, estimation 3 points (formule E=(a+4m+b)/6), priorisation par couverture additionnelle, quadrants de test, risque (niveau=proba*impact), risques produit vs projet, rapports de test vs defaut, gestion de configuration.',
+      '6': 'Revoir : categories d\'outils (DevOps, non-fonctionnel, collaboration, gestion, conception), risques et benefices de l\'automatisation.'
+    };
+    revHtml += tips[s.ch] || '';
+    revHtml += `</em></div>`;
+    prio++;
+  });
+
+  // Global advice
+  const globalPct = Math.round((totalCorrect / results.length) * 100);
+  revHtml += '<h3>Verdict global</h3>';
+  if (globalPct >= 65) {
+    revHtml += `<div class="advice-card ok"><strong>Tu es au-dessus du seuil (${globalPct}% >= 65%)</strong>
+    Continue de consolider les chapitres ci-dessus pour securiser ta reussite le jour J. Vise 75%+ pour etre a l'aise.</div>`;
+  } else {
+    const gap = 26 - totalCorrect; // need 26/40 for 65%
+    revHtml += `<div class="advice-card critical"><strong>Il te manque ${gap > 0 ? gap : 0} bonne(s) reponse(s) pour atteindre le seuil de 65%</strong>
+    Concentre-toi sur les chapitres ci-dessus par ordre de priorite. Les chapitres 4 (techniques) et 5 (gestion) pesent le plus lourd dans l'examen.
+    ${inattention.length >= 3 ? '<br><br><strong>Attention !</strong> Tu as beaucoup d\'erreurs d\'inattention. Avant de reviser du contenu, entraine-toi a lire les questions plus lentement et a eliminer les mauvaises reponses une par une.' : ''}
+    </div>`;
+  }
+
+  // Time advice
+  const elapsed = 3600 - timeLeft;
+  if (elapsed < 1200) {
+    revHtml += `<div class="advice-card"><strong>Tu as fini en ${Math.floor(elapsed/60)} minutes - c'est tres rapide</strong>
+    Prends plus de temps ! Tu as 60 minutes pour 40 questions, soit 1m30 par question. Utilise ce temps pour relire chaque question et eliminer les pieges. La vitesse excessive est une source majeure d'erreurs d'inattention.</div>`;
+  } else if (elapsed < 2400) {
+    revHtml += `<div class="advice-card"><strong>Temps : ${Math.floor(elapsed/60)} minutes</strong>
+    C'est un bon rythme. Essaie de garder 5-10 minutes a la fin pour relire les questions dont tu n'es pas sur.</div>`;
+  }
+
+  document.getElementById('revisionPlan').innerHTML = revHtml;
+}
+
+function copyResults() {
+  let lines = ['RESULTATS EXAMEN D ISTQB', ''];
+  let correct = 0;
+  questions.forEach((q, i) => {
+    const ans = answers[i];
+    let selLetters = '-';
+    if (ans !== undefined) {
+      const sel = Array.isArray(ans) ? ans : [ans];
+      selLetters = sel.map(s => String.fromCharCode(97 + s)).join(',');
+    }
+    const corLetters = q.correct.map(c => String.fromCharCode(97 + c)).join(',');
+    let isCorrect = false;
+    if (q.multi) {
+      const sel = ans !== undefined ? [...ans].sort() : [];
+      const cor = [...q.correct].sort();
+      isCorrect = sel.length === cor.length && sel.every((v, j) => v === cor[j]);
+    } else {
+      isCorrect = ans === q.correct[0];
+    }
+    if (isCorrect) correct++;
+    const status = isCorrect ? 'OK' : 'FAUX';
+    lines.push(`Q${q.id} [${q.lo}] | Reponse: ${selLetters} | Correcte: ${corLetters} | ${status}`);
+  });
+  lines.push('');
+  lines.push(`Score: ${correct}/${questions.length} (${Math.round(correct/questions.length*100)}%)`);
+  const text = lines.join('\n');
+  navigator.clipboard.writeText(text).then(() => {
+    alert('Resultats copies dans le presse-papier ! Colle-les dans Claude.');
+  }).catch(() => {
+    prompt('Copie ce texte :', text);
+  });
+}
+
+// Keyboard navigation
+document.addEventListener('keydown', (e) => {
+  if (examFinished) return;
+  if (e.key === 'ArrowLeft') navigate(-1);
+  if (e.key === 'ArrowRight') navigate(1);
+  const num = parseInt(e.key);
+  if (num >= 1 && num <= 4 && !questions[currentQ].multi) {
+    answers[currentQ] = num - 1;
+    showQuestion(currentQ);
+  }
+});
+</script>
+</body>
+</html>
