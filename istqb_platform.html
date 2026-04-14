@@ -410,6 +410,25 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
 .tuto-congrats h4 { color: #166534; font-size: 1.2rem; margin-bottom: 8px; }
 .tuto-reset { background: #64748b; color: white; border: none; padding: 8px 20px; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 0.85rem; margin-top: 12px; }
 
+.dash-empty-overlay { position: relative; }
+.dash-empty-overlay::after { content: ""; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(255,255,255,0.7); border-radius: 16px; z-index: 1; }
+.dash-empty-label { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); z-index: 2; background: #f1f5f9; padding: 10px 20px; border-radius: 10px; font-size: 0.85rem; font-weight: 600; color: #94a3b8; text-align: center; }
+.error-analysis-card { background: white; border-radius: 16px; padding: 24px; box-shadow: 0 2px 10px rgba(0,0,0,0.06); margin-bottom: 20px; }
+.error-analysis-card h3 { font-size: 1.15rem; font-weight: 700; color: #1e3a5f; margin-bottom: 16px; }
+.error-stat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; margin-bottom: 20px; }
+.error-stat { text-align: center; padding: 16px; border-radius: 12px; }
+.error-stat .es-num { font-size: 1.8rem; font-weight: 800; }
+.error-stat .es-label { font-size: 0.78rem; color: #475569; margin-top: 4px; }
+.worst-question { display: flex; align-items: center; gap: 12px; padding: 12px; margin-bottom: 8px; border-radius: 10px; background: #f8fafc; border-left: 4px solid #dc2626; }
+.worst-question .wq-rank { font-size: 1.1rem; font-weight: 800; color: #dc2626; min-width: 24px; }
+.worst-question .wq-id { font-weight: 700; color: #1e293b; min-width: 50px; }
+.worst-question .wq-lo { font-size: 0.8rem; color: #2563eb; background: #eff6ff; padding: 2px 8px; border-radius: 10px; }
+.worst-question .wq-stats { font-size: 0.82rem; color: #64748b; margin-left: auto; }
+.worst-question .wq-link { font-size: 0.78rem; color: #2563eb; cursor: pointer; text-decoration: underline; margin-left: 8px; }
+.evo-legend { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-top: 10px; }
+.evo-legend-item { display: flex; align-items: center; gap: 5px; font-size: 0.75rem; color: #475569; }
+.evo-legend-dot { width: 10px; height: 3px; border-radius: 2px; }
+
 @media (max-width: 900px) {
   .dash-overview { grid-template-columns: 1fr; }
   .chapter-cards-grid { grid-template-columns: 1fr; }
@@ -3049,6 +3068,20 @@ function saveHistory(modeId, score, total) {
       if (isCorrect(i)) loScores[q.lo].c++;
     }
   });
+  // Classify errors
+  let errInattention = 0, errLacune = 0, errNonRepondu = 0;
+  questions.forEach((q, i) => {
+    if (isCorrect(i)) return;
+    const sel = answers[i] || [];
+    if (sel.length === 0) {
+      errNonRepondu++;
+    } else if (q.kl === 'K1' || (q.multi && sel.some(s => q.correct.includes(s)))) {
+      errInattention++;
+    } else {
+      errLacune++;
+    }
+  });
+
   all.push({
     mode: modeId,
     label: currentMode ? currentMode.label : modeId,
@@ -3056,7 +3089,8 @@ function saveHistory(modeId, score, total) {
     pct: Math.round(score/total*100),
     date: new Date().toISOString(),
     chapters: chScores,
-    loScores: loScores
+    loScores: loScores,
+    errors: { inattention: errInattention, lacune: errLacune, nonRepondu: errNonRepondu }
   });
   localStorage.setItem('istqb_history_all', JSON.stringify(all));
 
@@ -3331,11 +3365,25 @@ function fcReview() {
   renderFcCard();
 }
 
+function openFicheForLO(lo) {
+  const ch = lo.split('.')[0].replace('FL-','');
+  switchHomeTab('apprentissage', document.querySelectorAll('.home-screen .tabs .tab-btn')[2]);
+  setTimeout(() => {
+    const fiche = document.querySelector('.fiche-ch' + ch);
+    if (fiche) {
+      const body = fiche.querySelector('.fiche-body');
+      if (body && body.style.display !== 'block') fiche.querySelector('.fiche-header').click();
+      setTimeout(() => fiche.scrollIntoView({behavior:'smooth'}), 200);
+    }
+  }, 100);
+}
+
 function renderProgression() {
   const all = getAllHistory();
   const container = document.getElementById('progressDashboard');
+  const hasData = all.length > 0;
 
-  // ===== HELPER: heat color interpolation =====
+  // ===== HELPERS =====
   function heatColor(pct) {
     if (pct < 0) return '#e2e8f0';
     if (pct <= 50) {
@@ -3346,33 +3394,25 @@ function renderProgression() {
       return `rgb(${r},${g},${b})`;
     }
   }
-
   function scoreBadgeColor(pct) {
     if (pct >= 65) return '#16a34a';
     if (pct >= 50) return '#eab308';
     return '#dc2626';
   }
-
   function scoreClass(pct) {
     if (pct >= 65) return 'good';
     if (pct >= 50) return 'medium';
     return 'bad';
   }
-
-  // ===== EMPTY STATE =====
-  if (all.length === 0) {
-    container.innerHTML = `<div style="text-align:center;padding:60px 24px;">
-      <h3 style="font-size:1.3rem;color:#1e3a5f;margin-bottom:8px;">Aucun quiz termine</h3>
-      <p style="color:#94a3b8;font-size:1rem;">Commence par passer un quiz pour voir ton tableau de bord de performance ici.</p>
-    </div>`;
-    return;
+  function emptyOverlay(text) {
+    return `<div class="dash-empty-label">${text}</div>`;
   }
 
   // ===== DATA COMPUTATION =====
-  const totalAttempts = all.length;
-  const totalQuestions = all.reduce((s, a) => s + a.total, 0);
-  const totalCorrect = all.reduce((s, a) => s + a.score, 0);
-  const avgPct = Math.round(totalCorrect / totalQuestions * 100);
+  const totalAttempts = hasData ? all.length : 0;
+  const totalQuestions = hasData ? all.reduce((s, a) => s + a.total, 0) : 0;
+  const totalCorrect = hasData ? all.reduce((s, a) => s + a.score, 0) : 0;
+  const avgPct = hasData ? Math.round(totalCorrect / totalQuestions * 100) : 0;
 
   const chTotals = {};
   const chTrends = {};
@@ -3411,17 +3451,19 @@ function renderProgression() {
   let html = '';
 
   // ========== SECTION 1: OVERVIEW (3 cards) ==========
+  const overlayCls = hasData ? '' : 'dash-empty-overlay';
   html += '<div class="dash-overview">';
 
   // Card 1: Score Moyen
-  html += `<div class="dash-card" style="display:flex;flex-direction:column;align-items:center;justify-content:center;">
+  html += `<div class="dash-card ${overlayCls}" style="display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;">
     <div style="font-size:0.85rem;color:#64748b;font-weight:600;margin-bottom:8px;text-transform:uppercase;">Score Moyen</div>
-    <div class="dash-score-big ${scoreClass(avgPct)}">${avgPct}%</div>
-    <div class="dash-subtitle">${totalAttempts} soumission${totalAttempts > 1 ? 's' : ''}</div>
+    <div class="dash-score-big" style="${hasData ? 'color:' + scoreBadgeColor(avgPct) : 'color:#cbd5e1'}">${hasData ? avgPct + '%' : '--%'}</div>
+    <div class="dash-subtitle">${hasData ? totalAttempts + ' soumission' + (totalAttempts > 1 ? 's' : '') : '0 soumission'}</div>
+    ${hasData ? '' : emptyOverlay('Passez un quiz pour debloquer')}
   </div>`;
 
   // Card 2: Score Moyen par Chapitre (bar chart)
-  html += '<div class="dash-card"><div style="font-size:0.85rem;color:#64748b;font-weight:600;margin-bottom:10px;text-transform:uppercase;">Score Moyen par Chapitre</div>';
+  html += `<div class="dash-card ${overlayCls}" style="position:relative;"><div style="font-size:0.85rem;color:#64748b;font-weight:600;margin-bottom:10px;text-transform:uppercase;">Score Moyen par Chapitre</div>`;
   {
     const W = 320, H = 170, PAD_L = 35, PAD_B = 30, PAD_T = 10, PAD_R = 10;
     const chartW = W - PAD_L - PAD_R;
@@ -3434,25 +3476,26 @@ function renderProgression() {
       svg += `<line x1="${PAD_L}" y1="${y}" x2="${W-PAD_R}" y2="${y}" stroke="#e2e8f0" stroke-width="0.5"/>`;
       svg += `<text x="${PAD_L-4}" y="${y+3}" text-anchor="end" fill="#94a3b8" font-size="8">${p}%</text>`;
     }
-    // 65% dashed red line
     const y65 = PAD_T + chartH * (1 - 65/100);
     svg += `<line x1="${PAD_L}" y1="${y65}" x2="${W-PAD_R}" y2="${y65}" stroke="#dc2626" stroke-width="1" stroke-dasharray="4,3"/>`;
     for (let i = 1; i <= 6; i++) {
       const x = PAD_L + (i - 0.5) * gap - barW / 2;
       const data = chTotals[String(i)];
       const pct = data ? Math.round(data.c / data.t * 100) : 0;
-      const barH = chartH * pct / 100;
-      svg += `<rect x="${x}" y="${PAD_T + chartH - barH}" width="${barW}" height="${barH}" rx="3" fill="#60a5fa"/>`;
-      svg += `<text x="${x + barW/2}" y="${PAD_T + chartH - barH - 3}" text-anchor="middle" fill="#1e293b" font-size="7" font-weight="700">${pct}%</text>`;
+      const barH = hasData ? chartH * pct / 100 : chartH * 0.15;
+      const barColor = hasData ? '#60a5fa' : '#e2e8f0';
+      svg += `<rect x="${x}" y="${PAD_T + chartH - barH}" width="${barW}" height="${barH}" rx="3" fill="${barColor}"/>`;
+      if (hasData) svg += `<text x="${x + barW/2}" y="${PAD_T + chartH - barH - 3}" text-anchor="middle" fill="#1e293b" font-size="7" font-weight="700">${pct}%</text>`;
       svg += `<text x="${PAD_L + (i - 0.5) * gap}" y="${H - PAD_B + 12}" text-anchor="middle" fill="#64748b" font-size="7.5">CH-${i}</text>`;
     }
     svg += '</svg>';
     html += svg;
   }
+  if (!hasData) html += emptyOverlay('Passez un quiz pour debloquer');
   html += '</div>';
 
   // Card 3: Tendance par Chapitre (multi-line chart)
-  html += '<div class="dash-card"><div style="font-size:0.85rem;color:#64748b;font-weight:600;margin-bottom:10px;text-transform:uppercase;">Tendance par Chapitre</div>';
+  html += `<div class="dash-card ${overlayCls}" style="position:relative;"><div style="font-size:0.85rem;color:#64748b;font-weight:600;margin-bottom:10px;text-transform:uppercase;">Tendance par Chapitre</div>`;
   {
     const W = 380, H = 150, PAD_L = 35, PAD_B = 40, PAD_T = 10, PAD_R = 10;
     const chartW = W - PAD_L - PAD_R;
@@ -3472,7 +3515,7 @@ function renderProgression() {
     }
     allDates.sort();
 
-    if (allDates.length >= 2) {
+    if (hasData && allDates.length >= 2) {
       const showEvery = Math.max(1, Math.floor(allDates.length / 5));
       allDates.forEach((dt, i) => {
         if (i % showEvery === 0 || i === allDates.length - 1) {
@@ -3493,12 +3536,11 @@ function renderProgression() {
         svg += `<path d="${path}" fill="none" stroke="${color}" stroke-width="1.5" opacity="0.9"/>`;
       }
     } else {
-      svg += `<text x="${W/2}" y="${H/2}" text-anchor="middle" fill="#94a3b8" font-size="9">Pas assez de donnees</text>`;
+      svg += `<text x="${W/2}" y="${H/2}" text-anchor="middle" fill="#94a3b8" font-size="9">Completez un quiz pour voir votre evolution</text>`;
     }
     svg += '</svg>';
     html += svg;
 
-    // Legend
     html += '<div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:6px;justify-content:center;">';
     for (let ch = 1; ch <= 6; ch++) {
       html += `<span style="display:flex;align-items:center;gap:4px;font-size:0.7rem;color:#475569;">
@@ -3507,11 +3549,93 @@ function renderProgression() {
     }
     html += '</div>';
   }
+  if (!hasData) html += emptyOverlay('Passez un quiz pour debloquer');
   html += '</div>';
   html += '</div>'; // end dash-overview
 
-  // ========== SECTION 2: HEATMAP ==========
-  html += '<div class="heatmap-card">';
+  // ========== SECTION 2: EVOLUTION GLOBALE ==========
+  html += `<div class="heatmap-card ${!hasData || all.length < 2 ? 'dash-empty-overlay' : ''}" style="position:relative;">`;
+  html += '<div style="font-size:1.15rem;font-weight:700;color:#1e3a5f;margin-bottom:16px;">Evolution globale</div>';
+  {
+    const W = 700, H = 220, PAD_L = 45, PAD_B = 35, PAD_T = 15, PAD_R = 15;
+    const chartW = W - PAD_L - PAD_R;
+    const chartH = H - PAD_T - PAD_B;
+    let svg = `<svg viewBox="0 0 ${W} ${H}" style="width:100%;height:auto;">`;
+    // Grid
+    for (let p = 0; p <= 100; p += 25) {
+      const y = PAD_T + chartH * (1 - p / 100);
+      svg += `<line x1="${PAD_L}" y1="${y}" x2="${W-PAD_R}" y2="${y}" stroke="#e2e8f0" stroke-width="0.5"/>`;
+      svg += `<text x="${PAD_L-6}" y="${y+4}" text-anchor="end" fill="#94a3b8" font-size="9">${p}%</text>`;
+    }
+    // 65% threshold
+    const y65 = PAD_T + chartH * (1 - 65/100);
+    svg += `<line x1="${PAD_L}" y1="${y65}" x2="${W-PAD_R}" y2="${y65}" stroke="#dc2626" stroke-width="1" stroke-dasharray="5,4"/>`;
+    svg += `<text x="${W-PAD_R+2}" y="${y65+4}" fill="#dc2626" font-size="7">65%</text>`;
+
+    if (hasData && all.length >= 2) {
+      const n = all.length;
+      // Prepare data series
+      const scoreGlobal = all.map(a => a.pct);
+      const examScores = all.map(a => a.mode && a.mode.startsWith('exam') ? a.pct : null);
+      const trainScores = all.map(a => {
+        const trainModes = ['random','chapter','weakpoints','wrong','realistic','mini'];
+        return (a.mode && trainModes.some(m => a.mode.startsWith(m) || a.mode.startsWith('ch') || a.mode === 'random_20' || a.mode === 'random_40')) ? a.pct : null;
+      });
+      const inattRates = all.map(a => a.errors ? (a.errors.inattention / a.total * 100) : null);
+      const lacuneRates = all.map(a => a.errors ? (a.errors.lacune / a.total * 100) : null);
+
+      // X labels
+      const showEvery = Math.max(1, Math.floor(n / 8));
+      all.forEach((a, i) => {
+        if (i % showEvery === 0 || i === n - 1) {
+          const d = new Date(a.date);
+          const x = PAD_L + (i / (n - 1)) * chartW;
+          svg += `<text x="${x}" y="${H - PAD_B + 14}" text-anchor="middle" fill="#94a3b8" font-size="7.5">${d.getDate()}/${d.getMonth()+1}</text>`;
+        }
+      });
+
+      function plotLine(data, color, width, dashed) {
+        const pts = [];
+        data.forEach((v, i) => {
+          if (v !== null) pts.push({ x: PAD_L + (i / (n - 1)) * chartW, y: PAD_T + chartH * (1 - v / 100) });
+        });
+        if (pts.length < 2) return;
+        const path = pts.map((p, i) => (i === 0 ? 'M' : 'L') + `${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(' ');
+        svg += `<path d="${path}" fill="none" stroke="${color}" stroke-width="${width}"${dashed ? ' stroke-dasharray="6,4"' : ''}/>`;
+        pts.forEach(p => { svg += `<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="2.5" fill="${color}" stroke="white" stroke-width="0.8"/>`; });
+      }
+
+      plotLine(scoreGlobal, '#2563eb', 2.5, false);
+      plotLine(examScores, '#1e3a5f', 1.8, true);
+      plotLine(trainScores, '#0d9488', 1.8, true);
+      plotLine(inattRates, '#f59e0b', 1.5, false);
+      plotLine(lacuneRates, '#dc2626', 1.5, false);
+    } else {
+      svg += `<text x="${W/2}" y="${H/2}" text-anchor="middle" fill="#94a3b8" font-size="11">Completez au moins 2 quiz pour voir l'evolution</text>`;
+    }
+    svg += '</svg>';
+    html += svg;
+
+    // Legend
+    html += '<div class="evo-legend">';
+    const legendItems = [
+      {color:'#2563eb', label:'Score global'},
+      {color:'#1e3a5f', label:'Examens blancs', dashed:true},
+      {color:'#0d9488', label:'Entrainements', dashed:true},
+      {color:'#f59e0b', label:"Taux d'inattention"},
+      {color:'#dc2626', label:'Taux de lacunes'}
+    ];
+    legendItems.forEach(it => {
+      const style = it.dashed ? `background:repeating-linear-gradient(90deg,${it.color} 0,${it.color} 4px,transparent 4px,transparent 7px);` : `background:${it.color};`;
+      html += `<span class="evo-legend-item"><span class="evo-legend-dot" style="${style}"></span>${it.label}</span>`;
+    });
+    html += '</div>';
+  }
+  if (!hasData || all.length < 2) html += emptyOverlay('Completez au moins 2 quiz pour debloquer');
+  html += '</div>'; // end evolution globale
+
+  // ========== SECTION 3: HEATMAP ==========
+  html += `<div class="heatmap-card ${overlayCls}" style="position:relative;">`;
   html += '<div style="font-size:1.15rem;font-weight:700;color:#1e3a5f;margin-bottom:16px;">Carte thermique de performance par chapitre</div>';
 
   for (let ch = 1; ch <= 6; ch++) {
@@ -3540,11 +3664,11 @@ function renderProgression() {
     html += '</div></div>';
   }
 
-  // Color scale bar
   html += '<div class="heatmap-scale"><span style="font-size:0.75rem;color:#64748b;">0%</span><div class="heatmap-scale-bar"></div><span style="font-size:0.75rem;color:#64748b;">100%</span></div>';
+  if (!hasData) html += emptyOverlay('Passez un quiz pour debloquer');
   html += '</div>'; // end heatmap
 
-  // ========== SECTION 3: CHAPTER DETAIL CARDS ==========
+  // ========== SECTION 4: CHAPTER DETAIL CARDS ==========
   html += '<div style="font-size:1.15rem;font-weight:700;color:#1e3a5f;margin-bottom:16px;">Detail par chapitre</div>';
   html += '<div class="chapter-cards-grid">';
 
@@ -3553,13 +3677,13 @@ function renderProgression() {
     const chPct = chData ? Math.round(chData.c / chData.t * 100) : 0;
     const trend = chTrends[String(ch)] || [];
 
-    html += '<div class="chapter-detail-card">';
+    html += `<div class="chapter-detail-card ${overlayCls}" style="position:relative;">`;
     html += `<div class="chapter-detail-header">
       <h3>${CHAPTER_NAMES[ch]}</h3>
       <button class="btn-practice" onclick="startQuiz('ch${ch}')">Pratiquer ce Chapitre</button>
     </div>`;
     html += `<div style="font-size:0.82rem;color:#64748b;margin-bottom:4px;">Score Moyen</div>`;
-    html += `<div style="font-size:2.2rem;font-weight:800;color:${scoreBadgeColor(chPct)};margin-bottom:12px;">${chPct}%</div>`;
+    html += `<div style="font-size:2.2rem;font-weight:800;color:${hasData ? scoreBadgeColor(chPct) : '#cbd5e1'};margin-bottom:12px;">${hasData ? chPct + '%' : '0%'}</div>`;
 
     html += '<div class="chapter-detail-cols">';
 
@@ -3607,31 +3731,126 @@ function renderProgression() {
         <div style="font-size:0.7rem;font-weight:700;min-width:30px;color:${textCol}">${pctLabel}</div>
       </div>`;
     });
-    // mini color scale
     html += '<div style="display:flex;align-items:center;gap:6px;margin-top:8px;"><span style="font-size:0.65rem;color:#94a3b8;">0%</span><div style="flex:1;height:6px;border-radius:3px;background:linear-gradient(90deg,#dc2626,#eab308,#16a34a);"></div><span style="font-size:0.65rem;color:#94a3b8;">100%</span></div>';
     html += '</div>'; // end right col
 
     html += '</div>'; // end chapter-detail-cols
+    if (!hasData) html += emptyOverlay('Passez un quiz pour debloquer');
     html += '</div>'; // end chapter-detail-card
   }
   html += '</div>'; // end chapter-cards-grid
 
-  // ========== SECTION 4: HISTORY ==========
+  // ========== SECTION 5: ERROR ANALYSIS ==========
+  html += '<div class="error-analysis-card">';
+  html += '<h3>Analyse des erreurs</h3>';
+
+  // Compute error totals from history entries that have errors field
+  let totalInattention = 0, totalLacune = 0, totalNonRepondu = 0;
+  let entriesWithErrors = 0;
+  all.forEach(a => {
+    if (a.errors) {
+      totalInattention += a.errors.inattention || 0;
+      totalLacune += a.errors.lacune || 0;
+      totalNonRepondu += a.errors.nonRepondu || 0;
+      entriesWithErrors++;
+    }
+  });
+  const avgInattention = entriesWithErrors > 0 ? (totalInattention / all.filter(a=>a.errors).reduce((s,a)=>s+a.total,0) * 100) : 0;
+  const avgLacune = entriesWithErrors > 0 ? (totalLacune / all.filter(a=>a.errors).reduce((s,a)=>s+a.total,0) * 100) : 0;
+
+  // Evolution: compare last 3 vs first 3
+  let evolutionLabel = 'Stable';
+  let evolutionColor = '#64748b';
+  let evolutionArrow = '&#8596;';
+  const errEntries = all.filter(a => a.errors);
+  if (errEntries.length >= 6) {
+    const first3 = errEntries.slice(0, 3);
+    const last3 = errEntries.slice(-3);
+    const first3rate = first3.reduce((s,a) => s + (a.errors.inattention + a.errors.lacune), 0) / first3.reduce((s,a) => s + a.total, 0);
+    const last3rate = last3.reduce((s,a) => s + (a.errors.inattention + a.errors.lacune), 0) / last3.reduce((s,a) => s + a.total, 0);
+    if (last3rate < first3rate - 0.05) { evolutionLabel = 'En baisse'; evolutionColor = '#16a34a'; evolutionArrow = '&#8600;'; }
+    else if (last3rate > first3rate + 0.05) { evolutionLabel = 'En hausse'; evolutionColor = '#dc2626'; evolutionArrow = '&#8599;'; }
+  }
+
+  // Sub-section 5a: Stat cards grid
+  const emptyStatStyle = !hasData ? 'color:#cbd5e1' : '';
+  html += '<div class="error-stat-grid">';
+  html += `<div class="error-stat" style="background:#fef3c7;"><div class="es-num" style="${emptyStatStyle || 'color:#f59e0b'}">${hasData ? totalInattention : '0'}</div><div class="es-label">Erreurs d'inattention</div></div>`;
+  html += `<div class="error-stat" style="background:#fee2e2;"><div class="es-num" style="${emptyStatStyle || 'color:#dc2626'}">${hasData ? totalLacune : '0'}</div><div class="es-label">Lacunes</div></div>`;
+  html += `<div class="error-stat" style="background:#f1f5f9;"><div class="es-num" style="${emptyStatStyle || 'color:#64748b'}">${hasData ? totalNonRepondu : '0'}</div><div class="es-label">Non repondues</div></div>`;
+  html += `<div class="error-stat" style="background:#fef3c7;"><div class="es-num" style="${emptyStatStyle || 'color:#f59e0b'}">${hasData ? avgInattention.toFixed(1) + '%' : '0%'}</div><div class="es-label">Taux d'inattention moyen</div></div>`;
+  html += `<div class="error-stat" style="background:#fee2e2;"><div class="es-num" style="${emptyStatStyle || 'color:#dc2626'}">${hasData ? avgLacune.toFixed(1) + '%' : '0%'}</div><div class="es-label">Taux de lacune moyen</div></div>`;
+  html += `<div class="error-stat" style="background:#f0fdf4;"><div class="es-num" style="color:${evolutionColor}">${evolutionArrow}</div><div class="es-label">${evolutionLabel}</div></div>`;
+  html += '</div>';
+
+  // Sub-section 5b: Top 10 des questions les plus ratees
+  html += '<h3 style="font-size:1rem;font-weight:700;color:#1e3a5f;margin:20px 0 12px;">Top 10 des questions les plus ratees</h3>';
+  const wq = getWrongQuestions();
+  const wqEntries = Object.entries(wq).sort((a, b) => b[1].wrong - a[1].wrong).slice(0, 10);
+  if (wqEntries.length > 0) {
+    wqEntries.forEach(([qId, data], idx) => {
+      const qObj = ALL_QUESTIONS.find(q => q.id === qId);
+      const lo = qObj ? qObj.lo || '' : '';
+      const ch = qObj ? qObj.chapter : '';
+      const chName = ch ? (CHAPTER_NAMES[ch] || 'Ch.' + ch) : '';
+      html += `<div class="worst-question">
+        <span class="wq-rank">#${idx + 1}</span>
+        <span class="wq-id">${qId}</span>
+        ${lo ? `<span class="wq-lo">${lo}</span>` : ''}
+        <span style="font-size:0.8rem;color:#475569;">${chName}</span>
+        <span class="wq-stats">Ratee ${data.wrong} fois, reussie ${data.right || 0} fois</span>
+        ${lo ? `<span class="wq-link" onclick="openFicheForLO('${lo}')">Revoir la fiche</span>` : ''}
+      </div>`;
+    });
+  } else {
+    html += '<div style="text-align:center;padding:20px;color:#94a3b8;font-size:0.9rem;">Aucune question ratee pour le moment</div>';
+  }
+
+  // Sub-section 5c: LOs problematiques
+  html += '<h3 style="font-size:1rem;font-weight:700;color:#1e3a5f;margin:24px 0 12px;">LOs problematiques</h3>';
+  const problematicLOs = Object.entries(loTotals)
+    .filter(([lo, d]) => d.t >= 2 && Math.round(d.c / d.t * 100) < 50)
+    .map(([lo, d]) => ({ lo, pct: Math.round(d.c / d.t * 100), t: d.t, c: d.c }))
+    .sort((a, b) => a.pct - b.pct);
+
+  if (problematicLOs.length > 0) {
+    problematicLOs.forEach(item => {
+      const desc = LO_DESCRIPTIONS[item.lo] || item.lo;
+      const barCol = item.pct < 30 ? '#dc2626' : '#f59e0b';
+      html += `<div style="display:flex;align-items:center;gap:12px;margin-bottom:8px;padding:10px 14px;background:#f8fafc;border-radius:10px;border-left:4px solid ${barCol};">
+        <span style="font-weight:700;color:#1e293b;min-width:80px;">${item.lo}</span>
+        <span style="flex:1;font-size:0.82rem;color:#475569;">${desc}</span>
+        <div style="width:80px;height:10px;background:#e2e8f0;border-radius:5px;overflow:hidden;"><div style="height:100%;width:${item.pct}%;background:${barCol};border-radius:5px;"></div></div>
+        <span style="font-size:0.82rem;font-weight:700;color:${barCol};min-width:40px;">${item.pct}%</span>
+        <span class="wq-link" onclick="openFicheForLO('${item.lo}')">Revoir la fiche</span>
+      </div>`;
+    });
+  } else {
+    html += '<div style="text-align:center;padding:20px;color:#16a34a;font-size:0.9rem;font-weight:600;">Aucun LO problematique - continuez comme ca !</div>';
+  }
+
+  html += '</div>'; // end error-analysis-card
+
+  // ========== SECTION 6: HISTORY ==========
   html += '<div class="submissions-card">';
   html += '<div style="font-size:1.15rem;font-weight:700;color:#1e3a5f;margin-bottom:16px;">Soumissions de Tests</div>';
 
-  [...all].reverse().forEach(a => {
-    const d = new Date(a.date);
-    const dateStr = String(d.getDate()).padStart(2,'0') + '/' + String(d.getMonth()+1).padStart(2,'0') + '/' + d.getFullYear() + ' ' + String(d.getHours()).padStart(2,'0') + ':' + String(d.getMinutes()).padStart(2,'0');
-    const scCol = a.pct >= 65 ? '#16a34a' : '#dc2626';
-    html += `<div class="submission-row">
-      <div>
-        <div class="submission-label">${a.label}</div>
-        <div class="submission-date">Soumis a : ${dateStr}</div>
-      </div>
-      <div class="submission-score" style="color:${scCol}">${a.pct}%</div>
-    </div>`;
-  });
+  if (hasData) {
+    [...all].reverse().forEach(a => {
+      const d = new Date(a.date);
+      const dateStr = String(d.getDate()).padStart(2,'0') + '/' + String(d.getMonth()+1).padStart(2,'0') + '/' + d.getFullYear() + ' ' + String(d.getHours()).padStart(2,'0') + ':' + String(d.getMinutes()).padStart(2,'0');
+      const scCol = a.pct >= 65 ? '#16a34a' : '#dc2626';
+      html += `<div class="submission-row">
+        <div>
+          <div class="submission-label">${a.label}</div>
+          <div class="submission-date">Soumis a : ${dateStr}</div>
+        </div>
+        <div class="submission-score" style="color:${scCol}">${a.pct}%</div>
+      </div>`;
+    });
+  } else {
+    html += '<div style="text-align:center;padding:30px;color:#94a3b8;font-size:0.9rem;">Aucune soumission pour le moment</div>';
+  }
 
   html += '</div>'; // end submissions
 
