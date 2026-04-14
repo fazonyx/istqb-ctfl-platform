@@ -15,15 +15,130 @@
 
 <div class="home-screen" style="max-width:960px;margin:0 auto;padding:24px;">
 
-  <div class="tabs" style="max-width:600px;margin:0 auto 24px;">
-    <button class="tab-btn active" onclick="switchChapterTab('cours',this)">Cours</button>
+  <div class="tabs" style="max-width:700px;margin:0 auto 24px;">
+    <button class="tab-btn active" onclick="switchChapterTab('syllabus',this)">Syllabus</button>
+    <button class="tab-btn" onclick="switchChapterTab('fiche',this)">Fiche</button>
     <button class="tab-btn" onclick="switchChapterTab('flashcards',this)">Flashcards</button>
     <button class="tab-btn" onclick="switchChapterTab('tutos',this)">Tutos</button>
     <button class="tab-btn" onclick="switchChapterTab('quiz',this)">Quiz</button>
   </div>
 
-  <!-- TAB: Cours -->
-  <div id="chTab-cours">
+  <!-- TAB: Syllabus -->
+  <div id="chTab-syllabus">
+
+<div class="question-card" style="margin-bottom:20px;">
+  <h3>3.1. Static Testing Basics</h3>
+  <div class="fiche-highlight">
+    <strong>Learning Objectives:</strong><br>
+    FL-3.1.1 (K1) Recognize types of work products that can be examined by static testing<br>
+    FL-3.1.2 (K2) Explain the value of static testing<br>
+    FL-3.1.3 (K2) Compare and contrast static testing and dynamic testing
+  </div>
+  <p>In contrast to dynamic testing, in static testing the software under test does not need to be executed. Code, process specification, system architecture specification or other work products are evaluated through manual examination (e.g., reviews) or with the help of a tool (e.g., static analysis). Test objectives include improving quality, detecting defects and assessing characteristics like readability, completeness, correctness, testability and consistency. Static testing can be applied for both verification and validation.</p>
+  <p>Testers, business representatives (Product Owner, business analyst etc.) and developers work together during example mappings, collaborative user story writing and backlog refinement sessions to ensure that user stories and related work products meet defined criteria, e.g., the Definition of Ready (see section 5.1.3). Review techniques can be applied to ensure user stories are complete and understandable and include testable acceptance criteria. By asking the right questions, testers explore, challenge and help improve the proposed user stories.</p>
+  <p>Static analysis can identify problems prior to dynamic testing while often requiring less effort, since no test cases are required, and tools (see chapter 6) are typically used. Static analysis is often incorporated into CI frameworks (see section 2.1.4). While largely used to detect specific code defects, static analysis is also used to evaluate maintainability and security. Spelling checkers and readability tools are other examples of static analysis tools.</p>
+
+  <h4>3.1.1. Work Products Examinable by Static Testing</h4>
+  <p>Almost any work product can be examined using static testing. Examples include requirement specification documents, source code, test plans, test cases, product backlog items, test charters, project documentation, contracts and models.</p>
+  <p>Any work product that can be read and understood can be the subject of a review. However, for static analysis, work products need a structure against which they can be checked (e.g., models, code or text with a formal syntax).</p>
+  <p>Work products that are not appropriate for static testing include those that are difficult to interpret by human beings and that should not be analyzed by tools (e.g., 3rd party executable code due to legal reasons).</p>
+
+  <h4>3.1.2. Value of Static Testing</h4>
+  <p>Static testing can detect defects in the earliest phases of the SDLC, fulfilling the principle of early testing (see section 1.3). It can also identify defects which cannot be detected by dynamic testing (e.g., unreachable code, design patterns not implemented as desired, defects in non-executable work products).</p>
+  <p>Static testing provides the ability to evaluate the quality of, and to build confidence in work products. By verifying the documented requirements, the stakeholders can also make sure that these requirements describe their actual needs. Since static testing can be performed early in the SDLC, a shared understanding can be created among the involved stakeholders. Communication will also be improved between the involved stakeholders. For this reason, it is recommended to involve a wide variety of stakeholders in static testing.</p>
+  <p>Even though reviews can be costly to implement, the overall project costs are usually much lower than when no reviews are performed because less time and effort needs to be spent on fixing defects later in the project.</p>
+  <p>Certain code defects can be detected using static analysis more efficiently than in dynamic testing, usually resulting in both fewer code defects and a lower overall development effort.</p>
+
+  <h4>3.1.3. Differences between Static Testing and Dynamic Testing</h4>
+  <p>Static testing and dynamic testing practices complement each other. They have similar objectives, such as supporting the detection of defects in work products (see section 1.1.1), but there are also some differences, such as:</p>
+  <ul>
+    <li>Static testing and dynamic testing (with analysis of failures) can both lead to the detection of defects, however there are some defect types that can only be found by either static or dynamic testing.</li>
+    <li>Static testing finds defects directly, while dynamic testing causes failures from which the associated defects are determined through subsequent analysis</li>
+    <li>Static testing may more easily detect defects that lay on paths through the code that are rarely executed or hard to reach using dynamic testing</li>
+    <li>Static testing can be applied to non-executable work products, while dynamic testing can only be applied to executable work products</li>
+    <li>Static testing can be used to measure quality characteristics that are not dependent on executing code (e.g., maintainability), while dynamic testing can be used to measure quality characteristics that are dependent on executing code (e.g., performance efficiency)</li>
+  </ul>
+  <p>Typical defects that are easier and/or cheaper to find through static testing include:</p>
+  <ul>
+    <li>Defects in requirements (e.g., inconsistencies, ambiguities, contradictions, omissions, inaccuracies, duplications)</li>
+    <li>Design defects (e.g., inefficient database structures, poor modularization)</li>
+    <li>Certain types of coding defects (e.g., variables with undefined values, undeclared variables, unreachable or duplicated code, excessive code complexity)</li>
+    <li>Deviations from standards (e.g., lack of adherence to naming conventions in coding standards)</li>
+    <li>Incorrect interface specifications (e.g., mismatched number, type or order of parameters)</li>
+    <li>Specific types of security vulnerabilities (e.g., buffer overflows)</li>
+    <li>Gaps or inaccuracies in test basis coverage (e.g., missing tests for an acceptance criterion)</li>
+  </ul>
+</div>
+
+<div class="question-card" style="margin-bottom:20px;">
+  <h3>3.2. Feedback and Review Process</h3>
+  <div class="fiche-highlight">
+    <strong>Learning Objectives:</strong><br>
+    FL-3.2.1 (K1) Identify the benefits of early and frequent stakeholder feedback<br>
+    FL-3.2.2 (K2) Summarize the activities of the review process<br>
+    FL-3.2.3 (K1) Recall which responsibilities are assigned to the principal roles when performing reviews<br>
+    FL-3.2.4 (K2) Compare and contrast the different review types<br>
+    FL-3.2.5 (K1) Recall the factors that contribute to a successful review
+  </div>
+
+  <h4>3.2.1. Benefits of Early and Frequent Stakeholder Feedback</h4>
+  <p>Early and frequent feedback allows for the early communication of potential quality problems. If there is little stakeholder involvement during the SDLC, the product being developed might not meet the stakeholder's original or current vision. A failure to deliver what the stakeholder wants can result in costly rework, missed deadlines, blame games, and might even lead to complete project failure.</p>
+  <p>Frequent stakeholder feedback throughout the SDLC can prevent misunderstandings about requirements and ensure that changes to requirements are understood and implemented earlier. This helps the development team to improve their understanding of what they are building. It allows them to focus on those features that deliver the most value to the stakeholders and that have the most positive impact on identified risks.</p>
+
+  <h4>3.2.2. Review Process Activities</h4>
+  <p>The ISO/IEC 20246 standard defines a generic review process that provides a structured but flexible framework from which a specific review process may be tailored to a particular situation. If the required review is more formal, then more of the tasks described for the different activities will be needed.</p>
+  <p>The size of many work products makes them too large to be covered by a single review. The review process may be invoked multiple times to complete the review for the entire work product.</p>
+  <p>The activities in the review process are:</p>
+  <ul>
+    <li><strong>Planning.</strong> During the planning phase, the scope of the review, which comprises the purpose, the work product to be reviewed, quality characteristics to be evaluated, areas to focus on, exit criteria, supporting information such as standards, effort and the timeframes for the review, shall be defined.</li>
+    <li><strong>Review initiation.</strong> During review initiation, the goal is to make sure that everyone and everything involved is prepared to start the review. This includes making sure that every participant has access to the work product under review, understands their role and responsibilities and receives everything needed to perform the review.</li>
+    <li><strong>Individual review.</strong> Every reviewer performs an individual review to assess the quality of the work product under review, and to identify anomalies, recommendations, and questions by applying one or more review techniques (e.g., checklist-based reviewing, scenario-based reviewing). The ISO/IEC 20246 standard provides more depth on different review techniques. The reviewers log all their identified anomalies, recommendations, and questions.</li>
+    <li><strong>Communication and analysis.</strong> Since the anomalies identified during a review are not necessarily defects, all these anomalies need to be analyzed and discussed. For every anomaly, the decision should be made on its status, ownership and required actions. This is typically done in a review meeting, during which the participants also decide what the quality level of reviewed work product is and what follow-up actions are required. A follow-up review may be required to complete actions.</li>
+    <li><strong>Fixing and reporting.</strong> For every defect, a defect report should be created so that corrective actions can be followed up. Once the exit criteria are reached, the work product can be accepted. The review results are reported.</li>
+  </ul>
+
+  <h4>3.2.3. Roles and Responsibilities in Reviews</h4>
+  <p>Reviews involve various stakeholders, who may take on several roles. The principal roles and their responsibilities are:</p>
+  <ul>
+    <li><strong>Manager</strong> – decides what is to be reviewed and provides resources, such as staff and time for the review</li>
+    <li><strong>Author</strong> – creates and fixes the work product under review</li>
+    <li><strong>Moderator</strong> (also known as the facilitator) – ensures the effective running of review meetings, including mediation, time management, and a safe review environment in which everyone can speak freely</li>
+    <li><strong>Scribe</strong> (also known as recorder) – collates anomalies from reviewers and records review information, such as decisions and new anomalies found during the review meeting</li>
+    <li><strong>Reviewer</strong> – performs reviews. A reviewer may be someone working on the project, a subject matter expert, or any other stakeholder</li>
+    <li><strong>Review leader</strong> – takes overall responsibility for the review such as deciding who will be involved, and organizing when and where the review will take place</li>
+  </ul>
+  <p>Other, more detailed roles are possible, as described in the ISO/IEC 20246 standard.</p>
+
+  <h4>3.2.4. Review Types</h4>
+  <p>There exist many review types ranging from informal reviews to formal reviews. The required level of formality depends on factors such as the SDLC being followed, the maturity of the development process, the criticality and complexity of the work product being reviewed, legal or regulatory requirements, and the need for an audit trail. The same work product can be reviewed with different review types, e.g., first an informal one and later a more formal one.</p>
+  <p>Selecting the right review type is key to achieving the required review objectives (see section 3.2.5). The selection is not only based on the objectives, but also on factors such as the project needs, available resources, work product type and risks, business domain, and company culture.</p>
+  <p>Some commonly used review types are:</p>
+  <ul>
+    <li><strong>Informal review.</strong> Informal reviews do not follow a defined process and do not require a formal documented output. The main objective is detecting anomalies.</li>
+    <li><strong>Walkthrough.</strong> A walkthrough, which is led by the author, can serve many objectives, such as evaluating quality and building confidence in the work product, educating reviewers, gaining consensus, generating new ideas, motivating and enabling authors to improve and detecting anomalies. Reviewers might perform an individual review before the walkthrough, but this is not required.</li>
+    <li><strong>Technical Review.</strong> A technical review is performed by technically qualified reviewers and led by a moderator. The objectives of a technical review are to gain consensus and make decisions regarding a technical problem, but also to detect anomalies, evaluate quality and build confidence in the work product, generate new ideas, and to motivate and enable authors to improve.</li>
+    <li><strong>Inspection.</strong> As inspections are the most formal type of review, they follow the complete generic process (see section 3.2.2). The main objective is to find the maximum number of anomalies. Other objectives are to evaluate quality, build confidence in the work product, and to motivate and enable authors to improve. Metrics are collected and used to improve the SDLC, including the inspection process. In inspections, the author cannot act as the review leader or scribe.</li>
+  </ul>
+
+  <h4>3.2.5. Success Factors for Reviews</h4>
+  <p>There are several factors that determine the success of reviews, which include:</p>
+  <ul>
+    <li>Defining clear objectives and measurable exit criteria. Evaluation of participants should never be an objective</li>
+    <li>Choosing the appropriate review type to achieve the given objectives, and to suit the type of work product, the review participants, the project needs and context</li>
+    <li>Performing reviews on small chunks, so that reviewers do not lose concentration during an individual review and/or the review meeting (when held)</li>
+    <li>Providing feedback from reviews to stakeholders and authors so they can improve the product and their activities (see section 3.2.1)</li>
+    <li>Providing adequate time to participants to prepare for the review</li>
+    <li>Support from management for the review process</li>
+    <li>Making reviews part of the organization's culture, to promote learning and process improvement</li>
+    <li>Providing adequate training for all participants so they know how to fulfil their role</li>
+    <li>Facilitating meetings</li>
+  </ul>
+</div>
+
+  </div>
+
+  <!-- TAB: Fiche -->
+  <div id="chTab-fiche" style="display:none;">
 
           <h4>Produits examinables par test statique</h4>
           <ul>
@@ -150,7 +265,7 @@
 const CURRENT_CHAPTER = 3;
 
 function switchChapterTab(id, btn) {
-  ['cours','flashcards','tutos','quiz'].forEach(function(t) {
+  ['syllabus','fiche','flashcards','tutos','quiz'].forEach(function(t) {
     document.getElementById('chTab-' + t).style.display = t === id ? 'block' : 'none';
   });
   document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
