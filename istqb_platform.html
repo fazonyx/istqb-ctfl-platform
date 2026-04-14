@@ -480,9 +480,13 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
   <!-- PROGRESSION TAB -->
   <div id="homeTab-progression" style="display:none;">
     <div id="progressDashboard"></div>
-    <div style="text-align:center;margin-top:16px;">
-      <button class="btn-retry" style="background:#dc2626;font-size:0.9rem;padding:10px 24px;" onclick="if(confirm('Effacer tout l\'historique ?')){localStorage.removeItem('istqb_history_all');localStorage.removeItem('istqb_history');renderHome();switchHomeTab('progression',document.querySelectorAll('.home-screen .tabs .tab-btn')[1]);}">Reinitialiser l'historique</button>
+    <div style="text-align:center;margin-top:16px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+      <button class="btn-retry" style="background:#2563eb;font-size:0.9rem;padding:10px 24px;" onclick="exportData()">Exporter mes donnees</button>
+      <button class="btn-retry" style="background:#16a34a;font-size:0.9rem;padding:10px 24px;" onclick="document.getElementById('importFile').click()">Importer des donnees</button>
+      <button class="btn-retry" style="background:#dc2626;font-size:0.9rem;padding:10px 24px;" onclick="if(confirm('Effacer tout l\'historique ?')){localStorage.removeItem('istqb_history_all');localStorage.removeItem('istqb_history');localStorage.removeItem('istqb_wrong_questions');renderHome();switchHomeTab('progression',document.querySelectorAll('.home-screen .tabs .tab-btn')[1]);}">Reinitialiser l'historique</button>
+      <input type="file" id="importFile" accept=".json" style="display:none;" onchange="importData(event)">
     </div>
+    <div id="importStatus" style="text-align:center;margin-top:8px;font-size:0.85rem;"></div>
   </div>
 
   <!-- APPRENTISSAGE TAB -->
@@ -4755,6 +4759,85 @@ function checkTutoStep(tutoId, stepIdx) {
       });
     }
   }
+}
+
+// ============================================================
+// EXPORT / IMPORT DATA
+// ============================================================
+function exportData() {
+  const data = {
+    _export: 'ISTQB_Platform_Data',
+    _version: 1,
+    _date: new Date().toISOString(),
+    history: getHistory(),
+    history_all: getAllHistory(),
+    wrong_questions: getWrongQuestions(),
+    flashcards: (() => { try { return JSON.parse(localStorage.getItem('istqb_flashcards') || 'null'); } catch { return null; } })(),
+    tutos: {}
+  };
+  TUTORIALS.forEach(t => {
+    const s = loadTutoState(t.id);
+    if (Object.keys(s).length > 0) data.tutos[t.id] = s;
+  });
+  data.quiz_states = {};
+  QUIZ_MODES.forEach(m => {
+    try {
+      const s = JSON.parse(localStorage.getItem('istqb_' + m.id));
+      if (s) data.quiz_states[m.id] = s;
+    } catch {}
+  });
+
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'istqb_data_' + new Date().toISOString().slice(0,10) + '.json';
+  a.click();
+  URL.revokeObjectURL(url);
+  document.getElementById('importStatus').innerHTML = '<span style="color:#16a34a;">Donnees exportees avec succes.</span>';
+}
+
+function importData(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const data = JSON.parse(e.target.result);
+      if (data._export !== 'ISTQB_Platform_Data') {
+        document.getElementById('importStatus').innerHTML = '<span style="color:#dc2626;">Fichier invalide.</span>';
+        return;
+      }
+      if (data.history) localStorage.setItem('istqb_history', JSON.stringify(data.history));
+      if (data.history_all) {
+        const existing = getAllHistory();
+        const existingDates = new Set(existing.map(e => e.date));
+        const newEntries = data.history_all.filter(e => !existingDates.has(e.date));
+        const merged = [...existing, ...newEntries].sort((a, b) => new Date(a.date) - new Date(b.date));
+        localStorage.setItem('istqb_history_all', JSON.stringify(merged));
+      }
+      if (data.wrong_questions) localStorage.setItem('istqb_wrong_questions', JSON.stringify(data.wrong_questions));
+      if (data.flashcards) localStorage.setItem('istqb_flashcards', JSON.stringify(data.flashcards));
+      if (data.tutos) {
+        Object.entries(data.tutos).forEach(([id, state]) => {
+          localStorage.setItem('istqb_tuto_' + id, JSON.stringify(state));
+        });
+      }
+      if (data.quiz_states) {
+        Object.entries(data.quiz_states).forEach(([id, state]) => {
+          localStorage.setItem('istqb_' + id, JSON.stringify(state));
+        });
+      }
+      const count = data.history_all ? data.history_all.length : 0;
+      document.getElementById('importStatus').innerHTML = '<span style="color:#16a34a;">Import reussi ! ' + count + ' tentatives restaurees.</span>';
+      renderHome();
+      switchHomeTab('progression', document.querySelectorAll('.home-screen .tabs .tab-btn')[1]);
+    } catch (err) {
+      document.getElementById('importStatus').innerHTML = '<span style="color:#dc2626;">Erreur : ' + err.message + '</span>';
+    }
+  };
+  reader.readAsText(file);
+  event.target.value = '';
 }
 
 // ============================================================
