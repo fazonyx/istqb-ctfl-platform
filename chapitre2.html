@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ISTQB CTFL - Chapitre 2 - Test dans le cycle de vie</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="header">
+  <h1>Chapitre 2 - Test dans le cycle de vie du developpement logiciel</h1>
+  <a href="istqb_platform.html" class="btn-back" style="text-decoration:none;">&#8592; Retour a la plateforme</a>
+</div>
+
+<div class="home-screen" style="max-width:960px;margin:0 auto;padding:24px;">
+
+  <div class="tabs" style="max-width:600px;margin:0 auto 24px;">
+    <button class="tab-btn active" onclick="switchChapterTab('cours',this)">Cours</button>
+    <button class="tab-btn" onclick="switchChapterTab('flashcards',this)">Flashcards</button>
+    <button class="tab-btn" onclick="switchChapterTab('tutos',this)">Tutos</button>
+    <button class="tab-btn" onclick="switchChapterTab('quiz',this)">Quiz</button>
+  </div>
+
+  <!-- TAB: Cours -->
+  <div id="chTab-cours">
+
+          <h4>Impact du SDLC sur le test</h4>
+          <p>Le choix du SDLC (sequentiel, iteratif, agile) impacte : la portee et le timing des activites de test, le niveau de detail de la documentation, les techniques choisies, l'etendue de l'automatisation, et le role du testeur.</p>
+
+          <h4>Bonnes pratiques pour TOUS les SDLC</h4>
+          <ul>
+            <li>Pour chaque activite de developpement, il y a une activite de test correspondante</li>
+            <li>Chaque niveau de test a des objectifs specifiques</li>
+            <li>L'analyse et la conception des tests commencent pendant l'activite de developpement correspondante</li>
+            <li>Les testeurs participent des la definition et au raffinement des exigences</li>
+          </ul>
+
+          <h4>Modeles sequentiels vs iteratifs/incrementaux</h4>
+          <table>
+            <tr><th>Sequentiel (V-model, cascade)</th><th>Iteratif/incremental (Agile, Scrum)</th></tr>
+            <tr><td>Phases lineaires, chaque phase termine avant la suivante</td><td>Cycles courts (sprints/iterations)</td></tr>
+            <tr><td>Tests souvent a la fin du cycle</td><td>Tests a chaque iteration</td></tr>
+            <tr><td>Documentation formelle</td><td>Documentation legere</td></tr>
+            <tr><td>Exigences definies tot et stables</td><td>Exigences evoluent continuellement</td></tr>
+            <tr><td>Feedback tardif</td><td>Feedback rapide et frequent</td></tr>
+          </table>
+          <div class="fiche-diagram">
+            <svg viewBox="0 0 740 300" xmlns="http://www.w3.org/2000/svg">
+              <defs><marker id="arrow3" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#94a3b8"/></marker></defs>
+              <rect x="5" y="10" width="160" height="40" rx="8" fill="#2563eb"/><text x="85" y="35" text-anchor="middle" fill="white" font-size="11" font-weight="bold">Exigences</text>
+              <rect x="575" y="10" width="160" height="40" rx="8" fill="#16a34a"/><text x="655" y="35" text-anchor="middle" fill="white" font-size="10" font-weight="bold">Test acceptation</text>
+              <line x1="165" y1="30" x2="575" y2="30" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6 3" marker-end="url(#arrow3)"/>
+              <rect x="75" y="85" width="160" height="40" rx="8" fill="#2563eb"/><text x="155" y="110" text-anchor="middle" fill="white" font-size="10" font-weight="bold">Conception systeme</text>
+              <rect x="505" y="85" width="160" height="40" rx="8" fill="#16a34a"/><text x="585" y="110" text-anchor="middle" fill="white" font-size="10" font-weight="bold">Test systeme</text>
+              <line x1="235" y1="105" x2="505" y2="105" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6 3" marker-end="url(#arrow3)"/>
+              <rect x="145" y="160" width="160" height="40" rx="8" fill="#2563eb"/><text x="225" y="185" text-anchor="middle" fill="white" font-size="10" font-weight="bold">Conception detaillee</text>
+              <rect x="435" y="160" width="160" height="40" rx="8" fill="#16a34a"/><text x="515" y="185" text-anchor="middle" fill="white" font-size="10" font-weight="bold">Test integration</text>
+              <line x1="305" y1="180" x2="435" y2="180" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6 3" marker-end="url(#arrow3)"/>
+              <rect x="225" y="240" width="130" height="40" rx="8" fill="#1e40af"/><text x="290" y="265" text-anchor="middle" fill="white" font-size="11" font-weight="bold">Codage</text>
+              <rect x="375" y="240" width="160" height="40" rx="8" fill="#16a34a"/><text x="455" y="265" text-anchor="middle" fill="white" font-size="10" font-weight="bold">Test composant</text>
+              <line x1="355" y1="260" x2="375" y2="260" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6 3" marker-end="url(#arrow3)"/>
+              <line x1="85" y1="50" x2="155" y2="85" stroke="#93c5fd" stroke-width="2"/>
+              <line x1="155" y1="125" x2="225" y2="160" stroke="#93c5fd" stroke-width="2"/>
+              <line x1="225" y1="200" x2="290" y2="240" stroke="#93c5fd" stroke-width="2"/>
+              <line x1="455" y1="240" x2="515" y2="200" stroke="#86efac" stroke-width="2"/>
+              <line x1="515" y1="160" x2="585" y2="125" stroke="#86efac" stroke-width="2"/>
+              <line x1="585" y1="85" x2="655" y2="50" stroke="#86efac" stroke-width="2"/>
+            </svg>
+          </div>
+
+          <div class="fiche-diagram">
+            <svg viewBox="0 0 320 280" xmlns="http://www.w3.org/2000/svg">
+              <defs><marker id="arrow4" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#94a3b8"/></marker></defs>
+              <text x="160" y="140" text-anchor="middle" fill="#94a3b8" font-size="14" font-weight="bold">Sprint</text>
+              <rect x="100" y="10" width="120" height="44" rx="10" fill="#2563eb"/><text x="160" y="37" text-anchor="middle" fill="white" font-size="12" font-weight="bold">Planifier</text>
+              <rect x="220" y="108" width="95" height="44" rx="10" fill="#16a34a"/><text x="267" y="135" text-anchor="middle" fill="white" font-size="12" font-weight="bold">Coder</text>
+              <rect x="100" y="220" width="120" height="44" rx="10" fill="#f59e0b"/><text x="160" y="247" text-anchor="middle" fill="white" font-size="12" font-weight="bold">Tester</text>
+              <rect x="5" y="108" width="95" height="44" rx="10" fill="#0d9488"/><text x="52" y="135" text-anchor="middle" fill="white" font-size="12" font-weight="bold">Livrer</text>
+              <line x1="220" y1="45" x2="240" y2="108" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow4)"/>
+              <line x1="260" y1="152" x2="220" y2="225" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow4)"/>
+              <line x1="100" y1="240" x2="80" y2="152" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow4)"/>
+              <line x1="60" y1="108" x2="105" y2="54" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow4)"/>
+            </svg>
+          </div>
+
+          <h4>Test-first : TDD, ATDD, BDD</h4>
+          <table>
+            <tr><th>Approche</th><th>Niveau</th><th>Qui ecrit</th><th>Description</th></tr>
+            <tr><td>TDD</td><td>Composant</td><td>Developpeur</td><td>Ecrire un test unitaire AVANT le code. Red-Green-Refactor. Code oriente.</td></tr>
+            <tr><td>ATDD</td><td>Systeme/Acceptation</td><td>Equipe (testeur, dev, metier)</td><td>Tests derives des criteres d'acceptation AVANT le developpement.</td></tr>
+            <tr><td>BDD</td><td>Systeme/Acceptation</td><td>Equipe</td><td>Tests exprimes en langage naturel (Given/When/Then). Le comportement est central.</td></tr>
+          </table>
+
+          <h4>Approche Shift-left</h4>
+          <p>Principe : tester le plus tot possible dans le SDLC. Exemples :</p>
+          <ul>
+            <li>Reviser les exigences avant leur acceptation formelle</li>
+            <li>Ecrire des tests avant le code (TDD)</li>
+            <li>Executer des tests de performance au niveau composant</li>
+            <li>Effectuer des analyses statiques avant les tests dynamiques</li>
+          </ul>
+          <div class="fiche-highlight">Ce qui n'est PAS shift-left : ecrire un script de test avant de mettre en place la gestion de configuration (c'est juste mal organise, pas shift-left).</div>
+
+          <h4>Retrospectives</h4>
+          <p>Reunions a la fin d'un sprint/iteration pour discuter de ce qui a bien fonctionne, ce qui peut etre ameliore, et definir des actions d'amelioration continue.</p>
+          <div class="fiche-highlight">Les retrospectives ne servent PAS a : trouver des defauts dans le produit, evaluer les performances individuelles, remplacer les tests.</div>
+
+          <h4>Niveaux de test</h4>
+          <table>
+            <tr><th>Niveau</th><th>Objet de test</th><th>Base de test</th><th>Defauts typiques</th></tr>
+            <tr><td>Composant (unitaire)</td><td>Code, modules, classes</td><td>Conception detaillee, code</td><td>Logique incorrecte, calculs errones, chemins manquants</td></tr>
+            <tr><td>Integration composants</td><td>Interfaces, interactions entre composants</td><td>Conception, diagrammes de sequence, API</td><td>Donnees incorrectes entre composants, mauvaise gestion interfaces</td></tr>
+            <tr><td>Systeme</td><td>Systeme complet, workflow bout en bout</td><td>Exigences, cas d'utilisation, epics</td><td>Calculs incorrects, comportement fonctionnel/non-fonctionnel inattendu</td></tr>
+            <tr><td>Integration systeme</td><td>Interactions entre systemes, APIs externes</td><td>Diagrammes de sequence, specifications interfaces</td><td>Formats de message incorrects, incompatibilites entre systemes</td></tr>
+            <tr><td>Acceptation</td><td>Systeme du point de vue metier</td><td>Processus metier, exigences utilisateur, reglementations</td><td>Workflows metier mal implementes, regles metier non respectees</td></tr>
+          </table>
+          <div class="fiche-diagram">
+            <svg viewBox="0 0 500 230" xmlns="http://www.w3.org/2000/svg">
+              <rect x="30" y="180" width="440" height="40" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/><text x="250" y="205" text-anchor="middle" fill="#1e3a5f" font-size="12" font-weight="bold">Composant</text>
+              <rect x="60" y="136" width="380" height="40" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/><text x="250" y="161" text-anchor="middle" fill="#166534" font-size="12" font-weight="bold">Integration composant</text>
+              <rect x="90" y="92" width="320" height="40" rx="10" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/><text x="250" y="117" text-anchor="middle" fill="#92400e" font-size="12" font-weight="bold">Systeme</text>
+              <rect x="120" y="48" width="260" height="40" rx="10" fill="#fed7aa" stroke="#fb923c" stroke-width="2"/><text x="250" y="73" text-anchor="middle" fill="#9a3412" font-size="12" font-weight="bold">Integration systeme</text>
+              <rect x="150" y="4" width="200" height="40" rx="10" fill="#ede9fe" stroke="#a78bfa" stroke-width="2"/><text x="250" y="29" text-anchor="middle" fill="#5b21b6" font-size="12" font-weight="bold">Acceptation</text>
+            </svg>
+          </div>
+
+          <h4>Types de test</h4>
+          <ul>
+            <li><strong>Fonctionnel :</strong> Que fait le systeme ? Verifie les fonctionnalites (completude, exactitude, pertinence)</li>
+            <li><strong>Non-fonctionnel :</strong> Comment le systeme le fait ? Performance, utilisabilite, securite, fiabilite, portabilite</li>
+            <li><strong>Boite noire :</strong> Basee sur les specifications (entrees/sorties), sans connaitre la structure interne</li>
+            <li><strong>Boite blanche :</strong> Basee sur la structure interne du code (instructions, branches)</li>
+            <li><strong>Confirmation (re-test) :</strong> Re-tester un defaut corrige pour verifier qu'il est resolu</li>
+            <li><strong>Regression :</strong> Verifier qu'un changement n'a pas cause de nouveaux defauts dans le code existant</li>
+          </ul>
+          <div class="fiche-highlight">Confirmation = re-tester ce qui a echoue. Regression = re-tester ce qui marchait. Ce sont des activites DIFFERENTES !</div>
+<div class="fiche-method">
+  <h5>Comment distinguer confirmation et regression dans un scenario</h5>
+  <ol>
+    <li>Identifier les tests qui avaient <strong>echoue</strong> a l'execution precedente</li>
+    <li>Ces tests, re-executes apres correction &#8594; ce sont des tests de <strong>confirmation</strong></li>
+    <li>Identifier les tests qui avaient <strong>reussi</strong> a l'execution precedente</li>
+    <li>Ces tests, re-executes pour verifier qu'ils passent toujours &#8594; ce sont des tests de <strong>regression</strong></li>
+  </ol>
+  <div class="method-example">
+    <strong>Exemple :</strong> Execution 1 : TC1=FAIL, TC2=PASS. Apres correction, Execution 2 : TC1 est re-teste (confirmation), TC2 est re-teste (regression).
+  </div>
+  <div class="fiche-trap">
+    <strong>Piege :</strong> Si TC1 echoue ENCORE a l'Execution 2, puis est re-teste a l'Execution 3, c'est ENCORE de la confirmation (pas de la regression).
+  </div>
+</div>
+
+          <h4>Test de maintenance : 3 declencheurs</h4>
+          <ul>
+            <li><strong>Modification :</strong> Corrections, ameliorations, changements planifies (ex: mise a jour OS)</li>
+            <li><strong>Changement d'environnement :</strong> Migration de plateforme, nouvelle base de donnees</li>
+            <li><strong>Retrait (retirement) :</strong> Systeme mis hors service, migration des donnees a tester</li>
+          </ul>
+<div class="fiche-method">
+  <h5>Comment identifier un declencheur de maintenance</h5>
+  <ol>
+    <li>Le systeme existant est <strong>modifie</strong> (correction, amelioration, hotfix) &#8594; <strong>Modification</strong></li>
+    <li>L'<strong>environnement change</strong> (nouvel OS, nouvelle DB, migration cloud) &#8594; <strong>Changement d'environnement</strong></li>
+    <li>Le systeme est <strong>retire/desactive</strong> (migration de donnees, archivage) &#8594; <strong>Retrait</strong></li>
+  </ol>
+  <div class="fiche-trap">
+    <strong>Piege :</strong> Developper une NOUVELLE fonctionnalite (user story) n'est PAS de la maintenance &#8212; c'est du developpement normal suivi de tests de regression. La maintenance concerne un systeme DEJA en production.
+  </div>
+</div>
+
+  </div>
+
+  <!-- TAB: Flashcards -->
+  <div id="chTab-flashcards" style="display:none;">
+    <div id="fcArea"></div>
+  </div>
+
+  <!-- TAB: Tutos -->
+  <div id="chTab-tutos" style="display:none;">
+    <div id="tutoArea"></div>
+  </div>
+
+  <!-- TAB: Quiz -->
+  <div id="chTab-quiz" style="display:none;">
+    <div style="text-align:center;padding:40px;">
+      <h3>Teste-toi sur le Chapitre 2</h3>
+      <p style="color:#64748b;margin-bottom:20px;">10 questions aleatoires de ce chapitre, 15 minutes.</p>
+      <button class="btn-start" onclick="startChapterQuiz()" style="background:#2563eb;color:white;border:none;padding:14px 32px;border-radius:10px;font-size:1rem;font-weight:600;cursor:pointer;">Lancer le quiz</button>
+    </div>
+  </div>
+
+  <!-- Voir aussi -->
+  <div style="margin-top:30px;" class="fiche-seealso">
+    <strong>Voir aussi :</strong>
+    <a href="chapitre1.html">Ch.1 - Fondamentaux du test</a> |
+    <a href="chapitre4.html">Ch.4 - Techniques de test</a> |
+    <a href="chapitre5.html">Ch.5 - Gestion des tests</a>
+  </div>
+
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/shared.js"></script>
+<script src="js/storage.js"></script>
+<script>
+const CURRENT_CHAPTER = 2;
+
+function switchChapterTab(id, btn) {
+  ['cours','flashcards','tutos','quiz'].forEach(function(t) {
+    document.getElementById('chTab-' + t).style.display = t === id ? 'block' : 'none';
+  });
+  document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  if (id === 'flashcards' && !window._fcInit) { initChapterFlashcards(); window._fcInit = true; }
+  if (id === 'tutos' && !window._tutoInit) { initChapterTutos(); window._tutoInit = true; }
+}
+
+function startChapterQuiz() {
+  window.location.href = 'istqb_platform.html?quiz=ch' + CURRENT_CHAPTER;
+}
+
+function initChapterFlashcards() {
+  var cards = FLASHCARDS.filter(function(c) { return c.ch === CURRENT_CHAPTER; });
+  if (cards.length === 0) {
+    document.getElementById('fcArea').innerHTML = '<p style="text-align:center;color:#94a3b8;padding:40px;">Aucune flashcard pour ce chapitre.</p>';
+    return;
+  }
+  var deck = shuffle([].concat(cards));
+  var known = new Set();
+  var idx = 0;
+
+  function render() {
+    if (deck.length === 0) {
+      document.getElementById('fcArea').innerHTML = '<div class="tuto-congrats"><h4>Toutes les cartes sont maitrisees !</h4><button class="tuto-reset" onclick="location.reload()">Recommencer</button></div>';
+      return;
+    }
+    var card = deck[idx];
+    var mastered = known.size;
+    document.getElementById('fcArea').innerHTML =
+      '<div style="text-align:center;margin-bottom:16px;">' +
+        '<div class="progress-bar" style="max-width:400px;margin:0 auto;"><div class="progress-fill" style="width:' + Math.round(mastered/cards.length*100) + '%;background:#16a34a;"></div></div>' +
+        '<div style="font-size:0.8rem;color:#94a3b8;margin-top:6px;">' + mastered + '/' + cards.length + ' maitrisees</div>' +
+      '</div>' +
+      '<div style="max-width:500px;margin:0 auto;cursor:pointer;perspective:600px;" onclick="this.querySelector(\'.fc-inner\').classList.toggle(\'fc-flipped\')">' +
+        '<div class="fc-inner" style="position:relative;min-height:200px;transition:transform 0.5s;transform-style:preserve-3d;">' +
+          '<div style="position:absolute;width:100%;backface-visibility:hidden;background:white;border-radius:16px;padding:32px;box-shadow:0 2px 12px rgba(0,0,0,0.08);text-align:center;">' +
+            '<div style="font-size:0.8rem;color:#94a3b8;margin-bottom:12px;">Question</div>' +
+            '<div style="font-size:1.1rem;font-weight:600;">' + card.front + '</div>' +
+          '</div>' +
+          '<div style="position:absolute;width:100%;backface-visibility:hidden;transform:rotateY(180deg);background:#f0fdf4;border-radius:16px;padding:32px;box-shadow:0 2px 12px rgba(0,0,0,0.08);text-align:center;">' +
+            '<div style="font-size:0.8rem;color:#94a3b8;margin-bottom:12px;">Reponse</div>' +
+            '<div style="font-size:1rem;">' + card.back + '</div>' +
+          '</div>' +
+        '</div>' +
+      '</div>' +
+      '<div style="display:flex;gap:12px;justify-content:center;margin-top:20px;">' +
+        '<button class="btn" style="background:#16a34a;color:white;" onclick="fcKnowCh()">Je sais</button>' +
+        '<button class="btn" style="background:#f59e0b;color:white;" onclick="fcReviewCh()">A revoir</button>' +
+      '</div>';
+  }
+
+  window.fcKnowCh = function() {
+    known.add(deck[idx].front);
+    deck.splice(idx, 1);
+    if (idx >= deck.length) idx = 0;
+    render();
+  };
+  window.fcReviewCh = function() {
+    var card = deck.splice(idx, 1)[0];
+    var insertAt = Math.min(idx + 3, deck.length);
+    deck.splice(insertAt, 0, card);
+    if (idx >= deck.length) idx = 0;
+    render();
+  };
+
+  render();
+}
+
+function initChapterTutos() {
+  var tutos = TUTORIALS.filter(function(t) { return t.chapter === CURRENT_CHAPTER; });
+  if (tutos.length === 0) {
+    document.getElementById('tutoArea').innerHTML = '<p style="text-align:center;color:#94a3b8;padding:40px;">Aucun tuto pour ce chapitre.</p>';
+    return;
+  }
+  var html = '';
+  tutos.forEach(function(tuto) {
+    html += '<div class="tuto-card" id="tuto-' + tuto.id + '">' +
+      '<h3>' + tuto.title + '</h3>' +
+      '<div class="tuto-desc">' + tuto.steps.length + ' etapes | ' + tuto.desc + '</div>' +
+      '<div class="tuto-scenario">' + tuto.scenario.replace(/\n/g, '<br>') + '</div>' +
+      '<div class="tuto-progress" id="tuto-progress-' + tuto.id + '"></div>' +
+      '<div id="tuto-steps-' + tuto.id + '"></div>' +
+      '<div id="tuto-congrats-' + tuto.id + '"></div>' +
+      '<button class="tuto-reset" onclick="resetTuto(\'' + tuto.id + '\')">Recommencer cet exercice</button>' +
+    '</div>';
+  });
+  document.getElementById('tutoArea').innerHTML = html;
+  tutos.forEach(function(tuto) {
+    var state = loadTutoState(tuto.id);
+    renderTutoSteps(tuto, state);
+  });
+}
+
+function resetTuto(tutoId) {
+  localStorage.removeItem('istqb_tuto_' + tutoId);
+  initChapterTutos();
+}
+
+function renderTutoSteps(tuto, state) {
+  var completedSteps = state.completed || [];
+  var currentStep = completedSteps.length;
+  var allDone = currentStep >= tuto.steps.length;
+  var progHtml = '';
+  tuto.steps.forEach(function(_, i) {
+    var cls = 'tuto-progress-dot';
+    if (i < currentStep) cls += ' done';
+    else if (i === currentStep) cls += ' current';
+    progHtml += '<div class="' + cls + '"></div>';
+  });
+  document.getElementById('tuto-progress-' + tuto.id).innerHTML = progHtml;
+  var stepsHtml = '';
+  tuto.steps.forEach(function(step, i) {
+    var stepCls = 'tuto-step';
+    if (i < currentStep) stepCls += ' correct';
+    else if (i === currentStep) stepCls += ' active';
+    else stepCls += ' locked';
+    stepsHtml += '<div class="' + stepCls + '" id="tuto-step-' + tuto.id + '-' + i + '">';
+    stepsHtml += '<div class="tuto-step-header"><div class="tuto-step-num">' + (i < currentStep ? '&#10003;' : i + 1) + '</div><div class="tuto-step-title">' + step.q + '</div></div>';
+    if (i <= currentStep) {
+      if (step.type === 'input') {
+        var prevAnswer = i < currentStep ? (state.answers && state.answers[i]) || '' : '';
+        stepsHtml += '<div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;"><input class="tuto-input" id="tuto-input-' + tuto.id + '-' + i + '" value="' + prevAnswer + '"' + (i < currentStep ? ' disabled' : '') + ' placeholder="Votre reponse" onkeydown="if(event.key===\'Enter\')checkTutoStep(\'' + tuto.id + '\',' + i + ')">' + (i === currentStep ? '<button class="tuto-btn-check" onclick="checkTutoStep(\'' + tuto.id + '\',' + i + ')">Verifier</button>' : '') + (step.hint && i === currentStep ? '<div style="font-size:0.8rem;color:#94a3b8;margin-top:4px;width:100%;"><em>Indice : ' + step.hint + '</em></div>' : '') + '</div>';
+      } else if (step.type === 'options') {
+        stepsHtml += '<div class="tuto-options">';
+        step.options.forEach(function(opt) {
+          var optCls = 'tuto-opt';
+          if (i < currentStep) { if (opt === step.answer) optCls += ' correct-opt'; else if (state.answers && state.answers[i] === opt && opt !== step.answer) optCls += ' wrong-opt'; }
+          var disabled = i < currentStep ? ' style="pointer-events:none;"' : '';
+          stepsHtml += '<div class="' + optCls + '"' + disabled + ' onclick="selectTutoOpt(\'' + tuto.id + '\',' + i + ',this,\'' + opt.replace(/'/g, "\\'") + '\')">' + opt + '</div>';
+        });
+        stepsHtml += '</div>';
+        if (i === currentStep) stepsHtml += '<button class="tuto-btn-check" onclick="checkTutoStep(\'' + tuto.id + '\',' + i + ')" style="margin-top:8px;">Verifier</button>';
+      } else if (step.type === 'multi') {
+        stepsHtml += '<div class="tuto-options" id="tuto-multi-' + tuto.id + '-' + i + '">';
+        step.options.forEach(function(opt) {
+          var optCls = 'tuto-opt';
+          if (i < currentStep) { if (step.answer.includes(opt)) optCls += ' correct-opt'; else if (state.answers && state.answers[i] && state.answers[i].includes(opt)) optCls += ' wrong-opt'; }
+          var disabled = i < currentStep ? ' style="pointer-events:none;"' : '';
+          stepsHtml += '<div class="' + optCls + '"' + disabled + ' onclick="toggleTutoMulti(this)">' + opt + '</div>';
+        });
+        stepsHtml += '</div>';
+        if (i === currentStep) {
+          stepsHtml += '<div style="font-size:0.8rem;color:#94a3b8;margin-top:4px;"><em>Selectionnez 2 reponses puis cliquez Verifier.</em></div>';
+          stepsHtml += '<button class="tuto-btn-check" onclick="checkTutoStep(\'' + tuto.id + '\',' + i + ')" style="margin-top:8px;">Verifier</button>';
+        }
+      }
+      if (i < currentStep) {
+        var wasCorrectFirst = state.firstTry && state.firstTry[i];
+        var fb = wasCorrectFirst ? step.feedback_ok : step.feedback_ko;
+        stepsHtml += '<div class="tuto-feedback show ok">' + fb + '</div>';
+      } else {
+        stepsHtml += '<div class="tuto-feedback" id="tuto-fb-' + tuto.id + '-' + i + '"></div>';
+      }
+    }
+    stepsHtml += '</div>';
+  });
+  document.getElementById('tuto-steps-' + tuto.id).innerHTML = stepsHtml;
+  if (allDone) {
+    var firstTryCount = state.firstTry ? Object.values(state.firstTry).filter(function(v) { return v; }).length : 0;
+    document.getElementById('tuto-congrats-' + tuto.id).innerHTML = '<div class="tuto-congrats"><h4>Exercice termine !</h4><p>' + firstTryCount + '/' + tuto.steps.length + ' reponses correctes du premier coup.</p>' + (firstTryCount === tuto.steps.length ? '<p style="color:#16a34a;font-weight:700;">Parfait ! Vous maitrisez cette technique.</p>' : '<p style="color:#f59e0b;">Recommencez pour viser le sans-faute !</p>') + '</div>';
+  } else {
+    document.getElementById('tuto-congrats-' + tuto.id).innerHTML = '';
+  }
+}
+
+function selectTutoOpt(tutoId, stepIdx, el, value) {
+  el.parentNode.querySelectorAll('.tuto-opt').forEach(function(o) { o.classList.remove('selected'); });
+  el.classList.add('selected'); el.dataset.value = value;
+}
+function toggleTutoMulti(el) { el.classList.toggle('selected'); }
+function checkTutoStep(tutoId, stepIdx) {
+  var tuto = TUTORIALS.find(function(t) { return t.id === tutoId; });
+  var step = tuto.steps[stepIdx];
+  var state = loadTutoState(tutoId);
+  if (!state.completed) state.completed = [];
+  if (!state.answers) state.answers = {};
+  if (!state.firstTry) state.firstTry = {};
+  var userAnswer, isCorrect = false;
+  if (step.type === 'input') {
+    var input = document.getElementById('tuto-input-' + tutoId + '-' + stepIdx);
+    userAnswer = input.value.trim(); isCorrect = userAnswer === step.answer;
+  } else if (step.type === 'options') {
+    var selected = document.querySelector('#tuto-step-' + tutoId + '-' + stepIdx + ' .tuto-opt.selected');
+    userAnswer = selected ? selected.textContent.trim() : ''; isCorrect = userAnswer === step.answer;
+  } else if (step.type === 'multi') {
+    var selectedEls = document.querySelectorAll('#tuto-multi-' + tutoId + '-' + stepIdx + ' .tuto-opt.selected');
+    userAnswer = Array.from(selectedEls).map(function(el) { return el.textContent.trim(); });
+    isCorrect = userAnswer.length === step.answer.length && step.answer.every(function(a) { return userAnswer.includes(a); });
+  }
+  var fb = document.getElementById('tuto-fb-' + tutoId + '-' + stepIdx);
+  if (isCorrect) {
+    state.answers[stepIdx] = userAnswer;
+    if (state.firstTry[stepIdx] === undefined) state.firstTry[stepIdx] = true;
+    state.completed.push(stepIdx); saveTutoState(tutoId, state); renderTutoSteps(tuto, state);
+    var nextStep = document.getElementById('tuto-step-' + tutoId + '-' + (stepIdx + 1));
+    if (nextStep) setTimeout(function() { nextStep.scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 200);
+  } else {
+    if (state.firstTry[stepIdx] === undefined) state.firstTry[stepIdx] = false;
+    saveTutoState(tutoId, state); fb.className = 'tuto-feedback show ko'; fb.innerHTML = step.feedback_ko;
+    if (step.type === 'options') {
+      document.querySelectorAll('#tuto-step-' + tutoId + '-' + stepIdx + ' .tuto-opt').forEach(function(o) {
+        if (o.textContent.trim() === step.answer) o.classList.add('correct-opt');
+        else if (o.classList.contains('selected')) o.classList.add('wrong-opt');
+      });
+    }
+  }
+}
+</script>
+</body>
+</html>

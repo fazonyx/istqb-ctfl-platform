@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ISTQB CTFL - Aide-memoire</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+.am-container { max-width: 960px; margin: 0 auto; padding: 24px; }
+.am-section { background: white; border-radius: 16px; padding: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); margin-bottom: 20px; }
+.am-section h3 { color: #1e3a5f; font-size: 1.15rem; margin-bottom: 16px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; }
+.am-formulas { display: flex; flex-direction: column; gap: 8px; }
+.am-formula { padding: 10px 16px; background: #eff6ff; border-radius: 8px; font-size: 0.9rem; border-left: 4px solid #2563eb; }
+.am-formula code { font-weight: 700; color: #1e40af; }
+.am-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin-top: 8px; }
+.am-table th { background: #1e3a5f; color: white; padding: 10px 12px; text-align: left; font-weight: 600; }
+.am-table td { padding: 10px 12px; border-bottom: 1px solid #e2e8f0; }
+.am-table tr:nth-child(even) td { background: #f8fafc; }
+.am-table tr:hover td { background: #eff6ff; }
+.am-tips ul { list-style: none; padding: 0; }
+.am-tips li { padding: 10px 16px; margin-bottom: 6px; background: #fffbeb; border-left: 4px solid #f59e0b; border-radius: 0 8px 8px 0; font-size: 0.88rem; }
+.am-tips li strong { color: #92400e; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Aide-memoire ISTQB CTFL v4.0</h1>
+  <a href="istqb_platform.html" class="btn-back" style="text-decoration:none;">← Retour a la plateforme</a>
+</div>
+
+<div class="am-container">
+
+  <div class="am-section">
+    <h3>Formules essentielles</h3>
+    <div class="am-formulas">
+      <div class="am-formula">Estimation 3 points : <code>E = (a + 4m + b) / 6</code> (a=optimiste, m=probable, b=pessimiste)</div>
+      <div class="am-formula">Risque : <code>Niveau = Probabilite x Impact</code></div>
+      <div class="am-formula">Couverture EP : <code>partitions testees / total partitions x 100%</code></div>
+      <div class="am-formula">Couverture BVA : <code>valeurs limites testees / total valeurs limites x 100%</code></div>
+      <div class="am-formula">Couverture instructions : <code>instructions executees / total instructions x 100%</code></div>
+      <div class="am-formula">Couverture branches : <code>branches executees / total branches x 100%</code></div>
+      <div class="am-formula">Couverture table decision : <code>regles testees / total regles x 100%</code></div>
+      <div class="am-formula">Couverture transitions : <code>transitions executees / total transitions valides x 100%</code></div>
+    </div>
+  </div>
+
+  <div class="am-section">
+    <h3>Chaine causale</h3>
+    <table class="am-table">
+      <tr><th>Etape</th><th>Definition</th><th>Exemple</th></tr>
+      <tr><td><strong>Cause racine</strong></td><td>Raison fondamentale de l'erreur</td><td>Developpeur fatigue, manque de formation</td></tr>
+      <tr><td><strong>Erreur</strong></td><td>Action humaine incorrecte</td><td>Mauvaise logique ecrite dans le code</td></tr>
+      <tr><td><strong>Defaut (bug)</strong></td><td>Imperfection dans un produit d'activite</td><td>Condition "if" inversee dans le code</td></tr>
+      <tr><td><strong>Defaillance</strong></td><td>Comportement observe incorrect</td><td>L'application affiche un montant errone</td></tr>
+    </table>
+  </div>
+
+  <div class="am-section">
+    <h3>7 principes du test</h3>
+    <table class="am-table">
+      <tr><th>#</th><th>Principe</th><th>Resume</th></tr>
+      <tr><td>1</td><td>Presence de defauts</td><td>Le test montre la presence de defauts, pas leur absence</td></tr>
+      <tr><td>2</td><td>Test exhaustif impossible</td><td>Impossible de tout tester, il faut prioriser</td></tr>
+      <tr><td>3</td><td>Tester tot</td><td>Plus on trouve un defaut tot, moins il coute cher</td></tr>
+      <tr><td>4</td><td>Regroupement des defauts</td><td>La majorite des defauts se concentre dans peu de modules</td></tr>
+      <tr><td>5</td><td>Usure des tests</td><td>Repeter les memes tests ne trouve plus rien : varier !</td></tr>
+      <tr><td>6</td><td>Test contextuel</td><td>L'approche depend du contexte du projet</td></tr>
+      <tr><td>7</td><td>Illusion d'absence de defauts</td><td>0 bug ne signifie pas satisfaction utilisateur</td></tr>
+    </table>
+  </div>
+
+  <div class="am-section">
+    <h3>Activites de test et leurs produits (testware)</h3>
+    <table class="am-table">
+      <tr><th>Activite</th><th>Produits / Testware</th></tr>
+      <tr><td>Planification</td><td>Plan de test, calendrier, criteres d'entree/sortie</td></tr>
+      <tr><td>Pilotage et controle</td><td>Rapports d'avancement, actions correctives</td></tr>
+      <tr><td>Analyse</td><td>Conditions de test priorisees, defauts dans la base de test</td></tr>
+      <tr><td>Conception</td><td>Cas de test, chartes de test, donnees de test identifiees</td></tr>
+      <tr><td>Implementation</td><td>Procedures de test, suites, calendrier d'execution, env. pret</td></tr>
+      <tr><td>Execution</td><td>Resultats, statut des cas de test, rapports de defauts</td></tr>
+      <tr><td>Completion</td><td>Rapport final, testware archive, lecons apprises</td></tr>
+    </table>
+  </div>
+
+  <div class="am-section">
+    <h3>Niveaux de test</h3>
+    <table class="am-table">
+      <tr><th>Niveau</th><th>Objet de test</th><th>Base de test</th><th>Defauts typiques</th></tr>
+      <tr><td>Composant</td><td>Code, modules</td><td>Conception detaillee, code</td><td>Logique incorrecte, calculs errones</td></tr>
+      <tr><td>Integration composants</td><td>Interfaces</td><td>Conception, API</td><td>Donnees incorrectes entre composants</td></tr>
+      <tr><td>Systeme</td><td>Systeme entier</td><td>Exigences, cas d'utilisation</td><td>Comportement fonctionnel/NF inattendu</td></tr>
+      <tr><td>Integration systeme</td><td>APIs externes</td><td>Specs interfaces</td><td>Formats incorrects, incompatibilites</td></tr>
+      <tr><td>Acceptation</td><td>Point de vue metier</td><td>Processus metier, reglementations</td><td>Workflows mal implementes</td></tr>
+    </table>
+  </div>
+
+  <div class="am-section">
+    <h3>Types de revue</h3>
+    <table class="am-table">
+      <tr><th>Type</th><th>Formalite</th><th>Objectif</th><th>Dirige par</th></tr>
+      <tr><td>Informelle</td><td>Aucune</td><td>Detecter anomalies, idees</td><td>Pas de leader</td></tr>
+      <tr><td>Walkthrough</td><td>Faible-moyenne</td><td>Evaluer qualite</td><td>Auteur</td></tr>
+      <tr><td>Technique</td><td>Moyenne-elevee</td><td>Consensus, anomalies</td><td>Facilitateur</td></tr>
+      <tr><td>Inspection</td><td>Elevee</td><td>Max anomalies, metriques</td><td>Facilitateur forme</td></tr>
+    </table>
+  </div>
+
+  <div class="am-section">
+    <h3>Processus de revue : 5 etapes</h3>
+    <table class="am-table">
+      <tr><th>#</th><th>Etape</th><th>Description</th></tr>
+      <tr><td>1</td><td>Planification</td><td>Portee, criteres, repartition des roles, criteres d'entree/sortie</td></tr>
+      <tr><td>2</td><td>Initiation de la revue</td><td>Distribution des documents, explication de la portee</td></tr>
+      <tr><td>3</td><td>Revue individuelle</td><td>Chaque reviseur examine et note les defauts potentiels</td></tr>
+      <tr><td>4</td><td>Communication et analyse</td><td>Discussion des defauts, decision sur le statut de chaque anomalie</td></tr>
+      <tr><td>5</td><td>Correction et rapport</td><td>Correction des defauts, creation des rapports, metriques collectees</td></tr>
+    </table>
+  </div>
+
+  <div class="am-section">
+    <h3>Roles de revue</h3>
+    <table class="am-table">
+      <tr><th>Role</th><th>Responsabilite</th></tr>
+      <tr><td>Manager</td><td>Decide ce qui est revise, alloue temps et budget</td></tr>
+      <tr><td>Auteur</td><td>Createur du produit, corrige les defauts</td></tr>
+      <tr><td>Moderateur</td><td>Anime les reunions, gestion du temps, mediation</td></tr>
+      <tr><td>Review leader</td><td>Responsabilite globale, decide des participants</td></tr>
+      <tr><td>Reviseur</td><td>Examine le produit, identifie les defauts</td></tr>
+      <tr><td>Scribe</td><td>Enregistre anomalies et decisions</td></tr>
+    </table>
+  </div>
+
+  <div class="am-section">
+    <h3>Techniques boite noire</h3>
+    <table class="am-table">
+      <tr><th>Technique</th><th>Ce qu'elle fait</th><th>Mesure de couverture</th></tr>
+      <tr><td>Partitions d'equivalence</td><td>Divise les entrees en groupes equivalents</td><td>partitions testees / total</td></tr>
+      <tr><td>BVA (2 valeurs)</td><td>Teste les frontieres entre partitions</td><td>valeurs limites testees / total</td></tr>
+      <tr><td>Tables de decision</td><td>Teste les combinaisons de conditions</td><td>regles testees / total</td></tr>
+      <tr><td>Transitions d'etat</td><td>Teste les changements d'etat</td><td>transitions executees / total valides</td></tr>
+    </table>
+  </div>
+
+  <div class="am-section">
+    <h3>Criteres d'entree vs Criteres de sortie</h3>
+    <table class="am-table">
+      <tr><th>Criteres d'entree (avant)</th><th>Criteres de sortie (apres)</th></tr>
+      <tr><td>Environnement de test disponible</td><td>Couverture cible atteinte</td></tr>
+      <tr><td>Outils de test prets</td><td>Densite de defauts acceptable</td></tr>
+      <tr><td>Code testable disponible</td><td>Defauts non corriges dans les limites</td></tr>
+      <tr><td>Donnees de test pretes</td><td>Tests de regression automatises passes</td></tr>
+      <tr><td>Base de test revue</td><td>Budget/temps ecoule</td></tr>
+    </table>
+  </div>
+
+  <div class="am-section">
+    <h3>Risques produit vs Risques projet</h3>
+    <table class="am-table">
+      <tr><th>Risque produit (qualite du logiciel)</th><th>Risque projet (gestion du projet)</th></tr>
+      <tr><td>Fonctionnalite incorrecte</td><td>Retard dans le calendrier</td></tr>
+      <tr><td>Performance insuffisante</td><td>Depassement de budget</td></tr>
+      <tr><td>Problemes de securite</td><td>Manque de ressources/competences</td></tr>
+      <tr><td>Mauvaise utilisabilite</td><td>Problemes de communication</td></tr>
+      <tr><td>Fiabilite insuffisante</td><td>Turnover de l'equipe</td></tr>
+    </table>
+  </div>
+
+  <div class="am-section">
+    <h3>Contenu d'un rapport de defaut</h3>
+    <table class="am-table">
+      <tr><th>Element</th><th>Description</th></tr>
+      <tr><td>Identifiant unique</td><td>Numero ou code du defaut</td></tr>
+      <tr><td>Titre / Resume</td><td>Description courte du probleme</td></tr>
+      <tr><td>Date, auteur</td><td>Qui a trouve et quand</td></tr>
+      <tr><td>Element de test et environnement</td><td>Application, version, OS, navigateur...</td></tr>
+      <tr><td>Etapes de reproduction</td><td>Comment reproduire le defaut</td></tr>
+      <tr><td>Resultat attendu vs reel</td><td>Ce qui devrait se passer vs ce qui se passe</td></tr>
+      <tr><td>Severite</td><td>Impact technique du defaut</td></tr>
+      <tr><td>Priorite</td><td>Urgence de la correction</td></tr>
+      <tr><td>Statut</td><td>Ouvert, en cours, corrige, ferme, rejete...</td></tr>
+      <tr><td>References</td><td>Cas de test, exigence liee</td></tr>
+    </table>
+  </div>
+
+  <div class="am-section">
+    <h3>Mnemoniques et astuces d'examen</h3>
+    <div class="am-tips">
+      <ul>
+        <li><strong>"PLUS probable"</strong>, <strong>"NE PAS"</strong>, <strong>"CORRECT"</strong> : attention aux mots-cles dans les questions d'examen. Lisez CHAQUE mot.</li>
+        <li><strong>100% branches implique 100% instructions</strong> (mais PAS l'inverse). C'est une question classique de l'examen.</li>
+        <li><strong>Corriger n'est PAS un objectif du test.</strong> Le test detecte les defauts, le debogage les corrige.</li>
+        <li><strong>Error guessing anticipe les erreurs, defauts et defaillances</strong>, mais PAS les causes racines.</li>
+        <li><strong>"Pesticide paradox" / Usure des tests</strong> = memes tests repetes ne trouvent plus rien. Solution : varier les tests.</li>
+        <li><strong>"Illusion d'absence de defauts"</strong> = 0 bug ne signifie pas que le logiciel satisfait les utilisateurs.</li>
+        <li><strong>Confirmation = re-tester ce qui a echoue.</strong> Regression = re-tester ce qui marchait. Deux concepts DIFFERENTS !</li>
+        <li><strong>Test de maintenance - 3 declencheurs :</strong> modification du systeme, changement d'environnement, retrait du systeme.</li>
+        <li><strong>Revues :</strong> on trouve des DEFAUTS (pas des defaillances). Les defaillances n'apparaissent qu'a l'execution.</li>
+        <li><strong>Walkthrough :</strong> dirige par l'AUTEUR. Inspection : dirige par un facilitateur FORME.</li>
+        <li><strong>Processus de revue :</strong> 5 etapes exactement dans l'ordre. Planification AVANT initiation.</li>
+        <li><strong>Test exploratoire :</strong> ne permet PAS de predire le nombre de defauts restants.</li>
+        <li><strong>User stories :</strong> Card, Conversation, Confirmation. Creees ENSEMBLE par toute l'equipe.</li>
+        <li><strong>INVEST :</strong> Independent, Negotiable, Valuable, Estimable, Small, Testable.</li>
+        <li><strong>Shift-left :</strong> tester tot = reviser exigences, ecrire tests avant code, analyse statique avant dynamique.</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

@@ -56,7 +56,52 @@
   <!-- APPRENTISSAGE TAB -->
   <div id="homeTab-apprentissage" style="display:none;">
 
-    <div class="apprentissage-subtabs">
+    <div class="section-title">Apprentissage par chapitre</div>
+    <p style="color:#64748b;margin-bottom:20px;">Chaque chapitre regroupe le cours complet, les flashcards, les tutos interactifs et un mini-quiz.</p>
+    <div class="cards-grid">
+      <a href="chapitre1.html" class="mode-card" style="text-decoration:none;color:inherit;">
+        <div class="card-title">Chapitre 1 - Fondamentaux du test</div>
+        <div class="card-meta"><span>Cours + Flashcards + Tutos + Quiz</span></div>
+        <span class="difficulty-tag diff-easy">Facile</span>
+      </a>
+      <a href="chapitre2.html" class="mode-card" style="text-decoration:none;color:inherit;">
+        <div class="card-title">Chapitre 2 - Test dans le cycle de vie</div>
+        <div class="card-meta"><span>Cours + Flashcards + Tutos + Quiz</span></div>
+        <span class="difficulty-tag diff-medium">Moyen</span>
+      </a>
+      <a href="chapitre3.html" class="mode-card" style="text-decoration:none;color:inherit;">
+        <div class="card-title">Chapitre 3 - Test statique</div>
+        <div class="card-meta"><span>Cours + Flashcards + Tutos + Quiz</span></div>
+        <span class="difficulty-tag diff-medium">Moyen</span>
+      </a>
+      <a href="chapitre4.html" class="mode-card" style="text-decoration:none;color:inherit;">
+        <div class="card-title">Chapitre 4 - Techniques de test</div>
+        <div class="card-meta"><span>Cours + Flashcards + Tutos + Quiz</span></div>
+        <span class="difficulty-tag diff-hard">Difficile</span>
+      </a>
+      <a href="chapitre5.html" class="mode-card" style="text-decoration:none;color:inherit;">
+        <div class="card-title">Chapitre 5 - Gestion des tests</div>
+        <div class="card-meta"><span>Cours + Flashcards + Tutos + Quiz</span></div>
+        <span class="difficulty-tag diff-medium">Moyen</span>
+      </a>
+      <a href="chapitre6.html" class="mode-card" style="text-decoration:none;color:inherit;">
+        <div class="card-title">Chapitre 6 - Outils de test</div>
+        <div class="card-meta"><span>Cours + Flashcards + Tutos + Quiz</span></div>
+        <span class="difficulty-tag diff-easy">Facile</span>
+      </a>
+    </div>
+
+    <div class="section-title">Ressources transversales</div>
+    <div class="cards-grid">
+      <a href="aide-memoire.html" class="mode-card" style="text-decoration:none;color:inherit;">
+        <div class="card-title">Aide-memoire</div>
+        <div class="card-meta"><span>Formules, tableaux de reference, astuces d'examen</span></div>
+        <span class="difficulty-tag diff-easy">Reference</span>
+      </a>
+    </div>
+
+    <!-- LEGACY: hidden subtabs kept for backwards compatibility with switchApprentissageSubtab -->
+    <div style="display:none;" class="apprentissage-subtabs">
       <button class="subtab-btn active" onclick="switchApprentissageSubtab('fiches',this)">Fiches de revision</button>
       <button class="subtab-btn" onclick="switchApprentissageSubtab('flashcards',this)">Flashcards</button>
       <button class="subtab-btn" onclick="switchApprentissageSubtab('aide',this)">Aide-memoire</button>

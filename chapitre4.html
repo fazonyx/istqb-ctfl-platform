@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ISTQB CTFL - Chapitre 4 - Techniques de test</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="header">
+  <h1>Chapitre 4 - Techniques de test</h1>
+  <a href="istqb_platform.html" class="btn-back" style="text-decoration:none;">&#8592; Retour a la plateforme</a>
+</div>
+
+<div class="home-screen" style="max-width:960px;margin:0 auto;padding:24px;">
+
+  <div class="tabs" style="max-width:600px;margin:0 auto 24px;">
+    <button class="tab-btn active" onclick="switchChapterTab('cours',this)">Cours</button>
+    <button class="tab-btn" onclick="switchChapterTab('flashcards',this)">Flashcards</button>
+    <button class="tab-btn" onclick="switchChapterTab('tutos',this)">Tutos</button>
+    <button class="tab-btn" onclick="switchChapterTab('quiz',this)">Quiz</button>
+  </div>
+
+  <!-- TAB: Cours -->
+  <div id="chTab-cours">
+
+          <h4>Boite noire vs Boite blanche vs Basee sur l'experience</h4>
+          <table>
+            <tr><th>Categorie</th><th>Base</th><th>Quand l'utiliser</th></tr>
+            <tr><td>Boite noire</td><td>Specifications, exigences, comportement</td><td>Quand les specifications sont disponibles, tout niveau de test</td></tr>
+            <tr><td>Boite blanche</td><td>Structure interne du code</td><td>Test de composant, mesure de couverture de code</td></tr>
+            <tr><td>Basee sur l'experience</td><td>Connaissance et expertise du testeur</td><td>Quand les specs sont limitees, en complement des autres techniques</td></tr>
+          </table>
+
+          <h4>Partitions d'equivalence (EP)</h4>
+          <ul>
+            <li>Diviser les entrees en groupes (partitions) ou le systeme se comporte de la meme maniere</li>
+            <li><strong>Partition valide :</strong> valeurs acceptees par le systeme</li>
+            <li><strong>Partition invalide :</strong> valeurs rejetees par le systeme</li>
+            <li>Chaque valeur appartient a exactement UNE partition</li>
+            <li>Un seul cas de test par partition suffit (representant)</li>
+          </ul>
+          <div class="fiche-chain">Couverture EP = partitions testees / total partitions x 100%</div>
+          <p>Exemple : champ age 18-65. Partitions : &lt;18 (invalide), 18-65 (valide), &gt;65 (invalide). 3 partitions au total.</p>
+<div class="fiche-method">
+  <h5>Comment resoudre un exercice EP en 4 etapes</h5>
+  <ol>
+    <li><strong>Identifier la variable</strong> d'entree et ses contraintes (ex: "age entre 18 et 65")</li>
+    <li><strong>Lister les partitions</strong> : une valide (18-65), les invalides (&lt;18, &gt;65). S'il y a des sous-regles, creer des partitions supplementaires</li>
+    <li><strong>Choisir un representant</strong> par partition (n'importe quelle valeur dans la plage : 25 pour 18-65, 10 pour &lt;18, 70 pour &gt;65)</li>
+    <li><strong>Compter :</strong> couverture = partitions testees / total partitions x 100%</li>
+  </ol>
+  <div class="method-example">
+    <strong>Exemple :</strong> D = CY - BY. Partitions : D&lt;0 (erreur), 0&lt;=D&lt;18 (etudiant), 18&lt;=D&lt;65 (normal), D&gt;=65 (retraite) = 4 partitions. Si 2 sont deja couvertes, il faut 2 tests supplementaires.
+  </div>
+  <div class="fiche-trap">
+    <strong>Piege :</strong> Lis bien les bornes ! "depasse 100$" signifie &gt;100, pas &gt;=100. "entre 0 et 2 inclus" signifie 0, 1 et 2 sont dans la partition.
+  </div>
+</div>
+
+          <h4>BVA 2 valeurs (par defaut dans le syllabus)</h4>
+          <ul>
+            <li>Pour chaque frontiere entre 2 partitions : 2 valeurs (une de chaque cote)</li>
+            <li>Exemple : frontiere entre &lt;18 et 18-65 a la valeur 18 : tester 17 et 18</li>
+            <li>Exemple : frontiere entre 18-65 et &gt;65 a la valeur 65 : tester 65 et 66</li>
+            <li>Total : 2 frontieres x 2 valeurs = 4 valeurs limites</li>
+          </ul>
+
+          <h4>BVA 3 valeurs</h4>
+          <ul>
+            <li>Pour chaque frontiere : 3 valeurs (frontiere + 1 de chaque cote)</li>
+            <li>Exemple frontiere a 18 : tester 17, 18, 19</li>
+            <li>Exemple frontiere a 65 : tester 64, 65, 66</li>
+            <li>Total : 2 frontieres x 3 valeurs = 6 valeurs limites (en eliminant les doublons)</li>
+          </ul>
+          <div class="fiche-chain">Couverture BVA = valeurs limites testees / total valeurs limites x 100%</div>
+<div class="fiche-method">
+  <h5>Comment resoudre un exercice BVA en 3 etapes</h5>
+  <ol>
+    <li><strong>Identifier les frontieres</strong> entre partitions (la ou le comportement change)</li>
+    <li><strong>Pour BVA 2-valeurs :</strong> pour chaque frontiere, prendre la valeur juste en-dessous et juste au-dessus (ex: frontiere a 18 &#8594; tester 17 et 18)</li>
+    <li><strong>Pour BVA 3-valeurs :</strong> pour chaque frontiere, prendre la frontiere + 1 de chaque cote (ex: frontiere a 18 &#8594; tester 17, 18, 19)</li>
+  </ol>
+  <div class="method-example">
+    <strong>Exemple BVA 2-val :</strong> Partitions &lt;0, 0-2, &gt;2. Frontieres a 0 et 2.<br>
+    Frontiere 0 : tester -1 et 0. Frontiere 2 : tester 2 et 3.<br>
+    Total : 4 valeurs limites = {-1, 0, 2, 3}. Si tu testes les 4 &#8594; 100% couverture BVA.
+  </div>
+  <div class="fiche-trap">
+    <strong>Piege :</strong> Ne confonds pas BVA 2-valeurs et 3-valeurs ! Le syllabus utilise 2-valeurs par defaut. Si la question dit "two-value BVA", c'est 2 valeurs par frontiere, pas 3.
+  </div>
+</div>
+          <div class="fiche-diagram">
+            <svg viewBox="0 0 700 140" xmlns="http://www.w3.org/2000/svg" style="max-width:700px;width:100%">
+              <line x1="50" y1="70" x2="650" y2="70" stroke="#334155" stroke-width="2"/>
+              <line x1="50" y1="65" x2="50" y2="75" stroke="#334155" stroke-width="2"/>
+              <line x1="650" y1="65" x2="650" y2="75" stroke="#334155" stroke-width="2"/>
+              <text x="50" y="95" text-anchor="middle" font-size="11" fill="#64748b">0</text>
+              <text x="650" y="95" text-anchor="middle" font-size="11" fill="#64748b">80</text>
+              <rect x="50" y="45" width="135" height="50" rx="4" fill="#fee2e2" opacity="0.7"/>
+              <rect x="185" y="45" width="340" height="50" rx="4" fill="#dcfce7" opacity="0.7"/>
+              <rect x="525" y="45" width="125" height="50" rx="4" fill="#fee2e2" opacity="0.7"/>
+              <text x="117" y="63" text-anchor="middle" font-size="10" fill="#991b1b">Invalide (&lt;18)</text>
+              <text x="355" y="63" text-anchor="middle" font-size="10" fill="#166534">Valide (18-65)</text>
+              <text x="587" y="63" text-anchor="middle" font-size="10" fill="#991b1b">Invalide (&gt;65)</text>
+              <line x1="185" y1="40" x2="185" y2="100" stroke="#334155" stroke-width="1.5" stroke-dasharray="5,3"/>
+              <line x1="525" y1="40" x2="525" y2="100" stroke="#334155" stroke-width="1.5" stroke-dasharray="5,3"/>
+              <circle cx="172" cy="70" r="6" fill="#dc2626"/>
+              <text x="172" y="38" text-anchor="middle" font-size="11" font-weight="bold" fill="#dc2626">17</text>
+              <circle cx="198" cy="70" r="6" fill="#16a34a"/>
+              <text x="198" y="38" text-anchor="middle" font-size="11" font-weight="bold" fill="#16a34a">18</text>
+              <circle cx="512" cy="70" r="6" fill="#16a34a"/>
+              <text x="512" y="38" text-anchor="middle" font-size="11" font-weight="bold" fill="#16a34a">65</text>
+              <circle cx="538" cy="70" r="6" fill="#dc2626"/>
+              <text x="538" y="38" text-anchor="middle" font-size="11" font-weight="bold" fill="#dc2626">66</text>
+              <text x="350" y="125" text-anchor="middle" font-size="12" fill="#334155">EP = 3 partitions | BVA 2-val = 4 valeurs limites</text>
+            </svg>
+          </div>
+
+          <h4>Tables de decision</h4>
+          <ul>
+            <li><strong>Conditions :</strong> les entrees/situations (lignes du haut)</li>
+            <li><strong>Actions :</strong> les sorties/resultats attendus (lignes du bas)</li>
+            <li><strong>Regles :</strong> chaque colonne = une combinaison unique de conditions avec ses actions</li>
+            <li>Nombre de regles theorique = 2^n (n = nombre de conditions booleennes)</li>
+          </ul>
+          <div class="fiche-chain">Couverture table de decision = regles testees / total regles x 100%</div>
+          <div class="fiche-highlight">Pour identifier quelle regle couvre un cas de test : verifier la combinaison de conditions et trouver la colonne correspondante.</div>
+<div class="fiche-method">
+  <h5>Comment resoudre un exercice de table de decision</h5>
+  <ol>
+    <li><strong>Lire le cas de test</strong> : extraire les valeurs de chaque condition (ex: "19 ans, non inscrit, sans experience")</li>
+    <li><strong>Mapper chaque condition</strong> a la ligne correspondante de la table (Age=19-65, Inscrit=NON, Exp=0-4)</li>
+    <li><strong>Trouver la colonne</strong> ou TOUTES les conditions correspondent &#8594; c'est la regle couverte</li>
+    <li><strong>Pour la couverture :</strong> compter combien de colonnes/regles sont couvertes par l'ensemble des cas de test</li>
+  </ol>
+  <div class="method-example">
+    <strong>Exemple :</strong> TC: homme de 66 ans, non inscrit. Dans la table : Age &gt;65, Inscrit=NON. Chercher la colonne avec &gt;65 et NON &#8594; c'est R4.
+  </div>
+</div>
+          <div class="fiche-diagram">
+            <svg viewBox="0 0 420 170" xmlns="http://www.w3.org/2000/svg" style="max-width:420px;width:100%">
+              <rect x="0" y="0" width="100" height="30" fill="#2563eb" stroke="#1e40af" stroke-width="1"/>
+              <rect x="100" y="0" width="80" height="30" fill="#2563eb" stroke="#1e40af" stroke-width="1"/>
+              <rect x="180" y="0" width="80" height="30" fill="#2563eb" stroke="#1e40af" stroke-width="1"/>
+              <rect x="260" y="0" width="80" height="30" fill="#2563eb" stroke="#1e40af" stroke-width="1"/>
+              <rect x="340" y="0" width="80" height="30" fill="#2563eb" stroke="#1e40af" stroke-width="1"/>
+              <text x="50" y="20" text-anchor="middle" font-size="12" fill="white" font-weight="bold"></text>
+              <text x="140" y="20" text-anchor="middle" font-size="12" fill="white" font-weight="bold">R1</text>
+              <text x="220" y="20" text-anchor="middle" font-size="12" fill="white" font-weight="bold">R2</text>
+              <text x="300" y="20" text-anchor="middle" font-size="12" fill="white" font-weight="bold">R3</text>
+              <text x="380" y="20" text-anchor="middle" font-size="12" fill="white" font-weight="bold">R4</text>
+              <rect x="0" y="30" width="100" height="30" fill="#dbeafe" stroke="#93c5fd" stroke-width="1"/>
+              <rect x="100" y="30" width="80" height="30" fill="#dbeafe" stroke="#93c5fd" stroke-width="1"/>
+              <rect x="180" y="30" width="80" height="30" fill="#dbeafe" stroke="#93c5fd" stroke-width="1"/>
+              <rect x="260" y="30" width="80" height="30" fill="#dbeafe" stroke="#93c5fd" stroke-width="1"/>
+              <rect x="340" y="30" width="80" height="30" fill="#dbeafe" stroke="#93c5fd" stroke-width="1"/>
+              <text x="50" y="50" text-anchor="middle" font-size="11" fill="#1e40af" font-weight="bold">Membre?</text>
+              <text x="140" y="50" text-anchor="middle" font-size="11" fill="#334155">Oui</text>
+              <text x="220" y="50" text-anchor="middle" font-size="11" fill="#334155">Oui</text>
+              <text x="300" y="50" text-anchor="middle" font-size="11" fill="#334155">Non</text>
+              <text x="380" y="50" text-anchor="middle" font-size="11" fill="#334155">Non</text>
+              <rect x="0" y="60" width="100" height="30" fill="#dbeafe" stroke="#93c5fd" stroke-width="1"/>
+              <rect x="100" y="60" width="80" height="30" fill="#dbeafe" stroke="#93c5fd" stroke-width="1"/>
+              <rect x="180" y="60" width="80" height="30" fill="#dbeafe" stroke="#93c5fd" stroke-width="1"/>
+              <rect x="260" y="60" width="80" height="30" fill="#dbeafe" stroke="#93c5fd" stroke-width="1"/>
+              <rect x="340" y="60" width="80" height="30" fill="#dbeafe" stroke="#93c5fd" stroke-width="1"/>
+              <text x="50" y="80" text-anchor="middle" font-size="11" fill="#1e40af" font-weight="bold">Retard?</text>
+              <text x="140" y="80" text-anchor="middle" font-size="11" fill="#334155">Oui</text>
+              <text x="220" y="80" text-anchor="middle" font-size="11" fill="#334155">Non</text>
+              <text x="300" y="80" text-anchor="middle" font-size="11" fill="#334155">Oui</text>
+              <text x="380" y="80" text-anchor="middle" font-size="11" fill="#334155">Non</text>
+              <line x1="0" y1="95" x2="420" y2="95" stroke="#334155" stroke-width="2"/>
+              <rect x="0" y="100" width="100" height="30" fill="#dcfce7" stroke="#86efac" stroke-width="1"/>
+              <rect x="100" y="100" width="80" height="30" fill="#dcfce7" stroke="#86efac" stroke-width="1"/>
+              <rect x="180" y="100" width="80" height="30" fill="#dcfce7" stroke="#86efac" stroke-width="1"/>
+              <rect x="260" y="100" width="80" height="30" fill="#dcfce7" stroke="#86efac" stroke-width="1"/>
+              <rect x="340" y="100" width="80" height="30" fill="#dcfce7" stroke="#86efac" stroke-width="1"/>
+              <text x="50" y="120" text-anchor="middle" font-size="11" fill="#166534" font-weight="bold">Reduction</text>
+              <text x="140" y="120" text-anchor="middle" font-size="11" fill="#64748b">-</text>
+              <text x="220" y="120" text-anchor="middle" font-size="13" fill="#16a34a" font-weight="bold">X</text>
+              <text x="300" y="120" text-anchor="middle" font-size="11" fill="#64748b">-</text>
+              <text x="380" y="120" text-anchor="middle" font-size="11" fill="#64748b">-</text>
+              <rect x="0" y="130" width="100" height="30" fill="#dcfce7" stroke="#86efac" stroke-width="1"/>
+              <rect x="100" y="130" width="80" height="30" fill="#dcfce7" stroke="#86efac" stroke-width="1"/>
+              <rect x="180" y="130" width="80" height="30" fill="#dcfce7" stroke="#86efac" stroke-width="1"/>
+              <rect x="260" y="130" width="80" height="30" fill="#dcfce7" stroke="#86efac" stroke-width="1"/>
+              <rect x="340" y="130" width="80" height="30" fill="#dcfce7" stroke="#86efac" stroke-width="1"/>
+              <text x="50" y="150" text-anchor="middle" font-size="11" fill="#166534" font-weight="bold">Plein tarif</text>
+              <text x="140" y="150" text-anchor="middle" font-size="13" fill="#334155" font-weight="bold">X</text>
+              <text x="220" y="150" text-anchor="middle" font-size="11" fill="#64748b">-</text>
+              <text x="300" y="150" text-anchor="middle" font-size="13" fill="#334155" font-weight="bold">X</text>
+              <text x="380" y="150" text-anchor="middle" font-size="13" fill="#334155" font-weight="bold">X</text>
+            </svg>
+          </div>
+
+          <h4>Transitions d'etat</h4>
+          <ul>
+            <li><strong>Etat :</strong> situation dans laquelle le systeme se trouve</li>
+            <li><strong>Transition :</strong> changement d'un etat a un autre</li>
+            <li><strong>Evenement :</strong> ce qui declenche une transition</li>
+            <li><strong>Action :</strong> ce qui resulte d'une transition</li>
+            <li><strong>Garde :</strong> condition supplementaire pour qu'une transition ait lieu</li>
+          </ul>
+          <div class="fiche-chain">Couverture transitions = transitions executees / total transitions valides x 100%</div>
+          <div class="fiche-diagram">
+            <svg viewBox="0 0 520 200" xmlns="http://www.w3.org/2000/svg" style="max-width:520px;width:100%">
+              <defs>
+                <marker id="arrowST" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
+                  <polygon points="0 0, 10 3.5, 0 7" fill="#334155"/>
+                </marker>
+              </defs>
+              <circle cx="80" cy="100" r="35" fill="#94a3b8"/>
+              <text x="80" y="105" text-anchor="middle" font-size="12" fill="white" font-weight="bold">Inactif</text>
+              <circle cx="280" cy="100" r="35" fill="#16a34a"/>
+              <text x="280" y="105" text-anchor="middle" font-size="12" fill="white" font-weight="bold">Actif</text>
+              <circle cx="460" cy="100" r="35" fill="#dc2626"/>
+              <text x="460" y="105" text-anchor="middle" font-size="11" fill="white" font-weight="bold">Termine</text>
+              <path d="M 115 90 Q 180 35 245 90" fill="none" stroke="#334155" stroke-width="1.5" marker-end="url(#arrowST)"/>
+              <text x="180" y="48" text-anchor="middle" font-size="11" fill="#334155" font-weight="bold">Demarrer</text>
+              <path d="M 315 100 L 425 100" fill="none" stroke="#334155" stroke-width="1.5" marker-end="url(#arrowST)"/>
+              <text x="370" y="93" text-anchor="middle" font-size="11" fill="#334155" font-weight="bold">Fermer</text>
+              <path d="M 105 128 Q 270 195 440 128" fill="none" stroke="#334155" stroke-width="1.5" marker-end="url(#arrowST)"/>
+              <text x="270" y="185" text-anchor="middle" font-size="11" fill="#334155" font-weight="bold">Annuler</text>
+              <path d="M 265 67 Q 280 15 295 67" fill="none" stroke="#334155" stroke-width="1.5" marker-end="url(#arrowST)"/>
+              <text x="280" y="20" text-anchor="middle" font-size="11" fill="#334155" font-weight="bold">Modifier</text>
+            </svg>
+          </div>
+<div class="fiche-method">
+  <h5>Comment resoudre un exercice de transitions d'etat</h5>
+  <ol>
+    <li><strong>Dessiner le graphe</strong> a partir de la table : etats = cercles, transitions = fleches avec evenements</li>
+    <li><strong>Lister toutes les transitions valides</strong> (compter les fleches distinctes)</li>
+    <li><strong>Tracer le chemin</strong> du cas de test en suivant les evenements un par un depuis l'etat initial</li>
+    <li><strong>Compter les transitions distinctes couvertes</strong> par le chemin</li>
+    <li><strong>Verifier la faisabilite :</strong> apres un etat final (End), plus aucune transition n'est possible !</li>
+  </ol>
+  <div class="method-example">
+    <strong>Exemple :</strong> Sequence "Available, ChangeRoom, NotAvailable, Available, Pay"<br>
+    S1&#8594;S2 (Available) &#8594; S2&#8594;S1 (ChangeRoom) &#8594; S1&#8594;S3 (NotAvailable) &#8594; S3&#8594;S2 (Available) &#8594; S2&#8594;S4 (Pay)<br>
+    = 5 transitions distinctes couvertes sur 7 = 71% couverture.
+  </div>
+  <div class="fiche-trap">
+    <strong>Piege :</strong> Un meme evenement peut correspondre a des transitions DIFFERENTES selon l'etat de depart ! "Available" depuis S1 (&#8594;S2) n'est PAS la meme transition que "Available" depuis S3 (&#8594;S2).
+  </div>
+</div>
+
+          <h4>Couverture des instructions</h4>
+          <ul>
+            <li>Chaque instruction du code executee au moins une fois</li>
+            <li>Mesure : instructions executees / total instructions x 100%</li>
+          </ul>
+          <div class="fiche-highlight">100% couverture instructions NE GARANTIT PAS 100% couverture branches ! Une branche "else" vide peut ne pas etre testee.</div>
+
+          <h4>Couverture des branches</h4>
+          <ul>
+            <li>Chaque branche (vrai ET faux) de chaque decision executee au moins une fois</li>
+            <li>Mesure : branches executees / total branches x 100%</li>
+          </ul>
+          <div class="fiche-chain">100% branches &#8594; 100% instructions (garanti) | 100% instructions &#8599; 100% branches (PAS garanti)</div>
+          <div class="fiche-diagram">
+            <svg viewBox="0 0 580 280" xmlns="http://www.w3.org/2000/svg" style="max-width:580px;width:100%">
+              <defs>
+                <marker id="arrowFC" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
+                  <polygon points="0 0, 10 3.5, 0 7" fill="#334155"/>
+                </marker>
+              </defs>
+              <rect x="200" y="5" width="80" height="30" rx="12" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5"/>
+              <text x="240" y="25" text-anchor="middle" font-size="12" fill="#334155" font-weight="bold">Debut</text>
+              <line x1="240" y1="35" x2="240" y2="60" stroke="#334155" stroke-width="1.5" marker-end="url(#arrowFC)"/>
+              <polygon points="240,62 300,95 240,128 180,95" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+              <text x="240" y="99" text-anchor="middle" font-size="11" fill="#92400e" font-weight="bold">x &gt; 0 ?</text>
+              <line x1="300" y1="95" x2="340" y2="95" stroke="#334155" stroke-width="1.5" marker-end="url(#arrowFC)"/>
+              <text x="318" y="88" text-anchor="middle" font-size="10" fill="#16a34a" font-weight="bold">Vrai</text>
+              <rect x="342" y="80" width="90" height="30" rx="10" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
+              <text x="387" y="100" text-anchor="middle" font-size="11" fill="#166534" font-weight="bold">A = x + 1</text>
+              <line x1="387" y1="110" x2="387" y2="195" stroke="#334155" stroke-width="1"/>
+              <line x1="387" y1="195" x2="240" y2="195" stroke="#334155" stroke-width="1"/>
+              <line x1="240" y1="128" x2="240" y2="195" stroke="#334155" stroke-width="1.5"/>
+              <text x="225" y="148" text-anchor="end" font-size="10" fill="#dc2626" font-weight="bold">Faux</text>
+              <circle cx="240" cy="195" r="3" fill="#334155"/>
+              <line x1="240" y1="198" x2="240" y2="218" stroke="#334155" stroke-width="1.5" marker-end="url(#arrowFC)"/>
+              <rect x="200" y="220" width="80" height="30" rx="12" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5"/>
+              <text x="240" y="240" text-anchor="middle" font-size="12" fill="#334155" font-weight="bold">Fin</text>
+              <rect x="370" y="140" width="200" height="55" rx="6" fill="#dcfce7" stroke="#86efac" stroke-width="1"/>
+              <text x="380" y="157" font-size="9" fill="#166534" font-weight="bold">x=1 : couvre Debut, x&gt;0</text>
+              <text x="380" y="170" font-size="9" fill="#166534" font-weight="bold">(Vrai), A=x+1, Fin</text>
+              <text x="380" y="183" font-size="9" fill="#166534" font-weight="bold">= 100% instructions</text>
+              <rect x="10" y="140" width="165" height="42" rx="6" fill="#fee2e2" stroke="#fca5a5" stroke-width="1"/>
+              <text x="20" y="157" font-size="9" fill="#991b1b" font-weight="bold">Branche Faux jamais testee</text>
+              <text x="20" y="170" font-size="9" fill="#991b1b" font-weight="bold">= seulement 50% branches!</text>
+            </svg>
+          </div>
+<div class="fiche-method">
+  <h5>Comment verifier la couverture d'instructions et de branches</h5>
+  <ol>
+    <li><strong>Tracer le chemin</strong> du cas de test dans le code (quelles lignes sont executees)</li>
+    <li><strong>Instructions :</strong> cocher chaque ligne executee. Couverture = lignes cochees / total lignes</li>
+    <li><strong>Branches :</strong> pour chaque IF/decision, verifier si le chemin VRAI et le chemin FAUX ont ete empruntes</li>
+    <li><strong>Rappel :</strong> 100% branches garantit 100% instructions. L'inverse est FAUX.</li>
+  </ol>
+  <div class="fiche-trap">
+    <strong>Piege :</strong> Un IF sans ELSE a quand meme 2 branches (vrai et faux). Si tu ne testes que le cas vrai, tu as 100% instructions mais seulement 50% branches.
+  </div>
+</div>
+
+          <h4>Error guessing (Supposition d'erreurs)</h4>
+          <ul>
+            <li>Le testeur utilise son experience pour anticiper les erreurs, defauts et defaillances</li>
+            <li>Base sur : defauts passes, erreurs typiques des developpeurs, types de defaillances connues</li>
+            <li>Cree des "listes de bugs" ou "attaques" (taxonomies de defauts)</li>
+          </ul>
+          <div class="fiche-highlight">Error guessing n'anticipe PAS les causes racines ! Il anticipe les erreurs, defauts et defaillances.</div>
+
+          <h4>Test exploratoire</h4>
+          <ul>
+            <li>Conception, execution et evaluation des tests simultanement</li>
+            <li>Utilise des chartes de test (session-based)</li>
+            <li>Peut utiliser des techniques boite noire pendant l'exploration</li>
+            <li>Ideal quand les specifications sont limitees ou le temps est court</li>
+          </ul>
+          <div class="fiche-highlight">Le test exploratoire ne permet PAS de predire de maniere fiable le nombre de defauts restants (pas de metriques de couverture formelles).</div>
+
+          <h4>Test base sur des checklists</h4>
+          <p>Le testeur utilise une liste de conditions a verifier. Les checklists sont construites a partir de l'experience, des standards, ou des defauts connus. La couverture peut etre imprecise car les items sont souvent a un niveau d'abstraction eleve.</p>
+
+          <h4>User stories : Card, Conversation, Confirmation</h4>
+          <ul>
+            <li><strong>Card :</strong> Support physique ou numerique decrivant la user story</li>
+            <li><strong>Conversation :</strong> Echanges entre equipe pour clarifier les details</li>
+            <li><strong>Confirmation :</strong> Criteres d'acceptation utilises pour confirmer que la story est complete</li>
+          </ul>
+          <p>Collaboration pour comprendre ce qui doit etre livre : les user stories sont creees ENSEMBLE par representants metier, developpeurs et testeurs.</p>
+
+          <h4>Criteres d'acceptation : INVEST et Given/When/Then</h4>
+          <ul>
+            <li><strong>INVEST :</strong> Independent, Negotiable, Valuable, Estimable, Small, Testable</li>
+            <li><strong>Given/When/Then :</strong> Given [contexte initial], When [action], Then [resultat attendu]</li>
+          </ul>
+
+  </div>
+
+  <!-- TAB: Flashcards -->
+  <div id="chTab-flashcards" style="display:none;">
+    <div id="fcArea"></div>
+  </div>
+
+  <!-- TAB: Tutos -->
+  <div id="chTab-tutos" style="display:none;">
+    <div id="tutoArea"></div>
+  </div>
+
+  <!-- TAB: Quiz -->
+  <div id="chTab-quiz" style="display:none;">
+    <div style="text-align:center;padding:40px;">
+      <h3>Teste-toi sur le Chapitre 4</h3>
+      <p style="color:#64748b;margin-bottom:20px;">10 questions aleatoires de ce chapitre, 15 minutes.</p>
+      <button class="btn-start" onclick="startChapterQuiz()" style="background:#2563eb;color:white;border:none;padding:14px 32px;border-radius:10px;font-size:1rem;font-weight:600;cursor:pointer;">Lancer le quiz</button>
+    </div>
+  </div>
+
+  <!-- Voir aussi -->
+  <div style="margin-top:30px;" class="fiche-seealso">
+    <strong>Voir aussi :</strong>
+    <a href="chapitre2.html">Ch.2 - Test dans le cycle de vie</a> |
+    <a href="chapitre5.html">Ch.5 - Gestion des tests</a> |
+    <a href="chapitre1.html">Ch.1 - Fondamentaux du test</a>
+  </div>
+
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/shared.js"></script>
+<script src="js/storage.js"></script>
+<script>
+const CURRENT_CHAPTER = 4;
+function switchChapterTab(id, btn) { ['cours','flashcards','tutos','quiz'].forEach(function(t) { document.getElementById('chTab-' + t).style.display = t === id ? 'block' : 'none'; }); document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); }); btn.classList.add('active'); if (id === 'flashcards' && !window._fcInit) { initChapterFlashcards(); window._fcInit = true; } if (id === 'tutos' && !window._tutoInit) { initChapterTutos(); window._tutoInit = true; } }
+function startChapterQuiz() { window.location.href = 'istqb_platform.html?quiz=ch' + CURRENT_CHAPTER; }
+function initChapterFlashcards() {
+  var cards = FLASHCARDS.filter(function(c) { return c.ch === CURRENT_CHAPTER; });
+  if (cards.length === 0) { document.getElementById('fcArea').innerHTML = '<p style="text-align:center;color:#94a3b8;padding:40px;">Aucune flashcard pour ce chapitre.</p>'; return; }
+  var deck = shuffle([].concat(cards)); var known = new Set(); var idx = 0;
+  function render() {
+    if (deck.length === 0) { document.getElementById('fcArea').innerHTML = '<div class="tuto-congrats"><h4>Toutes les cartes sont maitrisees !</h4><button class="tuto-reset" onclick="location.reload()">Recommencer</button></div>'; return; }
+    var card = deck[idx]; var mastered = known.size;
+    document.getElementById('fcArea').innerHTML = '<div style="text-align:center;margin-bottom:16px;"><div class="progress-bar" style="max-width:400px;margin:0 auto;"><div class="progress-fill" style="width:' + Math.round(mastered/cards.length*100) + '%;background:#16a34a;"></div></div><div style="font-size:0.8rem;color:#94a3b8;margin-top:6px;">' + mastered + '/' + cards.length + ' maitrisees</div></div><div style="max-width:500px;margin:0 auto;cursor:pointer;perspective:600px;" onclick="this.querySelector(\'.fc-inner\').classList.toggle(\'fc-flipped\')"><div class="fc-inner" style="position:relative;min-height:200px;transition:transform 0.5s;transform-style:preserve-3d;"><div style="position:absolute;width:100%;backface-visibility:hidden;background:white;border-radius:16px;padding:32px;box-shadow:0 2px 12px rgba(0,0,0,0.08);text-align:center;"><div style="font-size:0.8rem;color:#94a3b8;margin-bottom:12px;">Question</div><div style="font-size:1.1rem;font-weight:600;">' + card.front + '</div></div><div style="position:absolute;width:100%;backface-visibility:hidden;transform:rotateY(180deg);background:#f0fdf4;border-radius:16px;padding:32px;box-shadow:0 2px 12px rgba(0,0,0,0.08);text-align:center;"><div style="font-size:0.8rem;color:#94a3b8;margin-bottom:12px;">Reponse</div><div style="font-size:1rem;">' + card.back + '</div></div></div></div><div style="display:flex;gap:12px;justify-content:center;margin-top:20px;"><button class="btn" style="background:#16a34a;color:white;" onclick="fcKnowCh()">Je sais</button><button class="btn" style="background:#f59e0b;color:white;" onclick="fcReviewCh()">A revoir</button></div>';
+  }
+  window.fcKnowCh = function() { known.add(deck[idx].front); deck.splice(idx, 1); if (idx >= deck.length) idx = 0; render(); };
+  window.fcReviewCh = function() { var card = deck.splice(idx, 1)[0]; var insertAt = Math.min(idx + 3, deck.length); deck.splice(insertAt, 0, card); if (idx >= deck.length) idx = 0; render(); };
+  render();
+}
+function initChapterTutos() {
+  var tutos = TUTORIALS.filter(function(t) { return t.chapter === CURRENT_CHAPTER; });
+  if (tutos.length === 0) { document.getElementById('tutoArea').innerHTML = '<p style="text-align:center;color:#94a3b8;padding:40px;">Aucun tuto pour ce chapitre.</p>'; return; }
+  var html = '';
+  tutos.forEach(function(tuto) { html += '<div class="tuto-card" id="tuto-' + tuto.id + '"><h3>' + tuto.title + '</h3><div class="tuto-desc">' + tuto.steps.length + ' etapes | ' + tuto.desc + '</div><div class="tuto-scenario">' + tuto.scenario.replace(/\n/g, '<br>') + '</div><div class="tuto-progress" id="tuto-progress-' + tuto.id + '"></div><div id="tuto-steps-' + tuto.id + '"></div><div id="tuto-congrats-' + tuto.id + '"></div><button class="tuto-reset" onclick="resetTuto(\'' + tuto.id + '\')">Recommencer cet exercice</button></div>'; });
+  document.getElementById('tutoArea').innerHTML = html;
+  tutos.forEach(function(tuto) { renderTutoSteps(tuto, loadTutoState(tuto.id)); });
+}
+function resetTuto(tutoId) { localStorage.removeItem('istqb_tuto_' + tutoId); initChapterTutos(); }
+function renderTutoSteps(tuto, state) {
+  var completedSteps = state.completed || []; var currentStep = completedSteps.length; var allDone = currentStep >= tuto.steps.length;
+  var progHtml = ''; tuto.steps.forEach(function(_, i) { var cls = 'tuto-progress-dot'; if (i < currentStep) cls += ' done'; else if (i === currentStep) cls += ' current'; progHtml += '<div class="' + cls + '"></div>'; }); document.getElementById('tuto-progress-' + tuto.id).innerHTML = progHtml;
+  var stepsHtml = '';
+  tuto.steps.forEach(function(step, i) {
+    var stepCls = 'tuto-step'; if (i < currentStep) stepCls += ' correct'; else if (i === currentStep) stepCls += ' active'; else stepCls += ' locked';
+    stepsHtml += '<div class="' + stepCls + '" id="tuto-step-' + tuto.id + '-' + i + '"><div class="tuto-step-header"><div class="tuto-step-num">' + (i < currentStep ? '&#10003;' : i + 1) + '</div><div class="tuto-step-title">' + step.q + '</div></div>';
+    if (i <= currentStep) {
+      if (step.type === 'input') { var prevAnswer = i < currentStep ? (state.answers && state.answers[i]) || '' : ''; stepsHtml += '<div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;"><input class="tuto-input" id="tuto-input-' + tuto.id + '-' + i + '" value="' + prevAnswer + '"' + (i < currentStep ? ' disabled' : '') + ' placeholder="Votre reponse" onkeydown="if(event.key===\'Enter\')checkTutoStep(\'' + tuto.id + '\',' + i + ')"></' + (i === currentStep ? '<button class="tuto-btn-check" onclick="checkTutoStep(\'' + tuto.id + '\',' + i + ')">Verifier</button>' : '') + (step.hint && i === currentStep ? '<div style="font-size:0.8rem;color:#94a3b8;margin-top:4px;width:100%;"><em>Indice : ' + step.hint + '</em></div>' : '') + '</div>'; }
+      else if (step.type === 'options') { stepsHtml += '<div class="tuto-options">'; step.options.forEach(function(opt) { var optCls = 'tuto-opt'; if (i < currentStep) { if (opt === step.answer) optCls += ' correct-opt'; else if (state.answers && state.answers[i] === opt && opt !== step.answer) optCls += ' wrong-opt'; } var disabled = i < currentStep ? ' style="pointer-events:none;"' : ''; stepsHtml += '<div class="' + optCls + '"' + disabled + ' onclick="selectTutoOpt(\'' + tuto.id + '\',' + i + ',this,\'' + opt.replace(/'/g, "\\'") + '\')">' + opt + '</div>'; }); stepsHtml += '</div>'; if (i === currentStep) stepsHtml += '<button class="tuto-btn-check" onclick="checkTutoStep(\'' + tuto.id + '\',' + i + ')" style="margin-top:8px;">Verifier</button>'; }
+      else if (step.type === 'multi') { stepsHtml += '<div class="tuto-options" id="tuto-multi-' + tuto.id + '-' + i + '">'; step.options.forEach(function(opt) { var optCls = 'tuto-opt'; if (i < currentStep) { if (step.answer.includes(opt)) optCls += ' correct-opt'; else if (state.answers && state.answers[i] && state.answers[i].includes(opt)) optCls += ' wrong-opt'; } var disabled = i < currentStep ? ' style="pointer-events:none;"' : ''; stepsHtml += '<div class="' + optCls + '"' + disabled + ' onclick="toggleTutoMulti(this)">' + opt + '</div>'; }); stepsHtml += '</div>'; if (i === currentStep) { stepsHtml += '<div style="font-size:0.8rem;color:#94a3b8;margin-top:4px;"><em>Selectionnez 2 reponses puis cliquez Verifier.</em></div><button class="tuto-btn-check" onclick="checkTutoStep(\'' + tuto.id + '\',' + i + ')" style="margin-top:8px;">Verifier</button>'; } }
+      if (i < currentStep) { var wasCorrectFirst = state.firstTry && state.firstTry[i]; stepsHtml += '<div class="tuto-feedback show ok">' + (wasCorrectFirst ? step.feedback_ok : step.feedback_ko) + '</div>'; }
+      else { stepsHtml += '<div class="tuto-feedback" id="tuto-fb-' + tuto.id + '-' + i + '"></div>'; }
+    }
+    stepsHtml += '</div>';
+  });
+  document.getElementById('tuto-steps-' + tuto.id).innerHTML = stepsHtml;
+  if (allDone) { var firstTryCount = state.firstTry ? Object.values(state.firstTry).filter(function(v) { return v; }).length : 0; document.getElementById('tuto-congrats-' + tuto.id).innerHTML = '<div class="tuto-congrats"><h4>Exercice termine !</h4><p>' + firstTryCount + '/' + tuto.steps.length + ' reponses correctes du premier coup.</p>' + (firstTryCount === tuto.steps.length ? '<p style="color:#16a34a;font-weight:700;">Parfait !</p>' : '<p style="color:#f59e0b;">Recommencez pour viser le sans-faute !</p>') + '</div>'; }
+  else { document.getElementById('tuto-congrats-' + tuto.id).innerHTML = ''; }
+}
+function selectTutoOpt(tutoId, stepIdx, el, value) { el.parentNode.querySelectorAll('.tuto-opt').forEach(function(o) { o.classList.remove('selected'); }); el.classList.add('selected'); el.dataset.value = value; }
+function toggleTutoMulti(el) { el.classList.toggle('selected'); }
+function checkTutoStep(tutoId, stepIdx) {
+  var tuto = TUTORIALS.find(function(t) { return t.id === tutoId; }); var step = tuto.steps[stepIdx]; var state = loadTutoState(tutoId);
+  if (!state.completed) state.completed = []; if (!state.answers) state.answers = {}; if (!state.firstTry) state.firstTry = {};
+  var userAnswer, isCorrect = false;
+  if (step.type === 'input') { var input = document.getElementById('tuto-input-' + tutoId + '-' + stepIdx); userAnswer = input.value.trim(); isCorrect = userAnswer === step.answer; }
+  else if (step.type === 'options') { var selected = document.querySelector('#tuto-step-' + tutoId + '-' + stepIdx + ' .tuto-opt.selected'); userAnswer = selected ? selected.textContent.trim() : ''; isCorrect = userAnswer === step.answer; }
+  else if (step.type === 'multi') { var selectedEls = document.querySelectorAll('#tuto-multi-' + tutoId + '-' + stepIdx + ' .tuto-opt.selected'); userAnswer = Array.from(selectedEls).map(function(el) { return el.textContent.trim(); }); isCorrect = userAnswer.length === step.answer.length && step.answer.every(function(a) { return userAnswer.includes(a); }); }
+  var fb = document.getElementById('tuto-fb-' + tutoId + '-' + stepIdx);
+  if (isCorrect) { state.answers[stepIdx] = userAnswer; if (state.firstTry[stepIdx] === undefined) state.firstTry[stepIdx] = true; state.completed.push(stepIdx); saveTutoState(tutoId, state); renderTutoSteps(tuto, state); var nextStep = document.getElementById('tuto-step-' + tutoId + '-' + (stepIdx + 1)); if (nextStep) setTimeout(function() { nextStep.scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 200); }
+  else { if (state.firstTry[stepIdx] === undefined) state.firstTry[stepIdx] = false; saveTutoState(tutoId, state); fb.className = 'tuto-feedback show ko'; fb.innerHTML = step.feedback_ko; if (step.type === 'options') { document.querySelectorAll('#tuto-step-' + tutoId + '-' + stepIdx + ' .tuto-opt').forEach(function(o) { if (o.textContent.trim() === step.answer) o.classList.add('correct-opt'); else if (o.classList.contains('selected')) o.classList.add('wrong-opt'); }); } }
+}
+</script>
+</body>
+</html>

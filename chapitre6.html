@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ISTQB CTFL - Chapitre 6 - Outils de test</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="header">
+  <h1>Chapitre 6 - Outils de test</h1>
+  <a href="istqb_platform.html" class="btn-back" style="text-decoration:none;">&#8592; Retour a la plateforme</a>
+</div>
+
+<div class="home-screen" style="max-width:960px;margin:0 auto;padding:24px;">
+
+  <div class="tabs" style="max-width:600px;margin:0 auto 24px;">
+    <button class="tab-btn active" onclick="switchChapterTab('cours',this)">Cours</button>
+    <button class="tab-btn" onclick="switchChapterTab('flashcards',this)">Flashcards</button>
+    <button class="tab-btn" onclick="switchChapterTab('tutos',this)">Tutos</button>
+    <button class="tab-btn" onclick="switchChapterTab('quiz',this)">Quiz</button>
+  </div>
+
+  <!-- TAB: Cours -->
+  <div id="chTab-cours">
+
+          <h4>Categories d'outils</h4>
+          <table>
+            <tr><th>Categorie</th><th>Exemples</th></tr>
+            <tr><td>Gestion de test</td><td>ALM, JIRA, TestRail, gestion des defauts, gestion de configuration</td></tr>
+            <tr><td>Test statique</td><td>Analyseurs statiques (SonarQube, lint), outils de revue</td></tr>
+            <tr><td>Conception et implementation</td><td>Outils de modelisation, preparation de donnees de test, BDD (Cucumber)</td></tr>
+            <tr><td>Execution et couverture</td><td>Frameworks de test unitaire (JUnit, NUnit), outils de couverture de code</td></tr>
+            <tr><td>Non-fonctionnel</td><td>Outils de performance (JMeter), securite (OWASP ZAP)</td></tr>
+            <tr><td>DevOps / CI-CD</td><td>Jenkins, GitLab CI, outils d'automatisation de build/deploy</td></tr>
+            <tr><td>Collaboration</td><td>Outils de gestion d'exigences, wikis, tableaux de bord</td></tr>
+          </table>
+          <div class="fiche-diagram">
+            <svg viewBox="0 0 520 380" xmlns="http://www.w3.org/2000/svg" style="max-width:520px;width:100%">
+              <line x1="260" y1="190" x2="260" y2="45" stroke="#94a3b8" stroke-width="1.5"/>
+              <line x1="260" y1="190" x2="95" y2="90" stroke="#94a3b8" stroke-width="1.5"/>
+              <line x1="260" y1="190" x2="425" y2="90" stroke="#94a3b8" stroke-width="1.5"/>
+              <line x1="260" y1="190" x2="50" y2="200" stroke="#94a3b8" stroke-width="1.5"/>
+              <line x1="260" y1="190" x2="470" y2="200" stroke="#94a3b8" stroke-width="1.5"/>
+              <line x1="260" y1="190" x2="110" y2="315" stroke="#94a3b8" stroke-width="1.5"/>
+              <line x1="260" y1="190" x2="410" y2="315" stroke="#94a3b8" stroke-width="1.5"/>
+              <circle cx="260" cy="190" r="45" fill="#2563eb"/>
+              <text x="260" y="185" text-anchor="middle" font-size="11" fill="white" font-weight="bold">Outils</text>
+              <text x="260" y="200" text-anchor="middle" font-size="11" fill="white" font-weight="bold">de test</text>
+              <rect x="205" y="20" width="110" height="32" rx="10" fill="#0d9488"/>
+              <text x="260" y="41" text-anchor="middle" font-size="11" fill="white" font-weight="bold">Gestion</text>
+              <rect x="30" y="68" width="110" height="32" rx="10" fill="#7c3aed"/>
+              <text x="85" y="89" text-anchor="middle" font-size="11" fill="white" font-weight="bold">Statique</text>
+              <rect x="370" y="68" width="110" height="32" rx="10" fill="#2563eb"/>
+              <text x="425" y="89" text-anchor="middle" font-size="11" fill="white" font-weight="bold">Conception</text>
+              <rect x="0" y="184" width="110" height="32" rx="10" fill="#16a34a"/>
+              <text x="55" y="205" text-anchor="middle" font-size="11" fill="white" font-weight="bold">Execution</text>
+              <rect x="405" y="184" width="115" height="32" rx="10" fill="#f59e0b"/>
+              <text x="462" y="205" text-anchor="middle" font-size="10" fill="white" font-weight="bold">Non-fonctionnel</text>
+              <rect x="50" y="300" width="110" height="32" rx="10" fill="#dc2626"/>
+              <text x="105" y="321" text-anchor="middle" font-size="11" fill="white" font-weight="bold">DevOps</text>
+              <rect x="350" y="300" width="120" height="32" rx="10" fill="#ec4899"/>
+              <text x="410" y="321" text-anchor="middle" font-size="11" fill="white" font-weight="bold">Collaboration</text>
+            </svg>
+          </div>
+
+          <h4>Outils facilitant l'execution des tests</h4>
+          <p>Les outils DevOps/CI-CD et les outils non-fonctionnels facilitent particulierement l'execution des tests en permettant l'automatisation de l'execution et du reporting.</p>
+
+          <h4>Avantages de l'automatisation</h4>
+          <ul>
+            <li>Execution plus rapide des tests repetitifs</li>
+            <li>Plus grande couverture de test possible</li>
+            <li>Moins d'erreurs humaines dans l'execution</li>
+            <li>Metriques de couverture objectives et mesurables</li>
+            <li>Feedback plus rapide aux developpeurs</li>
+            <li>Reduction du temps d'execution des tests de regression</li>
+          </ul>
+
+          <h4>Risques de l'automatisation</h4>
+          <ul>
+            <li>Attentes irrealistes (l'automatisation ne remplace pas tout le test manuel)</li>
+            <li>Sous-estimation de l'effort de maintenance des scripts</li>
+            <li>Incompatibilite avec certaines plateformes ou technologies</li>
+            <li>Faux sentiment de securite (les tests automatises peuvent manquer des defauts)</li>
+            <li>Competences techniques requises pour l'equipe</li>
+            <li>Dependance a un outil specifique (vendor lock-in)</li>
+          </ul>
+
+  </div>
+
+  <!-- TAB: Flashcards -->
+  <div id="chTab-flashcards" style="display:none;">
+    <div id="fcArea"></div>
+  </div>
+
+  <!-- TAB: Tutos -->
+  <div id="chTab-tutos" style="display:none;">
+    <div id="tutoArea"></div>
+  </div>
+
+  <!-- TAB: Quiz -->
+  <div id="chTab-quiz" style="display:none;">
+    <div style="text-align:center;padding:40px;">
+      <h3>Teste-toi sur le Chapitre 6</h3>
+      <p style="color:#64748b;margin-bottom:20px;">10 questions aleatoires de ce chapitre, 15 minutes.</p>
+      <button class="btn-start" onclick="startChapterQuiz()" style="background:#2563eb;color:white;border:none;padding:14px 32px;border-radius:10px;font-size:1rem;font-weight:600;cursor:pointer;">Lancer le quiz</button>
+    </div>
+  </div>
+
+  <!-- Voir aussi -->
+  <div style="margin-top:30px;" class="fiche-seealso">
+    <strong>Voir aussi :</strong>
+    <a href="chapitre4.html">Ch.4 - Techniques de test</a> |
+    <a href="chapitre5.html">Ch.5 - Gestion des tests</a> |
+    <a href="chapitre2.html">Ch.2 - Test dans le cycle de vie</a>
+  </div>
+
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/shared.js"></script>
+<script src="js/storage.js"></script>
+<script>
+const CURRENT_CHAPTER = 6;
+function switchChapterTab(id, btn) { ['cours','flashcards','tutos','quiz'].forEach(function(t) { document.getElementById('chTab-' + t).style.display = t === id ? 'block' : 'none'; }); document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); }); btn.classList.add('active'); if (id === 'flashcards' && !window._fcInit) { initChapterFlashcards(); window._fcInit = true; } if (id === 'tutos' && !window._tutoInit) { initChapterTutos(); window._tutoInit = true; } }
+function startChapterQuiz() { window.location.href = 'istqb_platform.html?quiz=ch' + CURRENT_CHAPTER; }
+function initChapterFlashcards() {
+  var cards = FLASHCARDS.filter(function(c) { return c.ch === CURRENT_CHAPTER; });
+  if (cards.length === 0) { document.getElementById('fcArea').innerHTML = '<p style="text-align:center;color:#94a3b8;padding:40px;">Aucune flashcard pour ce chapitre.</p>'; return; }
+  var deck = shuffle([].concat(cards)); var known = new Set(); var idx = 0;
+  function render() {
+    if (deck.length === 0) { document.getElementById('fcArea').innerHTML = '<div class="tuto-congrats"><h4>Toutes les cartes sont maitrisees !</h4><button class="tuto-reset" onclick="location.reload()">Recommencer</button></div>'; return; }
+    var card = deck[idx]; var mastered = known.size;
+    document.getElementById('fcArea').innerHTML = '<div style="text-align:center;margin-bottom:16px;"><div class="progress-bar" style="max-width:400px;margin:0 auto;"><div class="progress-fill" style="width:' + Math.round(mastered/cards.length*100) + '%;background:#16a34a;"></div></div><div style="font-size:0.8rem;color:#94a3b8;margin-top:6px;">' + mastered + '/' + cards.length + ' maitrisees</div></div><div style="max-width:500px;margin:0 auto;cursor:pointer;perspective:600px;" onclick="this.querySelector(\'.fc-inner\').classList.toggle(\'fc-flipped\')"><div class="fc-inner" style="position:relative;min-height:200px;transition:transform 0.5s;transform-style:preserve-3d;"><div style="position:absolute;width:100%;backface-visibility:hidden;background:white;border-radius:16px;padding:32px;box-shadow:0 2px 12px rgba(0,0,0,0.08);text-align:center;"><div style="font-size:0.8rem;color:#94a3b8;margin-bottom:12px;">Question</div><div style="font-size:1.1rem;font-weight:600;">' + card.front + '</div></div><div style="position:absolute;width:100%;backface-visibility:hidden;transform:rotateY(180deg);background:#f0fdf4;border-radius:16px;padding:32px;box-shadow:0 2px 12px rgba(0,0,0,0.08);text-align:center;"><div style="font-size:0.8rem;color:#94a3b8;margin-bottom:12px;">Reponse</div><div style="font-size:1rem;">' + card.back + '</div></div></div></div><div style="display:flex;gap:12px;justify-content:center;margin-top:20px;"><button class="btn" style="background:#16a34a;color:white;" onclick="fcKnowCh()">Je sais</button><button class="btn" style="background:#f59e0b;color:white;" onclick="fcReviewCh()">A revoir</button></div>';
+  }
+  window.fcKnowCh = function() { known.add(deck[idx].front); deck.splice(idx, 1); if (idx >= deck.length) idx = 0; render(); };
+  window.fcReviewCh = function() { var card = deck.splice(idx, 1)[0]; var insertAt = Math.min(idx + 3, deck.length); deck.splice(insertAt, 0, card); if (idx >= deck.length) idx = 0; render(); };
+  render();
+}
+function initChapterTutos() {
+  var tutos = TUTORIALS.filter(function(t) { return t.chapter === CURRENT_CHAPTER; });
+  if (tutos.length === 0) { document.getElementById('tutoArea').innerHTML = '<p style="text-align:center;color:#94a3b8;padding:40px;">Aucun tuto pour ce chapitre.</p>'; return; }
+  var html = '';
+  tutos.forEach(function(tuto) { html += '<div class="tuto-card" id="tuto-' + tuto.id + '"><h3>' + tuto.title + '</h3><div class="tuto-desc">' + tuto.steps.length + ' etapes | ' + tuto.desc + '</div><div class="tuto-scenario">' + tuto.scenario.replace(/\n/g, '<br>') + '</div><div class="tuto-progress" id="tuto-progress-' + tuto.id + '"></div><div id="tuto-steps-' + tuto.id + '"></div><div id="tuto-congrats-' + tuto.id + '"></div><button class="tuto-reset" onclick="resetTuto(\'' + tuto.id + '\')">Recommencer cet exercice</button></div>'; });
+  document.getElementById('tutoArea').innerHTML = html;
+  tutos.forEach(function(tuto) { renderTutoSteps(tuto, loadTutoState(tuto.id)); });
+}
+function resetTuto(tutoId) { localStorage.removeItem('istqb_tuto_' + tutoId); initChapterTutos(); }
+function renderTutoSteps(tuto, state) {
+  var completedSteps = state.completed || []; var currentStep = completedSteps.length; var allDone = currentStep >= tuto.steps.length;
+  var progHtml = ''; tuto.steps.forEach(function(_, i) { var cls = 'tuto-progress-dot'; if (i < currentStep) cls += ' done'; else if (i === currentStep) cls += ' current'; progHtml += '<div class="' + cls + '"></div>'; }); document.getElementById('tuto-progress-' + tuto.id).innerHTML = progHtml;
+  var stepsHtml = '';
+  tuto.steps.forEach(function(step, i) {
+    var stepCls = 'tuto-step'; if (i < currentStep) stepCls += ' correct'; else if (i === currentStep) stepCls += ' active'; else stepCls += ' locked';
+    stepsHtml += '<div class="' + stepCls + '" id="tuto-step-' + tuto.id + '-' + i + '"><div class="tuto-step-header"><div class="tuto-step-num">' + (i < currentStep ? '&#10003;' : i + 1) + '</div><div class="tuto-step-title">' + step.q + '</div></div>';
+    if (i <= currentStep) {
+      if (step.type === 'input') { var prevAnswer = i < currentStep ? (state.answers && state.answers[i]) || '' : ''; stepsHtml += '<div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;"><input class="tuto-input" id="tuto-input-' + tuto.id + '-' + i + '" value="' + prevAnswer + '"' + (i < currentStep ? ' disabled' : '') + ' placeholder="Votre reponse" onkeydown="if(event.key===\'Enter\')checkTutoStep(\'' + tuto.id + '\',' + i + ')">' + (i === currentStep ? '<button class="tuto-btn-check" onclick="checkTutoStep(\'' + tuto.id + '\',' + i + ')">Verifier</button>' : '') + (step.hint && i === currentStep ? '<div style="font-size:0.8rem;color:#94a3b8;margin-top:4px;width:100%;"><em>Indice : ' + step.hint + '</em></div>' : '') + '</div>'; }
+      else if (step.type === 'options') { stepsHtml += '<div class="tuto-options">'; step.options.forEach(function(opt) { var optCls = 'tuto-opt'; if (i < currentStep) { if (opt === step.answer) optCls += ' correct-opt'; else if (state.answers && state.answers[i] === opt && opt !== step.answer) optCls += ' wrong-opt'; } var disabled = i < currentStep ? ' style="pointer-events:none;"' : ''; stepsHtml += '<div class="' + optCls + '"' + disabled + ' onclick="selectTutoOpt(\'' + tuto.id + '\',' + i + ',this,\'' + opt.replace(/'/g, "\\'") + '\')">' + opt + '</div>'; }); stepsHtml += '</div>'; if (i === currentStep) stepsHtml += '<button class="tuto-btn-check" onclick="checkTutoStep(\'' + tuto.id + '\',' + i + ')" style="margin-top:8px;">Verifier</button>'; }
+      else if (step.type === 'multi') { stepsHtml += '<div class="tuto-options" id="tuto-multi-' + tuto.id + '-' + i + '">'; step.options.forEach(function(opt) { var optCls = 'tuto-opt'; if (i < currentStep) { if (step.answer.includes(opt)) optCls += ' correct-opt'; else if (state.answers && state.answers[i] && state.answers[i].includes(opt)) optCls += ' wrong-opt'; } var disabled = i < currentStep ? ' style="pointer-events:none;"' : ''; stepsHtml += '<div class="' + optCls + '"' + disabled + ' onclick="toggleTutoMulti(this)">' + opt + '</div>'; }); stepsHtml += '</div>'; if (i === currentStep) { stepsHtml += '<div style="font-size:0.8rem;color:#94a3b8;margin-top:4px;"><em>Selectionnez 2 reponses puis cliquez Verifier.</em></div><button class="tuto-btn-check" onclick="checkTutoStep(\'' + tuto.id + '\',' + i + ')" style="margin-top:8px;">Verifier</button>'; } }
+      if (i < currentStep) { var wasCorrectFirst = state.firstTry && state.firstTry[i]; stepsHtml += '<div class="tuto-feedback show ok">' + (wasCorrectFirst ? step.feedback_ok : step.feedback_ko) + '</div>'; }
+      else { stepsHtml += '<div class="tuto-feedback" id="tuto-fb-' + tuto.id + '-' + i + '"></div>'; }
+    }
+    stepsHtml += '</div>';
+  });
+  document.getElementById('tuto-steps-' + tuto.id).innerHTML = stepsHtml;
+  if (allDone) { var firstTryCount = state.firstTry ? Object.values(state.firstTry).filter(function(v) { return v; }).length : 0; document.getElementById('tuto-congrats-' + tuto.id).innerHTML = '<div class="tuto-congrats"><h4>Exercice termine !</h4><p>' + firstTryCount + '/' + tuto.steps.length + ' reponses correctes du premier coup.</p>' + (firstTryCount === tuto.steps.length ? '<p style="color:#16a34a;font-weight:700;">Parfait !</p>' : '<p style="color:#f59e0b;">Recommencez pour viser le sans-faute !</p>') + '</div>'; }
+  else { document.getElementById('tuto-congrats-' + tuto.id).innerHTML = ''; }
+}
+function selectTutoOpt(tutoId, stepIdx, el, value) { el.parentNode.querySelectorAll('.tuto-opt').forEach(function(o) { o.classList.remove('selected'); }); el.classList.add('selected'); el.dataset.value = value; }
+function toggleTutoMulti(el) { el.classList.toggle('selected'); }
+function checkTutoStep(tutoId, stepIdx) {
+  var tuto = TUTORIALS.find(function(t) { return t.id === tutoId; }); var step = tuto.steps[stepIdx]; var state = loadTutoState(tutoId);
+  if (!state.completed) state.completed = []; if (!state.answers) state.answers = {}; if (!state.firstTry) state.firstTry = {};
+  var userAnswer, isCorrect = false;
+  if (step.type === 'input') { var input = document.getElementById('tuto-input-' + tutoId + '-' + stepIdx); userAnswer = input.value.trim(); isCorrect = userAnswer === step.answer; }
+  else if (step.type === 'options') { var selected = document.querySelector('#tuto-step-' + tutoId + '-' + stepIdx + ' .tuto-opt.selected'); userAnswer = selected ? selected.textContent.trim() : ''; isCorrect = userAnswer === step.answer; }
+  else if (step.type === 'multi') { var selectedEls = document.querySelectorAll('#tuto-multi-' + tutoId + '-' + stepIdx + ' .tuto-opt.selected'); userAnswer = Array.from(selectedEls).map(function(el) { return el.textContent.trim(); }); isCorrect = userAnswer.length === step.answer.length && step.answer.every(function(a) { return userAnswer.includes(a); }); }
+  var fb = document.getElementById('tuto-fb-' + tutoId + '-' + stepIdx);
+  if (isCorrect) { state.answers[stepIdx] = userAnswer; if (state.firstTry[stepIdx] === undefined) state.firstTry[stepIdx] = true; state.completed.push(stepIdx); saveTutoState(tutoId, state); renderTutoSteps(tuto, state); var nextStep = document.getElementById('tuto-step-' + tutoId + '-' + (stepIdx + 1)); if (nextStep) setTimeout(function() { nextStep.scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 200); }
+  else { if (state.firstTry[stepIdx] === undefined) state.firstTry[stepIdx] = false; saveTutoState(tutoId, state); fb.className = 'tuto-feedback show ko'; fb.innerHTML = step.feedback_ko; if (step.type === 'options') { document.querySelectorAll('#tuto-step-' + tutoId + '-' + stepIdx + ' .tuto-opt').forEach(function(o) { if (o.textContent.trim() === step.answer) o.classList.add('correct-opt'); else if (o.classList.contains('selected')) o.classList.add('wrong-opt'); }); } }
+}
+</script>
+</body>
+</html>

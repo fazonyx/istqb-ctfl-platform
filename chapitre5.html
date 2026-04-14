@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ISTQB CTFL - Chapitre 5 - Gestion des tests</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="header">
+  <h1>Chapitre 5 - Gestion des tests</h1>
+  <a href="istqb_platform.html" class="btn-back" style="text-decoration:none;">&#8592; Retour a la plateforme</a>
+</div>
+
+<div class="home-screen" style="max-width:960px;margin:0 auto;padding:24px;">
+
+  <div class="tabs" style="max-width:600px;margin:0 auto 24px;">
+    <button class="tab-btn active" onclick="switchChapterTab('cours',this)">Cours</button>
+    <button class="tab-btn" onclick="switchChapterTab('flashcards',this)">Flashcards</button>
+    <button class="tab-btn" onclick="switchChapterTab('tutos',this)">Tutos</button>
+    <button class="tab-btn" onclick="switchChapterTab('quiz',this)">Quiz</button>
+  </div>
+
+  <!-- TAB: Cours -->
+  <div id="chTab-cours">
+
+          <h4>Plan de test : contenu</h4>
+          <ul>
+            <li>Contexte du test (portee, objectifs, contraintes)</li>
+            <li>Approche de test (niveaux, types, techniques, criteres, metriques)</li>
+            <li>Communication (qui recoit quels rapports, frequence)</li>
+            <li>Registre des risques</li>
+            <li>Calendrier, budget, ressources</li>
+          </ul>
+
+          <h4>Criteres d'entree vs Criteres de sortie</h4>
+          <table>
+            <tr><th>Criteres d'entree (avant de commencer)</th><th>Criteres de sortie (pour terminer)</th></tr>
+            <tr><td>Disponibilite de l'environnement de test</td><td>Niveau de couverture atteint (exigences, code)</td></tr>
+            <tr><td>Disponibilite des outils de test</td><td>Densite de defauts estimee atteinte</td></tr>
+            <tr><td>Code testable disponible</td><td>Nombre de defauts non corriges dans les limites</td></tr>
+            <tr><td>Donnees de test disponibles</td><td>Tests de regression automatises passes</td></tr>
+            <tr><td>Base de test disponible et revue</td><td>Budget/temps ecoule</td></tr>
+          </table>
+          <div class="fiche-highlight">En Agile, les criteres d'entree s'appellent "Definition of Ready" et les criteres de sortie "Definition of Done".</div>
+
+          <h4>Techniques d'estimation</h4>
+          <table>
+            <tr><th>Technique</th><th>Description</th></tr>
+            <tr><td>Estimation basee sur les ratios</td><td>Utilise un ratio standard (ex: 1 jour de dev = 0.5 jour de test)</td></tr>
+            <tr><td>Estimation a 3 points</td><td>Formule : E = (a + 4m + b) / 6 (a=optimiste, m=probable, b=pessimiste)</td></tr>
+            <tr><td>Planning poker (consensus)</td><td>Chaque membre estime independamment, puis discussion jusqu'au consensus</td></tr>
+          </table>
+          <div class="fiche-chain">E = (optimiste + 4 x plus probable + pessimiste) / 6</div>
+<div class="fiche-method">
+  <h5>Comment calculer l'estimation 3 points</h5>
+  <ol>
+    <li><strong>Identifier</strong> les 3 valeurs : a (optimiste), m (plus probable), b (pessimiste)</li>
+    <li><strong>Appliquer la formule :</strong> E = (a + 4&#215;m + b) / 6</li>
+    <li><strong>Multiplier</strong> par le nombre d'elements (cas de test, taches, etc.)</li>
+  </ol>
+  <div class="method-example">
+    <strong>Exemple :</strong> Meilleur cas = 1h, probable = 3h, pire = 8h.<br>
+    E = (1 + 4&#215;3 + 8) / 6 = (1 + 12 + 8) / 6 = 21 / 6 = 3.5h par cas de test.<br>
+    Pour 4 cas de test : 3.5 &#215; 4 = <strong>14 heures</strong>.
+  </div>
+  <div class="fiche-trap">
+    <strong>Piege :</strong> N'oublie pas de multiplier par le nombre d'elements ! L'erreur classique est de donner 3.5h (un seul cas) au lieu de 14h (les 4).
+  </div>
+</div>
+
+          <h4>Priorisation des cas de test</h4>
+          <ul>
+            <li><strong>Basee sur le risque :</strong> tester d'abord les cas a haut risque</li>
+            <li><strong>Couverture additionnelle :</strong> choisir les cas qui augmentent le plus la couverture</li>
+            <li><strong>Basee sur les exigences :</strong> prioriser selon l'importance des exigences</li>
+          </ul>
+
+          <h4>Pyramide de test</h4>
+          <ul>
+            <li>Base (beaucoup) : Tests unitaires / composants (rapides, peu couteux, automatises)</li>
+            <li>Milieu (moyen) : Tests d'integration (API, services)</li>
+            <li>Sommet (peu) : Tests UI / systeme / end-to-end (lents, couteux)</li>
+          </ul>
+          <p>Plus on monte dans la pyramide, moins il y a de tests mais plus ils sont couteux et lents.</p>
+          <div class="fiche-diagram">
+            <svg viewBox="0 0 600 250" xmlns="http://www.w3.org/2000/svg" style="max-width:600px;width:100%">
+              <polygon points="120,220 480,220 420,150 180,150" fill="#16a34a"/>
+              <text x="300" y="193" text-anchor="middle" font-size="14" fill="white" font-weight="bold">Tests composants</text>
+              <polygon points="180,150 420,150 360,80 240,80" fill="#f59e0b"/>
+              <text x="300" y="123" text-anchor="middle" font-size="13" fill="white" font-weight="bold">Tests integration</text>
+              <polygon points="240,80 360,80 300,20" fill="#dc2626"/>
+              <text x="300" y="62" text-anchor="middle" font-size="11" fill="white" font-weight="bold">Tests UI / E2E</text>
+              <line x1="70" y1="210" x2="70" y2="30" stroke="#64748b" stroke-width="2" marker-end="url(#arrowPyr)"/>
+              <defs>
+                <marker id="arrowPyr" viewBox="0 0 10 7" refX="5" refY="3.5" markerWidth="8" markerHeight="6" orient="auto">
+                  <polygon points="0 0, 10 3.5, 0 7" fill="#64748b"/>
+                </marker>
+              </defs>
+              <text x="60" y="120" text-anchor="middle" font-size="10" fill="#64748b" transform="rotate(-90,60,120)">Moins nombreux, plus lents, plus chers</text>
+              <line x1="530" y1="30" x2="530" y2="210" stroke="#64748b" stroke-width="2" marker-end="url(#arrowPyr)"/>
+              <text x="540" y="120" text-anchor="middle" font-size="10" fill="#64748b" transform="rotate(90,540,120)">Plus nombreux, plus rapides, moins chers</text>
+            </svg>
+          </div>
+
+          <h4>Quadrants de test</h4>
+          <table>
+            <tr><th></th><th>Soutien equipe (support)</th><th>Critique produit</th></tr>
+            <tr><td>Technologie</td><td>Q1: Tests unitaires, tests de composants</td><td>Q4: Tests de performance, securite, fiabilite</td></tr>
+            <tr><td>Metier</td><td>Q2: Tests fonctionnels, tests d'acceptation</td><td>Q3: Tests exploratoires, utilisabilite, alpha/beta</td></tr>
+          </table>
+          <div class="fiche-diagram">
+            <svg viewBox="0 0 460 320" xmlns="http://www.w3.org/2000/svg" style="max-width:460px;width:100%">
+              <text x="25" y="260" text-anchor="middle" font-size="11" fill="#64748b" font-weight="bold" transform="rotate(-90,25,260)">Technologie</text>
+              <text x="25" y="100" text-anchor="middle" font-size="11" fill="#64748b" font-weight="bold" transform="rotate(-90,25,100)">Metier</text>
+              <text x="155" y="310" text-anchor="middle" font-size="11" fill="#64748b" font-weight="bold">Soutien equipe</text>
+              <text x="355" y="310" text-anchor="middle" font-size="11" fill="#64748b" font-weight="bold">Critique produit</text>
+              <rect x="55" y="160" width="190" height="120" rx="8" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
+              <text x="150" y="200" text-anchor="middle" font-size="16" fill="#1e40af" font-weight="bold">Q1</text>
+              <text x="150" y="220" text-anchor="middle" font-size="11" fill="#1e40af">Unitaire</text>
+              <text x="150" y="236" text-anchor="middle" font-size="11" fill="#1e40af">Composant</text>
+              <rect x="55" y="30" width="190" height="120" rx="8" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
+              <text x="150" y="70" text-anchor="middle" font-size="16" fill="#166534" font-weight="bold">Q2</text>
+              <text x="150" y="90" text-anchor="middle" font-size="11" fill="#166534">Fonctionnel</text>
+              <text x="150" y="106" text-anchor="middle" font-size="11" fill="#166534">Acceptation</text>
+              <rect x="255" y="30" width="190" height="120" rx="8" fill="#fed7aa" stroke="#fdba74" stroke-width="1.5"/>
+              <text x="350" y="70" text-anchor="middle" font-size="16" fill="#92400e" font-weight="bold">Q3</text>
+              <text x="350" y="90" text-anchor="middle" font-size="11" fill="#92400e">Exploratoire</text>
+              <text x="350" y="106" text-anchor="middle" font-size="11" fill="#92400e">Utilisabilite</text>
+              <rect x="255" y="160" width="190" height="120" rx="8" fill="#fee2e2" stroke="#fca5a5" stroke-width="1.5"/>
+              <text x="350" y="200" text-anchor="middle" font-size="16" fill="#991b1b" font-weight="bold">Q4</text>
+              <text x="350" y="220" text-anchor="middle" font-size="11" fill="#991b1b">Performance</text>
+              <text x="350" y="236" text-anchor="middle" font-size="11" fill="#991b1b">Securite</text>
+            </svg>
+          </div>
+
+          <h4>Gestion des risques</h4>
+          <div class="fiche-chain">Risque = Probabilite x Impact</div>
+<div class="fiche-method">
+  <h5>Comment calculer le risque</h5>
+  <ol>
+    <li><strong>Formule :</strong> Niveau de risque = Probabilite &#215; Impact</li>
+    <li>Si on te donne le niveau et la probabilite &#8594; <strong>Impact = Niveau / Probabilite</strong></li>
+    <li>Si on te donne le niveau et l'impact &#8594; <strong>Probabilite = Niveau / Impact</strong></li>
+  </ol>
+  <div class="method-example">
+    <strong>Exemple :</strong> Niveau = 1000$, Probabilite = 50% (= 0.5).<br>
+    Impact = 1000 / 0.5 = <strong>2000$</strong>.
+  </div>
+</div>
+          <table>
+            <tr><th>Risque produit (qualite)</th><th>Risque projet (gestion)</th></tr>
+            <tr><td>Le logiciel ne fait pas ce qu'il devrait</td><td>Le projet est en retard ou depasse le budget</td></tr>
+            <tr><td>Performance insuffisante</td><td>Ressources insuffisantes</td></tr>
+            <tr><td>Problemes de securite</td><td>Turnover de l'equipe</td></tr>
+            <tr><td>Calculs incorrects</td><td>Changement de priorites</td></tr>
+            <tr><td>Mauvaise utilisabilite</td><td>Problemes de communication</td></tr>
+          </table>
+          <p>L'analyse de risque produit guide la priorisation des tests : plus le risque est eleve, plus le test doit etre intensif.</p>
+
+          <h4>Metriques de test</h4>
+          <ul>
+            <li><strong>Couverture :</strong> % d'exigences/code couvert par les tests</li>
+            <li><strong>Defauts :</strong> nombre trouves, corriges, en attente, densite, taux de detection</li>
+            <li><strong>Execution :</strong> % de tests passes, echoues, bloques, non executes</li>
+            <li><strong>Effort :</strong> temps reel vs planifie</li>
+          </ul>
+
+          <h4>Rapports de test vs Rapports de defaut</h4>
+          <table>
+            <tr><th>Rapport d'avancement de test</th><th>Rapport de completion de test</th><th>Rapport de defaut</th></tr>
+            <tr><td>Pendant les tests</td><td>A la fin des tests</td><td>Pour chaque defaut</td></tr>
+            <tr><td>Statut vs plan, bloqueurs</td><td>Resume, deviations, lecons apprises</td><td>ID, titre, description, etapes</td></tr>
+            <tr><td>Metriques d'avancement</td><td>Elements non testes, risques residuels</td><td>Resultat attendu vs reel</td></tr>
+            <tr><td></td><td>Recommandations</td><td>Severite, priorite, statut, environnement</td></tr>
+          </table>
+
+          <h4>Gestion de configuration</h4>
+          <p>Suivi et controle des produits d'activite de test (testware). Permet de : identifier et versionner tous les elements, etablir des baselines, reproduire des etats anterieurs, maintenir la tracabilite entre les elements.</p>
+
+  </div>
+
+  <!-- TAB: Flashcards -->
+  <div id="chTab-flashcards" style="display:none;">
+    <div id="fcArea"></div>
+  </div>
+
+  <!-- TAB: Tutos -->
+  <div id="chTab-tutos" style="display:none;">
+    <div id="tutoArea"></div>
+  </div>
+
+  <!-- TAB: Quiz -->
+  <div id="chTab-quiz" style="display:none;">
+    <div style="text-align:center;padding:40px;">
+      <h3>Teste-toi sur le Chapitre 5</h3>
+      <p style="color:#64748b;margin-bottom:20px;">10 questions aleatoires de ce chapitre, 15 minutes.</p>
+      <button class="btn-start" onclick="startChapterQuiz()" style="background:#2563eb;color:white;border:none;padding:14px 32px;border-radius:10px;font-size:1rem;font-weight:600;cursor:pointer;">Lancer le quiz</button>
+    </div>
+  </div>
+
+  <!-- Voir aussi -->
+  <div style="margin-top:30px;" class="fiche-seealso">
+    <strong>Voir aussi :</strong>
+    <a href="chapitre4.html">Ch.4 - Techniques de test</a> |
+    <a href="chapitre2.html">Ch.2 - Test dans le cycle de vie</a> |
+    <a href="chapitre1.html">Ch.1 - Fondamentaux du test</a>
+  </div>
+
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/shared.js"></script>
+<script src="js/storage.js"></script>
+<script>
+const CURRENT_CHAPTER = 5;
+function switchChapterTab(id, btn) { ['cours','flashcards','tutos','quiz'].forEach(function(t) { document.getElementById('chTab-' + t).style.display = t === id ? 'block' : 'none'; }); document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); }); btn.classList.add('active'); if (id === 'flashcards' && !window._fcInit) { initChapterFlashcards(); window._fcInit = true; } if (id === 'tutos' && !window._tutoInit) { initChapterTutos(); window._tutoInit = true; } }
+function startChapterQuiz() { window.location.href = 'istqb_platform.html?quiz=ch' + CURRENT_CHAPTER; }
+function initChapterFlashcards() {
+  var cards = FLASHCARDS.filter(function(c) { return c.ch === CURRENT_CHAPTER; });
+  if (cards.length === 0) { document.getElementById('fcArea').innerHTML = '<p style="text-align:center;color:#94a3b8;padding:40px;">Aucune flashcard pour ce chapitre.</p>'; return; }
+  var deck = shuffle([].concat(cards)); var known = new Set(); var idx = 0;
+  function render() {
+    if (deck.length === 0) { document.getElementById('fcArea').innerHTML = '<div class="tuto-congrats"><h4>Toutes les cartes sont maitrisees !</h4><button class="tuto-reset" onclick="location.reload()">Recommencer</button></div>'; return; }
+    var card = deck[idx]; var mastered = known.size;
+    document.getElementById('fcArea').innerHTML = '<div style="text-align:center;margin-bottom:16px;"><div class="progress-bar" style="max-width:400px;margin:0 auto;"><div class="progress-fill" style="width:' + Math.round(mastered/cards.length*100) + '%;background:#16a34a;"></div></div><div style="font-size:0.8rem;color:#94a3b8;margin-top:6px;">' + mastered + '/' + cards.length + ' maitrisees</div></div><div style="max-width:500px;margin:0 auto;cursor:pointer;perspective:600px;" onclick="this.querySelector(\'.fc-inner\').classList.toggle(\'fc-flipped\')"><div class="fc-inner" style="position:relative;min-height:200px;transition:transform 0.5s;transform-style:preserve-3d;"><div style="position:absolute;width:100%;backface-visibility:hidden;background:white;border-radius:16px;padding:32px;box-shadow:0 2px 12px rgba(0,0,0,0.08);text-align:center;"><div style="font-size:0.8rem;color:#94a3b8;margin-bottom:12px;">Question</div><div style="font-size:1.1rem;font-weight:600;">' + card.front + '</div></div><div style="position:absolute;width:100%;backface-visibility:hidden;transform:rotateY(180deg);background:#f0fdf4;border-radius:16px;padding:32px;box-shadow:0 2px 12px rgba(0,0,0,0.08);text-align:center;"><div style="font-size:0.8rem;color:#94a3b8;margin-bottom:12px;">Reponse</div><div style="font-size:1rem;">' + card.back + '</div></div></div></div><div style="display:flex;gap:12px;justify-content:center;margin-top:20px;"><button class="btn" style="background:#16a34a;color:white;" onclick="fcKnowCh()">Je sais</button><button class="btn" style="background:#f59e0b;color:white;" onclick="fcReviewCh()">A revoir</button></div>';
+  }
+  window.fcKnowCh = function() { known.add(deck[idx].front); deck.splice(idx, 1); if (idx >= deck.length) idx = 0; render(); };
+  window.fcReviewCh = function() { var card = deck.splice(idx, 1)[0]; var insertAt = Math.min(idx + 3, deck.length); deck.splice(insertAt, 0, card); if (idx >= deck.length) idx = 0; render(); };
+  render();
+}
+function initChapterTutos() {
+  var tutos = TUTORIALS.filter(function(t) { return t.chapter === CURRENT_CHAPTER; });
+  if (tutos.length === 0) { document.getElementById('tutoArea').innerHTML = '<p style="text-align:center;color:#94a3b8;padding:40px;">Aucun tuto pour ce chapitre.</p>'; return; }
+  var html = '';
+  tutos.forEach(function(tuto) { html += '<div class="tuto-card" id="tuto-' + tuto.id + '"><h3>' + tuto.title + '</h3><div class="tuto-desc">' + tuto.steps.length + ' etapes | ' + tuto.desc + '</div><div class="tuto-scenario">' + tuto.scenario.replace(/\n/g, '<br>') + '</div><div class="tuto-progress" id="tuto-progress-' + tuto.id + '"></div><div id="tuto-steps-' + tuto.id + '"></div><div id="tuto-congrats-' + tuto.id + '"></div><button class="tuto-reset" onclick="resetTuto(\'' + tuto.id + '\')">Recommencer cet exercice</button></div>'; });
+  document.getElementById('tutoArea').innerHTML = html;
+  tutos.forEach(function(tuto) { renderTutoSteps(tuto, loadTutoState(tuto.id)); });
+}
+function resetTuto(tutoId) { localStorage.removeItem('istqb_tuto_' + tutoId); initChapterTutos(); }
+function renderTutoSteps(tuto, state) {
+  var completedSteps = state.completed || []; var currentStep = completedSteps.length; var allDone = currentStep >= tuto.steps.length;
+  var progHtml = ''; tuto.steps.forEach(function(_, i) { var cls = 'tuto-progress-dot'; if (i < currentStep) cls += ' done'; else if (i === currentStep) cls += ' current'; progHtml += '<div class="' + cls + '"></div>'; }); document.getElementById('tuto-progress-' + tuto.id).innerHTML = progHtml;
+  var stepsHtml = '';
+  tuto.steps.forEach(function(step, i) {
+    var stepCls = 'tuto-step'; if (i < currentStep) stepCls += ' correct'; else if (i === currentStep) stepCls += ' active'; else stepCls += ' locked';
+    stepsHtml += '<div class="' + stepCls + '" id="tuto-step-' + tuto.id + '-' + i + '"><div class="tuto-step-header"><div class="tuto-step-num">' + (i < currentStep ? '&#10003;' : i + 1) + '</div><div class="tuto-step-title">' + step.q + '</div></div>';
+    if (i <= currentStep) {
+      if (step.type === 'input') { var prevAnswer = i < currentStep ? (state.answers && state.answers[i]) || '' : ''; stepsHtml += '<div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;"><input class="tuto-input" id="tuto-input-' + tuto.id + '-' + i + '" value="' + prevAnswer + '"' + (i < currentStep ? ' disabled' : '') + ' placeholder="Votre reponse" onkeydown="if(event.key===\'Enter\')checkTutoStep(\'' + tuto.id + '\',' + i + ')">' + (i === currentStep ? '<button class="tuto-btn-check" onclick="checkTutoStep(\'' + tuto.id + '\',' + i + ')">Verifier</button>' : '') + (step.hint && i === currentStep ? '<div style="font-size:0.8rem;color:#94a3b8;margin-top:4px;width:100%;"><em>Indice : ' + step.hint + '</em></div>' : '') + '</div>'; }
+      else if (step.type === 'options') { stepsHtml += '<div class="tuto-options">'; step.options.forEach(function(opt) { var optCls = 'tuto-opt'; if (i < currentStep) { if (opt === step.answer) optCls += ' correct-opt'; else if (state.answers && state.answers[i] === opt && opt !== step.answer) optCls += ' wrong-opt'; } var disabled = i < currentStep ? ' style="pointer-events:none;"' : ''; stepsHtml += '<div class="' + optCls + '"' + disabled + ' onclick="selectTutoOpt(\'' + tuto.id + '\',' + i + ',this,\'' + opt.replace(/'/g, "\\'") + '\')">' + opt + '</div>'; }); stepsHtml += '</div>'; if (i === currentStep) stepsHtml += '<button class="tuto-btn-check" onclick="checkTutoStep(\'' + tuto.id + '\',' + i + ')" style="margin-top:8px;">Verifier</button>'; }
+      else if (step.type === 'multi') { stepsHtml += '<div class="tuto-options" id="tuto-multi-' + tuto.id + '-' + i + '">'; step.options.forEach(function(opt) { var optCls = 'tuto-opt'; if (i < currentStep) { if (step.answer.includes(opt)) optCls += ' correct-opt'; else if (state.answers && state.answers[i] && state.answers[i].includes(opt)) optCls += ' wrong-opt'; } var disabled = i < currentStep ? ' style="pointer-events:none;"' : ''; stepsHtml += '<div class="' + optCls + '"' + disabled + ' onclick="toggleTutoMulti(this)">' + opt + '</div>'; }); stepsHtml += '</div>'; if (i === currentStep) { stepsHtml += '<div style="font-size:0.8rem;color:#94a3b8;margin-top:4px;"><em>Selectionnez 2 reponses puis cliquez Verifier.</em></div><button class="tuto-btn-check" onclick="checkTutoStep(\'' + tuto.id + '\',' + i + ')" style="margin-top:8px;">Verifier</button>'; } }
+      if (i < currentStep) { var wasCorrectFirst = state.firstTry && state.firstTry[i]; stepsHtml += '<div class="tuto-feedback show ok">' + (wasCorrectFirst ? step.feedback_ok : step.feedback_ko) + '</div>'; }
+      else { stepsHtml += '<div class="tuto-feedback" id="tuto-fb-' + tuto.id + '-' + i + '"></div>'; }
+    }
+    stepsHtml += '</div>';
+  });
+  document.getElementById('tuto-steps-' + tuto.id).innerHTML = stepsHtml;
+  if (allDone) { var firstTryCount = state.firstTry ? Object.values(state.firstTry).filter(function(v) { return v; }).length : 0; document.getElementById('tuto-congrats-' + tuto.id).innerHTML = '<div class="tuto-congrats"><h4>Exercice termine !</h4><p>' + firstTryCount + '/' + tuto.steps.length + ' reponses correctes du premier coup.</p>' + (firstTryCount === tuto.steps.length ? '<p style="color:#16a34a;font-weight:700;">Parfait !</p>' : '<p style="color:#f59e0b;">Recommencez pour viser le sans-faute !</p>') + '</div>'; }
+  else { document.getElementById('tuto-congrats-' + tuto.id).innerHTML = ''; }
+}
+function selectTutoOpt(tutoId, stepIdx, el, value) { el.parentNode.querySelectorAll('.tuto-opt').forEach(function(o) { o.classList.remove('selected'); }); el.classList.add('selected'); el.dataset.value = value; }
+function toggleTutoMulti(el) { el.classList.toggle('selected'); }
+function checkTutoStep(tutoId, stepIdx) {
+  var tuto = TUTORIALS.find(function(t) { return t.id === tutoId; }); var step = tuto.steps[stepIdx]; var state = loadTutoState(tutoId);
+  if (!state.completed) state.completed = []; if (!state.answers) state.answers = {}; if (!state.firstTry) state.firstTry = {};
+  var userAnswer, isCorrect = false;
+  if (step.type === 'input') { var input = document.getElementById('tuto-input-' + tutoId + '-' + stepIdx); userAnswer = input.value.trim(); isCorrect = userAnswer === step.answer; }
+  else if (step.type === 'options') { var selected = document.querySelector('#tuto-step-' + tutoId + '-' + stepIdx + ' .tuto-opt.selected'); userAnswer = selected ? selected.textContent.trim() : ''; isCorrect = userAnswer === step.answer; }
+  else if (step.type === 'multi') { var selectedEls = document.querySelectorAll('#tuto-multi-' + tutoId + '-' + stepIdx + ' .tuto-opt.selected'); userAnswer = Array.from(selectedEls).map(function(el) { return el.textContent.trim(); }); isCorrect = userAnswer.length === step.answer.length && step.answer.every(function(a) { return userAnswer.includes(a); }); }
+  var fb = document.getElementById('tuto-fb-' + tutoId + '-' + stepIdx);
+  if (isCorrect) { state.answers[stepIdx] = userAnswer; if (state.firstTry[stepIdx] === undefined) state.firstTry[stepIdx] = true; state.completed.push(stepIdx); saveTutoState(tutoId, state); renderTutoSteps(tuto, state); var nextStep = document.getElementById('tuto-step-' + tutoId + '-' + (stepIdx + 1)); if (nextStep) setTimeout(function() { nextStep.scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 200); }
+  else { if (state.firstTry[stepIdx] === undefined) state.firstTry[stepIdx] = false; saveTutoState(tutoId, state); fb.className = 'tuto-feedback show ko'; fb.innerHTML = step.feedback_ko; if (step.type === 'options') { document.querySelectorAll('#tuto-step-' + tutoId + '-' + stepIdx + ' .tuto-opt').forEach(function(o) { if (o.textContent.trim() === step.answer) o.classList.add('correct-opt'); else if (o.classList.contains('selected')) o.classList.add('wrong-opt'); }); } }
+}
+</script>
+</body>
+</html>
