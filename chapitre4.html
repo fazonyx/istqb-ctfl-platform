@@ -10,7 +10,7 @@
 
 <div class="header">
   <h1>Chapitre 4 - Techniques de test</h1>
-  <a href="istqb_platform.html" class="btn-back" style="text-decoration:none;">&#8592; Retour a la plateforme</a>
+  <a href="istqb_platform.html#apprentissage" class="btn-back" style="text-decoration:none;">&#8592; Retour a la plateforme</a>
 </div>
 
 <div class="home-screen" style="max-width:960px;margin:0 auto;padding:24px;">
@@ -27,184 +27,184 @@
   <div id="chTab-syllabus">
 
 <div class="question-card" style="margin-bottom:20px;">
-  <h3>4.1. Test Techniques Overview</h3>
+  <h3>4.1. Vue d'ensemble des techniques de test</h3>
   <div class="fiche-highlight">
-    <strong>Learning Objectives:</strong><br>
-    FL-4.1.1 (K2) Distinguish black-box test techniques, white-box test techniques and experience-based test techniques
+    <strong>Objectifs d'apprentissage :</strong><br>
+    FL-4.1.1 (K2) Distinguer les techniques de test boite noire, les techniques de test boite blanche et les techniques de test basees sur l'experience
   </div>
-  <p>Test techniques support the tester in test analysis (what to test) and in test design (how to test). Test techniques help to develop a relatively small, but sufficient, set of test cases in a systematic way. Test techniques also help the tester to define test conditions, identify coverage items, and identify test data during the test analysis and design. Further information on test techniques can be found in the ISO/IEC/IEEE 29119-4 standard, and in (Beizer 1990, Craig 2002, Copeland 2004, Koomen 2006, Jorgensen 2014, Ammann 2016, Forgacs 2019).</p>
-  <p>In this syllabus, test techniques are classified as black-box, white-box, and experience-based.</p>
-  <p><strong>Black-box test techniques</strong> (also known as specification-based techniques) are based on an analysis of the specified behavior of the test object without reference to its internal structure. Therefore, the test cases are independent of how the software is implemented. Consequently, if the implementation changes, but the required behavior stays the same, then the test cases are still useful.</p>
-  <p><strong>White-box test techniques</strong> (also known as structure-based techniques) are based on an analysis of the test object's internal structure and processing. As the test cases are dependent on how the software is designed, they can only be created after the design or implementation of the test object.</p>
-  <p><strong>Experience-based test techniques</strong> effectively use the knowledge and experience of testers for the design and implementation of test cases. The effectiveness of these test techniques depends heavily on the tester's skills. Experience-based test techniques can detect defects that may be missed using the black-box test techniques and white-box test techniques. Hence, experience-based test techniques are complementary to the black-box test techniques and white-box test techniques.</p>
+  <p>Les techniques de test aident le testeur dans l'analyse de test (quoi tester) et dans la conception de test (comment tester). Les techniques de test contribuent a developper un ensemble de cas de test relativement restreint mais suffisant, de maniere systematique. Les techniques de test aident egalement le testeur a definir les conditions de test, a identifier les elements de couverture et a identifier les donnees de test pendant l'analyse et la conception des tests. Des informations complementaires sur les techniques de test se trouvent dans la norme ISO/IEC/IEEE 29119-4 et dans (Beizer 1990, Craig 2002, Copeland 2004, Koomen 2006, Jorgensen 2014, Ammann 2016, Forgacs 2019).</p>
+  <p>Dans ce syllabus, les techniques de test sont classees en boite noire, boite blanche et basees sur l'experience.</p>
+  <p><strong>Les techniques de test boite noire</strong> (egalement appelees techniques basees sur les specifications) reposent sur une analyse du comportement specifie de l'objet de test sans reference a sa structure interne. Par consequent, les cas de test sont independants de la facon dont le logiciel est implemente. En consequence, si l'implementation change mais que le comportement requis reste le meme, les cas de test restent utiles.</p>
+  <p><strong>Les techniques de test boite blanche</strong> (egalement appelees techniques basees sur la structure) reposent sur une analyse de la structure interne et du traitement de l'objet de test. Comme les cas de test dependent de la conception du logiciel, ils ne peuvent etre crees qu'apres la conception ou l'implementation de l'objet de test.</p>
+  <p><strong>Les techniques de test basees sur l'experience</strong> utilisent efficacement les connaissances et l'experience des testeurs pour la conception et l'implementation des cas de test. L'efficacite de ces techniques depend fortement des competences du testeur. Les techniques basees sur l'experience peuvent detecter des defauts qui pourraient etre manques par les techniques boite noire et boite blanche. Ainsi, les techniques basees sur l'experience sont complementaires aux techniques boite noire et boite blanche.</p>
 </div>
 
 <div class="question-card" style="margin-bottom:20px;">
-  <h3>4.2. Black-Box Test Techniques</h3>
+  <h3>4.2. Techniques de test boite noire</h3>
   <div class="fiche-highlight">
-    <strong>Learning Objectives:</strong><br>
-    FL-4.2.1 (K3) Use equivalence partitioning to derive test cases<br>
-    FL-4.2.2 (K3) Use boundary value analysis to derive test cases<br>
-    FL-4.2.3 (K3) Use decision table testing to derive test cases<br>
-    FL-4.2.4 (K3) Use state transition testing to derive test cases
+    <strong>Objectifs d'apprentissage :</strong><br>
+    FL-4.2.1 (K3) Utiliser les partitions d'equivalence pour deriver des cas de test<br>
+    FL-4.2.2 (K3) Utiliser l'analyse des valeurs limites pour deriver des cas de test<br>
+    FL-4.2.3 (K3) Utiliser le test par table de decision pour deriver des cas de test<br>
+    FL-4.2.4 (K3) Utiliser le test de transition d'etat pour deriver des cas de test
   </div>
-  <p>Commonly used black-box test techniques discussed in the following sections are:</p>
+  <p>Les techniques de test boite noire couramment utilisees, presentees dans les sections suivantes, sont :</p>
   <ul>
-    <li>Equivalence Partitioning</li>
-    <li>Boundary Value Analysis</li>
-    <li>Decision Table Testing</li>
-    <li>State Transition Testing</li>
+    <li>Partitions d'equivalence</li>
+    <li>Analyse des valeurs limites</li>
+    <li>Test par table de decision</li>
+    <li>Test de transition d'etat</li>
   </ul>
 
-  <h4>4.2.1. Equivalence Partitioning</h4>
-  <p>Equivalence Partitioning (EP) divides data into partitions (known as equivalence partitions) based on the expectation that all the elements of a given partition are to be processed in the same way by the test object. The theory behind this technique is that if a test case, that tests one value from an equivalence partition, detects a defect, this defect should also be detected by test cases that test any other value from the same partition. Therefore, one test for each partition is sufficient.</p>
-  <p>Equivalence partitions can be identified for any data element related to the test object, including inputs, outputs, configuration items, internal values, time-related values, and interface parameters. The partitions may be continuous or discrete, ordered or unordered, finite or infinite. The partitions must not overlap and must be non-empty sets.</p>
-  <p>For simple test items, EP can be easy, but in practice, understanding how the test object will treat different values is often complicated. Therefore, partitioning should be done with care.</p>
-  <p>A partition containing valid values is called a valid partition. A partition containing invalid values is called an invalid partition. The definitions of valid and invalid values may vary among teams and organizations. For example, valid values may be interpreted as those that should be processed by the test object or as those for which the specification defines their processing. Invalid values may be interpreted as those that should be ignored or rejected by the test object or as those for which no processing is defined in the test object specification.</p>
-  <p>In EP, the coverage items are the equivalence partitions. To achieve 100% coverage with this test technique, test cases must exercise all identified partitions (including invalid partitions) by covering each partition at least once. Coverage is measured as the number of partitions exercised by at least one test case, divided by the total number of identified partitions, and is expressed as a percentage.</p>
-  <p>Many test items include multiple sets of partitions (e.g., test items with more than one input parameter), which means that a test case will cover partitions from different sets of partitions. The simplest coverage criterion in the case of multiple sets of partitions is called Each Choice coverage (Ammann 2016). Each Choice coverage requires test cases to exercise each partition from each set of partitions at least once. Each Choice coverage does not take into account combinations of partitions.</p>
+  <h4>4.2.1. Partitions d'equivalence</h4>
+  <p>Les partitions d'equivalence (EP) divisent les donnees en partitions (appelees partitions d'equivalence) en se basant sur l'attente que tous les elements d'une partition donnee seront traites de la meme maniere par l'objet de test. La theorie derriere cette technique est que si un cas de test, qui teste une valeur d'une partition d'equivalence, detecte un defaut, ce defaut devrait egalement etre detecte par des cas de test testant toute autre valeur de la meme partition. Par consequent, un seul test pour chaque partition est suffisant.</p>
+  <p>Les partitions d'equivalence peuvent etre identifiees pour tout element de donnees lie a l'objet de test, y compris les entrees, les sorties, les elements de configuration, les valeurs internes, les valeurs liees au temps et les parametres d'interface. Les partitions peuvent etre continues ou discretes, ordonnees ou non ordonnees, finies ou infinies. Les partitions ne doivent pas se chevaucher et doivent etre des ensembles non vides.</p>
+  <p>Pour des elements de test simples, l'EP peut etre facile, mais en pratique, comprendre comment l'objet de test traitera differentes valeurs est souvent complique. Par consequent, le partitionnement doit etre fait avec soin.</p>
+  <p>Une partition contenant des valeurs valides est appelee partition valide. Une partition contenant des valeurs invalides est appelee partition invalide. Les definitions des valeurs valides et invalides peuvent varier selon les equipes et les organisations. Par exemple, les valeurs valides peuvent etre interpretees comme celles qui doivent etre traitees par l'objet de test ou celles pour lesquelles la specification definit leur traitement. Les valeurs invalides peuvent etre interpretees comme celles qui doivent etre ignorees ou rejetees par l'objet de test ou celles pour lesquelles aucun traitement n'est defini dans la specification de l'objet de test.</p>
+  <p>En EP, les elements de couverture sont les partitions d'equivalence. Pour atteindre 100% de couverture avec cette technique, les cas de test doivent exercer toutes les partitions identifiees (y compris les partitions invalides) en couvrant chaque partition au moins une fois. La couverture est mesuree comme le nombre de partitions exercees par au moins un cas de test, divise par le nombre total de partitions identifiees, et est exprimee en pourcentage.</p>
+  <p>De nombreux elements de test incluent plusieurs ensembles de partitions (par exemple, des elements de test avec plus d'un parametre d'entree), ce qui signifie qu'un cas de test couvrira des partitions de differents ensembles de partitions. Le critere de couverture le plus simple dans le cas de plusieurs ensembles de partitions est appele couverture Each Choice (Ammann 2016). La couverture Each Choice exige que les cas de test exercent chaque partition de chaque ensemble de partitions au moins une fois. La couverture Each Choice ne prend pas en compte les combinaisons de partitions.</p>
 
-  <h4>4.2.2. Boundary Value Analysis</h4>
-  <p>Boundary Value Analysis (BVA) is a test technique based on exercising the boundaries of equivalence partitions. Therefore, BVA can only be used for ordered partitions. The minimum and maximum values of a partition are its boundary values. In the case of BVA, if two elements belong to the same partition, all elements between them must also belong to that partition.</p>
-  <p>BVA focuses on the boundary values of the partitions because developers are more likely to make errors with these boundary values. Typical defects found by BVA are located where implemented boundaries are misplaced to positions above or below their intended positions or are omitted altogether.</p>
-  <p>This syllabus covers two versions of the BVA: 2-value and 3-value BVA. They differ in terms of coverage items per boundary that need to be exercised to achieve 100% coverage.</p>
-  <p>In <strong>2-value BVA</strong> (Craig 2002, Myers 2011), for each boundary value there are two coverage items: this boundary value and its closest neighbor belonging to the adjacent partition. To achieve 100% coverage with 2-value BVA, test cases must exercise all coverage items, i.e., all identified boundary values. Coverage is measured as the number of boundary values that were exercised, divided by the total number of identified boundary values, and is expressed as a percentage.</p>
-  <p>In <strong>3-value BVA</strong> (Koomen 2006, O'Regan 2019), for each boundary value there are three coverage items: this boundary value and both its neighbors. Therefore, in 3-value BVA some of the coverage items may not be boundary values. To achieve 100% coverage with 3-value BVA, test cases must exercise all coverage items, i.e., identified boundary values and their neighbors. Coverage is measured as the number of boundary values and their neighbors exercised, divided by the total number of identified boundary values and their neighbors, and is expressed as a percentage.</p>
-  <p>3-value BVA is more rigorous than 2-value BVA as it may detect defects overlooked by 2-value BVA. For example, if the decision "if (x &le; 10) ..." is incorrectly implemented as "if (x = 10) ...", no test data derived from the 2-value BVA (x = 10, x = 11) can detect the defect. However, x = 9, derived from the 3-value BVA, is likely to detect it.</p>
+  <h4>4.2.2. Analyse des valeurs limites</h4>
+  <p>L'analyse des valeurs limites (BVA) est une technique de test basee sur l'exercice des limites des partitions d'equivalence. Par consequent, la BVA ne peut etre utilisee que pour des partitions ordonnees. Les valeurs minimale et maximale d'une partition sont ses valeurs limites. Dans le cas de la BVA, si deux elements appartiennent a la meme partition, tous les elements entre eux doivent egalement appartenir a cette partition.</p>
+  <p>La BVA se concentre sur les valeurs limites des partitions car les developpeurs sont plus susceptibles de faire des erreurs avec ces valeurs limites. Les defauts typiques trouves par la BVA sont situes la ou les limites implementees sont deplacees au-dessus ou en dessous de leurs positions prevues ou sont completement omises.</p>
+  <p>Ce syllabus couvre deux versions de la BVA : la BVA a 2 valeurs et la BVA a 3 valeurs. Elles different en termes d'elements de couverture par limite devant etre exerces pour atteindre 100% de couverture.</p>
+  <p>En <strong>BVA a 2 valeurs</strong> (Craig 2002, Myers 2011), pour chaque valeur limite il y a deux elements de couverture : cette valeur limite et son voisin le plus proche appartenant a la partition adjacente. Pour atteindre 100% de couverture avec la BVA a 2 valeurs, les cas de test doivent exercer tous les elements de couverture, c'est-a-dire toutes les valeurs limites identifiees. La couverture est mesuree comme le nombre de valeurs limites exercees, divise par le nombre total de valeurs limites identifiees, et est exprimee en pourcentage.</p>
+  <p>En <strong>BVA a 3 valeurs</strong> (Koomen 2006, O'Regan 2019), pour chaque valeur limite il y a trois elements de couverture : cette valeur limite et ses deux voisins. Par consequent, en BVA a 3 valeurs, certains des elements de couverture peuvent ne pas etre des valeurs limites. Pour atteindre 100% de couverture avec la BVA a 3 valeurs, les cas de test doivent exercer tous les elements de couverture, c'est-a-dire les valeurs limites identifiees et leurs voisins. La couverture est mesuree comme le nombre de valeurs limites et de voisins exerces, divise par le nombre total de valeurs limites et de voisins identifies, et est exprimee en pourcentage.</p>
+  <p>La BVA a 3 valeurs est plus rigoureuse que la BVA a 2 valeurs car elle peut detecter des defauts negliges par la BVA a 2 valeurs. Par exemple, si la decision "if (x &le; 10) ..." est incorrectement implementee comme "if (x = 10) ...", aucune donnee de test derivee de la BVA a 2 valeurs (x = 10, x = 11) ne peut detecter le defaut. Cependant, x = 9, derive de la BVA a 3 valeurs, est susceptible de le detecter.</p>
 
-  <h4>4.2.3. Decision Table Testing</h4>
-  <p>Decision tables are used for testing the implementation of requirements that specify how different combinations of conditions result in different outcomes. Decision tables are an effective way of recording complex logic, such as business rules.</p>
-  <p>When creating decision tables, the conditions and the resulting actions of the system are defined. These form the rows of the table. Each column corresponds to a decision rule that defines a unique combination of conditions, along with the associated actions. In limited-entry decision tables all the values of the conditions and actions (except for irrelevant or infeasible ones; see below) are shown as Boolean values (true or false). Alternatively, in extended-entry decision tables some or all the conditions and actions may also take on multiple values (e.g., ranges of numbers, equivalence partitions, discrete values).</p>
-  <p>The notation for conditions is as follows: "T" (true) means that the condition is satisfied. "F" (false) means that the condition is not satisfied. "&ndash;" means that the value of the condition is irrelevant for the action outcome. "N/A" means that the condition is infeasible for a given rule. For actions: "X" means that the action should occur. Blank means that the action should not occur. Other notations may also be used.</p>
-  <p>A full decision table has enough columns to cover every combination of conditions. The table can be simplified by deleting columns containing infeasible combinations of conditions. The table can also be minimized by merging columns, in which some conditions do not affect the outcome, into a single column. Decision table minimization algorithms are out of scope of this syllabus.</p>
-  <p>In decision table testing, the coverage items are the columns containing feasible combinations of conditions. To achieve 100% coverage with this technique, test cases must exercise all these columns. Coverage is measured as the number of exercised columns, divided by the total number of feasible columns, and is expressed as a percentage.</p>
-  <p>The strength of decision table testing is that it provides a systematic approach to identify all the combinations of conditions, some of which might otherwise be overlooked. It also helps to find any gaps or contradictions in the requirements. If there are many conditions, exercising all the decision rules may be time consuming, since the number of rules grows exponentially with the number of conditions. In such a case, to reduce the number of rules that need to be exercised, a minimized decision table or a risk-based approach may be used.</p>
+  <h4>4.2.3. Test par table de decision</h4>
+  <p>Les tables de decision sont utilisees pour tester l'implementation d'exigences qui specifient comment differentes combinaisons de conditions produisent differents resultats. Les tables de decision sont un moyen efficace d'enregistrer une logique complexe, comme les regles metier.</p>
+  <p>Lors de la creation de tables de decision, les conditions et les actions resultantes du systeme sont definies. Celles-ci forment les lignes de la table. Chaque colonne correspond a une regle de decision qui definit une combinaison unique de conditions, accompagnee des actions associees. Dans les tables de decision a entrees limitees, toutes les valeurs des conditions et des actions (sauf celles qui sont non pertinentes ou infaisables ; voir ci-dessous) sont representees comme des valeurs booleennes (vrai ou faux). Alternativement, dans les tables de decision a entrees etendues, certaines ou toutes les conditions et actions peuvent egalement prendre plusieurs valeurs (par exemple, des plages de nombres, des partitions d'equivalence, des valeurs discretes).</p>
+  <p>La notation pour les conditions est la suivante : "T" (true/vrai) signifie que la condition est satisfaite. "F" (false/faux) signifie que la condition n'est pas satisfaite. "&ndash;" signifie que la valeur de la condition est non pertinente pour le resultat de l'action. "N/A" signifie que la condition est infaisable pour une regle donnee. Pour les actions : "X" signifie que l'action doit se produire. Un espace vide signifie que l'action ne doit pas se produire. D'autres notations peuvent egalement etre utilisees.</p>
+  <p>Une table de decision complete a suffisamment de colonnes pour couvrir chaque combinaison de conditions. La table peut etre simplifiee en supprimant les colonnes contenant des combinaisons infaisables de conditions. La table peut egalement etre minimisee en fusionnant les colonnes dans lesquelles certaines conditions n'affectent pas le resultat en une seule colonne. Les algorithmes de minimisation des tables de decision sont hors du perimetre de ce syllabus.</p>
+  <p>Dans le test par table de decision, les elements de couverture sont les colonnes contenant des combinaisons faisables de conditions. Pour atteindre 100% de couverture avec cette technique, les cas de test doivent exercer toutes ces colonnes. La couverture est mesuree comme le nombre de colonnes exercees, divise par le nombre total de colonnes faisables, et est exprimee en pourcentage.</p>
+  <p>La force du test par table de decision est qu'il fournit une approche systematique pour identifier toutes les combinaisons de conditions, dont certaines pourraient autrement etre negligees. Il aide egalement a trouver les lacunes ou contradictions dans les exigences. S'il y a de nombreuses conditions, exercer toutes les regles de decision peut etre chronophage, car le nombre de regles croit exponentiellement avec le nombre de conditions. Dans ce cas, pour reduire le nombre de regles a exercer, une table de decision minimisee ou une approche basee sur les risques peut etre utilisee.</p>
 
-  <h4>4.2.4. State Transition Testing</h4>
-  <p>A state diagram models the behavior of a system by showing its possible states and valid state transitions. A transition is initiated by an event, which may be additionally qualified by a guard condition. The transitions are assumed to be instantaneous and may sometimes result in the software taking action. The common transition labeling syntax is as follows: "event [guard condition] / action". Guard conditions and actions can be omitted if they do not exist or are irrelevant for the tester.</p>
-  <p>A state table is a model equivalent to a state diagram. Its rows represent states, and its columns represent events (together with guard conditions if they exist). Table entries (cells) represent transitions, and contain the target state, as well as the resulting actions, if defined. In contrast to the state diagram, the state table explicitly shows invalid transitions, which are represented by empty cells.</p>
-  <p>A test case based on a state diagram or state table is usually represented as a sequence of events, which results in a sequence of state changes (and actions, if needed). One test case may, and usually will, cover several transitions between states.</p>
-  <p>There exist many coverage criteria for state transition testing. This syllabus discusses three of them.</p>
-  <p>In <strong>all states coverage</strong>, the coverage items are the states. To achieve 100% all states coverage, test cases must ensure that all the states are exercised. Coverage is measured as the number of exercised states divided by the total number of states and is expressed as a percentage.</p>
-  <p>In <strong>valid transitions coverage</strong> (also called 0-switch coverage), the coverage items are single valid transitions. To achieve 100% valid transitions coverage, test cases must exercise all the valid transitions. Coverage is measured as the number of exercised valid transitions divided by the total number of valid transitions and is expressed as a percentage.</p>
-  <p>In <strong>all transitions coverage</strong>, the coverage items are all the transitions shown in a state table. To achieve 100% all transitions coverage, test cases must exercise all the valid transitions and attempt to execute invalid transitions. Testing only one invalid transition in a single test case helps to avoid defect masking, i.e., a situation in which one defect prevents the detection of another. Coverage is measured as the number of valid and invalid transitions exercised or attempted to be covered by executed test cases, divided by the total number of valid and invalid transitions, and is expressed as a percentage.</p>
-  <p>All states coverage is weaker than valid transitions coverage, because it can typically be achieved without exercising all the transitions. Valid transitions coverage is the most widely used coverage criterion. Achieving full valid transitions coverage guarantees full all states coverage. Achieving full all transitions coverage guarantees both full all states coverage and full valid transitions coverage and should be a minimum requirement for mission and safety-critical software.</p>
+  <h4>4.2.4. Test de transition d'etat</h4>
+  <p>Un diagramme d'etat modelise le comportement d'un systeme en montrant ses etats possibles et les transitions d'etat valides. Une transition est initiee par un evenement, qui peut etre en plus qualifie par une condition de garde. Les transitions sont supposees etre instantanees et peuvent parfois entrainer une action du logiciel. La syntaxe courante d'etiquetage des transitions est la suivante : "evenement [condition de garde] / action". Les conditions de garde et les actions peuvent etre omises si elles n'existent pas ou ne sont pas pertinentes pour le testeur.</p>
+  <p>Une table d'etat est un modele equivalent a un diagramme d'etat. Ses lignes representent les etats et ses colonnes representent les evenements (ainsi que les conditions de garde si elles existent). Les entrees de la table (cellules) representent les transitions et contiennent l'etat cible, ainsi que les actions resultantes, si elles sont definies. Contrairement au diagramme d'etat, la table d'etat montre explicitement les transitions invalides, representees par des cellules vides.</p>
+  <p>Un cas de test base sur un diagramme d'etat ou une table d'etat est generalement represente comme une sequence d'evenements, qui aboutit a une sequence de changements d'etat (et d'actions, si necessaire). Un cas de test peut, et le fait generalement, couvrir plusieurs transitions entre etats.</p>
+  <p>Il existe de nombreux criteres de couverture pour le test de transition d'etat. Ce syllabus en presente trois.</p>
+  <p>En <strong>couverture de tous les etats</strong>, les elements de couverture sont les etats. Pour atteindre 100% de couverture de tous les etats, les cas de test doivent s'assurer que tous les etats sont exerces. La couverture est mesuree comme le nombre d'etats exerces divise par le nombre total d'etats et est exprimee en pourcentage.</p>
+  <p>En <strong>couverture des transitions valides</strong> (egalement appelee couverture 0-switch), les elements de couverture sont les transitions valides individuelles. Pour atteindre 100% de couverture des transitions valides, les cas de test doivent exercer toutes les transitions valides. La couverture est mesuree comme le nombre de transitions valides exercees divise par le nombre total de transitions valides et est exprimee en pourcentage.</p>
+  <p>En <strong>couverture de toutes les transitions</strong>, les elements de couverture sont toutes les transitions figurant dans une table d'etat. Pour atteindre 100% de couverture de toutes les transitions, les cas de test doivent exercer toutes les transitions valides et tenter d'executer les transitions invalides. Tester une seule transition invalide par cas de test permet d'eviter le masquage de defauts, c'est-a-dire une situation dans laquelle un defaut empeche la detection d'un autre. La couverture est mesuree comme le nombre de transitions valides et invalides exercees ou tentees par les cas de test executes, divise par le nombre total de transitions valides et invalides, et est exprimee en pourcentage.</p>
+  <p>La couverture de tous les etats est plus faible que la couverture des transitions valides, car elle peut generalement etre atteinte sans exercer toutes les transitions. La couverture des transitions valides est le critere de couverture le plus largement utilise. Atteindre une couverture complete des transitions valides garantit une couverture complete de tous les etats. Atteindre une couverture complete de toutes les transitions garantit a la fois la couverture complete de tous les etats et la couverture complete des transitions valides, et devrait etre une exigence minimale pour les logiciels critiques en termes de mission et de securite.</p>
 </div>
 
 <div class="question-card" style="margin-bottom:20px;">
-  <h3>4.3. White-Box Test Techniques</h3>
+  <h3>4.3. Techniques de test boite blanche</h3>
   <div class="fiche-highlight">
-    <strong>Learning Objectives:</strong><br>
-    FL-4.3.1 (K2) Explain statement testing<br>
-    FL-4.3.2 (K2) Explain branch testing<br>
-    FL-4.3.3 (K2) Explain the value of white-box testing
+    <strong>Objectifs d'apprentissage :</strong><br>
+    FL-4.3.1 (K2) Expliquer le test des instructions<br>
+    FL-4.3.2 (K2) Expliquer le test des branches<br>
+    FL-4.3.3 (K2) Expliquer la valeur du test boite blanche
   </div>
-  <p>Because of their popularity and simplicity, this section focuses on two code-related white-box test techniques:</p>
+  <p>En raison de leur popularite et de leur simplicite, cette section se concentre sur deux techniques de test boite blanche liees au code :</p>
   <ul>
-    <li>Statement testing</li>
-    <li>Branch testing</li>
+    <li>Test des instructions</li>
+    <li>Test des branches</li>
   </ul>
-  <p>There are more rigorous white-box test techniques that are used in some safety-critical, mission-critical, or high-integrity environments to achieve more thorough code coverage. There are also white-box test techniques used in higher test levels (e.g., API testing), or using coverage not related to code (e.g., neuron coverage in neural network testing). These techniques are not discussed in this syllabus.</p>
+  <p>Il existe des techniques de test boite blanche plus rigoureuses qui sont utilisees dans certains environnements critiques pour la securite, la mission ou a haute integrite pour atteindre une couverture de code plus approfondie. Il existe egalement des techniques de test boite blanche utilisees a des niveaux de test superieurs (par exemple, le test d'API), ou utilisant une couverture non liee au code (par exemple, la couverture de neurones dans le test de reseaux de neurones). Ces techniques ne sont pas abordees dans ce syllabus.</p>
 
-  <h4>4.3.1. Statement Testing and Statement Coverage</h4>
-  <p>In statement testing, the coverage items are executable statements. The aim is to design test cases that exercise statements in the code until an acceptable level of coverage is achieved. Coverage is measured as the number of statements exercised by the test cases divided by the total number of executable statements in the code, and is expressed as a percentage.</p>
-  <p>When 100% statement coverage is achieved, it ensures that all executable statements in the code have been exercised at least once. In particular, this means that each statement with a defect will be executed, which may cause a failure demonstrating the presence of the defect. However, exercising a statement with a test case will not detect defects in all cases. For example, it may not detect defects that are data dependent (e.g., a division by zero that only fails when a denominator is set to zero). Also, 100% statement coverage does not ensure that all the decision logic has been tested as, for instance, it may not exercise all the branches (see chapter 4.3.2) in the code.</p>
+  <h4>4.3.1. Test des instructions et couverture des instructions</h4>
+  <p>Dans le test des instructions, les elements de couverture sont les instructions executables. L'objectif est de concevoir des cas de test qui exercent les instructions dans le code jusqu'a ce qu'un niveau de couverture acceptable soit atteint. La couverture est mesuree comme le nombre d'instructions exercees par les cas de test divise par le nombre total d'instructions executables dans le code, et est exprimee en pourcentage.</p>
+  <p>Lorsque 100% de couverture des instructions est atteinte, cela garantit que toutes les instructions executables du code ont ete exercees au moins une fois. En particulier, cela signifie que chaque instruction contenant un defaut sera executee, ce qui peut provoquer une defaillance demontrant la presence du defaut. Cependant, exercer une instruction avec un cas de test ne detectera pas les defauts dans tous les cas. Par exemple, cela peut ne pas detecter les defauts dependant des donnees (par exemple, une division par zero qui n'echoue que lorsqu'un denominateur est mis a zero). De plus, 100% de couverture des instructions ne garantit pas que toute la logique de decision a ete testee car, par exemple, cela peut ne pas exercer toutes les branches (voir chapitre 4.3.2) du code.</p>
 
-  <h4>4.3.2. Branch Testing and Branch Coverage</h4>
-  <p>A branch is a transfer of control between two nodes in the control flow graph, which shows the possible sequences in which source code statements are executed in the test object. Each transfer of control can be either unconditional (i.e., straight-line code) or conditional (i.e., a decision outcome).</p>
-  <p>In branch testing the coverage items are branches and the aim is to design test cases to exercise branches in the code until an acceptable level of coverage is achieved. Coverage is measured as the number of branches exercised by the test cases divided by the total number of branches and is expressed as a percentage.</p>
-  <p>When 100% branch coverage is achieved, all branches in the code, unconditional and conditional, are exercised by test cases. Conditional branches typically correspond to a true or false outcome from an "if...then" decision, an outcome from a switch/case statement, or a decision to exit or continue in a loop. However, exercising a branch with a test case will not detect defects in all cases. For example, it may not detect defects requiring the execution of a specific path in a code.</p>
-  <p>Branch coverage subsumes statement coverage. This means that any set of test cases achieving 100% branch coverage also achieves 100% statement coverage (but not vice versa).</p>
+  <h4>4.3.2. Test des branches et couverture des branches</h4>
+  <p>Une branche est un transfert de controle entre deux noeuds dans le graphe de flux de controle, qui montre les sequences possibles dans lesquelles les instructions du code source sont executees dans l'objet de test. Chaque transfert de controle peut etre soit inconditionnel (c'est-a-dire du code lineaire) soit conditionnel (c'est-a-dire un resultat de decision).</p>
+  <p>Dans le test des branches, les elements de couverture sont les branches et l'objectif est de concevoir des cas de test pour exercer les branches dans le code jusqu'a ce qu'un niveau de couverture acceptable soit atteint. La couverture est mesuree comme le nombre de branches exercees par les cas de test divise par le nombre total de branches et est exprimee en pourcentage.</p>
+  <p>Lorsque 100% de couverture des branches est atteinte, toutes les branches du code, inconditionnelles et conditionnelles, sont exercees par les cas de test. Les branches conditionnelles correspondent generalement a un resultat vrai ou faux d'une decision "if...then", a un resultat d'une instruction switch/case, ou a une decision de sortir ou de continuer dans une boucle. Cependant, exercer une branche avec un cas de test ne detectera pas les defauts dans tous les cas. Par exemple, cela peut ne pas detecter les defauts necessitant l'execution d'un chemin specifique dans le code.</p>
+  <p>La couverture des branches subsume la couverture des instructions. Cela signifie que tout ensemble de cas de test atteignant 100% de couverture des branches atteint egalement 100% de couverture des instructions (mais pas l'inverse).</p>
 
-  <h4>4.3.3. The Value of White-box Testing</h4>
-  <p>A fundamental strength that all white-box test techniques share is that the entire software implementation is taken into account during testing, which facilitates defect detection even when the software specification is vague, outdated or incomplete. A corresponding weakness is that if the software does not implement one or more requirements, white-box testing may not detect the resulting defects of omission (Watson 1996).</p>
-  <p>White-box test techniques can be used in static testing (e.g., during dry runs of code). They are well suited to reviewing code not yet ready for execution (Hetzel 1988), pseudocode and other high-level or top-down logic which can be modeled with a control flow graph.</p>
-  <p>Performing only black-box testing does not provide a measure of actual code coverage. White-box coverage measures provide an objective measurement of coverage and the necessary information to allow additional tests to be generated to increase this coverage, and subsequently increase confidence in the code.</p>
+  <h4>4.3.3. La valeur du test boite blanche</h4>
+  <p>Une force fondamentale que toutes les techniques de test boite blanche partagent est que l'ensemble de l'implementation logicielle est prise en compte pendant les tests, ce qui facilite la detection des defauts meme lorsque la specification du logiciel est vague, obsolete ou incomplete. Une faiblesse correspondante est que si le logiciel n'implemente pas une ou plusieurs exigences, le test boite blanche peut ne pas detecter les defauts d'omission resultants (Watson 1996).</p>
+  <p>Les techniques de test boite blanche peuvent etre utilisees en test statique (par exemple, lors de revues a sec du code). Elles sont bien adaptees a la revue de code pas encore pret pour l'execution (Hetzel 1988), de pseudocode et d'autres logiques de haut niveau ou descendantes pouvant etre modelisees avec un graphe de flux de controle.</p>
+  <p>Effectuer uniquement du test boite noire ne fournit pas de mesure de la couverture reelle du code. Les mesures de couverture boite blanche fournissent une mesure objective de la couverture et les informations necessaires pour permettre la generation de tests supplementaires afin d'augmenter cette couverture, et par consequent renforcer la confiance dans le code.</p>
 </div>
 
 <div class="question-card" style="margin-bottom:20px;">
-  <h3>4.4. Experience-based Test Techniques</h3>
+  <h3>4.4. Techniques de test basees sur l'experience</h3>
   <div class="fiche-highlight">
-    <strong>Learning Objectives:</strong><br>
-    FL-4.4.1 (K2) Explain error guessing<br>
-    FL-4.4.2 (K2) Explain exploratory testing<br>
-    FL-4.4.3 (K2) Explain checklist-based testing
+    <strong>Objectifs d'apprentissage :</strong><br>
+    FL-4.4.1 (K2) Expliquer la prediction d'erreurs<br>
+    FL-4.4.2 (K2) Expliquer le test exploratoire<br>
+    FL-4.4.3 (K2) Expliquer le test base sur des checklists
   </div>
-  <p>Commonly used experience-based test techniques discussed in the following sections are:</p>
+  <p>Les techniques de test basees sur l'experience couramment utilisees, presentees dans les sections suivantes, sont :</p>
   <ul>
-    <li>Error guessing</li>
-    <li>Exploratory testing</li>
-    <li>Checklist-based testing</li>
+    <li>Prediction d'erreurs</li>
+    <li>Test exploratoire</li>
+    <li>Test base sur des checklists</li>
   </ul>
 
-  <h4>4.4.1. Error Guessing</h4>
-  <p>Error guessing is a test technique used to anticipate the occurrence of errors, defects, and failures, based on the tester's knowledge, including:</p>
+  <h4>4.4.1. Prediction d'erreurs</h4>
+  <p>La prediction d'erreurs est une technique de test utilisee pour anticiper l'occurrence d'erreurs, de defauts et de defaillances, basee sur les connaissances du testeur, notamment :</p>
   <ul>
-    <li>How the application has worked in the past</li>
-    <li>The types of errors the developers tend to make and the types of defects that result from these errors</li>
-    <li>The types of failures that have occurred in other, similar applications</li>
+    <li>Comment l'application a fonctionne par le passe</li>
+    <li>Les types d'erreurs que les developpeurs ont tendance a commettre et les types de defauts qui resultent de ces erreurs</li>
+    <li>Les types de defaillances qui se sont produites dans d'autres applications similaires</li>
   </ul>
-  <p>In general, errors, defects and failures may be related to: input (e.g., correct input not accepted, parameters wrong or missing), output (e.g., wrong format, wrong result), logic (e.g., missing cases, wrong operator), computation (e.g., incorrect operand, wrong computation), interfaces (e.g., parameter mismatch, incompatible types), or data (e.g., incorrect initialization, wrong type).</p>
-  <p>Fault attacks are a way to implement error guessing. This test technique requires the tester to create or acquire a list of possible errors, defects and failures, and to design tests that will identify defects associated with the errors, expose the defects, or cause the failures. These lists can be built based on experience, defect and failure data, or from common knowledge about why software fails.</p>
+  <p>En general, les erreurs, defauts et defaillances peuvent etre lies a : l'entree (par exemple, une entree correcte non acceptee, des parametres errones ou manquants), la sortie (par exemple, un format errone, un resultat errone), la logique (par exemple, des cas manquants, un operateur errone), le calcul (par exemple, un operande incorrect, un calcul errone), les interfaces (par exemple, une incompatibilite de parametres, des types incompatibles), ou les donnees (par exemple, une initialisation incorrecte, un type errone).</p>
+  <p>Les attaques par fautes sont une maniere d'implementer la prediction d'erreurs. Cette technique de test exige que le testeur cree ou acquiere une liste d'erreurs, de defauts et de defaillances possibles, et concoive des tests qui identifieront les defauts associes aux erreurs, exposeront les defauts ou provoqueront les defaillances. Ces listes peuvent etre construites a partir de l'experience, des donnees de defauts et de defaillances, ou des connaissances generales sur les raisons pour lesquelles les logiciels echouent.</p>
 
-  <h4>4.4.2. Exploratory Testing</h4>
-  <p>In exploratory testing, tests are simultaneously designed, executed, and evaluated while the tester learns about the test object. The testing is used to learn more about the test object, to explore it more deeply with focused tests, and to create tests for untested areas.</p>
-  <p>Exploratory testing is sometimes performed using session-based testing to structure the testing. In a session-based approach, exploratory testing is performed within a defined time box. The tester uses a test charter containing test objectives to guide the testing. The test session is usually followed by a debriefing that involves a discussion between the tester and stakeholders interested in the test results of the test session. In this approach test objectives may be treated as high-level test conditions. Coverage items are identified and exercised during the test session. The tester may use test session sheets to document the steps followed and the discoveries made.</p>
-  <p>Exploratory testing is useful when there are few or inadequate specifications or there is significant time pressure on the testing. Exploratory testing is also useful to complement other more formal test techniques. Exploratory testing will be more effective if the tester is experienced, has domain knowledge and has a high degree of essential skills, like analytical skills, curiosity and creativeness (see section 1.5.1).</p>
-  <p>Exploratory testing can incorporate the use of other test techniques (e.g., equivalence partitioning). More information about exploratory testing can be found in (Kaner 1999, Whittaker 2009, Hendrickson 2013).</p>
+  <h4>4.4.2. Test exploratoire</h4>
+  <p>Dans le test exploratoire, les tests sont simultanement concus, executes et evalues pendant que le testeur decouvre l'objet de test. Le test est utilise pour en apprendre davantage sur l'objet de test, pour l'explorer plus en profondeur avec des tests cibles, et pour creer des tests pour les zones non testees.</p>
+  <p>Le test exploratoire est parfois realise en utilisant le test base sur des sessions pour structurer les tests. Dans une approche basee sur des sessions, le test exploratoire est effectue dans un cadre temporel defini. Le testeur utilise une charte de test contenant les objectifs de test pour guider les tests. La session de test est generalement suivie d'un debriefing impliquant une discussion entre le testeur et les parties prenantes interessees par les resultats de la session de test. Dans cette approche, les objectifs de test peuvent etre traites comme des conditions de test de haut niveau. Les elements de couverture sont identifies et exerces pendant la session de test. Le testeur peut utiliser des fiches de session de test pour documenter les etapes suivies et les decouvertes faites.</p>
+  <p>Le test exploratoire est utile lorsqu'il y a peu ou pas de specifications adequates ou lorsqu'il y a une pression temporelle importante sur les tests. Le test exploratoire est egalement utile pour completer d'autres techniques de test plus formelles. Le test exploratoire sera plus efficace si le testeur est experimente, possede une connaissance du domaine et un haut degre de competences essentielles, comme les capacites analytiques, la curiosite et la creativite (voir section 1.5.1).</p>
+  <p>Le test exploratoire peut incorporer l'utilisation d'autres techniques de test (par exemple, les partitions d'equivalence). Plus d'informations sur le test exploratoire se trouvent dans (Kaner 1999, Whittaker 2009, Hendrickson 2013).</p>
 
-  <h4>4.4.3. Checklist-Based Testing</h4>
-  <p>In checklist-based testing, a tester designs, implements, and executes tests to cover test conditions from a checklist. Checklists can be built based on experience, knowledge about what is important for the user, or an understanding of why and how software fails. Checklists should not contain items that can be checked automatically, items better suited as entry criteria, exit criteria, or items that are too general (Brykczynski 1999).</p>
-  <p>Checklist items are often phrased in the form of a question. It should be possible to check each item separately and directly. These items may refer to requirements, graphical interface properties, quality characteristics or other forms of test conditions. Checklists can be created to support various test types, including functional and non-functional testing (e.g., 10 heuristics for usability testing (Nielsen 1994)).</p>
-  <p>Some checklist entries may gradually become less effective over time because the developers will learn to avoid making the same errors. New entries may also need to be added to reflect newly found high severity defects. Therefore, checklists should be regularly updated based on defect analysis. However, care should be taken to avoid letting the checklist become too long (Gawande 2009).</p>
-  <p>In the absence of detailed test cases, checklist-based testing can provide guidelines and some degree of consistency for the testing. If the checklists are high-level, some variability in the actual testing is likely to occur, resulting in potentially greater coverage but less repeatability.</p>
+  <h4>4.4.3. Test base sur des checklists</h4>
+  <p>Dans le test base sur des checklists, un testeur concoit, implemente et execute des tests pour couvrir les conditions de test a partir d'une checklist. Les checklists peuvent etre construites a partir de l'experience, de la connaissance de ce qui est important pour l'utilisateur, ou d'une comprehension de pourquoi et comment les logiciels echouent. Les checklists ne doivent pas contenir d'elements pouvant etre verifies automatiquement, d'elements mieux adaptes comme criteres d'entree ou de sortie, ou d'elements trop generaux (Brykczynski 1999).</p>
+  <p>Les elements de checklist sont souvent formules sous forme de question. Il doit etre possible de verifier chaque element separement et directement. Ces elements peuvent se referer a des exigences, des proprietes d'interface graphique, des caracteristiques de qualite ou d'autres formes de conditions de test. Les checklists peuvent etre creees pour supporter differents types de tests, y compris les tests fonctionnels et non fonctionnels (par exemple, les 10 heuristiques pour les tests d'utilisabilite (Nielsen 1994)).</p>
+  <p>Certains elements de checklist peuvent progressivement devenir moins efficaces au fil du temps car les developpeurs apprendront a eviter de commettre les memes erreurs. De nouveaux elements peuvent egalement devoir etre ajoutes pour refleter les defauts de haute severite nouvellement trouves. Par consequent, les checklists doivent etre regulierement mises a jour en fonction de l'analyse des defauts. Cependant, il faut veiller a ne pas laisser la checklist devenir trop longue (Gawande 2009).</p>
+  <p>En l'absence de cas de test detailles, le test base sur des checklists peut fournir des lignes directrices et un certain degre de coherence pour les tests. Si les checklists sont de haut niveau, une certaine variabilite dans les tests reels est susceptible de se produire, entrainant potentiellement une couverture plus grande mais moins de repetabilite.</p>
 </div>
 
 <div class="question-card" style="margin-bottom:20px;">
-  <h3>4.5. Collaboration-based Test Approaches</h3>
+  <h3>4.5. Approches de test basees sur la collaboration</h3>
   <div class="fiche-highlight">
-    <strong>Learning Objectives:</strong><br>
-    FL-4.5.1 (K2) Explain how to write user stories in collaboration with developers and business representatives<br>
-    FL-4.5.2 (K2) Classify the different options for writing acceptance criteria<br>
-    FL-4.5.3 (K3) Use acceptance test-driven development (ATDD) to derive test cases
+    <strong>Objectifs d'apprentissage :</strong><br>
+    FL-4.5.1 (K2) Expliquer comment rediger des user stories en collaboration avec les developpeurs et les representants metier<br>
+    FL-4.5.2 (K2) Classifier les differentes options pour rediger des criteres d'acceptation<br>
+    FL-4.5.3 (K3) Utiliser le developpement pilote par les tests d'acceptation (ATDD) pour deriver des cas de test
   </div>
-  <p>Each of the above-mentioned test techniques (see sections 4.2, 4.3, 4.4) has a particular objective with respect to defect detection. Collaboration-based approaches, on the other hand, focus also on defect avoidance by collaboration and communication.</p>
+  <p>Chacune des techniques de test mentionnees ci-dessus (voir sections 4.2, 4.3, 4.4) a un objectif particulier en matiere de detection des defauts. Les approches basees sur la collaboration, en revanche, se concentrent egalement sur l'evitement des defauts par la collaboration et la communication.</p>
 
-  <h4>4.5.1. Collaborative User Story Writing</h4>
-  <p>A user story represents a feature that will be valuable to either a user or purchaser of a system or software. User stories have three critical aspects (Jeffries 2000), called together the "3 C's":</p>
+  <h4>4.5.1. Redaction collaborative de user stories</h4>
+  <p>Une user story represente une fonctionnalite qui sera precieuse pour un utilisateur ou un acheteur d'un systeme ou d'un logiciel. Les user stories ont trois aspects essentiels (Jeffries 2000), appeles ensemble les "3 C" :</p>
   <ul>
-    <li><strong>Card</strong> – the medium describing a user story (e.g., an index card, an entry in an electronic board)</li>
-    <li><strong>Conversation</strong> – explains how the software will be used (can be documented or verbal)</li>
-    <li><strong>Confirmation</strong> – the acceptance criteria (see section 4.5.2)</li>
+    <li><strong>Carte (Card)</strong> – le support decrivant une user story (par exemple, une fiche cartonnee, une entree dans un tableau electronique)</li>
+    <li><strong>Conversation</strong> – explique comment le logiciel sera utilise (peut etre documentee ou verbale)</li>
+    <li><strong>Confirmation</strong> – les criteres d'acceptation (voir section 4.5.2)</li>
   </ul>
-  <p>The most common format for a user story is "As a [role], I want [goal to be accomplished], so that I can [resulting business value for the role]", followed by the acceptance criteria.</p>
-  <p>Collaborative authorship of the user story can use techniques such as brainstorming and mind mapping. The collaboration allows the team to obtain a shared vision of what should be delivered, by taking into account three perspectives: business, development and testing.</p>
-  <p>Good user stories should be: Independent, Negotiable, Valuable, Estimable, Small and Testable (INVEST). If a stakeholder does not know how to test a user story, this may indicate that the user story is not clear enough, or that it does not reflect something valuable to them, or that the stakeholder just needs help in testing (Wake 2003).</p>
+  <p>Le format le plus courant pour une user story est "En tant que [role], je veux [objectif a accomplir], afin de [valeur metier resultante pour le role]", suivi des criteres d'acceptation.</p>
+  <p>La redaction collaborative de la user story peut utiliser des techniques telles que le brainstorming et le mind mapping. La collaboration permet a l'equipe d'obtenir une vision partagee de ce qui doit etre livre, en tenant compte de trois perspectives : metier, developpement et test.</p>
+  <p>Les bonnes user stories doivent etre : Independantes, Negociables, ayant de la Valeur, Estimables, de petite taille (Small) et Testables (INVEST). Si une partie prenante ne sait pas comment tester une user story, cela peut indiquer que la user story n'est pas assez claire, qu'elle ne reflete pas quelque chose de valeur pour elle, ou que la partie prenante a simplement besoin d'aide pour les tests (Wake 2003).</p>
 
-  <h4>4.5.2. Acceptance Criteria</h4>
-  <p>Acceptance criteria for a user story are the conditions that an implementation of the user story must meet to be accepted by stakeholders. From this perspective, acceptance criteria may be viewed as the test conditions that should be exercised by the tests. Acceptance criteria are usually a result of the Conversation (see section 4.5.1).</p>
-  <p>Acceptance criteria are used to:</p>
+  <h4>4.5.2. Criteres d'acceptation</h4>
+  <p>Les criteres d'acceptation d'une user story sont les conditions qu'une implementation de la user story doit remplir pour etre acceptee par les parties prenantes. De ce point de vue, les criteres d'acceptation peuvent etre consideres comme les conditions de test qui doivent etre exercees par les tests. Les criteres d'acceptation sont generalement le resultat de la Conversation (voir section 4.5.1).</p>
+  <p>Les criteres d'acceptation sont utilises pour :</p>
   <ul>
-    <li>Define the scope of the user story</li>
-    <li>Reach consensus among the stakeholders</li>
-    <li>Describe both positive and negative scenarios</li>
-    <li>Serve as a basis for the user story acceptance testing (see section 4.5.3)</li>
-    <li>Allow accurate planning and estimation</li>
+    <li>Definir la portee de la user story</li>
+    <li>Atteindre un consensus entre les parties prenantes</li>
+    <li>Decrire les scenarios positifs et negatifs</li>
+    <li>Servir de base pour les tests d'acceptation de la user story (voir section 4.5.3)</li>
+    <li>Permettre une planification et une estimation precises</li>
   </ul>
-  <p>There are several ways to write acceptance criteria for a user story. The two most common formats are:</p>
+  <p>Il existe plusieurs facons de rediger des criteres d'acceptation pour une user story. Les deux formats les plus courants sont :</p>
   <ul>
-    <li>Scenario-oriented (e.g., Given/When/Then format used in BDD, see section 2.1.3)</li>
-    <li>Rule-oriented (e.g., bullet point verification list, or tabulated form of input-output mapping)</li>
+    <li>Oriente scenario (par exemple, le format Given/When/Then utilise en BDD, voir section 2.1.3)</li>
+    <li>Oriente regles (par exemple, une liste de verification a puces, ou une forme tabulee de correspondance entree-sortie)</li>
   </ul>
-  <p>Most acceptance criteria can be documented in one of these two formats. However, the team may use another, custom format, as long as the acceptance criteria are well-defined and unambiguous.</p>
+  <p>La plupart des criteres d'acceptation peuvent etre documentes dans l'un de ces deux formats. Cependant, l'equipe peut utiliser un autre format personnalise, tant que les criteres d'acceptation sont bien definis et non ambigus.</p>
 
-  <h4>4.5.3. Acceptance Test-driven Development (ATDD)</h4>
-  <p>ATDD is a test-first approach (see section 2.1.3). Test cases are created prior to implementing the user story. The test cases are created by team members with different perspectives, e.g., customers, developers, and testers (Adzic 2009). Test cases may be executed manually or automated.</p>
-  <p>The first step is a specification workshop where the user story and (if not yet defined) its acceptance criteria are analyzed, discussed, and written by the team members. Incompleteness, ambiguities, or defects in the user story are resolved during this process. The next step is to create the test cases. This can be done by the team as a whole or by the tester individually. The test cases are based on the acceptance criteria and can be seen as examples of how the software works. This will help the team implement the user story correctly.</p>
-  <p>Since examples and tests are the same, these terms are often used interchangeably. During the test design the test techniques described in sections 4.2, 4.3 and 4.4 may be applied.</p>
-  <p>Typically, the first test cases are positive, confirming the correct behavior without exceptions or error conditions, and comprising the sequence of activities executed if everything goes as expected. After the positive test cases are done, the team should perform negative testing. Finally, the team should cover non-functional quality characteristics (e.g., performance efficiency, usability). Test cases should be expressed in a way that is understandable for the stakeholders. Typically, test cases contain sentences in natural language involving the necessary preconditions (if any), the inputs, and the postconditions.</p>
-  <p>The test cases must cover all the characteristics of the user story and should not go beyond the story. However, the acceptance criteria may detail some of the issues described in the user story. In addition, no two test cases should describe the same characteristics of the user story.</p>
-  <p>When captured in a format supported by a test automation framework, the developers can automate the test cases by writing the supporting code as they implement the feature described by a user story. The acceptance tests then become executable requirements.</p>
+  <h4>4.5.3. Developpement pilote par les tests d'acceptation (ATDD)</h4>
+  <p>L'ATDD est une approche "test en premier" (voir section 2.1.3). Les cas de test sont crees avant l'implementation de la user story. Les cas de test sont crees par des membres de l'equipe ayant differentes perspectives, par exemple des clients, des developpeurs et des testeurs (Adzic 2009). Les cas de test peuvent etre executes manuellement ou automatises.</p>
+  <p>La premiere etape est un atelier de specification ou la user story et (si ce n'est pas encore fait) ses criteres d'acceptation sont analyses, discutes et rediges par les membres de l'equipe. Les incompletudes, ambiguites ou defauts de la user story sont resolus au cours de ce processus. L'etape suivante consiste a creer les cas de test. Cela peut etre fait par l'equipe dans son ensemble ou par le testeur individuellement. Les cas de test sont bases sur les criteres d'acceptation et peuvent etre vus comme des exemples du fonctionnement du logiciel. Cela aidera l'equipe a implementer correctement la user story.</p>
+  <p>Puisque les exemples et les tests sont la meme chose, ces termes sont souvent utilises de maniere interchangeable. Pendant la conception des tests, les techniques de test decrites dans les sections 4.2, 4.3 et 4.4 peuvent etre appliquees.</p>
+  <p>En general, les premiers cas de test sont positifs, confirmant le comportement correct sans exceptions ni conditions d'erreur, et comprenant la sequence d'activites executees si tout se passe comme prevu. Une fois les cas de test positifs termines, l'equipe devrait effectuer des tests negatifs. Enfin, l'equipe devrait couvrir les caracteristiques de qualite non fonctionnelles (par exemple, l'efficacite de performance, l'utilisabilite). Les cas de test doivent etre exprimes d'une maniere comprehensible pour les parties prenantes. En general, les cas de test contiennent des phrases en langage naturel impliquant les preconditions necessaires (le cas echeant), les entrees et les postconditions.</p>
+  <p>Les cas de test doivent couvrir toutes les caracteristiques de la user story et ne doivent pas aller au-dela de la story. Cependant, les criteres d'acceptation peuvent detailler certains des aspects decrits dans la user story. De plus, deux cas de test ne doivent pas decrire les memes caracteristiques de la user story.</p>
+  <p>Lorsqu'ils sont captures dans un format supporte par un framework d'automatisation des tests, les developpeurs peuvent automatiser les cas de test en ecrivant le code de support au fur et a mesure qu'ils implementent la fonctionnalite decrite par une user story. Les tests d'acceptation deviennent alors des exigences executables.</p>
 </div>
 
   </div>

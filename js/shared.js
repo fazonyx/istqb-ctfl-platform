@@ -41,6 +41,11 @@ function switchHomeTab(tabId, btn) {
   btn.classList.add('active');
   if (tabId === 'progression') renderProgression();
   if (tabId === 'apprentissage' && !window._fcInitialized) { initFlashcards(); window._fcInitialized = true; }
+  // Update URL hash for browser back button support
+  const hashMap = { quizzes: '#quiz', progression: '#progression', apprentissage: '#apprentissage' };
+  if (hashMap[tabId] && window.location.hash !== hashMap[tabId]) {
+    history.pushState(null, '', hashMap[tabId]);
+  }
 }
 
 function switchTab(tabId, btn) {

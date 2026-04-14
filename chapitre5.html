@@ -10,7 +10,7 @@
 
 <div class="header">
   <h1>Chapitre 5 - Gestion des tests</h1>
-  <a href="istqb_platform.html" class="btn-back" style="text-decoration:none;">&#8592; Retour a la plateforme</a>
+  <a href="istqb_platform.html#apprentissage" class="btn-back" style="text-decoration:none;">&#8592; Retour a la plateforme</a>
 </div>
 
 <div class="home-screen" style="max-width:960px;margin:0 auto;padding:24px;">
@@ -27,268 +27,268 @@
   <div id="chTab-syllabus">
 
 <div class="question-card" style="margin-bottom:20px;">
-  <h3>5.1. Test Planning</h3>
+  <h3>5.1. Planification des tests</h3>
   <div class="fiche-highlight">
-    <strong>Learning Objectives:</strong><br>
-    FL-5.1.1 (K2) Exemplify the purpose and content of a test plan<br>
-    FL-5.1.2 (K1) Recognize how a tester adds value to iteration and release planning<br>
-    FL-5.1.3 (K2) Compare and contrast entry criteria and exit criteria<br>
-    FL-5.1.4 (K3) Use estimation techniques to calculate the required test effort<br>
-    FL-5.1.5 (K3) Apply test case prioritization<br>
-    FL-5.1.6 (K1) Recall the concepts of the test pyramid<br>
-    FL-5.1.7 (K2) Summarize the testing quadrants and their relationships with test levels and test types
+    <strong>Objectifs d'apprentissage :</strong><br>
+    FL-5.1.1 (K2) Illustrer l'objectif et le contenu d'un plan de test<br>
+    FL-5.1.2 (K1) Reconnaitre comment un testeur apporte de la valeur a la planification d'iteration et de release<br>
+    FL-5.1.3 (K2) Comparer et contraster les criteres d'entree et les criteres de sortie<br>
+    FL-5.1.4 (K3) Utiliser des techniques d'estimation pour calculer l'effort de test requis<br>
+    FL-5.1.5 (K3) Appliquer la priorisation des cas de test<br>
+    FL-5.1.6 (K1) Se rappeler les concepts de la pyramide de test<br>
+    FL-5.1.7 (K2) Resumer les quadrants de test et leurs relations avec les niveaux de test et les types de test
   </div>
 
-  <h4>5.1.1. Purpose and Content of a Test Plan</h4>
-  <p>A test plan describes the test objectives, resources and processes for a test project. A test plan:</p>
+  <h4>5.1.1. Objectif et contenu d'un plan de test</h4>
+  <p>Un plan de test decrit les objectifs de test, les ressources et les processus pour un projet de test. Un plan de test :</p>
   <ul>
-    <li>Documents the means and schedule for achieving test objectives</li>
-    <li>Helps to ensure that the performed test activities will meet the established criteria</li>
-    <li>Serves as a means of communication with team members and other stakeholders</li>
-    <li>Demonstrates that testing will adhere to the existing test policy and test strategy (or explains why the testing will deviate from them)</li>
+    <li>Documente les moyens et le calendrier pour atteindre les objectifs de test</li>
+    <li>Aide a s'assurer que les activites de test realisees repondront aux criteres etablis</li>
+    <li>Sert de moyen de communication avec les membres de l'equipe et les autres parties prenantes</li>
+    <li>Demontre que le test respectera la politique de test et la strategie de test existantes (ou explique pourquoi le test s'en ecartera)</li>
   </ul>
-  <p>Test planning guides the testers' thinking and forces the testers to confront the future challenges related to risks, schedules, people, tools, costs, effort, etc. The process of preparing a test plan is a useful way to think through the efforts needed to achieve the test objectives.</p>
-  <p>The typical content of a test plan includes:</p>
+  <p>La planification des tests guide la reflexion des testeurs et les oblige a anticiper les defis futurs lies aux risques, aux calendriers, aux personnes, aux outils, aux couts, a l'effort, etc. Le processus de preparation d'un plan de test est un moyen utile de reflechir aux efforts necessaires pour atteindre les objectifs de test.</p>
+  <p>Le contenu typique d'un plan de test comprend :</p>
   <ul>
-    <li>Context of testing (e.g., test scope, test objectives, test basis)</li>
-    <li>Assumptions and constraints of the test project</li>
-    <li>Stakeholders (e.g., roles, responsibilities, relevance to testing, hiring and training needs)</li>
-    <li>Communication (e.g., forms and frequency of communication, documentation templates)</li>
-    <li>Risk register (e.g., product risks, project risks)</li>
-    <li>Test approach (e.g., test levels, test types, test techniques, test deliverables, entry criteria and exit criteria, independence of testing, metrics to be collected, test data requirements, test environment requirements, deviations from the test policy and test strategy)</li>
-    <li>Budget and schedule</li>
+    <li>Contexte du test (par ex., portee du test, objectifs de test, base de test)</li>
+    <li>Hypotheses et contraintes du projet de test</li>
+    <li>Parties prenantes (par ex., roles, responsabilites, pertinence pour le test, besoins en recrutement et en formation)</li>
+    <li>Communication (par ex., formes et frequence de la communication, modeles de documentation)</li>
+    <li>Registre des risques (par ex., risques produit, risques projet)</li>
+    <li>Approche de test (par ex., niveaux de test, types de test, techniques de test, livrables de test, criteres d'entree et criteres de sortie, independance du test, metriques a collecter, exigences en donnees de test, exigences en environnement de test, ecarts par rapport a la politique de test et a la strategie de test)</li>
+    <li>Budget et calendrier</li>
   </ul>
-  <p>More details about the test plan and its content can be found in the ISO/IEC/IEEE 29119-3 standard.</p>
+  <p>Plus de details sur le plan de test et son contenu peuvent etre trouves dans la norme ISO/IEC/IEEE 29119-3.</p>
 
-  <h4>5.1.2. Tester's Contribution to Iteration and Release Planning</h4>
-  <p>In iterative SDLCs, typically two kinds of planning occur: release planning and iteration planning.</p>
-  <p><strong>Release planning</strong> looks ahead to the release of a product, defines and re-defines the product backlog, and may involve refining larger user stories into a set of smaller user stories. It also serves as the basis for the test approach and test plan across all iterations. Testers involved in release planning participate in writing testable user stories and acceptance criteria (see section 4.5), participate in project and quality risk analyses (see section 5.2), estimate test effort associated with user stories (see section 5.1.4), determine the test approach, and plan the testing for the release.</p>
-  <p><strong>Iteration planning</strong> looks ahead to the end of a single iteration and is concerned with the iteration backlog. Testers involved in iteration planning participate in the detailed risk analysis of user stories, determine the testability of user stories, break down user stories into tasks (particularly testing tasks), estimate test effort for all testing tasks, and identify and refine functional and non-functional aspects of the test object.</p>
+  <h4>5.1.2. Contribution du testeur a la planification d'iteration et de release</h4>
+  <p>Dans les SDLC iteratifs, deux types de planification ont generalement lieu : la planification de release et la planification d'iteration.</p>
+  <p><strong>La planification de release</strong> anticipe la livraison d'un produit, definit et redefinit le backlog produit, et peut impliquer le raffinement de user stories plus grandes en un ensemble de user stories plus petites. Elle sert egalement de base a l'approche de test et au plan de test pour toutes les iterations. Les testeurs impliques dans la planification de release participent a la redaction de user stories testables et de criteres d'acceptation (voir section 4.5), participent aux analyses de risques projet et qualite (voir section 5.2), estiment l'effort de test associe aux user stories (voir section 5.1.4), determinent l'approche de test et planifient le test pour la release.</p>
+  <p><strong>La planification d'iteration</strong> anticipe la fin d'une seule iteration et concerne le backlog d'iteration. Les testeurs impliques dans la planification d'iteration participent a l'analyse detaillee des risques des user stories, determinent la testabilite des user stories, decomposent les user stories en taches (en particulier les taches de test), estiment l'effort de test pour toutes les taches de test, et identifient et affinent les aspects fonctionnels et non fonctionnels de l'objet de test.</p>
 
-  <h4>5.1.3. Entry Criteria and Exit Criteria</h4>
-  <p>Entry criteria define the preconditions for undertaking a given activity. If entry criteria are not met, it is likely that the activity will prove to be more difficult, time-consuming, costly, and riskier. Exit criteria define what must be achieved to declare an activity completed. Entry criteria and exit criteria should be defined for each test level, and will differ based on the test objectives.</p>
-  <p>Typical entry criteria include: availability of resources (e.g., people, tools, environments, test data, budget, time), availability of testware (e.g., test basis, testable requirements, user stories, test cases), and initial quality level of a test object (e.g., all smoke tests have passed).</p>
-  <p>Typical exit criteria include: measures of thoroughness (e.g., achieved level of coverage, number of unresolved defects, defect density, number of failed test cases), and binary "yes/no" criteria (e.g., planned tests have been executed, static testing has been performed, all defects found are reported, all regression tests are automated).</p>
-  <p>Running out of time or budget can also be viewed as valid exit criteria. Even without other exit criteria being satisfied, it can be acceptable to end testing under such circumstances, if the stakeholders have reviewed and accepted the risk to go live without further testing.</p>
-  <p>In Agile software development, exit criteria are often called Definition of Done, defining the team's objective metrics for a releasable item. Entry criteria that a user story must fulfill to start the development and/or testing activities are called Definition of Ready.</p>
+  <h4>5.1.3. Criteres d'entree et criteres de sortie</h4>
+  <p>Les criteres d'entree definissent les preconditions pour entreprendre une activite donnee. Si les criteres d'entree ne sont pas remplis, il est probable que l'activite s'averera plus difficile, plus longue, plus couteuse et plus risquee. Les criteres de sortie definissent ce qui doit etre atteint pour declarer une activite terminee. Les criteres d'entree et de sortie doivent etre definis pour chaque niveau de test et differeront en fonction des objectifs de test.</p>
+  <p>Les criteres d'entree typiques comprennent : la disponibilite des ressources (par ex., personnes, outils, environnements, donnees de test, budget, temps), la disponibilite du testware (par ex., base de test, exigences testables, user stories, cas de test) et le niveau de qualite initial d'un objet de test (par ex., tous les tests de fumee ont reussi).</p>
+  <p>Les criteres de sortie typiques comprennent : les mesures de rigueur (par ex., niveau de couverture atteint, nombre de defauts non resolus, densite de defauts, nombre de cas de test echoues) et les criteres binaires "oui/non" (par ex., les tests planifies ont ete executes, le test statique a ete effectue, tous les defauts trouves sont rapportes, tous les tests de regression sont automatises).</p>
+  <p>L'epuisement du temps ou du budget peut egalement etre considere comme un critere de sortie valide. Meme sans que d'autres criteres de sortie soient satisfaits, il peut etre acceptable de terminer le test dans de telles circonstances, si les parties prenantes ont examine et accepte le risque de mettre en production sans tests supplementaires.</p>
+  <p>En developpement logiciel Agile, les criteres de sortie sont souvent appeles Definition of Done, definissant les metriques objectives de l'equipe pour un element livrable. Les criteres d'entree qu'une user story doit remplir pour demarrer les activites de developpement et/ou de test sont appeles Definition of Ready.</p>
 
-  <h4>5.1.4. Estimation Techniques</h4>
-  <p>Test effort estimation involves predicting the amount of test-related work needed to meet the test objectives of a test project. It is important to make it clear to the stakeholders that the estimate is based on a number of assumptions and is always subject to estimation error. Estimation for small tasks is usually more accurate than for the large ones. Therefore, when estimating a large task, it can be decomposed into a set of smaller tasks which then in turn can be estimated.</p>
-  <p>In this syllabus, the following four estimation techniques are described.</p>
-  <p><strong>Estimation based on ratios.</strong> In this metrics-based technique, figures are collected from previous projects within the organization, which makes it possible to derive "standard" ratios for similar projects. The ratios of an organization's own projects (e.g., taken from historical data) are generally the best source to use in the estimation process. These standard ratios can then be used to estimate the test effort for the new project. For example, if in the previous project the development-to-test effort ratio was 3:2, and in the current project the development effort is expected to be 600 person-days, the test effort can be estimated to be 400 person-days.</p>
-  <p><strong>Extrapolation.</strong> In this metrics-based technique, measurements are made as early as possible in the current project to gather the data. Having enough observations, the effort required for the remaining work can be approximated by extrapolating this data (usually by applying a mathematical model). This method is very suitable in iterative SDLCs. For example, the team may extrapolate the test effort in the forthcoming iteration as the averaged effort from the last three iterations.</p>
-  <p><strong>Wideband Delphi.</strong> In this iterative, expert-based technique, experts make experience-based estimations. Each expert, in isolation, estimates the effort. The results are collected and if there are deviations of an expert's estimate that are out of range of the agreed upon boundaries, the experts discuss their current estimates. Each expert is then asked to make a new estimation based on that feedback, again in isolation. This process is repeated until a consensus is reached. Planning Poker is a variant of Wideband Delphi, commonly used in Agile software development. In Planning Poker, estimates are usually made using cards with numbers that represent the effort size.</p>
-  <p><strong>Three-point estimation.</strong> In this expert-based technique, three estimations are made by the experts: the most optimistic estimation (a), the most likely estimation (m) and the most pessimistic estimation (b). The final estimate (E) is their weighted arithmetic mean. In the most popular version of this technique, the estimate is calculated as E = (a + 4*m + b) / 6. The advantage of this technique is that it allows the experts to calculate the measurement error: SD = (b &ndash; a) / 6. For example, if the estimates (in person-hours) are: a=6, m=9 and b=18, then the final estimation is 10&plusmn;2 person-hours (i.e., between 8 and 12 person-hours), because E = (6 + 4*9 + 18) / 6 = 10 and SD = (18 &ndash; 6) / 6 = 2.</p>
+  <h4>5.1.4. Techniques d'estimation</h4>
+  <p>L'estimation de l'effort de test consiste a predire la quantite de travail lie au test necessaire pour atteindre les objectifs de test d'un projet de test. Il est important de preciser aux parties prenantes que l'estimation est basee sur un certain nombre d'hypotheses et est toujours sujette a une erreur d'estimation. L'estimation pour les petites taches est generalement plus precise que pour les grandes. Par consequent, lors de l'estimation d'une tache importante, elle peut etre decomposee en un ensemble de taches plus petites qui peuvent ensuite etre estimees a leur tour.</p>
+  <p>Dans ce syllabus, les quatre techniques d'estimation suivantes sont decrites.</p>
+  <p><strong>Estimation basee sur les ratios.</strong> Dans cette technique basee sur les metriques, des chiffres sont collectes a partir de projets precedents au sein de l'organisation, ce qui permet de deriver des ratios "standards" pour des projets similaires. Les ratios des propres projets de l'organisation (par ex., tires de donnees historiques) sont generalement la meilleure source a utiliser dans le processus d'estimation. Ces ratios standards peuvent ensuite etre utilises pour estimer l'effort de test du nouveau projet. Par exemple, si dans le projet precedent le ratio effort de developpement/effort de test etait de 3:2, et que dans le projet actuel l'effort de developpement est estime a 600 jours-personnes, l'effort de test peut etre estime a 400 jours-personnes.</p>
+  <p><strong>Extrapolation.</strong> Dans cette technique basee sur les metriques, des mesures sont effectuees le plus tot possible dans le projet en cours pour collecter les donnees. Ayant suffisamment d'observations, l'effort requis pour le travail restant peut etre approxime en extrapolant ces donnees (generalement en appliquant un modele mathematique). Cette methode est tres adaptee aux SDLC iteratifs. Par exemple, l'equipe peut extrapoler l'effort de test de l'iteration a venir comme la moyenne de l'effort des trois dernieres iterations.</p>
+  <p><strong>Wideband Delphi.</strong> Dans cette technique iterative basee sur les experts, les experts font des estimations basees sur l'experience. Chaque expert, de maniere isolee, estime l'effort. Les resultats sont collectes et si les ecarts de l'estimation d'un expert sont en dehors des limites convenues, les experts discutent de leurs estimations actuelles. Chaque expert est ensuite invite a faire une nouvelle estimation basee sur ce retour, a nouveau de maniere isolee. Ce processus est repete jusqu'a ce qu'un consensus soit atteint. Le Planning Poker est une variante du Wideband Delphi, couramment utilisee dans le developpement logiciel Agile. Dans le Planning Poker, les estimations sont generalement faites a l'aide de cartes avec des nombres representant la taille de l'effort.</p>
+  <p><strong>Estimation a trois points.</strong> Dans cette technique basee sur les experts, trois estimations sont faites par les experts : l'estimation la plus optimiste (a), l'estimation la plus probable (m) et l'estimation la plus pessimiste (b). L'estimation finale (E) est leur moyenne arithmetique ponderee. Dans la version la plus populaire de cette technique, l'estimation est calculee comme E = (a + 4*m + b) / 6. L'avantage de cette technique est qu'elle permet aux experts de calculer l'erreur de mesure : SD = (b &ndash; a) / 6. Par exemple, si les estimations (en heures-personnes) sont : a=6, m=9 et b=18, alors l'estimation finale est de 10&plusmn;2 heures-personnes (c'est-a-dire entre 8 et 12 heures-personnes), car E = (6 + 4*9 + 18) / 6 = 10 et SD = (18 &ndash; 6) / 6 = 2.</p>
 
-  <h4>5.1.5. Test Case Prioritization</h4>
-  <p>Once the test cases and test procedures are specified and assembled into test suites, these test suites can be arranged in a test execution schedule that defines the order in which they are to be run. When prioritizing test cases, different factors can be taken into account. The most commonly used test case prioritization strategies are as follows:</p>
+  <h4>5.1.5. Priorisation des cas de test</h4>
+  <p>Une fois les cas de test et les procedures de test specifies et assembles en suites de test, ces suites de test peuvent etre organisees dans un calendrier d'execution des tests qui definit l'ordre dans lequel elles doivent etre executees. Lors de la priorisation des cas de test, differents facteurs peuvent etre pris en compte. Les strategies de priorisation des cas de test les plus couramment utilisees sont les suivantes :</p>
   <ul>
-    <li><strong>Risk-based prioritization</strong>, where the order of test execution is based on the results of risk analysis (see section 5.2.3). Test cases covering the most important risks are executed first.</li>
-    <li><strong>Coverage-based prioritization</strong>, where the order of test execution is based on coverage (e.g., statement coverage). Test cases achieving the highest coverage are executed first. In another variant, called additional coverage prioritization, the test case achieving the highest coverage is executed first; each subsequent test case is the one that achieves the highest additional coverage.</li>
-    <li><strong>Requirements-based prioritization</strong>, where the order of test execution is based on the priorities of the requirements traced back to the corresponding test cases. Requirement priorities are defined by stakeholders. Test cases related to the most important requirements are executed first.</li>
+    <li><strong>Priorisation basee sur le risque</strong>, ou l'ordre d'execution des tests est base sur les resultats de l'analyse des risques (voir section 5.2.3). Les cas de test couvrant les risques les plus importants sont executes en premier.</li>
+    <li><strong>Priorisation basee sur la couverture</strong>, ou l'ordre d'execution des tests est base sur la couverture (par ex., couverture des instructions). Les cas de test atteignant la couverture la plus elevee sont executes en premier. Dans une autre variante, appelee priorisation par couverture additionnelle, le cas de test atteignant la couverture la plus elevee est execute en premier ; chaque cas de test suivant est celui qui atteint la couverture additionnelle la plus elevee.</li>
+    <li><strong>Priorisation basee sur les exigences</strong>, ou l'ordre d'execution des tests est base sur les priorites des exigences retracees jusqu'aux cas de test correspondants. Les priorites des exigences sont definies par les parties prenantes. Les cas de test lies aux exigences les plus importantes sont executes en premier.</li>
   </ul>
-  <p>Ideally, test cases would be ordered to run based on their priority levels, using, for example, one of the above-mentioned prioritization strategies. However, this practice may not work if the test cases or the features being tested have dependencies. If a test case with a higher priority is dependent on a test case with a lower priority, the lower priority test case must be executed first.</p>
-  <p>The order of test execution must also take into account the availability of resources. For example, the required test tools, test environments or people that may only be available for a specific time window.</p>
+  <p>Idealement, les cas de test seraient ordonnes pour etre executes en fonction de leurs niveaux de priorite, en utilisant, par exemple, l'une des strategies de priorisation mentionnees ci-dessus. Cependant, cette pratique peut ne pas fonctionner si les cas de test ou les fonctionnalites testees ont des dependances. Si un cas de test de priorite superieure depend d'un cas de test de priorite inferieure, le cas de test de priorite inferieure doit etre execute en premier.</p>
+  <p>L'ordre d'execution des tests doit egalement tenir compte de la disponibilite des ressources. Par exemple, les outils de test, les environnements de test ou les personnes necessaires qui peuvent n'etre disponibles que pendant une fenetre de temps specifique.</p>
 
-  <h4>5.1.6. Test Pyramid</h4>
-  <p>The test pyramid is a model showing that different tests may have different granularity. The test pyramid model supports the team in test automation and in test effort allocation by showing that different test objectives are supported by different levels of test automation. The pyramid layers represent groups of tests. The higher the layer, the lower the test granularity, the lower the test isolation (i.e., the degree of dependency on other elements of the system) and the higher the test execution time. Tests in the bottom layer are small, isolated, fast, and check a small piece of functionality, so usually a lot of them are needed to achieve a reasonable coverage. The top layer represents complex, high-level, end-to-end tests. These high-level tests are generally slower than the tests from the lower layers, and they typically check a large piece of functionality, so usually just a few of them are needed to achieve a reasonable level of coverage.</p>
-  <p>The number and naming of the layers may differ. For example, the original test pyramid model (Cohn 2009) defines three layers: "unit tests", "service tests" and "UI tests". Another popular model defines unit (component) tests, integration (component integration) tests, and end-to-end tests. Other test levels (see section 2.2.1) can also be used.</p>
+  <h4>5.1.6. Pyramide de test</h4>
+  <p>La pyramide de test est un modele montrant que differents tests peuvent avoir differentes granularites. Le modele de la pyramide de test aide l'equipe dans l'automatisation des tests et dans l'allocation de l'effort de test en montrant que differents objectifs de test sont supportes par differents niveaux d'automatisation des tests. Les couches de la pyramide representent des groupes de tests. Plus la couche est elevee, plus la granularite du test est faible, plus l'isolation du test est faible (c'est-a-dire le degre de dependance vis-a-vis d'autres elements du systeme) et plus le temps d'execution du test est eleve. Les tests de la couche inferieure sont petits, isoles, rapides et verifient une petite partie de la fonctionnalite, donc generalement un grand nombre d'entre eux est necessaire pour atteindre une couverture raisonnable. La couche superieure represente des tests complexes, de haut niveau, de bout en bout. Ces tests de haut niveau sont generalement plus lents que les tests des couches inferieures, et ils verifient typiquement une grande partie de la fonctionnalite, donc generalement seuls quelques-uns sont necessaires pour atteindre un niveau de couverture raisonnable.</p>
+  <p>Le nombre et le nommage des couches peuvent differer. Par exemple, le modele original de la pyramide de test (Cohn 2009) definit trois couches : "tests unitaires", "tests de service" et "tests UI". Un autre modele populaire definit les tests unitaires (composants), les tests d'integration (integration de composants) et les tests de bout en bout. D'autres niveaux de test (voir section 2.2.1) peuvent egalement etre utilises.</p>
 
-  <h4>5.1.7. Testing Quadrants</h4>
-  <p>The testing quadrants, defined by Brian Marick (Marick 2003, Crispin 2008), group the test levels with the appropriate test types, activities, test techniques and work products in the Agile software development. The model supports test management in visualizing these to ensure that all appropriate test types and test levels are included in the SDLC and in understanding that some test types are more relevant to certain test levels than others. This model also provides a way to differentiate and describe the test types to all stakeholders, including developers, testers, and business representatives.</p>
-  <p>In this model, tests can be business facing or technology facing. Tests can also support the team (i.e., guide the development) or critique the product (i.e., measure its behavior against the expectations). The combination of these two viewpoints determines the four quadrants:</p>
+  <h4>5.1.7. Quadrants de test</h4>
+  <p>Les quadrants de test, definis par Brian Marick (Marick 2003, Crispin 2008), regroupent les niveaux de test avec les types de test, activites, techniques de test et produits d'activite appropries dans le developpement logiciel Agile. Le modele aide la gestion de test a les visualiser pour s'assurer que tous les types de test et niveaux de test appropries sont inclus dans le SDLC et a comprendre que certains types de test sont plus pertinents pour certains niveaux de test que d'autres. Ce modele fournit egalement un moyen de differencier et de decrire les types de test a toutes les parties prenantes, y compris les developpeurs, les testeurs et les representants metier.</p>
+  <p>Dans ce modele, les tests peuvent etre orientes metier ou orientes technologie. Les tests peuvent egalement soutenir l'equipe (c'est-a-dire guider le developpement) ou critiquer le produit (c'est-a-dire mesurer son comportement par rapport aux attentes). La combinaison de ces deux points de vue determine les quatre quadrants :</p>
   <ul>
-    <li><strong>Quadrant Q1</strong> (technology facing, support the team). This quadrant contains component tests and component integration tests. These tests should be automated and included in the CI process.</li>
-    <li><strong>Quadrant Q2</strong> (business facing, support the team). This quadrant contains functional tests, examples, user story tests, user experience prototypes, API testing, and simulations. These tests check the acceptance criteria and can be manual or automated.</li>
-    <li><strong>Quadrant Q3</strong> (business facing, critique the product). This quadrant contains exploratory testing, usability testing, user acceptance testing. These tests are user-oriented and often manual.</li>
-    <li><strong>Quadrant Q4</strong> (technology facing, critique the product). This quadrant contains smoke tests and non-functional tests (except usability tests). These tests are often automated.</li>
+    <li><strong>Quadrant Q1</strong> (oriente technologie, soutien a l'equipe). Ce quadrant contient les tests de composants et les tests d'integration de composants. Ces tests doivent etre automatises et inclus dans le processus de CI.</li>
+    <li><strong>Quadrant Q2</strong> (oriente metier, soutien a l'equipe). Ce quadrant contient les tests fonctionnels, les exemples, les tests de user stories, les prototypes d'experience utilisateur, les tests d'API et les simulations. Ces tests verifient les criteres d'acceptation et peuvent etre manuels ou automatises.</li>
+    <li><strong>Quadrant Q3</strong> (oriente metier, critique du produit). Ce quadrant contient les tests exploratoires, les tests d'utilisabilite, les tests d'acceptation utilisateur. Ces tests sont orientes utilisateur et souvent manuels.</li>
+    <li><strong>Quadrant Q4</strong> (oriente technologie, critique du produit). Ce quadrant contient les tests de fumee et les tests non fonctionnels (sauf les tests d'utilisabilite). Ces tests sont souvent automatises.</li>
   </ul>
 </div>
 
 <div class="question-card" style="margin-bottom:20px;">
-  <h3>5.2. Risk Management</h3>
+  <h3>5.2. Gestion des risques</h3>
   <div class="fiche-highlight">
-    <strong>Learning Objectives:</strong><br>
-    FL-5.2.1 (K1) Identify risk level by using risk likelihood and risk impact<br>
-    FL-5.2.2 (K2) Distinguish between project risks and product risks<br>
-    FL-5.2.3 (K2) Explain how product risk analysis may influence thoroughness and test scope<br>
-    FL-5.2.4 (K2) Explain what measures can be taken in response to analyzed product risks
+    <strong>Objectifs d'apprentissage :</strong><br>
+    FL-5.2.1 (K1) Identifier le niveau de risque en utilisant la vraisemblance du risque et l'impact du risque<br>
+    FL-5.2.2 (K2) Distinguer les risques projet des risques produit<br>
+    FL-5.2.3 (K2) Expliquer comment l'analyse des risques produit peut influencer la rigueur et la portee du test<br>
+    FL-5.2.4 (K2) Expliquer quelles mesures peuvent etre prises en reponse aux risques produit analyses
   </div>
-  <p>Organizations face many internal and external factors that make it uncertain whether and when they will achieve their objectives (ISO 31000). Risk management allows the organizations to increase the likelihood of achieving objectives, improve the quality of their products and increase the stakeholders' confidence and trust.</p>
-  <p>The main risk management activities are:</p>
+  <p>Les organisations font face a de nombreux facteurs internes et externes qui rendent incertain si et quand elles atteindront leurs objectifs (ISO 31000). La gestion des risques permet aux organisations d'augmenter la probabilite d'atteindre les objectifs, d'ameliorer la qualite de leurs produits et d'accroitre la confiance des parties prenantes.</p>
+  <p>Les principales activites de gestion des risques sont :</p>
   <ul>
-    <li>Risk analysis (consisting of risk identification and risk assessment; see section 5.2.3)</li>
-    <li>Risk control (consisting of risk mitigation and risk monitoring; see section 5.2.4)</li>
+    <li>L'analyse des risques (comprenant l'identification des risques et l'evaluation des risques ; voir section 5.2.3)</li>
+    <li>Le controle des risques (comprenant l'attenuation des risques et la surveillance des risques ; voir section 5.2.4)</li>
   </ul>
-  <p>The test approach, in which test activities are selected, prioritized, and managed based on risk analysis and risk control, is called risk-based testing.</p>
+  <p>L'approche de test, dans laquelle les activites de test sont selectionnees, priorisees et gerees sur la base de l'analyse et du controle des risques, est appelee test base sur les risques.</p>
 
-  <h4>5.2.1. Risk Definition and Risk Attributes</h4>
-  <p>Risk is a potential event, hazard, threat, or situation whose occurrence causes an adverse effect. A risk can be characterized by two factors:</p>
+  <h4>5.2.1. Definition du risque et attributs du risque</h4>
+  <p>Un risque est un evenement potentiel, un danger, une menace ou une situation dont la survenue provoque un effet nefaste. Un risque peut etre caracterise par deux facteurs :</p>
   <ul>
-    <li>Risk likelihood – the probability of the risk occurrence (greater than zero and less than one)</li>
-    <li>Risk impact (harm) – the consequences of this occurrence</li>
+    <li>Vraisemblance du risque – la probabilite de survenue du risque (superieure a zero et inferieure a un)</li>
+    <li>Impact du risque (prejudice) – les consequences de cette survenue</li>
   </ul>
-  <p>These two factors express the risk level, which is a measure for the risk. The higher the risk level, the more important is its treatment.</p>
+  <p>Ces deux facteurs expriment le niveau de risque, qui est une mesure du risque. Plus le niveau de risque est eleve, plus son traitement est important.</p>
 
-  <h4>5.2.2. Project Risks and Product Risks</h4>
-  <p>In software testing one is generally concerned with two types of risks: project risks and product risks.</p>
-  <p><strong>Project risks</strong> are related to the management and control of the project. Project risks include:</p>
+  <h4>5.2.2. Risques projet et risques produit</h4>
+  <p>Dans le test logiciel, on est generalement concerne par deux types de risques : les risques projet et les risques produit.</p>
+  <p><strong>Les risques projet</strong> sont lies a la gestion et au controle du projet. Les risques projet comprennent :</p>
   <ul>
-    <li>Organizational issues (e.g., delays in work products deliveries, inaccurate estimates, cost cutting)</li>
-    <li>People issues (e.g., insufficient skills, conflicts, communication problems, shortage of staff)</li>
-    <li>Technical issues (e.g., scope creep, poor tool support)</li>
-    <li>Supplier issues (e.g., third-party delivery failure, bankruptcy of the supporting company)</li>
+    <li>Problemes organisationnels (par ex., retards dans la livraison des produits d'activite, estimations inexactes, reductions de couts)</li>
+    <li>Problemes de personnel (par ex., competences insuffisantes, conflits, problemes de communication, manque de personnel)</li>
+    <li>Problemes techniques (par ex., derive du perimetre, support d'outils insuffisant)</li>
+    <li>Problemes de fournisseur (par ex., defaillance de livraison d'un tiers, faillite de l'entreprise de support)</li>
   </ul>
-  <p>Project risks, when they occur, may have an impact on the project schedule, budget or scope, which affects the project's ability to achieve its objectives.</p>
-  <p><strong>Product risks</strong> are related to the product quality characteristics (e.g., described in the ISO 25010 quality model). Examples of product risks include: missing or wrong functionality, incorrect calculations, runtime errors, poor architecture, inefficient algorithms, inadequate response time, poor user experience, security vulnerabilities. Product risks, when they occur, may result in various negative consequences, including:</p>
+  <p>Les risques projet, lorsqu'ils surviennent, peuvent avoir un impact sur le calendrier, le budget ou le perimetre du projet, ce qui affecte la capacite du projet a atteindre ses objectifs.</p>
+  <p><strong>Les risques produit</strong> sont lies aux caracteristiques de qualite du produit (par ex., decrites dans le modele de qualite ISO 25010). Des exemples de risques produit incluent : fonctionnalite manquante ou erronee, calculs incorrects, erreurs d'execution, architecture mediocre, algorithmes inefficaces, temps de reponse inadequat, experience utilisateur mediocre, vulnerabilites de securite. Les risques produit, lorsqu'ils surviennent, peuvent entrainer diverses consequences negatives, notamment :</p>
   <ul>
-    <li>User dissatisfaction</li>
-    <li>Loss of revenue, trust, reputation</li>
-    <li>Damage to third parties</li>
-    <li>High maintenance costs, overload of the help desk</li>
-    <li>Criminal penalties</li>
-    <li>In extreme cases, physical damage, injuries or even death</li>
-  </ul>
-
-  <h4>5.2.3. Product Risk Analysis</h4>
-  <p>From a testing perspective, the goal of product risk analysis is to provide an awareness of product risk to focus the test effort in a way that minimizes the residual level of product risk. Ideally, product risk analysis begins early in the SDLC.</p>
-  <p>Product risk analysis consists of risk identification and risk assessment. Risk identification is about generating a comprehensive list of risks. Stakeholders can identify risks by using various techniques and tools, e.g., brainstorming, workshops, interviews, or cause-effect diagrams. Risk assessment involves: categorization of identified risks, determining their risk likelihood, risk impact and risk level, prioritizing, and proposing ways to handle them. Categorization helps in assigning mitigation actions, because usually risks falling into the same category can be mitigated using a similar approach.</p>
-  <p>Risk assessment can use a quantitative or qualitative approach, or a mix of them. In the quantitative approach the risk level is calculated as the multiplication of risk likelihood and risk impact. In the qualitative approach the risk level can be determined using a risk matrix.</p>
-  <p>Product risk analysis may influence the thoroughness and test scope. Its results are used to:</p>
-  <ul>
-    <li>Determine the test scope to be carried out</li>
-    <li>Determine the particular test levels and propose test types to be performed</li>
-    <li>Determine the test techniques to be employed and the coverage to be achieved</li>
-    <li>Estimate the test effort required for each task</li>
-    <li>Prioritize testing in an attempt to find the critical defects as early as possible</li>
-    <li>Determine whether any activities in addition to testing could be employed to reduce risk</li>
+    <li>Insatisfaction des utilisateurs</li>
+    <li>Perte de revenus, de confiance, de reputation</li>
+    <li>Dommages a des tiers</li>
+    <li>Couts de maintenance eleves, surcharge du service d'assistance</li>
+    <li>Sanctions penales</li>
+    <li>Dans les cas extremes, dommages physiques, blessures voire deces</li>
   </ul>
 
-  <h4>5.2.4. Product Risk Control</h4>
-  <p>Product risk control comprises all measures that are taken in response to identified and assessed product risks. Product risk control consists of risk mitigation and risk monitoring. Risk mitigation involves implementing the actions proposed in risk assessment to reduce the risk level. The aim of risk monitoring is to ensure that the mitigation actions are effective, to obtain further information to improve risk assessment, and to identify emerging risks.</p>
-  <p>With respect to product risk control, once a risk has been analyzed, several response options to risk are possible, e.g., risk mitigation by testing, risk acceptance, risk transfer, or a contingency plan (Veenendaal 2012). Actions that can be taken to mitigate the product risks by testing are as follows:</p>
+  <h4>5.2.3. Analyse des risques produit</h4>
+  <p>Du point de vue du test, l'objectif de l'analyse des risques produit est de fournir une prise de conscience du risque produit pour concentrer l'effort de test de maniere a minimiser le niveau residuel de risque produit. Idealement, l'analyse des risques produit commence tot dans le SDLC.</p>
+  <p>L'analyse des risques produit consiste en l'identification des risques et l'evaluation des risques. L'identification des risques consiste a generer une liste exhaustive de risques. Les parties prenantes peuvent identifier les risques en utilisant diverses techniques et outils, par ex., brainstorming, ateliers, entretiens ou diagrammes de cause a effet. L'evaluation des risques implique : la categorisation des risques identifies, la determination de leur vraisemblance, impact et niveau de risque, la priorisation et la proposition de moyens pour les traiter. La categorisation aide a attribuer les actions d'attenuation, car generalement les risques appartenant a la meme categorie peuvent etre attenuer en utilisant une approche similaire.</p>
+  <p>L'evaluation des risques peut utiliser une approche quantitative ou qualitative, ou un melange des deux. Dans l'approche quantitative, le niveau de risque est calcule comme la multiplication de la vraisemblance du risque et de l'impact du risque. Dans l'approche qualitative, le niveau de risque peut etre determine a l'aide d'une matrice de risque.</p>
+  <p>L'analyse des risques produit peut influencer la rigueur et la portee du test. Ses resultats sont utilises pour :</p>
   <ul>
-    <li>Select the testers with the right level of experience and skills, suitable for a given risk type</li>
-    <li>Apply an appropriate level of independence of testing</li>
-    <li>Perform reviews and static analysis</li>
-    <li>Apply the appropriate test techniques and coverage levels</li>
-    <li>Apply the appropriate test types addressing the affected quality characteristics</li>
-    <li>Perform dynamic testing, including regression testing</li>
+    <li>Determiner la portee du test a realiser</li>
+    <li>Determiner les niveaux de test particuliers et proposer les types de test a effectuer</li>
+    <li>Determiner les techniques de test a employer et la couverture a atteindre</li>
+    <li>Estimer l'effort de test requis pour chaque tache</li>
+    <li>Prioriser le test pour tenter de trouver les defauts critiques le plus tot possible</li>
+    <li>Determiner si des activites supplementaires au test pourraient etre employees pour reduire le risque</li>
+  </ul>
+
+  <h4>5.2.4. Controle des risques produit</h4>
+  <p>Le controle des risques produit comprend toutes les mesures prises en reponse aux risques produit identifies et evalues. Le controle des risques produit consiste en l'attenuation des risques et la surveillance des risques. L'attenuation des risques implique la mise en oeuvre des actions proposees lors de l'evaluation des risques pour reduire le niveau de risque. L'objectif de la surveillance des risques est de s'assurer que les actions d'attenuation sont efficaces, d'obtenir des informations supplementaires pour ameliorer l'evaluation des risques et d'identifier les risques emergents.</p>
+  <p>En ce qui concerne le controle des risques produit, une fois qu'un risque a ete analyse, plusieurs options de reponse au risque sont possibles, par ex., attenuation du risque par le test, acceptation du risque, transfert du risque ou plan de contingence (Veenendaal 2012). Les actions qui peuvent etre prises pour attenuer les risques produit par le test sont les suivantes :</p>
+  <ul>
+    <li>Selectionner les testeurs ayant le bon niveau d'experience et de competences, adapte a un type de risque donne</li>
+    <li>Appliquer un niveau d'independance du test approprie</li>
+    <li>Effectuer des revues et des analyses statiques</li>
+    <li>Appliquer les techniques de test et les niveaux de couverture appropries</li>
+    <li>Appliquer les types de test appropries traitant les caracteristiques de qualite affectees</li>
+    <li>Effectuer des tests dynamiques, y compris des tests de regression</li>
   </ul>
 </div>
 
 <div class="question-card" style="margin-bottom:20px;">
-  <h3>5.3. Test Monitoring, Test Control and Test Completion</h3>
+  <h3>5.3. Suivi des tests, controle des tests et completion des tests</h3>
   <div class="fiche-highlight">
-    <strong>Learning Objectives:</strong><br>
-    FL-5.3.1 (K1) Recall metrics used for testing<br>
-    FL-5.3.2 (K2) Summarize the purposes, content, and audiences for test reports<br>
-    FL-5.3.3 (K2) Exemplify how to communicate the status of testing
+    <strong>Objectifs d'apprentissage :</strong><br>
+    FL-5.3.1 (K1) Se rappeler les metriques utilisees pour le test<br>
+    FL-5.3.2 (K2) Resumer les objectifs, le contenu et les audiences des rapports de test<br>
+    FL-5.3.3 (K2) Illustrer comment communiquer le statut du test
   </div>
-  <p>Test monitoring is concerned with gathering information about testing. This information is used to assess test progress and to measure whether the exit criteria or the test tasks associated with the exit criteria are satisfied, such as meeting the targets for coverage of product risks, requirements, or acceptance criteria.</p>
-  <p>Test control uses the information from test monitoring to provide, in a form of the control directives, guidance and the necessary corrective actions to achieve the most effective and efficient testing. Examples of control directives include:</p>
+  <p>Le suivi des tests concerne la collecte d'informations sur le test. Ces informations sont utilisees pour evaluer l'avancement des tests et pour mesurer si les criteres de sortie ou les taches de test associees aux criteres de sortie sont satisfaits, comme atteindre les objectifs de couverture des risques produit, des exigences ou des criteres d'acceptation.</p>
+  <p>Le controle des tests utilise les informations du suivi des tests pour fournir, sous forme de directives de controle, des orientations et les actions correctives necessaires pour obtenir le test le plus efficace et efficient. Des exemples de directives de controle incluent :</p>
   <ul>
-    <li>Reprioritizing tests when an identified risk becomes an issue</li>
-    <li>Re-evaluating whether a test item meets entry criteria or exit criteria due to rework</li>
-    <li>Adjusting the test schedule to address a delay in the delivery of the test environment</li>
-    <li>Adding new resources when and where needed</li>
+    <li>Re-prioriser les tests lorsqu'un risque identifie devient un probleme</li>
+    <li>Reevaluer si un element de test repond aux criteres d'entree ou de sortie suite a une retouche</li>
+    <li>Ajuster le calendrier de test pour faire face a un retard dans la livraison de l'environnement de test</li>
+    <li>Ajouter de nouvelles ressources quand et ou elles sont necessaires</li>
   </ul>
-  <p>Test completion collects data from completed test activities to consolidate experience, testware, and any other relevant information. Test completion activities occur at project milestones such as when a test level is completed, an agile iteration is finished, a test project is completed (or cancelled), a software system is released, or a maintenance release is completed.</p>
+  <p>La completion des tests collecte les donnees des activites de test terminees pour consolider l'experience, le testware et toute autre information pertinente. Les activites de completion des tests se produisent aux jalons du projet, comme lorsqu'un niveau de test est termine, qu'une iteration agile est achevee, qu'un projet de test est termine (ou annule), qu'un systeme logiciel est livre ou qu'une version de maintenance est terminee.</p>
 
-  <h4>5.3.1. Metrics used in Testing</h4>
-  <p>Test metrics are gathered to show progress against the planned test schedule and budget, the current quality of the test object, and the effectiveness of the test activities with respect to the test objectives or an iteration goal. Test monitoring gathers a variety of metrics to support the test control and test completion.</p>
-  <p>Common test metrics include:</p>
+  <h4>5.3.1. Metriques utilisees dans le test</h4>
+  <p>Les metriques de test sont collectees pour montrer l'avancement par rapport au calendrier et au budget de test prevus, la qualite actuelle de l'objet de test et l'efficacite des activites de test par rapport aux objectifs de test ou a un objectif d'iteration. Le suivi des tests collecte une variete de metriques pour supporter le controle et la completion des tests.</p>
+  <p>Les metriques de test courantes comprennent :</p>
   <ul>
-    <li>Project progress metrics (e.g., task completion, resource usage, test effort)</li>
-    <li>Test progress metrics (e.g., test case implementation progress, test environment preparation progress, number of test cases run/not run, passed/failed, test execution time)</li>
-    <li>Product quality metrics (e.g., availability, response time, mean time to failure)</li>
-    <li>Defect metrics (e.g., number and priorities of defects found/fixed, defect density, defect detection percentage)</li>
-    <li>Risk metrics (e.g., residual risk level)</li>
-    <li>Coverage metrics (e.g., requirements coverage, code coverage)</li>
-    <li>Cost metrics (e.g., cost of testing, organizational cost of quality)</li>
+    <li>Metriques d'avancement du projet (par ex., achevement des taches, utilisation des ressources, effort de test)</li>
+    <li>Metriques d'avancement du test (par ex., avancement de l'implementation des cas de test, avancement de la preparation de l'environnement de test, nombre de cas de test executes/non executes, reussis/echoues, temps d'execution des tests)</li>
+    <li>Metriques de qualite du produit (par ex., disponibilite, temps de reponse, temps moyen avant defaillance)</li>
+    <li>Metriques de defauts (par ex., nombre et priorites des defauts trouves/corriges, densite de defauts, pourcentage de detection des defauts)</li>
+    <li>Metriques de risque (par ex., niveau de risque residuel)</li>
+    <li>Metriques de couverture (par ex., couverture des exigences, couverture du code)</li>
+    <li>Metriques de cout (par ex., cout du test, cout organisationnel de la qualite)</li>
   </ul>
 
-  <h4>5.3.2. Purpose, Content and Audience for Test Reports</h4>
-  <p>Test reporting summarizes and communicates test information during and after testing. Test progress reports support the ongoing test control and must provide enough information to make modifications to the test schedule, resources, or test plan, when such changes are needed due to deviation from the plan or changed circumstances. Test completion reports summarize a specific test activity (e.g., test level, test cycle, iteration) and can give information for subsequent testing.</p>
-  <p>During test monitoring and test control, the test team generates test progress reports for stakeholders to keep them informed. Test progress reports are usually generated on a regular basis (e.g., daily, weekly, etc.) and include:</p>
+  <h4>5.3.2. Objectif, contenu et audience des rapports de test</h4>
+  <p>Le reporting de test resume et communique les informations de test pendant et apres le test. Les rapports d'avancement de test supportent le controle continu des tests et doivent fournir suffisamment d'informations pour apporter des modifications au calendrier de test, aux ressources ou au plan de test, lorsque de tels changements sont necessaires en raison d'ecarts par rapport au plan ou de circonstances modifiees. Les rapports de completion de test resument une activite de test specifique (par ex., niveau de test, cycle de test, iteration) et peuvent fournir des informations pour les tests ulterieurs.</p>
+  <p>Pendant le suivi et le controle des tests, l'equipe de test genere des rapports d'avancement de test pour les parties prenantes afin de les tenir informees. Les rapports d'avancement de test sont generalement generes de maniere reguliere (par ex., quotidiennement, hebdomadairement, etc.) et comprennent :</p>
   <ul>
-    <li>Testing period</li>
-    <li>Test progress (e.g., ahead or behind schedule), including any notable deviations</li>
-    <li>Impediments for testing, and their workarounds</li>
-    <li>Test metrics (see section 5.3.1 for examples)</li>
-    <li>New and changed risks within testing period</li>
-    <li>Testing planned for the next period</li>
+    <li>Periode de test</li>
+    <li>Avancement du test (par ex., en avance ou en retard sur le calendrier), y compris tout ecart notable</li>
+    <li>Obstacles au test et leurs solutions de contournement</li>
+    <li>Metriques de test (voir section 5.3.1 pour des exemples)</li>
+    <li>Risques nouveaux et modifies pendant la periode de test</li>
+    <li>Tests planifies pour la prochaine periode</li>
   </ul>
-  <p>A test completion report is prepared during test completion, when a project, test level, or test type is complete and when, ideally, its exit criteria have been met. This report uses test progress reports and other data. Typical test completion reports include:</p>
+  <p>Un rapport de completion de test est prepare pendant la completion des tests, lorsqu'un projet, un niveau de test ou un type de test est termine et que, idealement, ses criteres de sortie ont ete atteints. Ce rapport utilise les rapports d'avancement de test et d'autres donnees. Les rapports de completion de test typiques comprennent :</p>
   <ul>
-    <li>Test summary</li>
-    <li>Testing and product quality evaluation based on the original test plan (i.e., test objectives and exit criteria)</li>
-    <li>Deviations from the test plan (e.g., differences from the planned test schedule, duration, and effort).</li>
-    <li>Testing impediments and workarounds</li>
-    <li>Test metrics based on test progress reports</li>
-    <li>Unmitigated risks, defects not fixed</li>
-    <li>Lessons learned that are relevant to the testing</li>
+    <li>Resume du test</li>
+    <li>Evaluation du test et de la qualite du produit basee sur le plan de test original (c'est-a-dire les objectifs de test et les criteres de sortie)</li>
+    <li>Ecarts par rapport au plan de test (par ex., differences par rapport au calendrier, a la duree et a l'effort de test prevus).</li>
+    <li>Obstacles au test et solutions de contournement</li>
+    <li>Metriques de test basees sur les rapports d'avancement de test</li>
+    <li>Risques non attenuer, defauts non corriges</li>
+    <li>Lecons apprises pertinentes pour le test</li>
   </ul>
-  <p>Different audiences require different information in the reports and influence the degree of formality and the frequency of test reporting. Test progress reporting to others in the same team is often frequent and informal, while test completion reporting follows a set template and occurs only once.</p>
-  <p>The ISO/IEC/IEEE 29119-3 standard includes templates and examples for test progress reports (called test status reports) and test completion reports.</p>
+  <p>Differentes audiences necessitent differentes informations dans les rapports et influencent le degre de formalite et la frequence du reporting de test. Le reporting d'avancement de test envers les autres membres de la meme equipe est souvent frequent et informel, tandis que le reporting de completion de test suit un modele defini et n'a lieu qu'une seule fois.</p>
+  <p>La norme ISO/IEC/IEEE 29119-3 comprend des modeles et des exemples de rapports d'avancement de test (appeles rapports de statut de test) et de rapports de completion de test.</p>
 
-  <h4>5.3.3. Communicating the Status of Testing</h4>
-  <p>The best means of communicating test status varies, depending on test management concerns, organizational test strategies, regulatory standards, or, in the case of self-organizing teams (see section 1.5.2), on the team itself. The options include:</p>
+  <h4>5.3.3. Communiquer le statut du test</h4>
+  <p>Le meilleur moyen de communiquer le statut du test varie, en fonction des preoccupations de la gestion de test, des strategies de test organisationnelles, des normes reglementaires ou, dans le cas des equipes auto-organisees (voir section 1.5.2), de l'equipe elle-meme. Les options comprennent :</p>
   <ul>
-    <li>Verbal communication with team members and other stakeholders</li>
-    <li>Dashboards (e.g., CI/CD dashboards, task boards, and burn-down charts)</li>
-    <li>Electronic communication channels (e.g., email, chat)</li>
-    <li>Online documentation</li>
-    <li>Formal test reports (see section 5.3.2)</li>
+    <li>Communication verbale avec les membres de l'equipe et les autres parties prenantes</li>
+    <li>Tableaux de bord (par ex., tableaux de bord CI/CD, tableaux de taches et diagrammes de burn-down)</li>
+    <li>Canaux de communication electroniques (par ex., email, chat)</li>
+    <li>Documentation en ligne</li>
+    <li>Rapports de test formels (voir section 5.3.2)</li>
   </ul>
-  <p>One or more of these options can be used. More formal communication may be more appropriate for distributed teams where direct face-to-face communication is not always possible due to geographical distance or time differences. Typically, different stakeholders are interested in different types of information, so communication should be tailored accordingly.</p>
+  <p>Une ou plusieurs de ces options peuvent etre utilisees. Une communication plus formelle peut etre plus appropriee pour les equipes distribuees ou la communication directe en face a face n'est pas toujours possible en raison de la distance geographique ou des decalages horaires. Typiquement, differentes parties prenantes sont interessees par differents types d'informations, donc la communication doit etre adaptee en consequence.</p>
 </div>
 
 <div class="question-card" style="margin-bottom:20px;">
-  <h3>5.4. Configuration Management</h3>
+  <h3>5.4. Gestion de configuration</h3>
   <div class="fiche-highlight">
-    <strong>Learning Objectives:</strong><br>
-    FL-5.4.1 (K2) Summarize how configuration management supports testing
+    <strong>Objectifs d'apprentissage :</strong><br>
+    FL-5.4.1 (K2) Resumer comment la gestion de configuration supporte le test
   </div>
-  <p>In testing, configuration management (CM) provides a discipline for identifying, controlling, and tracking work products such as test plans, test strategies, test conditions, test cases, test scripts, test results, test logs, and test reports as configuration items.</p>
-  <p>For a complex configuration item (e.g., a test environment), CM records the items it consists of, their relationships, and versions. If the configuration item is approved for testing, it becomes a baseline and can only be changed through a formal change control process.</p>
-  <p>Configuration management keeps a record of changed configuration items when a new baseline is created. It is possible to revert to a previous baseline to reproduce previous test results.</p>
-  <p>To properly support testing, CM ensures the following:</p>
+  <p>Dans le test, la gestion de configuration (CM) fournit une discipline pour identifier, controler et suivre les produits d'activite tels que les plans de test, les strategies de test, les conditions de test, les cas de test, les scripts de test, les resultats de test, les journaux de test et les rapports de test en tant qu'elements de configuration.</p>
+  <p>Pour un element de configuration complexe (par ex., un environnement de test), la CM enregistre les elements qui le composent, leurs relations et leurs versions. Si l'element de configuration est approuve pour le test, il devient une ligne de base et ne peut etre modifie que par un processus formel de controle des changements.</p>
+  <p>La gestion de configuration conserve un enregistrement des elements de configuration modifies lorsqu'une nouvelle ligne de base est creee. Il est possible de revenir a une ligne de base precedente pour reproduire des resultats de test anterieurs.</p>
+  <p>Pour supporter correctement le test, la CM assure ce qui suit :</p>
   <ul>
-    <li>All configuration items, including test items (individual parts of the test object), are uniquely identified, version controlled, tracked for changes, and related to other configuration items so that traceability can be maintained throughout the test process</li>
-    <li>All identified documentation and software items are referenced unambiguously in testware</li>
+    <li>Tous les elements de configuration, y compris les elements de test (parties individuelles de l'objet de test), sont identifies de maniere unique, controles en version, suivis pour les changements et relies a d'autres elements de configuration afin que la tracabilite puisse etre maintenue tout au long du processus de test</li>
+    <li>Toute la documentation identifiee et les elements logiciels sont references sans ambiguite dans le testware</li>
   </ul>
-  <p>Continuous integration, continuous delivery, continuous deployment and the associated testing are typically implemented as part of an automated DevOps pipeline (see section 2.1.4), in which automated CM is normally included.</p>
+  <p>L'integration continue, la livraison continue, le deploiement continu et les tests associes sont typiquement implementes dans le cadre d'un pipeline DevOps automatise (voir section 2.1.4), dans lequel la CM automatisee est normalement incluse.</p>
 </div>
 
 <div class="question-card" style="margin-bottom:20px;">
-  <h3>5.5. Defect Management</h3>
+  <h3>5.5. Gestion des defauts</h3>
   <div class="fiche-highlight">
-    <strong>Learning Objectives:</strong><br>
-    FL-5.5.1 (K3) Prepare a defect report
+    <strong>Objectifs d'apprentissage :</strong><br>
+    FL-5.5.1 (K3) Preparer un rapport de defaut
   </div>
-  <p>Since one of the major test objectives is to find defects, an established defect management process is essential. Although we refer to "defects" here, the reported anomalies may turn out to be real defects or something else (e.g., false-positive result, change request) - this is resolved during the process of dealing with the defect reports. Anomalies may be reported during any phase of the SDLC and the form depends on the SDLC. At a minimum, the defect management process includes a workflow for handling individual defects or anomalies from their discovery to their closure and rules for their classification. The workflow typically comprises activities to log the reported anomalies, analyze and classify them, decide on a suitable response such as to fix or keep it as it is and finally to close the defect report. The process must be followed by all involved stakeholders. It is advisable to handle defects from static testing (especially static analysis) in a similar way.</p>
-  <p>Typical defect reports have the following objectives:</p>
+  <p>Puisque l'un des principaux objectifs du test est de trouver des defauts, un processus de gestion des defauts etabli est essentiel. Bien que nous fassions reference aux "defauts" ici, les anomalies rapportees peuvent s'averer etre de vrais defauts ou autre chose (par ex., resultat faux positif, demande de changement) - cela est resolu au cours du processus de traitement des rapports de defaut. Les anomalies peuvent etre rapportees pendant toute phase du SDLC et la forme depend du SDLC. Au minimum, le processus de gestion des defauts comprend un workflow pour le traitement des defauts ou anomalies individuels, de leur decouverte a leur cloture, et des regles pour leur classification. Le workflow comprend typiquement des activites pour enregistrer les anomalies rapportees, les analyser et les classer, decider d'une reponse appropriee comme corriger ou laisser en l'etat, et enfin cloturer le rapport de defaut. Le processus doit etre suivi par toutes les parties prenantes impliquees. Il est conseille de traiter les defauts du test statique (en particulier l'analyse statique) de maniere similaire.</p>
+  <p>Les rapports de defaut typiques ont les objectifs suivants :</p>
   <ul>
-    <li>Provide those responsible for handling and resolving reported defects with sufficient information to resolve the issue</li>
-    <li>Provide a means of tracking the quality of the work product</li>
-    <li>Provide ideas for improvement of the development and test process</li>
+    <li>Fournir aux responsables du traitement et de la resolution des defauts rapportes suffisamment d'informations pour resoudre le probleme</li>
+    <li>Fournir un moyen de suivi de la qualite du produit d'activite</li>
+    <li>Fournir des idees pour l'amelioration du processus de developpement et de test</li>
   </ul>
-  <p>A defect report logged during dynamic testing typically includes:</p>
+  <p>Un rapport de defaut enregistre pendant le test dynamique comprend typiquement :</p>
   <ul>
-    <li>Unique identifier</li>
-    <li>Title with a short summary of the anomaly being reported</li>
-    <li>Date when the anomaly was observed, issuing organization, and author, including their role</li>
-    <li>Identification of the test object and test environment</li>
-    <li>Context of the defect (e.g., test case being run, test activity being performed, SDLC phase, and other relevant information such as the test technique, checklist or test data being used)</li>
-    <li>Description of the failure to enable reproduction and resolution including the test steps that detected the anomaly, and any relevant test logs, database dumps, screenshots, or recordings</li>
-    <li>Expected results and actual results</li>
-    <li>Severity of the defect (degree of impact) on the interests of stakeholders or requirements</li>
-    <li>Priority to fix</li>
-    <li>Status of the defect (e.g., open, deferred, duplicate, waiting to be fixed, awaiting confirmation testing, re-opened, closed, rejected)</li>
-    <li>References (e.g., to the test case)</li>
+    <li>Identifiant unique</li>
+    <li>Titre avec un bref resume de l'anomalie rapportee</li>
+    <li>Date a laquelle l'anomalie a ete observee, organisation emettrice et auteur, y compris leur role</li>
+    <li>Identification de l'objet de test et de l'environnement de test</li>
+    <li>Contexte du defaut (par ex., cas de test en cours d'execution, activite de test effectuee, phase du SDLC et autres informations pertinentes telles que la technique de test, la checklist ou les donnees de test utilisees)</li>
+    <li>Description de la defaillance pour permettre la reproduction et la resolution, y compris les etapes de test qui ont detecte l'anomalie, et tout journal de test, dump de base de donnees, capture d'ecran ou enregistrement pertinent</li>
+    <li>Resultats attendus et resultats reels</li>
+    <li>Severite du defaut (degre d'impact) sur les interets des parties prenantes ou les exigences</li>
+    <li>Priorite de correction</li>
+    <li>Statut du defaut (par ex., ouvert, differe, doublon, en attente de correction, en attente de test de confirmation, reouvert, ferme, rejete)</li>
+    <li>References (par ex., vers le cas de test)</li>
   </ul>
-  <p>Some of this data may be automatically included when using defect management tools (e.g., identifier, date, author and initial status). Document templates for a defect report and example defect reports can be found in the ISO/IEC/IEEE 29119-3 standard, which refers to defect reports as incident reports.</p>
+  <p>Certaines de ces donnees peuvent etre automatiquement incluses lors de l'utilisation d'outils de gestion des defauts (par ex., identifiant, date, auteur et statut initial). Des modeles de documents pour un rapport de defaut et des exemples de rapports de defaut peuvent etre trouves dans la norme ISO/IEC/IEEE 29119-3, qui fait reference aux rapports de defaut sous le nom de rapports d'incident.</p>
 </div>
 
   </div>

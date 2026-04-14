@@ -10,7 +10,7 @@
 
 <div class="header">
   <h1>Chapitre 2 - Test dans le cycle de vie du developpement logiciel</h1>
-  <a href="istqb_platform.html" class="btn-back" style="text-decoration:none;">&#8592; Retour a la plateforme</a>
+  <a href="istqb_platform.html#apprentissage" class="btn-back" style="text-decoration:none;">&#8592; Retour a la plateforme</a>
 </div>
 
 <div class="home-screen" style="max-width:960px;margin:0 auto;padding:24px;">
@@ -27,190 +27,190 @@
   <div id="chTab-syllabus">
 
 <div class="question-card" style="margin-bottom:20px;">
-  <h3>2.1. Testing in the Context of a Software Development Lifecycle (SDLC)</h3>
+  <h3>2.1. Le test dans le contexte d'un cycle de vie du developpement logiciel (SDLC)</h3>
   <div class="fiche-highlight">
-    <strong>Learning Objectives:</strong><br>
-    FL-2.1.1 (K2) Explain the impact of the chosen software development lifecycle on testing<br>
-    FL-2.1.2 (K1) Recall good testing practices that apply to all software development lifecycles<br>
-    FL-2.1.3 (K1) Recall the examples of test-first approaches to development<br>
-    FL-2.1.4 (K2) Summarize how DevOps might have an impact on testing<br>
-    FL-2.1.5 (K2) Explain shift left<br>
-    FL-2.1.6 (K2) Explain how retrospectives can be used as a mechanism for process improvement
+    <strong>Objectifs d'apprentissage :</strong><br>
+    FL-2.1.1 (K2) Expliquer l'impact du cycle de vie du developpement logiciel choisi sur le test<br>
+    FL-2.1.2 (K1) Rappeler les bonnes pratiques de test applicables a tous les cycles de vie du developpement logiciel<br>
+    FL-2.1.3 (K1) Rappeler les exemples d'approches de developpement pilotees par les tests<br>
+    FL-2.1.4 (K2) Resumer comment DevOps peut avoir un impact sur le test<br>
+    FL-2.1.5 (K2) Expliquer le shift-left<br>
+    FL-2.1.6 (K2) Expliquer comment les retrospectives peuvent etre utilisees comme mecanisme d'amelioration des processus
   </div>
-  <p>An SDLC model is an abstract, high-level representation of the software development process. An SDLC model defines how different development phases and types of activities performed within this process relate to each other, both logically and chronologically. Examples of SDLC models include: sequential development models (e.g., waterfall model, V-model), iterative development models (e.g., spiral model, prototyping), and incremental development models (e.g., Unified Process).</p>
-  <p>Some activities within software development processes can also be described by more detailed software development methods and Agile practices. Examples include: acceptance test-driven development (ATDD), behavior-driven development (BDD), domain-driven design (DDD), extreme programming (XP), feature-driven development (FDD), Kanban, Lean IT, Scrum, and test-driven development (TDD).</p>
+  <p>Un modele de SDLC est une representation abstraite et de haut niveau du processus de developpement logiciel. Un modele de SDLC definit comment les differentes phases de developpement et les types d'activites effectuees dans ce processus sont lies les uns aux autres, tant logiquement que chronologiquement. Les exemples de modeles de SDLC comprennent : les modeles de developpement sequentiels (par exemple, modele en cascade, modele en V), les modeles de developpement iteratifs (par exemple, modele en spirale, prototypage) et les modeles de developpement incrementaux (par exemple, Unified Process).</p>
+  <p>Certaines activites au sein des processus de developpement logiciel peuvent egalement etre decrites par des methodes de developpement logiciel plus detaillees et des pratiques Agile. Les exemples comprennent : le developpement pilote par les tests d'acceptation (ATDD), le developpement pilote par le comportement (BDD), la conception pilotee par le domaine (DDD), l'Extreme Programming (XP), le developpement pilote par les fonctionnalites (FDD), Kanban, Lean IT, Scrum et le developpement pilote par les tests (TDD).</p>
 
-  <h4>2.1.1. Impact of the Software Development Lifecycle on Testing</h4>
-  <p>Testing must be adapted to the SDLC to succeed. The choice of the SDLC impacts on the:</p>
+  <h4>2.1.1. Impact du cycle de vie du developpement logiciel sur le test</h4>
+  <p>Le test doit etre adapte au SDLC pour reussir. Le choix du SDLC a un impact sur :</p>
   <ul>
-    <li>Scope and timing of test activities (e.g., test levels and test types)</li>
-    <li>Level of detail of test documentation</li>
-    <li>Choice of test techniques and test approach</li>
-    <li>Extent of test automation</li>
-    <li>Role and responsibilities of a tester</li>
+    <li>La portee et le calendrier des activites de test (par exemple, niveaux de test et types de test)</li>
+    <li>Le niveau de detail de la documentation de test</li>
+    <li>Le choix des techniques de test et de l'approche de test</li>
+    <li>L'etendue de l'automatisation des tests</li>
+    <li>Le role et les responsabilites du testeur</li>
   </ul>
-  <p>In sequential development models, in the initial phases testers typically participate in requirement reviews, test analysis, and test design. The executable code is usually created in the later phases, so typically dynamic testing cannot be performed early in the SDLC.</p>
-  <p>In some iterative development models and incremental development models, it is assumed that each iteration delivers a working prototype or product increment. This implies that in each iteration both static testing and dynamic testing may be performed at all test levels. Frequent delivery of increments requires fast feedback and extensive regression testing.</p>
-  <p>Agile software development assumes that change may occur throughout the project. Therefore, lightweight work product documentation and extensive test automation to make regression testing easier are favored in agile projects. Also, most of the manual testing tends to be done using experience-based test techniques (see Section 4.4) that do not require extensive prior test analysis and design.</p>
+  <p>Dans les modeles de developpement sequentiels, dans les phases initiales, les testeurs participent generalement aux revues d'exigences, a l'analyse de test et a la conception des tests. Le code executable est generalement cree dans les phases ulterieures, de sorte que le test dynamique ne peut generalement pas etre effectue tot dans le SDLC.</p>
+  <p>Dans certains modeles de developpement iteratifs et incrementaux, on suppose que chaque iteration livre un prototype fonctionnel ou un increment de produit. Cela implique que dans chaque iteration, le test statique et le test dynamique peuvent etre effectues a tous les niveaux de test. La livraison frequente d'increments necessite un retour rapide et des tests de regression etendus.</p>
+  <p>Le developpement logiciel Agile suppose que des changements peuvent survenir tout au long du projet. Par consequent, une documentation legere des produits d'activite et une automatisation extensive des tests pour faciliter le test de regression sont privilegiees dans les projets agiles. De plus, la plupart des tests manuels tendent a etre effectues en utilisant des techniques de test basees sur l'experience (voir section 4.4) qui ne necessitent pas d'analyse et de conception de test prealables approfondies.</p>
 
-  <h4>2.1.2. Software Development Lifecycle and Good Testing Practices</h4>
-  <p>Good testing practices, independent of the chosen SDLC model, include the following:</p>
+  <h4>2.1.2. Cycle de vie du developpement logiciel et bonnes pratiques de test</h4>
+  <p>Les bonnes pratiques de test, independamment du modele de SDLC choisi, comprennent les suivantes :</p>
   <ul>
-    <li>For every software development activity, there is a corresponding test activity, so that all development activities are subject to quality control</li>
-    <li>Different test levels (see chapter 2.2.1) have specific and different test objectives, which allows for testing to be appropriately comprehensive while avoiding redundancy</li>
-    <li>Test analysis and design for a given test level begins during the corresponding development phase of the SDLC, so that testing can adhere to the principle of early testing (see section 1.3)</li>
-    <li>Testers are involved in reviewing work products as soon as drafts of these work products are available, so that this earlier testing and defect detection can support shift left (see section 2.1.5).</li>
+    <li>Pour chaque activite de developpement logiciel, il existe une activite de test correspondante, de sorte que toutes les activites de developpement sont soumises au controle qualite</li>
+    <li>Les differents niveaux de test (voir chapitre 2.2.1) ont des objectifs de test specifiques et differents, ce qui permet au test d'etre suffisamment complet tout en evitant la redondance</li>
+    <li>L'analyse et la conception de test pour un niveau de test donne commencent pendant la phase de developpement correspondante du SDLC, afin que le test puisse respecter le principe du test precoce (voir section 1.3)</li>
+    <li>Les testeurs participent a la revue des produits d'activite des que les ebauches de ces produits sont disponibles, afin que ce test plus precoce et cette detection des defauts puissent soutenir le shift-left (voir section 2.1.5).</li>
   </ul>
 
-  <h4>2.1.3. Testing as a Driver for Software Development</h4>
-  <p>TDD, ATDD and BDD are similar development approaches, where tests are defined as a means of directing development. Each of these approaches implements the principle of early testing (see section 1.3) and follows shift left (see section 2.1.5), since the tests are defined before the code is written. They support an iterative development model. These approaches are characterized as follows:</p>
-  <p><strong>Test-Driven Development (TDD):</strong></p>
+  <h4>2.1.3. Le test comme moteur du developpement logiciel</h4>
+  <p>TDD, ATDD et BDD sont des approches de developpement similaires, ou les tests sont definis comme un moyen de diriger le developpement. Chacune de ces approches met en oeuvre le principe du test precoce (voir section 1.3) et suit le shift-left (voir section 2.1.5), puisque les tests sont definis avant que le code ne soit ecrit. Elles soutiennent un modele de developpement iteratif. Ces approches sont caracterisees comme suit :</p>
+  <p><strong>Developpement pilote par les tests (TDD) :</strong></p>
   <ul>
-    <li>Directs the coding through test cases (instead of extensive software design) (Beck 2003)</li>
-    <li>Tests are written first, then the code is written to satisfy the tests, and then the tests and code are refactored</li>
+    <li>Dirige le codage par les cas de test (au lieu d'une conception logicielle extensive) (Beck 2003)</li>
+    <li>Les tests sont ecrits en premier, puis le code est ecrit pour satisfaire les tests, et ensuite les tests et le code sont refactorises</li>
   </ul>
-  <p><strong>Acceptance Test-Driven Development (ATDD)</strong> (see section 4.5.3):</p>
+  <p><strong>Developpement pilote par les tests d'acceptation (ATDD)</strong> (voir section 4.5.3) :</p>
   <ul>
-    <li>Derives tests from acceptance criteria as part of the system design process (Gartner 2011)</li>
-    <li>Tests are written before the part of the application is developed to satisfy the tests</li>
+    <li>Derive les tests des criteres d'acceptation dans le cadre du processus de conception du systeme (Gartner 2011)</li>
+    <li>Les tests sont ecrits avant que la partie de l'application ne soit developpee pour satisfaire les tests</li>
   </ul>
-  <p><strong>Behavior-Driven Development (BDD):</strong></p>
+  <p><strong>Developpement pilote par le comportement (BDD) :</strong></p>
   <ul>
-    <li>Expresses the desired behavior of an application with test cases written in a simple form of natural language, which is easy to understand by stakeholders – usually using the Given/When/Then format (Chelimsky 2010)</li>
-    <li>Test cases should then automatically be translated into executable tests</li>
+    <li>Exprime le comportement souhaite d'une application avec des cas de test ecrits dans une forme simple de langage naturel, facile a comprendre par les parties prenantes - generalement en utilisant le format Given/When/Then (Chelimsky 2010)</li>
+    <li>Les cas de test doivent ensuite etre automatiquement traduits en tests executables</li>
   </ul>
-  <p>For all the above approaches, tests may persist as automated tests to ensure the code quality in future adaptions / refactoring.</p>
+  <p>Pour toutes les approches ci-dessus, les tests peuvent persister sous forme de tests automatises pour assurer la qualite du code lors de futures adaptations / refactorisations.</p>
 
-  <h4>2.1.4. DevOps and Testing</h4>
-  <p>DevOps is an organizational approach aiming to create synergy by getting development (including testing) and operations to work together to achieve a set of common goals. DevOps requires a cultural shift within an organization to bridge the gaps between development (including testing) and operations while treating their functions with equal value. DevOps promotes team autonomy, fast feedback, integrated toolchains, and technical practices like continuous integration (CI) and continuous delivery (CD). This enables the teams to build, test and release high-quality code faster through a DevOps delivery pipeline (Kim 2016).</p>
-  <p>From the testing perspective, some of the benefits of DevOps are as follows:</p>
+  <h4>2.1.4. DevOps et test</h4>
+  <p>DevOps est une approche organisationnelle visant a creer une synergie en faisant travailler ensemble le developpement (y compris le test) et les operations pour atteindre un ensemble d'objectifs communs. DevOps necessite un changement culturel au sein d'une organisation pour combler les ecarts entre le developpement (y compris le test) et les operations tout en traitant leurs fonctions avec une valeur egale. DevOps favorise l'autonomie des equipes, le retour rapide, les chaines d'outils integrees et les pratiques techniques comme l'integration continue (CI) et la livraison continue (CD). Cela permet aux equipes de construire, tester et livrer du code de haute qualite plus rapidement grace a un pipeline de livraison DevOps (Kim 2016).</p>
+  <p>Du point de vue du test, certains des avantages de DevOps sont les suivants :</p>
   <ul>
-    <li>Fast feedback on the code quality, and whether changes adversely affect existing code</li>
-    <li>CI promotes shift left in testing (see section 2.1.5) by encouraging developers to submit high quality code accompanied by component tests and static analysis</li>
-    <li>Automated processes are promoted like CI/CD that facilitates establishing stable test environments</li>
-    <li>The visibility on non-functional quality characteristics increases (e.g., performance efficiency, reliability)</li>
-    <li>Automation through a delivery pipeline reduces the need for repetitive manual testing</li>
-    <li>The risk of regression is minimized due to the scale and range of automated regression tests</li>
+    <li>Retour rapide sur la qualite du code et sur le fait que les changements affectent negativement ou non le code existant</li>
+    <li>La CI favorise le shift-left dans le test (voir section 2.1.5) en encourageant les developpeurs a soumettre du code de haute qualite accompagne de tests de composants et d'analyse statique</li>
+    <li>Les processus automatises sont favorises comme CI/CD qui facilite l'etablissement d'environnements de test stables</li>
+    <li>La visibilite sur les caracteristiques de qualite non fonctionnelles augmente (par exemple, efficacite de performance, fiabilite)</li>
+    <li>L'automatisation via un pipeline de livraison reduit le besoin de tests manuels repetitifs</li>
+    <li>Le risque de regression est minimise grace a l'echelle et a la portee des tests de regression automatises</li>
   </ul>
-  <p>DevOps is not without its risks and challenges, which include:</p>
+  <p>DevOps n'est pas sans risques ni defis, qui comprennent :</p>
   <ul>
-    <li>The DevOps delivery pipeline must be defined and established</li>
-    <li>CI / CD tools must be introduced and maintained</li>
-    <li>Test automation requires additional resources and may be difficult to establish and maintain</li>
+    <li>Le pipeline de livraison DevOps doit etre defini et etabli</li>
+    <li>Les outils CI/CD doivent etre introduits et maintenus</li>
+    <li>L'automatisation des tests necessite des ressources supplementaires et peut etre difficile a etablir et a maintenir</li>
   </ul>
-  <p>Although DevOps comes with a high level of automated testing, manual testing – especially from the user's perspective – will still be needed.</p>
+  <p>Bien que DevOps implique un haut niveau de tests automatises, le test manuel - en particulier du point de vue de l'utilisateur - reste necessaire.</p>
 
-  <h4>2.1.5. Shift Left</h4>
-  <p>The principle of early testing (see section 1.3) is sometimes referred to as shift left because it is an approach where testing is performed earlier in the SDLC. Shift left basically suggests that testing should be done earlier (e.g., not waiting for code to be implemented or for components to be integrated), but it does not mean that testing later in the SDLC should be neglected.</p>
-  <p>There are some good practices that illustrate how to achieve a "shift left" in testing, which include:</p>
+  <h4>2.1.5. Shift-left</h4>
+  <p>Le principe du test precoce (voir section 1.3) est parfois appele shift-left car c'est une approche ou le test est effectue plus tot dans le SDLC. Le shift-left suggere essentiellement que le test devrait etre fait plus tot (par exemple, sans attendre que le code soit implemente ou que les composants soient integres), mais cela ne signifie pas que le test plus tard dans le SDLC devrait etre neglige.</p>
+  <p>Il existe quelques bonnes pratiques qui illustrent comment realiser un "shift-left" dans le test, notamment :</p>
   <ul>
-    <li>Reviewing the specification from the perspective of testers. These review activities on specifications often find potential defects, such as ambiguities, incompleteness, and inconsistencies</li>
-    <li>Writing test cases before the code is written and have the code run in a test harness during code implementation</li>
-    <li>Using CI and even better CD as it comes with fast feedback and automated component tests to accompany source code when it is submitted to the code repository</li>
-    <li>Completing static analysis of source code prior to dynamic testing, or as part of an automated process</li>
-    <li>Performing non-functional testing starting at the component test level, where possible. This is a form of shift left as these non-functional test types tend to be performed later in the SDLC when a complete system and a representative test environment are available</li>
+    <li>Revoir la specification du point de vue des testeurs. Ces activites de revue des specifications trouvent souvent des defauts potentiels, tels que des ambiguites, des incompletudes et des incoherences</li>
+    <li>Ecrire les cas de test avant que le code ne soit ecrit et executer le code dans un harnais de test pendant l'implementation du code</li>
+    <li>Utiliser la CI et encore mieux la CD car elle apporte un retour rapide et des tests de composants automatises pour accompagner le code source lorsqu'il est soumis au depot de code</li>
+    <li>Effectuer l'analyse statique du code source avant le test dynamique, ou dans le cadre d'un processus automatise</li>
+    <li>Effectuer les tests non fonctionnels des le niveau du test de composant, lorsque c'est possible. C'est une forme de shift-left car ces types de tests non fonctionnels tendent a etre effectues plus tard dans le SDLC lorsqu'un systeme complet et un environnement de test representatif sont disponibles</li>
   </ul>
-  <p>Shift left might result in extra training, effort and/or costs earlier in the process but is expected to save efforts and/or costs later in the process.</p>
-  <p>For shift left it is important that stakeholders are convinced and bought into this concept.</p>
+  <p>Le shift-left peut entrainer des formations, des efforts et/ou des couts supplementaires plus tot dans le processus, mais devrait permettre d'economiser des efforts et/ou des couts plus tard dans le processus.</p>
+  <p>Pour le shift-left, il est important que les parties prenantes soient convaincues et adherent a ce concept.</p>
 
-  <h4>2.1.6. Retrospectives and Process Improvement</h4>
-  <p>Retrospectives are often held at the end of a project or an iteration, at a release milestone, or can be held when needed. The timing and organization of the retrospectives depend on the particular SDLC model being followed. In these meetings the participants (not only testers, but also e.g., developers, architects, product owner, business analysts) discuss:</p>
+  <h4>2.1.6. Retrospectives et amelioration des processus</h4>
+  <p>Les retrospectives ont souvent lieu a la fin d'un projet ou d'une iteration, a un jalon de mise en production, ou peuvent etre tenues en cas de besoin. Le calendrier et l'organisation des retrospectives dependent du modele de SDLC particulier suivi. Lors de ces reunions, les participants (pas seulement les testeurs, mais aussi par exemple les developpeurs, les architectes, le product owner, les analystes metier) discutent :</p>
   <ul>
-    <li>What was successful, and should be retained?</li>
-    <li>What was not successful and could be improved?</li>
-    <li>How to incorporate the improvements and retain the successes in the future?</li>
+    <li>Qu'est-ce qui a fonctionne et devrait etre conserve ?</li>
+    <li>Qu'est-ce qui n'a pas fonctionne et pourrait etre ameliore ?</li>
+    <li>Comment integrer les ameliorations et conserver les succes a l'avenir ?</li>
   </ul>
-  <p>The results should be recorded and are normally part of the test completion report (see section 5.3.2). Retrospectives are critical for the successful implementation of continuous improvement, and it is important that any recommended improvements are followed up.</p>
-  <p>Typical benefits for testing include:</p>
+  <p>Les resultats doivent etre enregistres et font normalement partie du rapport de cloture des tests (voir section 5.3.2). Les retrospectives sont essentielles pour la mise en oeuvre reussie de l'amelioration continue, et il est important que toute amelioration recommandee fasse l'objet d'un suivi.</p>
+  <p>Les avantages typiques pour le test comprennent :</p>
   <ul>
-    <li>Increased test effectiveness / efficiency (e.g., by implementing suggestions for process improvement)</li>
-    <li>Increased quality of testware (e.g., by jointly reviewing the test processes)</li>
-    <li>Team bonding and learning (e.g., as a result of the opportunity to raise issues and propose improvement points)</li>
-    <li>Improved quality of the test basis (e.g., as deficiencies in the extent and quality of the requirements could be addressed and solved)</li>
-    <li>Better cooperation between development and testing (e.g., as collaboration is reviewed and optimized regularly)</li>
+    <li>Augmentation de l'efficacite / efficience du test (par exemple, en mettant en oeuvre des suggestions d'amelioration des processus)</li>
+    <li>Augmentation de la qualite du testware (par exemple, en revoyant conjointement les processus de test)</li>
+    <li>Cohesion d'equipe et apprentissage (par exemple, grace a l'opportunite de soulever des problemes et de proposer des points d'amelioration)</li>
+    <li>Amelioration de la qualite de la base de test (par exemple, les insuffisances dans l'etendue et la qualite des exigences pourraient etre traitees et resolues)</li>
+    <li>Meilleure cooperation entre le developpement et le test (par exemple, car la collaboration est revue et optimisee regulierement)</li>
   </ul>
 </div>
 
 <div class="question-card" style="margin-bottom:20px;">
-  <h3>2.2. Test Levels and Test Types</h3>
+  <h3>2.2. Niveaux de test et types de test</h3>
   <div class="fiche-highlight">
-    <strong>Learning Objectives:</strong><br>
-    FL-2.2.1 (K2) Distinguish the different test levels<br>
-    FL-2.2.2 (K2) Distinguish the different test types<br>
-    FL-2.2.3 (K2) Distinguish confirmation testing from regression testing
+    <strong>Objectifs d'apprentissage :</strong><br>
+    FL-2.2.1 (K2) Distinguer les differents niveaux de test<br>
+    FL-2.2.2 (K2) Distinguer les differents types de test<br>
+    FL-2.2.3 (K2) Distinguer le test de confirmation du test de regression
   </div>
-  <p>Test levels are groups of test activities that are organized and managed together. Each test level is an instance of the test process, performed in relation to software at a given phase of development, from individual components to complete systems or, where applicable, systems of systems.</p>
-  <p>Test levels are related to other activities within the SDLC. In sequential SDLC models, the test levels are often defined such that the exit criteria of one level are part of the entry criteria for the next level. In some iterative models, this may not apply. Development activities may span through multiple test levels. Test levels may overlap in time.</p>
-  <p>Test types are groups of test activities related to specific quality characteristics and most of those test activities can be performed at every test level.</p>
+  <p>Les niveaux de test sont des groupes d'activites de test qui sont organises et geres ensemble. Chaque niveau de test est une instance du processus de test, effectuee en relation avec le logiciel a une phase donnee du developpement, des composants individuels aux systemes complets ou, le cas echeant, aux systemes de systemes.</p>
+  <p>Les niveaux de test sont lies aux autres activites du SDLC. Dans les modeles de SDLC sequentiels, les niveaux de test sont souvent definis de telle sorte que les criteres de sortie d'un niveau font partie des criteres d'entree du niveau suivant. Dans certains modeles iteratifs, cela peut ne pas s'appliquer. Les activites de developpement peuvent s'etendre sur plusieurs niveaux de test. Les niveaux de test peuvent se chevaucher dans le temps.</p>
+  <p>Les types de test sont des groupes d'activites de test lies a des caracteristiques de qualite specifiques et la plupart de ces activites de test peuvent etre effectuees a chaque niveau de test.</p>
 
-  <h4>2.2.1. Test Levels</h4>
-  <p>In this syllabus, the following five test levels are described:</p>
+  <h4>2.2.1. Niveaux de test</h4>
+  <p>Dans ce syllabus, les cinq niveaux de test suivants sont decrits :</p>
   <ul>
-    <li><strong>Component testing</strong> (also known as unit testing) focuses on testing components in isolation. It often requires specific support, such as test harnesses or unit test frameworks. Component testing is normally performed by developers in their development environments.</li>
-    <li><strong>Component integration testing</strong> (also known as unit integration testing) focuses on testing the interfaces and interactions between components. Component integration testing is heavily dependent on the integration strategy like bottom-up, top-down or big-bang.</li>
-    <li><strong>System testing</strong> focuses on the overall behavior and capabilities of an entire system or product, often including functional testing of end-to-end tasks and the non-functional testing of quality characteristics. For some non-functional quality characteristics, it is preferable to test them on a complete system in a representative test environment (e.g., usability). Using simulations of sub-systems is also possible. System testing may be performed by an independent test team, and is related to specifications for the system.</li>
-    <li><strong>System integration testing</strong> focuses on testing the interfaces of the system under test and other systems and external services. System integration testing requires suitable test environments preferably similar to the operational environment.</li>
-    <li><strong>Acceptance testing</strong> focuses on validation and on demonstrating readiness for deployment, which means that the system fulfills the user's business needs. Ideally, acceptance testing should be performed by the intended users. The main forms of acceptance testing are: user acceptance testing (UAT), operational acceptance testing, contractual acceptance testing and regulatory acceptance testing, alpha testing and beta testing.</li>
+    <li><strong>Le test de composant</strong> (egalement appele test unitaire) se concentre sur le test des composants de maniere isolee. Il necessite souvent un support specifique, tel que des harnais de test ou des frameworks de test unitaire. Le test de composant est normalement effectue par les developpeurs dans leurs environnements de developpement.</li>
+    <li><strong>Le test d'integration de composants</strong> (egalement appele test d'integration unitaire) se concentre sur le test des interfaces et des interactions entre les composants. Le test d'integration de composants depend fortement de la strategie d'integration comme ascendante (bottom-up), descendante (top-down) ou big-bang.</li>
+    <li><strong>Le test systeme</strong> se concentre sur le comportement global et les capacites d'un systeme ou produit entier, incluant souvent le test fonctionnel des taches de bout en bout et le test non fonctionnel des caracteristiques de qualite. Pour certaines caracteristiques de qualite non fonctionnelles, il est preferable de les tester sur un systeme complet dans un environnement de test representatif (par exemple, l'utilisabilite). L'utilisation de simulations de sous-systemes est egalement possible. Le test systeme peut etre effectue par une equipe de test independante et est lie aux specifications du systeme.</li>
+    <li><strong>Le test d'integration systeme</strong> se concentre sur le test des interfaces du systeme sous test avec d'autres systemes et services externes. Le test d'integration systeme necessite des environnements de test adaptes, de preference similaires a l'environnement operationnel.</li>
+    <li><strong>Le test d'acceptation</strong> se concentre sur la validation et la demonstration de la disponibilite au deploiement, ce qui signifie que le systeme repond aux besoins metier de l'utilisateur. Idealement, le test d'acceptation devrait etre effectue par les utilisateurs vises. Les principales formes de test d'acceptation sont : le test d'acceptation utilisateur (UAT), le test d'acceptation operationnelle, le test d'acceptation contractuelle et le test d'acceptation reglementaire, le test alpha et le test beta.</li>
   </ul>
-  <p>Test levels are distinguished by the following non-exhaustive list of attributes, to avoid overlapping of test activities:</p>
+  <p>Les niveaux de test se distinguent par la liste non exhaustive d'attributs suivante, pour eviter le chevauchement des activites de test :</p>
   <ul>
-    <li>Test object</li>
-    <li>Test objectives</li>
-    <li>Test basis</li>
-    <li>Defects and failures</li>
-    <li>Approach and responsibilities</li>
+    <li>Objet de test</li>
+    <li>Objectifs de test</li>
+    <li>Base de test</li>
+    <li>Defauts et defaillances</li>
+    <li>Approche et responsabilites</li>
   </ul>
 
-  <h4>2.2.2. Test Types</h4>
-  <p>A lot of test types exist and can be applied in projects. In this syllabus, the following four test types are addressed:</p>
-  <p><strong>Functional testing</strong> evaluates the functions that a component or system should perform. The functions are "what" the test object should do. The main objective of functional testing is checking the functional completeness, functional correctness and functional appropriateness.</p>
-  <p><strong>Non-functional testing</strong> evaluates attributes other than functional characteristics of a component or system. Non-functional testing is the testing of "how well the system behaves". The main objective of non-functional testing is checking the non-functional quality characteristics. The ISO/IEC 25010 standard provides the following classification of the non-functional quality characteristics:</p>
+  <h4>2.2.2. Types de test</h4>
+  <p>De nombreux types de test existent et peuvent etre appliques dans les projets. Dans ce syllabus, les quatre types de test suivants sont abordes :</p>
+  <p><strong>Le test fonctionnel</strong> evalue les fonctions qu'un composant ou un systeme devrait effectuer. Les fonctions sont "ce que" l'objet de test devrait faire. L'objectif principal du test fonctionnel est de verifier la completude fonctionnelle, la correction fonctionnelle et la pertinence fonctionnelle.</p>
+  <p><strong>Le test non fonctionnel</strong> evalue les attributs autres que les caracteristiques fonctionnelles d'un composant ou d'un systeme. Le test non fonctionnel est le test de "comment le systeme se comporte". L'objectif principal du test non fonctionnel est de verifier les caracteristiques de qualite non fonctionnelles. La norme ISO/IEC 25010 fournit la classification suivante des caracteristiques de qualite non fonctionnelles :</p>
   <ul>
-    <li>Performance efficiency</li>
-    <li>Compatibility</li>
-    <li>Usability (also known as interaction capability)</li>
-    <li>Reliability</li>
-    <li>Security</li>
-    <li>Maintainability</li>
-    <li>Portability (also known as flexibility)</li>
-    <li>Safety</li>
+    <li>Efficacite de performance</li>
+    <li>Compatibilite</li>
+    <li>Utilisabilite (egalement connue sous le nom de capacite d'interaction)</li>
+    <li>Fiabilite</li>
+    <li>Securite</li>
+    <li>Maintenabilite</li>
+    <li>Portabilite (egalement connue sous le nom de flexibilite)</li>
+    <li>Surete</li>
   </ul>
-  <p>It is sometimes appropriate for non-functional testing to start early in the SDLC (e.g., as part of reviews or component testing). Many non-functional tests are derived from functional tests as they use the same functional tests, but check that while performing the function, a non-functional constraint is satisfied (e.g., checking that a function performs within a specified time, or a function can be ported to a new platform). The late discovery of non-functional defects can pose a serious threat to the success of a project. Non-functional testing sometimes needs a very specific test environment, such as a usability lab for usability testing.</p>
-  <p><strong>Black-box testing</strong> (see section 4.2) is specification-based and derives tests from documentation not related to the internal structure of the test object. The main objective of black-box testing is checking the system's behavior against its specifications.</p>
-  <p><strong>White-box testing</strong> (see section 4.3) is structure-based and derives tests from the system's implementation or internal structure (e.g., code, architecture, work flows, and data flows). The main objective of white-box testing is to cover the underlying structure by the tests to an acceptable level.</p>
-  <p>All the four above mentioned test types can be applied to all test levels, although the focus will be different at each level. Different test techniques can be used to derive test conditions and test cases for all the mentioned test types.</p>
+  <p>Il est parfois approprie que le test non fonctionnel commence tot dans le SDLC (par exemple, dans le cadre des revues ou du test de composant). De nombreux tests non fonctionnels sont derives des tests fonctionnels car ils utilisent les memes tests fonctionnels, mais verifient que lors de l'execution de la fonction, une contrainte non fonctionnelle est satisfaite (par exemple, verifier qu'une fonction s'execute dans un temps specifie, ou qu'une fonction peut etre portee sur une nouvelle plateforme). La decouverte tardive de defauts non fonctionnels peut constituer une menace serieuse pour le succes d'un projet. Le test non fonctionnel necessite parfois un environnement de test tres specifique, comme un laboratoire d'utilisabilite pour le test d'utilisabilite.</p>
+  <p><strong>Le test boite noire</strong> (voir section 4.2) est base sur les specifications et derive les tests de la documentation non liee a la structure interne de l'objet de test. L'objectif principal du test boite noire est de verifier le comportement du systeme par rapport a ses specifications.</p>
+  <p><strong>Le test boite blanche</strong> (voir section 4.3) est base sur la structure et derive les tests de l'implementation ou de la structure interne du systeme (par exemple, le code, l'architecture, les flux de travail et les flux de donnees). L'objectif principal du test boite blanche est de couvrir la structure sous-jacente par les tests a un niveau acceptable.</p>
+  <p>Les quatre types de test mentionnes ci-dessus peuvent etre appliques a tous les niveaux de test, bien que l'accent soit different a chaque niveau. Differentes techniques de test peuvent etre utilisees pour deriver les conditions de test et les cas de test pour tous les types de test mentionnes.</p>
 
-  <h4>2.2.3. Confirmation Testing and Regression Testing</h4>
-  <p>Changes are typically made to a component or system to either enhance it by adding a new feature or to fix it by removing a defect. Testing should then also include confirmation testing and regression testing.</p>
-  <p><strong>Confirmation testing</strong> confirms that an original defect has been successfully fixed. Depending on the risk, one can test the fixed version of the software in several ways, including:</p>
+  <h4>2.2.3. Test de confirmation et test de regression</h4>
+  <p>Des modifications sont generalement apportees a un composant ou un systeme soit pour l'ameliorer en ajoutant une nouvelle fonctionnalite, soit pour le corriger en supprimant un defaut. Le test devrait alors egalement inclure le test de confirmation et le test de regression.</p>
+  <p><strong>Le test de confirmation</strong> confirme qu'un defaut original a ete corrige avec succes. Selon le risque, on peut tester la version corrigee du logiciel de plusieurs facons, notamment :</p>
   <ul>
-    <li>executing all tests that previously have failed due to the defect, or, also by</li>
-    <li>adding new tests to cover any changes that were needed to fix the defect</li>
+    <li>en executant tous les tests qui avaient precedemment echoue a cause du defaut, ou aussi en</li>
+    <li>ajoutant de nouveaux tests pour couvrir les modifications necessaires a la correction du defaut</li>
   </ul>
-  <p>However, when time or money is short when fixing defects, confirmation testing might be restricted to simply exercising the test steps that should reproduce the failure caused by the defect and checking that the failure does not occur.</p>
-  <p><strong>Regression testing</strong> confirms that no adverse consequences have been caused by a change, including a fix that has already been confirmation tested. These adverse consequences could affect the same component where the change was made, other components in the same system, or even other connected systems. Regression testing may not be restricted to the test object itself but can also be related to the environment. It is advisable first to perform an impact analysis to recognize the extent of the regression testing. Impact analysis shows which parts of the software could be affected.</p>
-  <p>Regression test suites are run many times and generally the number of regression test cases will increase with each iteration or release, so regression testing is a strong candidate for automation. Test automation should start early in the project. Where CI is used, such as in DevOps (see section 2.1.4), it is good practice to also include automated regression tests. Depending on the situation, this may include regression tests on different test levels.</p>
-  <p>Confirmation testing and/or regression testing for the test object are needed on all test levels if defects are fixed and/or changes are made on these test levels.</p>
+  <p>Cependant, lorsque le temps ou l'argent est limite pour corriger les defauts, le test de confirmation peut se limiter a simplement executer les etapes de test qui devraient reproduire la defaillance causee par le defaut et verifier que la defaillance ne se produit pas.</p>
+  <p><strong>Le test de regression</strong> confirme qu'aucune consequence indesirable n'a ete causee par une modification, y compris une correction qui a deja fait l'objet d'un test de confirmation. Ces consequences indesirables pourraient affecter le meme composant ou la modification a ete effectuee, d'autres composants dans le meme systeme, ou meme d'autres systemes connectes. Le test de regression peut ne pas se limiter a l'objet de test lui-meme mais peut egalement concerner l'environnement. Il est conseille d'effectuer d'abord une analyse d'impact pour reconnaitre l'etendue du test de regression. L'analyse d'impact montre quelles parties du logiciel pourraient etre affectees.</p>
+  <p>Les suites de test de regression sont executees de nombreuses fois et generalement le nombre de cas de test de regression augmente a chaque iteration ou version, de sorte que le test de regression est un candidat de choix pour l'automatisation. L'automatisation des tests devrait commencer tot dans le projet. Lorsque la CI est utilisee, comme dans DevOps (voir section 2.1.4), il est recommande d'inclure egalement des tests de regression automatises. Selon la situation, cela peut inclure des tests de regression a differents niveaux de test.</p>
+  <p>Le test de confirmation et/ou le test de regression pour l'objet de test sont necessaires a tous les niveaux de test si des defauts sont corriges et/ou des modifications sont effectuees a ces niveaux de test.</p>
 </div>
 
 <div class="question-card" style="margin-bottom:20px;">
-  <h3>2.3. Maintenance Testing</h3>
+  <h3>2.3. Test de maintenance</h3>
   <div class="fiche-highlight">
-    <strong>Learning Objectives:</strong><br>
-    FL-2.3.1 (K2) Summarize maintenance testing and its triggers
+    <strong>Objectifs d'apprentissage :</strong><br>
+    FL-2.3.1 (K2) Resumer le test de maintenance et ses declencheurs
   </div>
-  <p>There are different categories of maintenance, it can be corrective, adaptive to changes in the environment or improve performance or maintainability (see ISO/IEC 14764 for details), so maintenance can involve planned releases/deployments and unplanned releases/deployments (hot fixes). Impact analysis may be done before a change is made, to help decide if the change should be made, based on the potential consequences in other areas of the system. Testing the changes to an operational system includes both evaluating the success of the implementation of the change and the checking for possible regressions in parts of the system that remain unchanged (which is usually most of the system).</p>
-  <p>The scope of maintenance testing typically depends on:</p>
+  <p>Il existe differentes categories de maintenance : elle peut etre corrective, adaptive aux changements de l'environnement ou viser a ameliorer les performances ou la maintenabilite (voir ISO/IEC 14764 pour les details). La maintenance peut donc impliquer des versions/deploiements planifies et des versions/deploiements non planifies (correctifs urgents). Une analyse d'impact peut etre effectuee avant qu'une modification ne soit apportee, pour aider a decider si la modification doit etre faite, sur la base des consequences potentielles dans d'autres parties du systeme. Tester les modifications apportees a un systeme operationnel comprend a la fois l'evaluation du succes de l'implementation de la modification et la verification de regressions possibles dans les parties du systeme qui restent inchangees (ce qui represente generalement la majeure partie du systeme).</p>
+  <p>La portee du test de maintenance depend generalement de :</p>
   <ul>
-    <li>The degree of risk of the change</li>
-    <li>The size of the existing system</li>
-    <li>The size of the change</li>
+    <li>Le degre de risque de la modification</li>
+    <li>La taille du systeme existant</li>
+    <li>La taille de la modification</li>
   </ul>
-  <p>The triggers for maintenance and maintenance testing can be classified as follows:</p>
+  <p>Les declencheurs de la maintenance et du test de maintenance peuvent etre classes comme suit :</p>
   <ul>
-    <li><strong>Modifications</strong>, such as planned enhancements (i.e., release-based), corrective changes or hot fixes.</li>
-    <li><strong>Upgrades or migrations</strong> of the operational environment, such as from one platform to another, which can require tests associated with the new environment as well as of the changed software, or tests of data conversion when data from another application is migrated into the system being maintained.</li>
-    <li><strong>Retirement</strong>, such as when an application reaches the end of its life. When a system is retired, this can require testing of data archiving if long data retention periods are required. Testing of restore and retrieval procedures after archiving may also be needed in the event that certain data is required during the archiving period.</li>
+    <li><strong>Les modifications</strong>, telles que les ameliorations planifiees (c'est-a-dire basees sur les versions), les corrections ou les correctifs urgents.</li>
+    <li><strong>Les mises a niveau ou migrations</strong> de l'environnement operationnel, par exemple d'une plateforme a une autre, ce qui peut necessiter des tests associes au nouvel environnement ainsi qu'au logiciel modifie, ou des tests de conversion de donnees lorsque des donnees d'une autre application sont migrees dans le systeme maintenu.</li>
+    <li><strong>Le retrait</strong>, par exemple lorsqu'une application arrive en fin de vie. Lorsqu'un systeme est retire, cela peut necessiter des tests d'archivage des donnees si de longues periodes de conservation des donnees sont requises. Des tests de restauration et de recuperation des procedures apres archivage peuvent egalement etre necessaires dans le cas ou certaines donnees seraient requises pendant la periode d'archivage.</li>
   </ul>
 </div>
 

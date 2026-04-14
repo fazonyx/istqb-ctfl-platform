@@ -10,7 +10,7 @@
 
 <div class="header">
   <h1>Chapitre 3 - Test statique</h1>
-  <a href="istqb_platform.html" class="btn-back" style="text-decoration:none;">&#8592; Retour a la plateforme</a>
+  <a href="istqb_platform.html#apprentissage" class="btn-back" style="text-decoration:none;">&#8592; Retour a la plateforme</a>
 </div>
 
 <div class="home-screen" style="max-width:960px;margin:0 auto;padding:24px;">
@@ -27,111 +27,111 @@
   <div id="chTab-syllabus">
 
 <div class="question-card" style="margin-bottom:20px;">
-  <h3>3.1. Static Testing Basics</h3>
+  <h3>3.1. Bases du test statique</h3>
   <div class="fiche-highlight">
-    <strong>Learning Objectives:</strong><br>
-    FL-3.1.1 (K1) Recognize types of work products that can be examined by static testing<br>
-    FL-3.1.2 (K2) Explain the value of static testing<br>
-    FL-3.1.3 (K2) Compare and contrast static testing and dynamic testing
+    <strong>Objectifs d'apprentissage :</strong><br>
+    FL-3.1.1 (K1) Reconnaitre les types de produits d'activite pouvant etre examines par le test statique<br>
+    FL-3.1.2 (K2) Expliquer la valeur du test statique<br>
+    FL-3.1.3 (K2) Comparer et opposer le test statique et le test dynamique
   </div>
-  <p>In contrast to dynamic testing, in static testing the software under test does not need to be executed. Code, process specification, system architecture specification or other work products are evaluated through manual examination (e.g., reviews) or with the help of a tool (e.g., static analysis). Test objectives include improving quality, detecting defects and assessing characteristics like readability, completeness, correctness, testability and consistency. Static testing can be applied for both verification and validation.</p>
-  <p>Testers, business representatives (Product Owner, business analyst etc.) and developers work together during example mappings, collaborative user story writing and backlog refinement sessions to ensure that user stories and related work products meet defined criteria, e.g., the Definition of Ready (see section 5.1.3). Review techniques can be applied to ensure user stories are complete and understandable and include testable acceptance criteria. By asking the right questions, testers explore, challenge and help improve the proposed user stories.</p>
-  <p>Static analysis can identify problems prior to dynamic testing while often requiring less effort, since no test cases are required, and tools (see chapter 6) are typically used. Static analysis is often incorporated into CI frameworks (see section 2.1.4). While largely used to detect specific code defects, static analysis is also used to evaluate maintainability and security. Spelling checkers and readability tools are other examples of static analysis tools.</p>
+  <p>Contrairement au test dynamique, le test statique ne necessite pas l'execution du logiciel sous test. Le code, les specifications de processus, les specifications d'architecture systeme ou d'autres produits d'activite sont evalues par un examen manuel (par exemple, les revues) ou a l'aide d'un outil (par exemple, l'analyse statique). Les objectifs du test incluent l'amelioration de la qualite, la detection des defauts et l'evaluation de caracteristiques telles que la lisibilite, la completude, la correction, la testabilite et la coherence. Le test statique peut etre applique a la fois pour la verification et la validation.</p>
+  <p>Les testeurs, les representants metier (Product Owner, analyste metier, etc.) et les developpeurs travaillent ensemble lors de sessions de cartographie d'exemples, d'ecriture collaborative de user stories et de raffinement du backlog pour s'assurer que les user stories et les produits d'activite associes repondent aux criteres definis, par exemple la Definition of Ready (voir section 5.1.3). Les techniques de revue peuvent etre appliquees pour s'assurer que les user stories sont completes, comprehensibles et incluent des criteres d'acceptation testables. En posant les bonnes questions, les testeurs explorent, remettent en question et contribuent a ameliorer les user stories proposees.</p>
+  <p>L'analyse statique peut identifier des problemes avant le test dynamique tout en necessitant souvent moins d'effort, puisqu'aucun cas de test n'est requis et que des outils (voir chapitre 6) sont generalement utilises. L'analyse statique est souvent integree dans les frameworks d'integration continue (voir section 2.1.4). Bien qu'elle soit largement utilisee pour detecter des defauts de code specifiques, l'analyse statique est egalement utilisee pour evaluer la maintenabilite et la securite. Les correcteurs orthographiques et les outils de lisibilite sont d'autres exemples d'outils d'analyse statique.</p>
 
-  <h4>3.1.1. Work Products Examinable by Static Testing</h4>
-  <p>Almost any work product can be examined using static testing. Examples include requirement specification documents, source code, test plans, test cases, product backlog items, test charters, project documentation, contracts and models.</p>
-  <p>Any work product that can be read and understood can be the subject of a review. However, for static analysis, work products need a structure against which they can be checked (e.g., models, code or text with a formal syntax).</p>
-  <p>Work products that are not appropriate for static testing include those that are difficult to interpret by human beings and that should not be analyzed by tools (e.g., 3rd party executable code due to legal reasons).</p>
+  <h4>3.1.1. Produits d'activite examinables par le test statique</h4>
+  <p>Presque tout produit d'activite peut etre examine a l'aide du test statique. Les exemples incluent les documents de specification des exigences, le code source, les plans de test, les cas de test, les elements du backlog produit, les chartes de test, la documentation projet, les contrats et les modeles.</p>
+  <p>Tout produit d'activite pouvant etre lu et compris peut faire l'objet d'une revue. Cependant, pour l'analyse statique, les produits d'activite doivent avoir une structure permettant leur verification (par exemple, des modeles, du code ou du texte avec une syntaxe formelle).</p>
+  <p>Les produits d'activite qui ne conviennent pas au test statique sont ceux qui sont difficiles a interpreter par des humains et qui ne devraient pas etre analyses par des outils (par exemple, du code executable tiers pour des raisons legales).</p>
 
-  <h4>3.1.2. Value of Static Testing</h4>
-  <p>Static testing can detect defects in the earliest phases of the SDLC, fulfilling the principle of early testing (see section 1.3). It can also identify defects which cannot be detected by dynamic testing (e.g., unreachable code, design patterns not implemented as desired, defects in non-executable work products).</p>
-  <p>Static testing provides the ability to evaluate the quality of, and to build confidence in work products. By verifying the documented requirements, the stakeholders can also make sure that these requirements describe their actual needs. Since static testing can be performed early in the SDLC, a shared understanding can be created among the involved stakeholders. Communication will also be improved between the involved stakeholders. For this reason, it is recommended to involve a wide variety of stakeholders in static testing.</p>
-  <p>Even though reviews can be costly to implement, the overall project costs are usually much lower than when no reviews are performed because less time and effort needs to be spent on fixing defects later in the project.</p>
-  <p>Certain code defects can be detected using static analysis more efficiently than in dynamic testing, usually resulting in both fewer code defects and a lower overall development effort.</p>
+  <h4>3.1.2. Valeur du test statique</h4>
+  <p>Le test statique peut detecter des defauts dans les phases les plus precoces du SDLC, respectant ainsi le principe du test precoce (voir section 1.3). Il peut egalement identifier des defauts qui ne peuvent pas etre detectes par le test dynamique (par exemple, du code inatteignable, des patterns de conception non implementes comme souhaite, des defauts dans des produits d'activite non executables).</p>
+  <p>Le test statique offre la capacite d'evaluer la qualite des produits d'activite et de renforcer la confiance en ceux-ci. En verifiant les exigences documentees, les parties prenantes peuvent egalement s'assurer que ces exigences decrivent leurs besoins reels. Puisque le test statique peut etre effectue tot dans le SDLC, une comprehension partagee peut etre creee entre les parties prenantes impliquees. La communication sera egalement amelioree entre les parties prenantes impliquees. Pour cette raison, il est recommande d'impliquer une grande variete de parties prenantes dans le test statique.</p>
+  <p>Meme si les revues peuvent etre couteuses a mettre en oeuvre, les couts globaux du projet sont generalement bien inferieurs a ceux engendres lorsqu'aucune revue n'est realisee, car moins de temps et d'effort sont necessaires pour corriger les defauts plus tard dans le projet.</p>
+  <p>Certains defauts de code peuvent etre detectes plus efficacement par l'analyse statique que par le test dynamique, ce qui se traduit generalement par moins de defauts de code et un effort de developpement global moindre.</p>
 
-  <h4>3.1.3. Differences between Static Testing and Dynamic Testing</h4>
-  <p>Static testing and dynamic testing practices complement each other. They have similar objectives, such as supporting the detection of defects in work products (see section 1.1.1), but there are also some differences, such as:</p>
+  <h4>3.1.3. Differences entre le test statique et le test dynamique</h4>
+  <p>Les pratiques de test statique et de test dynamique se completent mutuellement. Elles ont des objectifs similaires, tels que contribuer a la detection des defauts dans les produits d'activite (voir section 1.1.1), mais il existe egalement des differences, telles que :</p>
   <ul>
-    <li>Static testing and dynamic testing (with analysis of failures) can both lead to the detection of defects, however there are some defect types that can only be found by either static or dynamic testing.</li>
-    <li>Static testing finds defects directly, while dynamic testing causes failures from which the associated defects are determined through subsequent analysis</li>
-    <li>Static testing may more easily detect defects that lay on paths through the code that are rarely executed or hard to reach using dynamic testing</li>
-    <li>Static testing can be applied to non-executable work products, while dynamic testing can only be applied to executable work products</li>
-    <li>Static testing can be used to measure quality characteristics that are not dependent on executing code (e.g., maintainability), while dynamic testing can be used to measure quality characteristics that are dependent on executing code (e.g., performance efficiency)</li>
+    <li>Le test statique et le test dynamique (avec analyse des defaillances) peuvent tous deux mener a la detection de defauts, cependant certains types de defauts ne peuvent etre trouves que par le test statique ou le test dynamique.</li>
+    <li>Le test statique trouve les defauts directement, tandis que le test dynamique provoque des defaillances a partir desquelles les defauts associes sont determines par une analyse ulterieure</li>
+    <li>Le test statique peut plus facilement detecter des defauts situes sur des chemins dans le code rarement executes ou difficiles a atteindre avec le test dynamique</li>
+    <li>Le test statique peut etre applique aux produits d'activite non executables, tandis que le test dynamique ne peut etre applique qu'aux produits d'activite executables</li>
+    <li>Le test statique peut etre utilise pour mesurer des caracteristiques de qualite qui ne dependent pas de l'execution du code (par exemple, la maintenabilite), tandis que le test dynamique peut etre utilise pour mesurer des caracteristiques de qualite qui dependent de l'execution du code (par exemple, l'efficacite de performance)</li>
   </ul>
-  <p>Typical defects that are easier and/or cheaper to find through static testing include:</p>
+  <p>Les defauts typiques qui sont plus faciles et/ou moins couteux a trouver par le test statique incluent :</p>
   <ul>
-    <li>Defects in requirements (e.g., inconsistencies, ambiguities, contradictions, omissions, inaccuracies, duplications)</li>
-    <li>Design defects (e.g., inefficient database structures, poor modularization)</li>
-    <li>Certain types of coding defects (e.g., variables with undefined values, undeclared variables, unreachable or duplicated code, excessive code complexity)</li>
-    <li>Deviations from standards (e.g., lack of adherence to naming conventions in coding standards)</li>
-    <li>Incorrect interface specifications (e.g., mismatched number, type or order of parameters)</li>
-    <li>Specific types of security vulnerabilities (e.g., buffer overflows)</li>
-    <li>Gaps or inaccuracies in test basis coverage (e.g., missing tests for an acceptance criterion)</li>
+    <li>Defauts dans les exigences (par exemple, incoherences, ambiguites, contradictions, omissions, inexactitudes, doublons)</li>
+    <li>Defauts de conception (par exemple, structures de base de donnees inefficaces, mauvaise modularisation)</li>
+    <li>Certains types de defauts de codage (par exemple, variables avec des valeurs indefinies, variables non declarees, code inatteignable ou duplique, complexite de code excessive)</li>
+    <li>Ecarts par rapport aux standards (par exemple, non-respect des conventions de nommage dans les standards de codage)</li>
+    <li>Specifications d'interface incorrectes (par exemple, nombre, type ou ordre des parametres ne correspondant pas)</li>
+    <li>Types specifiques de vulnerabilites de securite (par exemple, depassements de tampon)</li>
+    <li>Lacunes ou inexactitudes dans la couverture de la base de test (par exemple, tests manquants pour un critere d'acceptation)</li>
   </ul>
 </div>
 
 <div class="question-card" style="margin-bottom:20px;">
-  <h3>3.2. Feedback and Review Process</h3>
+  <h3>3.2. Retour d'information et processus de revue</h3>
   <div class="fiche-highlight">
-    <strong>Learning Objectives:</strong><br>
-    FL-3.2.1 (K1) Identify the benefits of early and frequent stakeholder feedback<br>
-    FL-3.2.2 (K2) Summarize the activities of the review process<br>
-    FL-3.2.3 (K1) Recall which responsibilities are assigned to the principal roles when performing reviews<br>
-    FL-3.2.4 (K2) Compare and contrast the different review types<br>
-    FL-3.2.5 (K1) Recall the factors that contribute to a successful review
+    <strong>Objectifs d'apprentissage :</strong><br>
+    FL-3.2.1 (K1) Identifier les benefices d'un retour d'information precoce et frequent des parties prenantes<br>
+    FL-3.2.2 (K2) Resumer les activites du processus de revue<br>
+    FL-3.2.3 (K1) Se rappeler quelles responsabilites sont attribuees aux principaux roles lors des revues<br>
+    FL-3.2.4 (K2) Comparer et opposer les differents types de revue<br>
+    FL-3.2.5 (K1) Se rappeler les facteurs qui contribuent a la reussite d'une revue
   </div>
 
-  <h4>3.2.1. Benefits of Early and Frequent Stakeholder Feedback</h4>
-  <p>Early and frequent feedback allows for the early communication of potential quality problems. If there is little stakeholder involvement during the SDLC, the product being developed might not meet the stakeholder's original or current vision. A failure to deliver what the stakeholder wants can result in costly rework, missed deadlines, blame games, and might even lead to complete project failure.</p>
-  <p>Frequent stakeholder feedback throughout the SDLC can prevent misunderstandings about requirements and ensure that changes to requirements are understood and implemented earlier. This helps the development team to improve their understanding of what they are building. It allows them to focus on those features that deliver the most value to the stakeholders and that have the most positive impact on identified risks.</p>
+  <h4>3.2.1. Benefices d'un retour d'information precoce et frequent des parties prenantes</h4>
+  <p>Un retour d'information precoce et frequent permet la communication rapide des problemes de qualite potentiels. S'il y a peu d'implication des parties prenantes pendant le SDLC, le produit en cours de developpement pourrait ne pas correspondre a la vision originale ou actuelle des parties prenantes. Ne pas livrer ce que la partie prenante attend peut entrainer des retravaux couteux, des delais non respectes, des accusations mutuelles, et pourrait meme mener a l'echec complet du projet.</p>
+  <p>Un retour d'information frequent des parties prenantes tout au long du SDLC peut prevenir les malentendus concernant les exigences et garantir que les changements d'exigences sont compris et implementes plus tot. Cela aide l'equipe de developpement a ameliorer sa comprehension de ce qu'elle construit. Cela leur permet de se concentrer sur les fonctionnalites qui apportent le plus de valeur aux parties prenantes et qui ont l'impact positif le plus important sur les risques identifies.</p>
 
-  <h4>3.2.2. Review Process Activities</h4>
-  <p>The ISO/IEC 20246 standard defines a generic review process that provides a structured but flexible framework from which a specific review process may be tailored to a particular situation. If the required review is more formal, then more of the tasks described for the different activities will be needed.</p>
-  <p>The size of many work products makes them too large to be covered by a single review. The review process may be invoked multiple times to complete the review for the entire work product.</p>
-  <p>The activities in the review process are:</p>
+  <h4>3.2.2. Activites du processus de revue</h4>
+  <p>La norme ISO/IEC 20246 definit un processus de revue generique qui fournit un cadre structure mais flexible a partir duquel un processus de revue specifique peut etre adapte a une situation particuliere. Si la revue requise est plus formelle, alors davantage de taches decrites pour les differentes activites seront necessaires.</p>
+  <p>La taille de nombreux produits d'activite les rend trop volumineux pour etre couverts par une seule revue. Le processus de revue peut etre invoque plusieurs fois pour completer la revue de l'ensemble du produit d'activite.</p>
+  <p>Les activites du processus de revue sont :</p>
   <ul>
-    <li><strong>Planning.</strong> During the planning phase, the scope of the review, which comprises the purpose, the work product to be reviewed, quality characteristics to be evaluated, areas to focus on, exit criteria, supporting information such as standards, effort and the timeframes for the review, shall be defined.</li>
-    <li><strong>Review initiation.</strong> During review initiation, the goal is to make sure that everyone and everything involved is prepared to start the review. This includes making sure that every participant has access to the work product under review, understands their role and responsibilities and receives everything needed to perform the review.</li>
-    <li><strong>Individual review.</strong> Every reviewer performs an individual review to assess the quality of the work product under review, and to identify anomalies, recommendations, and questions by applying one or more review techniques (e.g., checklist-based reviewing, scenario-based reviewing). The ISO/IEC 20246 standard provides more depth on different review techniques. The reviewers log all their identified anomalies, recommendations, and questions.</li>
-    <li><strong>Communication and analysis.</strong> Since the anomalies identified during a review are not necessarily defects, all these anomalies need to be analyzed and discussed. For every anomaly, the decision should be made on its status, ownership and required actions. This is typically done in a review meeting, during which the participants also decide what the quality level of reviewed work product is and what follow-up actions are required. A follow-up review may be required to complete actions.</li>
-    <li><strong>Fixing and reporting.</strong> For every defect, a defect report should be created so that corrective actions can be followed up. Once the exit criteria are reached, the work product can be accepted. The review results are reported.</li>
+    <li><strong>Planification.</strong> Pendant la phase de planification, la portee de la revue doit etre definie, ce qui comprend l'objectif, le produit d'activite a revoir, les caracteristiques de qualite a evaluer, les zones sur lesquelles se concentrer, les criteres de sortie, les informations de support telles que les standards, l'effort et les delais de la revue.</li>
+    <li><strong>Initiation de la revue.</strong> Pendant l'initiation de la revue, l'objectif est de s'assurer que toutes les personnes et tous les elements impliques sont prets a demarrer la revue. Cela inclut de s'assurer que chaque participant a acces au produit d'activite en cours de revue, comprend son role et ses responsabilites et recoit tout ce qui est necessaire pour effectuer la revue.</li>
+    <li><strong>Revue individuelle.</strong> Chaque reviseur effectue une revue individuelle pour evaluer la qualite du produit d'activite en cours de revue, et pour identifier les anomalies, recommandations et questions en appliquant une ou plusieurs techniques de revue (par exemple, revue basee sur des checklists, revue basee sur des scenarios). La norme ISO/IEC 20246 fournit plus de details sur les differentes techniques de revue. Les reviseurs consignent toutes les anomalies, recommandations et questions identifiees.</li>
+    <li><strong>Communication et analyse.</strong> Puisque les anomalies identifiees lors d'une revue ne sont pas necessairement des defauts, toutes ces anomalies doivent etre analysees et discutees. Pour chaque anomalie, une decision doit etre prise concernant son statut, sa responsabilite et les actions requises. Cela se fait generalement lors d'une reunion de revue, au cours de laquelle les participants decident egalement du niveau de qualite du produit d'activite revise et des actions de suivi necessaires. Une revue de suivi peut etre necessaire pour completer les actions.</li>
+    <li><strong>Correction et rapport.</strong> Pour chaque defaut, un rapport de defaut doit etre cree afin que les actions correctives puissent etre suivies. Une fois les criteres de sortie atteints, le produit d'activite peut etre accepte. Les resultats de la revue sont rapportes.</li>
   </ul>
 
-  <h4>3.2.3. Roles and Responsibilities in Reviews</h4>
-  <p>Reviews involve various stakeholders, who may take on several roles. The principal roles and their responsibilities are:</p>
+  <h4>3.2.3. Roles et responsabilites dans les revues</h4>
+  <p>Les revues impliquent differentes parties prenantes, qui peuvent assumer plusieurs roles. Les principaux roles et leurs responsabilites sont :</p>
   <ul>
-    <li><strong>Manager</strong> – decides what is to be reviewed and provides resources, such as staff and time for the review</li>
-    <li><strong>Author</strong> – creates and fixes the work product under review</li>
-    <li><strong>Moderator</strong> (also known as the facilitator) – ensures the effective running of review meetings, including mediation, time management, and a safe review environment in which everyone can speak freely</li>
-    <li><strong>Scribe</strong> (also known as recorder) – collates anomalies from reviewers and records review information, such as decisions and new anomalies found during the review meeting</li>
-    <li><strong>Reviewer</strong> – performs reviews. A reviewer may be someone working on the project, a subject matter expert, or any other stakeholder</li>
-    <li><strong>Review leader</strong> – takes overall responsibility for the review such as deciding who will be involved, and organizing when and where the review will take place</li>
+    <li><strong>Manager</strong> – decide ce qui doit etre revise et fournit les ressources, telles que le personnel et le temps pour la revue</li>
+    <li><strong>Auteur</strong> – cree et corrige le produit d'activite en cours de revue</li>
+    <li><strong>Moderateur</strong> (egalement appele facilitateur) – assure le bon deroulement des reunions de revue, incluant la mediation, la gestion du temps et un environnement de revue sur dans lequel chacun peut s'exprimer librement</li>
+    <li><strong>Scribe</strong> (egalement appele secretaire) – rassemble les anomalies des reviseurs et enregistre les informations de revue, telles que les decisions et les nouvelles anomalies trouvees pendant la reunion de revue</li>
+    <li><strong>Reviseur</strong> – effectue les revues. Un reviseur peut etre une personne travaillant sur le projet, un expert du domaine ou toute autre partie prenante</li>
+    <li><strong>Responsable de la revue</strong> – prend la responsabilite globale de la revue, comme decider qui sera implique et organiser quand et ou la revue aura lieu</li>
   </ul>
-  <p>Other, more detailed roles are possible, as described in the ISO/IEC 20246 standard.</p>
+  <p>D'autres roles plus detailles sont possibles, comme decrit dans la norme ISO/IEC 20246.</p>
 
-  <h4>3.2.4. Review Types</h4>
-  <p>There exist many review types ranging from informal reviews to formal reviews. The required level of formality depends on factors such as the SDLC being followed, the maturity of the development process, the criticality and complexity of the work product being reviewed, legal or regulatory requirements, and the need for an audit trail. The same work product can be reviewed with different review types, e.g., first an informal one and later a more formal one.</p>
-  <p>Selecting the right review type is key to achieving the required review objectives (see section 3.2.5). The selection is not only based on the objectives, but also on factors such as the project needs, available resources, work product type and risks, business domain, and company culture.</p>
-  <p>Some commonly used review types are:</p>
+  <h4>3.2.4. Types de revue</h4>
+  <p>Il existe de nombreux types de revue allant des revues informelles aux revues formelles. Le niveau de formalite requis depend de facteurs tels que le SDLC suivi, la maturite du processus de developpement, la criticite et la complexite du produit d'activite revise, les exigences legales ou reglementaires, et le besoin d'une piste d'audit. Le meme produit d'activite peut etre revise avec differents types de revue, par exemple d'abord une revue informelle puis plus tard une plus formelle.</p>
+  <p>Choisir le bon type de revue est essentiel pour atteindre les objectifs de revue requis (voir section 3.2.5). Le choix n'est pas seulement base sur les objectifs, mais aussi sur des facteurs tels que les besoins du projet, les ressources disponibles, le type de produit d'activite et les risques, le domaine metier et la culture de l'entreprise.</p>
+  <p>Parmi les types de revue couramment utilises :</p>
   <ul>
-    <li><strong>Informal review.</strong> Informal reviews do not follow a defined process and do not require a formal documented output. The main objective is detecting anomalies.</li>
-    <li><strong>Walkthrough.</strong> A walkthrough, which is led by the author, can serve many objectives, such as evaluating quality and building confidence in the work product, educating reviewers, gaining consensus, generating new ideas, motivating and enabling authors to improve and detecting anomalies. Reviewers might perform an individual review before the walkthrough, but this is not required.</li>
-    <li><strong>Technical Review.</strong> A technical review is performed by technically qualified reviewers and led by a moderator. The objectives of a technical review are to gain consensus and make decisions regarding a technical problem, but also to detect anomalies, evaluate quality and build confidence in the work product, generate new ideas, and to motivate and enable authors to improve.</li>
-    <li><strong>Inspection.</strong> As inspections are the most formal type of review, they follow the complete generic process (see section 3.2.2). The main objective is to find the maximum number of anomalies. Other objectives are to evaluate quality, build confidence in the work product, and to motivate and enable authors to improve. Metrics are collected and used to improve the SDLC, including the inspection process. In inspections, the author cannot act as the review leader or scribe.</li>
+    <li><strong>Revue informelle.</strong> Les revues informelles ne suivent pas de processus defini et ne necessitent pas de sortie documentee formelle. L'objectif principal est de detecter des anomalies.</li>
+    <li><strong>Walkthrough (revue guidee).</strong> Un walkthrough, dirige par l'auteur, peut servir de nombreux objectifs, tels qu'evaluer la qualite et renforcer la confiance dans le produit d'activite, former les reviseurs, obtenir un consensus, generer de nouvelles idees, motiver et permettre aux auteurs de s'ameliorer et detecter des anomalies. Les reviseurs peuvent effectuer une revue individuelle avant le walkthrough, mais ce n'est pas obligatoire.</li>
+    <li><strong>Revue technique.</strong> Une revue technique est realisee par des reviseurs techniquement qualifies et dirigee par un moderateur. Les objectifs d'une revue technique sont d'obtenir un consensus et de prendre des decisions concernant un probleme technique, mais aussi de detecter des anomalies, d'evaluer la qualite et de renforcer la confiance dans le produit d'activite, de generer de nouvelles idees et de motiver et permettre aux auteurs de s'ameliorer.</li>
+    <li><strong>Inspection.</strong> Les inspections etant le type de revue le plus formel, elles suivent le processus generique complet (voir section 3.2.2). L'objectif principal est de trouver le nombre maximum d'anomalies. Les autres objectifs sont d'evaluer la qualite, de renforcer la confiance dans le produit d'activite et de motiver et permettre aux auteurs de s'ameliorer. Des metriques sont collectees et utilisees pour ameliorer le SDLC, y compris le processus d'inspection. Lors des inspections, l'auteur ne peut pas agir en tant que responsable de la revue ou scribe.</li>
   </ul>
 
-  <h4>3.2.5. Success Factors for Reviews</h4>
-  <p>There are several factors that determine the success of reviews, which include:</p>
+  <h4>3.2.5. Facteurs de succes des revues</h4>
+  <p>Plusieurs facteurs determinent le succes des revues, notamment :</p>
   <ul>
-    <li>Defining clear objectives and measurable exit criteria. Evaluation of participants should never be an objective</li>
-    <li>Choosing the appropriate review type to achieve the given objectives, and to suit the type of work product, the review participants, the project needs and context</li>
-    <li>Performing reviews on small chunks, so that reviewers do not lose concentration during an individual review and/or the review meeting (when held)</li>
-    <li>Providing feedback from reviews to stakeholders and authors so they can improve the product and their activities (see section 3.2.1)</li>
-    <li>Providing adequate time to participants to prepare for the review</li>
-    <li>Support from management for the review process</li>
-    <li>Making reviews part of the organization's culture, to promote learning and process improvement</li>
-    <li>Providing adequate training for all participants so they know how to fulfil their role</li>
-    <li>Facilitating meetings</li>
+    <li>Definir des objectifs clairs et des criteres de sortie mesurables. L'evaluation des participants ne doit jamais etre un objectif</li>
+    <li>Choisir le type de revue approprie pour atteindre les objectifs donnes, et adapte au type de produit d'activite, aux participants de la revue, aux besoins et au contexte du projet</li>
+    <li>Effectuer les revues sur de petites portions, afin que les reviseurs ne perdent pas leur concentration pendant une revue individuelle et/ou la reunion de revue (lorsqu'elle a lieu)</li>
+    <li>Fournir un retour d'information des revues aux parties prenantes et aux auteurs afin qu'ils puissent ameliorer le produit et leurs activites (voir section 3.2.1)</li>
+    <li>Accorder un temps suffisant aux participants pour se preparer a la revue</li>
+    <li>Soutien du management pour le processus de revue</li>
+    <li>Integrer les revues dans la culture de l'organisation, pour promouvoir l'apprentissage et l'amelioration des processus</li>
+    <li>Fournir une formation adequate a tous les participants afin qu'ils sachent comment remplir leur role</li>
+    <li>Faciliter les reunions</li>
   </ul>
 </div>
 

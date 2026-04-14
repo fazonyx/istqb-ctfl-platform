@@ -712,3 +712,20 @@ document.addEventListener('keydown', function(e) {
 // INIT
 // ============================================================
 renderHome();
+
+// Handle hash-based navigation (e.g., #apprentissage from chapter pages or browser back)
+function handleHashNavigation() {
+  if (window.location.hash === '#apprentissage') {
+    const btn = document.querySelectorAll('.home-screen .tabs .tab-btn')[2];
+    if (btn) switchHomeTab('apprentissage', btn);
+  } else if (window.location.hash === '#progression') {
+    const btn = document.querySelectorAll('.home-screen .tabs .tab-btn')[1];
+    if (btn) switchHomeTab('progression', btn);
+  } else if (window.location.hash === '#quiz' || window.location.hash === '') {
+    const btn = document.querySelectorAll('.home-screen .tabs .tab-btn')[0];
+    if (btn) switchHomeTab('quizzes', btn);
+  }
+}
+handleHashNavigation();
+window.addEventListener('hashchange', handleHashNavigation);
+window.addEventListener('popstate', handleHashNavigation);
