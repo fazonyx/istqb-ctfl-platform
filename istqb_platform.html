@@ -429,6 +429,45 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
 .evo-legend-item { display: flex; align-items: center; gap: 5px; font-size: 0.75rem; color: #475569; }
 .evo-legend-dot { width: 10px; height: 3px; border-radius: 2px; }
 
+/* Collapsible sections */
+.prog-section { background: white; border-radius: 16px; box-shadow: 0 2px 10px rgba(0,0,0,0.06); margin-bottom: 20px; overflow: hidden; }
+.prog-section-header { display: flex; align-items: center; justify-content: space-between; padding: 18px 24px; cursor: pointer; user-select: none; transition: background 0.15s; }
+.prog-section-header:hover { background: #f8fafc; }
+.prog-section-header h3 { font-size: 1.1rem; font-weight: 700; color: #1e3a5f; margin: 0; }
+.prog-section-header .prog-arrow { font-size: 0.8rem; color: #94a3b8; transition: transform 0.3s; }
+.prog-section-header .prog-arrow.open { transform: rotate(90deg); }
+.prog-section-header .prog-subtitle { font-size: 0.78rem; color: #94a3b8; margin-left: 12px; font-weight: 400; }
+.prog-section-body { padding: 0 24px 24px; }
+.prog-section-body.collapsed { display: none; }
+
+/* Score banner */
+.score-banner { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; padding: 24px; background: white; border-radius: 16px; box-shadow: 0 2px 10px rgba(0,0,0,0.06); margin-bottom: 20px; }
+.score-banner-main { text-align: center; min-width: 140px; }
+.score-banner-main .sb-pct { font-size: 3.2rem; font-weight: 800; }
+.score-banner-main .sb-label { font-size: 0.82rem; color: #64748b; text-transform: uppercase; font-weight: 600; }
+.score-banner-stats { display: flex; gap: 20px; flex-wrap: wrap; flex: 1; }
+.score-banner-stat { text-align: center; min-width: 80px; }
+.score-banner-stat .sbs-num { font-size: 1.4rem; font-weight: 700; }
+.score-banner-stat .sbs-label { font-size: 0.72rem; color: #94a3b8; }
+.score-banner-trend { display: flex; align-items: center; gap: 6px; font-size: 0.85rem; font-weight: 600; }
+
+/* Graph containers - bigger */
+.graph-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+.graph-card { background: white; border-radius: 16px; padding: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.06); position: relative; }
+.graph-card h4 { font-size: 0.9rem; font-weight: 700; color: #1e3a5f; margin-bottom: 4px; }
+.graph-card .graph-legend-text { font-size: 0.75rem; color: #94a3b8; margin-bottom: 12px; }
+.graph-expand-btn { position: absolute; top: 12px; right: 12px; background: #f1f5f9; border: none; border-radius: 6px; padding: 4px 8px; cursor: pointer; font-size: 0.7rem; color: #64748b; }
+.graph-expand-btn:hover { background: #e2e8f0; }
+.graph-card.expanded { position: fixed; top: 60px; left: 20px; right: 20px; bottom: 20px; z-index: 200; padding: 30px; box-shadow: 0 8px 40px rgba(0,0,0,0.3); }
+.graph-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.4); z-index: 199; }
+.graph-overlay.show { display: block; }
+
+@media (max-width: 768px) {
+  .graph-row { grid-template-columns: 1fr; }
+  .score-banner { flex-direction: column; text-align: center; }
+  .score-banner-stats { justify-content: center; }
+}
+
 @media (max-width: 900px) {
   .dash-overview { grid-template-columns: 1fr; }
   .chapter-cards-grid { grid-template-columns: 1fr; }
@@ -3378,6 +3417,27 @@ function openFicheForLO(lo) {
   }, 100);
 }
 
+function toggleProgSection(header) {
+  const body = header.nextElementSibling;
+  const arrow = header.querySelector('.prog-arrow');
+  body.classList.toggle('collapsed');
+  arrow.classList.toggle('open');
+}
+
+function toggleGraphExpand(btn) {
+  const card = btn.closest('.graph-card');
+  const overlay = document.getElementById('graphOverlay');
+  if (card.classList.contains('expanded')) {
+    card.classList.remove('expanded');
+    overlay.classList.remove('show');
+    btn.textContent = 'Agrandir';
+  } else {
+    card.classList.add('expanded');
+    overlay.classList.add('show');
+    btn.textContent = 'Reduire';
+  }
+}
+
 function renderProgression() {
   const all = getAllHistory();
   const container = document.getElementById('progressDashboard');
@@ -3413,6 +3473,8 @@ function renderProgression() {
   const totalQuestions = hasData ? all.reduce((s, a) => s + a.total, 0) : 0;
   const totalCorrect = hasData ? all.reduce((s, a) => s + a.score, 0) : 0;
   const avgPct = hasData ? Math.round(totalCorrect / totalQuestions * 100) : 0;
+  const passCount = hasData ? all.filter(a => a.pct >= 65).length : 0;
+  const bestPct = hasData ? Math.max(...all.map(a => a.pct)) : 0;
 
   const chTotals = {};
   const chTrends = {};
@@ -3448,24 +3510,51 @@ function renderProgression() {
 
   const CH_COLORS = {1:'#60a5fa',2:'#f472b6',3:'#fb923c',4:'#facc15',5:'#34d399',6:'#a78bfa'};
 
+  // Trend indicator: compare last 3 vs first 3 attempts avg score
+  let trendLabel = 'Stable';
+  let trendColor = '#64748b';
+  let trendArrow = '&#8596;';
+  if (all.length >= 6) {
+    const first3avg = all.slice(0, 3).reduce((s, a) => s + a.pct, 0) / 3;
+    const last3avg = all.slice(-3).reduce((s, a) => s + a.pct, 0) / 3;
+    if (last3avg > first3avg + 3) { trendLabel = 'En progression'; trendColor = '#16a34a'; trendArrow = '&#8599;'; }
+    else if (last3avg < first3avg - 3) { trendLabel = 'En baisse'; trendColor = '#dc2626'; trendArrow = '&#8600;'; }
+  }
+
   let html = '';
-
-  // ========== SECTION 1: OVERVIEW (3 cards) ==========
   const overlayCls = hasData ? '' : 'dash-empty-overlay';
-  html += '<div class="dash-overview">';
 
-  // Card 1: Score Moyen
-  html += `<div class="dash-card ${overlayCls}" style="display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;">
-    <div style="font-size:0.85rem;color:#64748b;font-weight:600;margin-bottom:8px;text-transform:uppercase;">Score Moyen</div>
-    <div class="dash-score-big" style="${hasData ? 'color:' + scoreBadgeColor(avgPct) : 'color:#cbd5e1'}">${hasData ? avgPct + '%' : '--%'}</div>
-    <div class="dash-subtitle">${hasData ? totalAttempts + ' soumission' + (totalAttempts > 1 ? 's' : '') : '0 soumission'}</div>
-    ${hasData ? '' : emptyOverlay('Passez un quiz pour debloquer')}
+  // ========== OVERLAY FOR GRAPH EXPAND ==========
+  html += '<div class="graph-overlay" id="graphOverlay" onclick="document.querySelector(\'.graph-card.expanded .graph-expand-btn\').click()"></div>';
+
+  // ========== SECTION 1: SCORE BANNER ==========
+  html += `<div class="score-banner ${overlayCls}" style="position:relative;">`;
+  html += `<div class="score-banner-main">
+    <div class="sb-pct" style="color:${hasData ? scoreBadgeColor(avgPct) : '#cbd5e1'}">${hasData ? avgPct + '%' : '--%'}</div>
+    <div class="sb-label">Score Moyen</div>
   </div>`;
+  html += '<div class="score-banner-stats">';
+  html += `<div class="score-banner-stat"><div class="sbs-num" style="color:${hasData ? '#1e3a5f' : '#cbd5e1'}">${totalAttempts}</div><div class="sbs-label">Quiz passes</div></div>`;
+  html += `<div class="score-banner-stat"><div class="sbs-num" style="color:${hasData ? '#1e3a5f' : '#cbd5e1'}">${totalQuestions}</div><div class="sbs-label">Questions repondues</div></div>`;
+  html += `<div class="score-banner-stat"><div class="sbs-num" style="color:${hasData ? '#16a34a' : '#cbd5e1'}">${passCount}</div><div class="sbs-label">Reussis (>=65%)</div></div>`;
+  html += `<div class="score-banner-stat"><div class="sbs-num" style="color:${hasData ? '#2563eb' : '#cbd5e1'}">${hasData ? bestPct + '%' : '--%'}</div><div class="sbs-label">Meilleur</div></div>`;
+  html += '</div>';
+  if (hasData && all.length >= 6) {
+    html += `<div class="score-banner-trend" style="color:${trendColor}"><span>${trendArrow}</span> ${trendLabel}</div>`;
+  }
+  if (!hasData) html += emptyOverlay('Passez un quiz pour debloquer');
+  html += '</div>';
 
-  // Card 2: Score Moyen par Chapitre (bar chart)
-  html += `<div class="dash-card ${overlayCls}" style="position:relative;"><div style="font-size:0.85rem;color:#64748b;font-weight:600;margin-bottom:10px;text-transform:uppercase;">Score Moyen par Chapitre</div>`;
+  // ========== SECTION 2: GRAPH ROW (2 graphs side by side) ==========
+  html += '<div class="graph-row">';
+
+  // Graph 1: Score Moyen par Chapitre (bar chart)
+  html += `<div class="graph-card ${overlayCls}" style="position:relative;">`;
+  html += '<button class="graph-expand-btn" onclick="toggleGraphExpand(this)">Agrandir</button>';
+  html += '<h4>Score Moyen par Chapitre</h4>';
+  html += '<div class="graph-legend-text">Moyenne cumulee de vos scores par chapitre. La ligne rouge pointillee indique le seuil de reussite (65%).</div>';
   {
-    const W = 320, H = 170, PAD_L = 35, PAD_B = 30, PAD_T = 10, PAD_R = 10;
+    const W = 500, H = 250, PAD_L = 40, PAD_B = 35, PAD_T = 15, PAD_R = 15;
     const chartW = W - PAD_L - PAD_R;
     const chartH = H - PAD_T - PAD_B;
     const barW = chartW / 6 * 0.55;
@@ -3474,7 +3563,7 @@ function renderProgression() {
     for (let p = 0; p <= 100; p += 25) {
       const y = PAD_T + chartH * (1 - p / 100);
       svg += `<line x1="${PAD_L}" y1="${y}" x2="${W-PAD_R}" y2="${y}" stroke="#e2e8f0" stroke-width="0.5"/>`;
-      svg += `<text x="${PAD_L-4}" y="${y+3}" text-anchor="end" fill="#94a3b8" font-size="8">${p}%</text>`;
+      svg += `<text x="${PAD_L-4}" y="${y+3}" text-anchor="end" fill="#94a3b8" font-size="9">${p}%</text>`;
     }
     const y65 = PAD_T + chartH * (1 - 65/100);
     svg += `<line x1="${PAD_L}" y1="${y65}" x2="${W-PAD_R}" y2="${y65}" stroke="#dc2626" stroke-width="1" stroke-dasharray="4,3"/>`;
@@ -3483,10 +3572,10 @@ function renderProgression() {
       const data = chTotals[String(i)];
       const pct = data ? Math.round(data.c / data.t * 100) : 0;
       const barH = hasData ? chartH * pct / 100 : chartH * 0.15;
-      const barColor = hasData ? '#60a5fa' : '#e2e8f0';
-      svg += `<rect x="${x}" y="${PAD_T + chartH - barH}" width="${barW}" height="${barH}" rx="3" fill="${barColor}"/>`;
-      if (hasData) svg += `<text x="${x + barW/2}" y="${PAD_T + chartH - barH - 3}" text-anchor="middle" fill="#1e293b" font-size="7" font-weight="700">${pct}%</text>`;
-      svg += `<text x="${PAD_L + (i - 0.5) * gap}" y="${H - PAD_B + 12}" text-anchor="middle" fill="#64748b" font-size="7.5">CH-${i}</text>`;
+      const barColor = hasData ? CH_COLORS[i] : '#e2e8f0';
+      svg += `<rect x="${x}" y="${PAD_T + chartH - barH}" width="${barW}" height="${barH}" rx="4" fill="${barColor}"/>`;
+      if (hasData) svg += `<text x="${x + barW/2}" y="${PAD_T + chartH - barH - 4}" text-anchor="middle" fill="#1e293b" font-size="9" font-weight="700">${pct}%</text>`;
+      svg += `<text x="${PAD_L + (i - 0.5) * gap}" y="${H - PAD_B + 14}" text-anchor="middle" fill="#64748b" font-size="9">CH-${i}</text>`;
     }
     svg += '</svg>';
     html += svg;
@@ -3494,17 +3583,20 @@ function renderProgression() {
   if (!hasData) html += emptyOverlay('Passez un quiz pour debloquer');
   html += '</div>';
 
-  // Card 3: Tendance par Chapitre (multi-line chart)
-  html += `<div class="dash-card ${overlayCls}" style="position:relative;"><div style="font-size:0.85rem;color:#64748b;font-weight:600;margin-bottom:10px;text-transform:uppercase;">Tendance par Chapitre</div>`;
+  // Graph 2: Tendance de Performance par Chapitre (multi-line chart)
+  html += `<div class="graph-card ${overlayCls}" style="position:relative;">`;
+  html += '<button class="graph-expand-btn" onclick="toggleGraphExpand(this)">Agrandir</button>';
+  html += '<h4>Tendance de Performance par Chapitre</h4>';
+  html += '<div class="graph-legend-text">Evolution de vos scores par chapitre au fil du temps. Chaque ligne represente un chapitre.</div>';
   {
-    const W = 380, H = 150, PAD_L = 35, PAD_B = 40, PAD_T = 10, PAD_R = 10;
+    const W = 500, H = 220, PAD_L = 40, PAD_B = 45, PAD_T = 15, PAD_R = 15;
     const chartW = W - PAD_L - PAD_R;
     const chartH = H - PAD_T - PAD_B;
     let svg = `<svg viewBox="0 0 ${W} ${H}" style="width:100%;height:auto;">`;
     for (let p = 0; p <= 100; p += 25) {
       const y = PAD_T + chartH * (1 - p / 100);
       svg += `<line x1="${PAD_L}" y1="${y}" x2="${W-PAD_R}" y2="${y}" stroke="#e2e8f0" stroke-width="0.5"/>`;
-      svg += `<text x="${PAD_L-4}" y="${y+3}" text-anchor="end" fill="#94a3b8" font-size="7">${p}%</text>`;
+      svg += `<text x="${PAD_L-4}" y="${y+3}" text-anchor="end" fill="#94a3b8" font-size="8">${p}%</text>`;
     }
     const y65 = PAD_T + chartH * (1 - 65/100);
     svg += `<line x1="${PAD_L}" y1="${y65}" x2="${W-PAD_R}" y2="${y65}" stroke="#dc2626" stroke-width="1" stroke-dasharray="4,3"/>`;
@@ -3516,12 +3608,12 @@ function renderProgression() {
     allDates.sort();
 
     if (hasData && allDates.length >= 2) {
-      const showEvery = Math.max(1, Math.floor(allDates.length / 5));
+      const showEvery = Math.max(1, Math.floor(allDates.length / 6));
       allDates.forEach((dt, i) => {
         if (i % showEvery === 0 || i === allDates.length - 1) {
           const d = new Date(dt);
           const x = PAD_L + (i / (allDates.length - 1)) * chartW;
-          svg += `<text x="${x}" y="${H - PAD_B + 12}" text-anchor="middle" fill="#94a3b8" font-size="6.5">${d.getDate()}/${d.getMonth()+1}</text>`;
+          svg += `<text x="${x}" y="${H - PAD_B + 14}" text-anchor="middle" fill="#94a3b8" font-size="7.5">${d.getDate()}/${d.getMonth()+1}</text>`;
         }
       });
       for (let ch = 1; ch <= 6; ch++) {
@@ -3533,48 +3625,54 @@ function renderProgression() {
           return { x: PAD_L + (xi / (allDates.length - 1)) * chartW, y: PAD_T + chartH * (1 - d.pct / 100) };
         });
         const path = points.map((p, i) => (i === 0 ? 'M' : 'L') + `${p.x},${p.y}`).join(' ');
-        svg += `<path d="${path}" fill="none" stroke="${color}" stroke-width="1.5" opacity="0.9"/>`;
+        svg += `<path d="${path}" fill="none" stroke="${color}" stroke-width="2" opacity="0.9"/>`;
+        points.forEach(p => { svg += `<circle cx="${p.x}" cy="${p.y}" r="3" fill="${color}" stroke="white" stroke-width="1"/>`; });
       }
     } else {
-      svg += `<text x="${W/2}" y="${H/2}" text-anchor="middle" fill="#94a3b8" font-size="9">Completez un quiz pour voir votre evolution</text>`;
+      svg += `<text x="${W/2}" y="${H/2}" text-anchor="middle" fill="#94a3b8" font-size="10">Completez un quiz pour voir votre evolution</text>`;
     }
     svg += '</svg>';
     html += svg;
 
-    html += '<div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:6px;justify-content:center;">';
+    // Legend below graph
+    html += '<div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:8px;justify-content:center;">';
     for (let ch = 1; ch <= 6; ch++) {
-      html += `<span style="display:flex;align-items:center;gap:4px;font-size:0.7rem;color:#475569;">
-        <span style="width:8px;height:8px;border-radius:50%;background:${CH_COLORS[ch]};display:inline-block;"></span>Ch.${ch}
+      html += `<span style="display:flex;align-items:center;gap:4px;font-size:0.75rem;color:#475569;">
+        <span style="width:10px;height:10px;border-radius:50%;background:${CH_COLORS[ch]};display:inline-block;"></span>Ch.${ch}
       </span>`;
     }
     html += '</div>';
   }
   if (!hasData) html += emptyOverlay('Passez un quiz pour debloquer');
   html += '</div>';
-  html += '</div>'; // end dash-overview
 
-  // ========== SECTION 2: EVOLUTION GLOBALE ==========
-  html += `<div class="heatmap-card ${!hasData || all.length < 2 ? 'dash-empty-overlay' : ''}" style="position:relative;">`;
-  html += '<div style="font-size:1.15rem;font-weight:700;color:#1e3a5f;margin-bottom:16px;">Evolution globale</div>';
+  html += '</div>'; // end graph-row
+
+  // ========== SECTION 3: EVOLUTION GLOBALE (collapsible) ==========
+  html += '<div class="prog-section">';
+  html += `<div class="prog-section-header" onclick="toggleProgSection(this)">
+    <div style="display:flex;align-items:center;"><h3>Evolution globale</h3><span class="prog-subtitle">Score, inattention et lacunes dans le temps</span></div>
+    <span class="prog-arrow open">&#9654;</span>
+  </div>`;
+  html += `<div class="prog-section-body">`;
   {
-    const W = 700, H = 220, PAD_L = 45, PAD_B = 35, PAD_T = 15, PAD_R = 15;
+    const evoOverlay = !hasData || all.length < 2 ? 'dash-empty-overlay' : '';
+    html += `<div style="position:relative;" class="${evoOverlay}">`;
+    const W = 800, H = 260, PAD_L = 45, PAD_B = 35, PAD_T = 15, PAD_R = 15;
     const chartW = W - PAD_L - PAD_R;
     const chartH = H - PAD_T - PAD_B;
     let svg = `<svg viewBox="0 0 ${W} ${H}" style="width:100%;height:auto;">`;
-    // Grid
     for (let p = 0; p <= 100; p += 25) {
       const y = PAD_T + chartH * (1 - p / 100);
       svg += `<line x1="${PAD_L}" y1="${y}" x2="${W-PAD_R}" y2="${y}" stroke="#e2e8f0" stroke-width="0.5"/>`;
       svg += `<text x="${PAD_L-6}" y="${y+4}" text-anchor="end" fill="#94a3b8" font-size="9">${p}%</text>`;
     }
-    // 65% threshold
     const y65 = PAD_T + chartH * (1 - 65/100);
     svg += `<line x1="${PAD_L}" y1="${y65}" x2="${W-PAD_R}" y2="${y65}" stroke="#dc2626" stroke-width="1" stroke-dasharray="5,4"/>`;
     svg += `<text x="${W-PAD_R+2}" y="${y65+4}" fill="#dc2626" font-size="7">65%</text>`;
 
     if (hasData && all.length >= 2) {
       const n = all.length;
-      // Prepare data series
       const scoreGlobal = all.map(a => a.pct);
       const examScores = all.map(a => a.mode && a.mode.startsWith('exam') ? a.pct : null);
       const trainScores = all.map(a => {
@@ -3584,8 +3682,7 @@ function renderProgression() {
       const inattRates = all.map(a => a.errors ? (a.errors.inattention / a.total * 100) : null);
       const lacuneRates = all.map(a => a.errors ? (a.errors.lacune / a.total * 100) : null);
 
-      // X labels
-      const showEvery = Math.max(1, Math.floor(n / 8));
+      const showEvery = Math.max(1, Math.floor(n / 10));
       all.forEach((a, i) => {
         if (i % showEvery === 0 || i === n - 1) {
           const d = new Date(a.date);
@@ -3616,7 +3713,6 @@ function renderProgression() {
     svg += '</svg>';
     html += svg;
 
-    // Legend
     html += '<div class="evo-legend">';
     const legendItems = [
       {color:'#2563eb', label:'Score global'},
@@ -3630,13 +3726,20 @@ function renderProgression() {
       html += `<span class="evo-legend-item"><span class="evo-legend-dot" style="${style}"></span>${it.label}</span>`;
     });
     html += '</div>';
+    if (!hasData || all.length < 2) html += emptyOverlay('Completez au moins 2 quiz pour debloquer');
+    html += '</div>'; // end evoOverlay wrapper
   }
-  if (!hasData || all.length < 2) html += emptyOverlay('Completez au moins 2 quiz pour debloquer');
-  html += '</div>'; // end evolution globale
+  html += '</div>'; // end prog-section-body
+  html += '</div>'; // end prog-section
 
-  // ========== SECTION 3: HEATMAP ==========
-  html += `<div class="heatmap-card ${overlayCls}" style="position:relative;">`;
-  html += '<div style="font-size:1.15rem;font-weight:700;color:#1e3a5f;margin-bottom:16px;">Carte thermique de performance par chapitre</div>';
+  // ========== SECTION 4: HEATMAP (collapsible) ==========
+  html += '<div class="prog-section">';
+  html += `<div class="prog-section-header" onclick="toggleProgSection(this)">
+    <div style="display:flex;align-items:center;"><h3>Carte thermique de performance</h3><span class="prog-subtitle">Performance par objectif d'apprentissage</span></div>
+    <span class="prog-arrow open">&#9654;</span>
+  </div>`;
+  html += `<div class="prog-section-body">`;
+  html += `<div class="${overlayCls}" style="position:relative;">`;
 
   for (let ch = 1; ch <= 6; ch++) {
     const chData = chTotals[String(ch)];
@@ -3666,10 +3769,17 @@ function renderProgression() {
 
   html += '<div class="heatmap-scale"><span style="font-size:0.75rem;color:#64748b;">0%</span><div class="heatmap-scale-bar"></div><span style="font-size:0.75rem;color:#64748b;">100%</span></div>';
   if (!hasData) html += emptyOverlay('Passez un quiz pour debloquer');
-  html += '</div>'; // end heatmap
+  html += '</div>'; // end overlayCls wrapper
+  html += '</div>'; // end prog-section-body
+  html += '</div>'; // end prog-section
 
-  // ========== SECTION 4: CHAPTER DETAIL CARDS ==========
-  html += '<div style="font-size:1.15rem;font-weight:700;color:#1e3a5f;margin-bottom:16px;">Detail par chapitre</div>';
+  // ========== SECTION 5: DETAIL PAR CHAPITRE (collapsible) ==========
+  html += '<div class="prog-section">';
+  html += `<div class="prog-section-header" onclick="toggleProgSection(this)">
+    <div style="display:flex;align-items:center;"><h3>Detail par chapitre</h3><span class="prog-subtitle">Scores, tendances et objectifs pour chaque chapitre</span></div>
+    <span class="prog-arrow open">&#9654;</span>
+  </div>`;
+  html += `<div class="prog-section-body">`;
   html += '<div class="chapter-cards-grid">';
 
   for (let ch = 1; ch <= 6; ch++) {
@@ -3739,10 +3849,16 @@ function renderProgression() {
     html += '</div>'; // end chapter-detail-card
   }
   html += '</div>'; // end chapter-cards-grid
+  html += '</div>'; // end prog-section-body
+  html += '</div>'; // end prog-section
 
-  // ========== SECTION 5: ERROR ANALYSIS ==========
-  html += '<div class="error-analysis-card">';
-  html += '<h3>Analyse des erreurs</h3>';
+  // ========== SECTION 6: ERROR ANALYSIS (collapsible) ==========
+  html += '<div class="prog-section">';
+  html += `<div class="prog-section-header" onclick="toggleProgSection(this)">
+    <div style="display:flex;align-items:center;"><h3>Analyse des erreurs</h3><span class="prog-subtitle">Inattention, lacunes et questions problematiques</span></div>
+    <span class="prog-arrow open">&#9654;</span>
+  </div>`;
+  html += `<div class="prog-section-body">`;
 
   // Compute error totals from history entries that have errors field
   let totalInattention = 0, totalLacune = 0, totalNonRepondu = 0;
@@ -3772,7 +3888,6 @@ function renderProgression() {
     else if (last3rate > first3rate + 0.05) { evolutionLabel = 'En hausse'; evolutionColor = '#dc2626'; evolutionArrow = '&#8599;'; }
   }
 
-  // Sub-section 5a: Stat cards grid
   const emptyStatStyle = !hasData ? 'color:#cbd5e1' : '';
   html += '<div class="error-stat-grid">';
   html += `<div class="error-stat" style="background:#fef3c7;"><div class="es-num" style="${emptyStatStyle || 'color:#f59e0b'}">${hasData ? totalInattention : '0'}</div><div class="es-label">Erreurs d'inattention</div></div>`;
@@ -3783,7 +3898,7 @@ function renderProgression() {
   html += `<div class="error-stat" style="background:#f0fdf4;"><div class="es-num" style="color:${evolutionColor}">${evolutionArrow}</div><div class="es-label">${evolutionLabel}</div></div>`;
   html += '</div>';
 
-  // Sub-section 5b: Top 10 des questions les plus ratees
+  // Top 10 des questions les plus ratees
   html += '<h3 style="font-size:1rem;font-weight:700;color:#1e3a5f;margin:20px 0 12px;">Top 10 des questions les plus ratees</h3>';
   const wq = getWrongQuestions();
   const wqEntries = Object.entries(wq).sort((a, b) => b[1].wrong - a[1].wrong).slice(0, 10);
@@ -3806,7 +3921,7 @@ function renderProgression() {
     html += '<div style="text-align:center;padding:20px;color:#94a3b8;font-size:0.9rem;">Aucune question ratee pour le moment</div>';
   }
 
-  // Sub-section 5c: LOs problematiques
+  // LOs problematiques
   html += '<h3 style="font-size:1rem;font-weight:700;color:#1e3a5f;margin:24px 0 12px;">LOs problematiques</h3>';
   const problematicLOs = Object.entries(loTotals)
     .filter(([lo, d]) => d.t >= 2 && Math.round(d.c / d.t * 100) < 50)
@@ -3829,11 +3944,16 @@ function renderProgression() {
     html += '<div style="text-align:center;padding:20px;color:#16a34a;font-size:0.9rem;font-weight:600;">Aucun LO problematique - continuez comme ca !</div>';
   }
 
-  html += '</div>'; // end error-analysis-card
+  html += '</div>'; // end prog-section-body
+  html += '</div>'; // end prog-section
 
-  // ========== SECTION 6: HISTORY ==========
-  html += '<div class="submissions-card">';
-  html += '<div style="font-size:1.15rem;font-weight:700;color:#1e3a5f;margin-bottom:16px;">Soumissions de Tests</div>';
+  // ========== SECTION 7: HISTORY (collapsible) ==========
+  html += '<div class="prog-section">';
+  html += `<div class="prog-section-header" onclick="toggleProgSection(this)">
+    <div style="display:flex;align-items:center;"><h3>Historique des soumissions</h3><span class="prog-subtitle">Toutes vos tentatives</span></div>
+    <span class="prog-arrow open">&#9654;</span>
+  </div>`;
+  html += `<div class="prog-section-body">`;
 
   if (hasData) {
     [...all].reverse().forEach(a => {
@@ -3843,7 +3963,7 @@ function renderProgression() {
       html += `<div class="submission-row">
         <div>
           <div class="submission-label">${a.label}</div>
-          <div class="submission-date">Soumis a : ${dateStr}</div>
+          <div class="submission-date">Soumis le : ${dateStr}</div>
         </div>
         <div class="submission-score" style="color:${scCol}">${a.pct}%</div>
       </div>`;
@@ -3852,7 +3972,8 @@ function renderProgression() {
     html += '<div style="text-align:center;padding:30px;color:#94a3b8;font-size:0.9rem;">Aucune soumission pour le moment</div>';
   }
 
-  html += '</div>'; // end submissions
+  html += '</div>'; // end prog-section-body
+  html += '</div>'; // end prog-section
 
   container.innerHTML = html;
 }
