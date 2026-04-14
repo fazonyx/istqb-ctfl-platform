@@ -433,6 +433,13 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
   .prog-ch-cols { grid-template-columns: 1fr; }
   .prog-heatmap-chapter { min-width: 100px; }
 }
+.q-table { border-collapse: collapse; margin: 10px 0; font-size: 0.85rem; width: 100%; }
+.q-table th, .q-table td { border: 1px solid #cbd5e1; padding: 6px 10px; text-align: center; }
+.q-table th { background: #1e3a5f; color: white; font-weight: 600; }
+.q-table td { background: #f8fafc; }
+.q-table tr:nth-child(even) td { background: #eff6ff; }
+.q-scenario .q-table { white-space: normal; }
+.q-scenario svg { display: block; margin: 10px auto; max-width: 100%; }
 </style>
 </head>
 <body>
@@ -1939,13 +1946,15 @@ correct:[0],
 justification:"a) Correct. Il y a 12 valeurs limites. Les cas de test couvrent 6 d'entre elles (91, 50, 81, 60, 70, 80), donc 6/12 = 50%."},
 
 {id:"A-22",exam:"A",lo:"FL-4.2.3",kl:"K3",pts:1,multi:false,chapter:4,
-q:"Un magasin de location de velos a un systeme CRM avec ces regles :\n- Tout le monde peut louer, mais les membres recoivent 20% de remise\n- Si le delai de retour est depasse, la remise n'est plus disponible\n- Apres 15 locations, les membres recoivent un T-Shirt\nTable de decision avec 8 regles (R1-R8). Quelle regle decrit une situation impossible ?",
+scenario:'Votre magasin de location de velos favori a un systeme CRM. Fonctionnalites :<br>- Tout le monde peut louer, les membres ont 20% de remise<br>- Si le delai de retour est depasse, la remise est annulee<br>- Apres 15 locations, les membres recoivent un T-Shirt<br><br><table class="q-table"><tr><th>Conditions</th><th>R1</th><th>R2</th><th>R3</th><th>R4</th><th>R5</th><th>R6</th><th>R7</th><th>R8</th></tr><tr><td>Membre</td><td>V</td><td>V</td><td>V</td><td>V</td><td>F</td><td>F</td><td>F</td><td>F</td></tr><tr><td>Retard</td><td>V</td><td>F</td><td>V</td><td>F</td><td>V</td><td>F</td><td>F</td><td>V</td></tr><tr><td>15e location</td><td>F</td><td>F</td><td>V</td><td>V</td><td>F</td><td>F</td><td>V</td><td>V</td></tr><tr><th>Actions</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr><tr><td>Remise 20%</td><td></td><td>X</td><td></td><td>X</td><td></td><td></td><td></td><td></td></tr><tr><td>T-Shirt</td><td></td><td></td><td>X</td><td>X</td><td></td><td></td><td>X</td><td></td></tr></table>',
+q:"Quelle regle decrit une situation impossible ?",
 options:["R4","R2","R6","R8"],
 correct:[3],
 justification:"d) Correct. R8 : non-membre avec delai depasse et 15e location. Seuls les membres peuvent recevoir un T-Shirt, donc l'action est incorrecte."},
 
 {id:"A-23",exam:"A",lo:"FL-4.2.4",kl:"K3",pts:1,multi:false,chapter:4,
-q:"Vous testez un systeme dont le cycle de vie est modelise par un diagramme de transition d'etats (INIT vers OFF). Quel est le nombre MINIMAL de cas de test pour atteindre la couverture des transitions valides ?",
+scenario:'Diagramme de transition d\'etats du systeme :<br><br><svg viewBox="0 0 520 260" xmlns="http://www.w3.org/2000/svg" style="max-width:520px;font-family:sans-serif;font-size:12px"><rect x="0" y="100" width="60" height="36" rx="6" fill="#1e3a5f" stroke="#1e3a5f"/><text x="30" y="123" text-anchor="middle" fill="white" font-weight="bold">INIT</text><rect x="110" y="100" width="60" height="36" rx="6" fill="#2563eb" stroke="#1e3a5f"/><text x="140" y="123" text-anchor="middle" fill="white" font-weight="bold">S1</text><rect x="220" y="100" width="60" height="36" rx="6" fill="#2563eb" stroke="#1e3a5f"/><text x="250" y="123" text-anchor="middle" fill="white" font-weight="bold">S2</text><rect x="330" y="100" width="60" height="36" rx="6" fill="#2563eb" stroke="#1e3a5f"/><text x="360" y="123" text-anchor="middle" fill="white" font-weight="bold">S3</text><rect x="440" y="100" width="60" height="36" rx="6" fill="#16a34a" stroke="#166534"/><text x="470" y="123" text-anchor="middle" fill="white" font-weight="bold">OFF</text><line x1="60" y1="118" x2="105" y2="118" stroke="#334155" stroke-width="2" marker-end="url(#ah)"/><line x1="170" y1="118" x2="215" y2="118" stroke="#334155" stroke-width="2" marker-end="url(#ah)"/><line x1="280" y1="118" x2="325" y2="118" stroke="#334155" stroke-width="2" marker-end="url(#ah)"/><line x1="390" y1="118" x2="435" y2="118" stroke="#334155" stroke-width="2" marker-end="url(#ah)"/><path d="M155 100 Q155 40 470 40 Q480 40 480 100" fill="none" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="6 3" marker-end="url(#ah)"/><text x="320" y="35" text-anchor="middle" fill="#dc2626" font-size="11">error</text><path d="M265 100 Q265 55 470 55 Q480 55 480 100" fill="none" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="6 3" marker-end="url(#ah)"/><text x="380" y="50" text-anchor="middle" fill="#dc2626" font-size="11">error</text><defs><marker id="ah" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#334155"/></marker></defs></svg><br>6 transitions : INIT→S1, S1→S2, S2→S3, S3→OFF, S1→OFF (error), S2→OFF (error)',
+q:"Quel est le nombre MINIMAL de cas de test pour atteindre la couverture des transitions valides ?",
 options:["4","2","7","3"],
 correct:[3],
 justification:"d) Correct. Les transitions 'test' et 'error' ne peuvent pas etre dans le meme cas de test. Il faut au minimum 3 cas de test."},
@@ -2337,13 +2346,15 @@ correct:[1],
 justification:"b) Correct. BVA 2 valeurs couvre: 5,6,12,13 (et 0,1 pour le vide). BVA 3 valeurs ajoute les voisins supplementaires: 7 et 11."},
 
 {id:"B-22",exam:"B",lo:"FL-4.2.3",kl:"K3",pts:1,multi:false,chapter:4,
-q:"Table de decision pour le risque d'atherosclerose (5 regles basees sur cholesterol et pression arterielle).\nCas de test :\nTC1: Cholesterol=125, Pression=141\nTC2: Cholesterol=200, Pression=201\nTC3: Cholesterol=124, Pression=201\nTC4: Cholesterol=109, Pression=200\nTC5: Cholesterol=201, Pression=140\nQuelle est la couverture de la table de decision ?",
+scenario:'Table de decision pour le risque d\'atherosclerose :<br><br><table class="q-table"><tr><th>Conditions</th><th>R1</th><th>R2</th><th>R3</th><th>R4</th><th>R5</th></tr><tr><td>Cholesterol (mg/dl)</td><td>≤124</td><td>125-200</td><td>≤124</td><td>125-200</td><td>≥201</td></tr><tr><td>Pression arterielle (mm Hg)</td><td>≤140</td><td>≤140</td><td>&gt;140</td><td>&gt;140</td><td>-</td></tr><tr><th>Niveau de risque</th><th>Tres bas</th><th>Bas</th><th>Moyen</th><th>Haut</th><th>Tres haut</th></tr></table><br>Cas de test :<br>TC1: Cholesterol=125, Pression=141<br>TC2: Cholesterol=200, Pression=201<br>TC3: Cholesterol=124, Pression=201<br>TC4: Cholesterol=109, Pression=200<br>TC5: Cholesterol=201, Pression=140',
+q:"Quelle est la couverture de la table de decision ?",
 options:["40%","60%","80%","100%"],
 correct:[2],
 justification:"b) Correct. TC1 couvre R2, TC3/TC4 couvrent R3/R4 (mais un seul), TC5 couvre R5. 4 regles sur 5 = 80%."},
 
 {id:"B-23",exam:"B",lo:"FL-4.2.4",kl:"K3",pts:1,multi:false,chapter:4,
-q:"Un systeme de stockage peut stocker jusqu'a 3 elements (variable N). Lequel des cas de test (sequences d'evenements) atteint le plus haut niveau de couverture des transitions valides ?",
+scenario:'Systeme de stockage avec variable N (0 a 3). Evenements : Add (ajoute 1) et Remove (retire 1).<br><br><svg viewBox="0 0 480 120" xmlns="http://www.w3.org/2000/svg" style="max-width:480px;font-family:sans-serif;font-size:12px"><circle cx="60" cy="60" r="30" fill="#1e3a5f" stroke="#0f172a" stroke-width="2"/><text x="60" y="65" text-anchor="middle" fill="white" font-weight="bold">N=0</text><circle cx="180" cy="60" r="30" fill="#2563eb" stroke="#1e3a5f" stroke-width="2"/><text x="180" y="65" text-anchor="middle" fill="white" font-weight="bold">N=1</text><circle cx="300" cy="60" r="30" fill="#2563eb" stroke="#1e3a5f" stroke-width="2"/><text x="300" y="65" text-anchor="middle" fill="white" font-weight="bold">N=2</text><circle cx="420" cy="60" r="30" fill="#2563eb" stroke="#1e3a5f" stroke-width="2"/><text x="420" y="65" text-anchor="middle" fill="white" font-weight="bold">N=3</text><line x1="93" y1="50" x2="147" y2="50" stroke="#16a34a" stroke-width="2" marker-end="url(#ab)"/><text x="120" y="43" text-anchor="middle" fill="#16a34a" font-size="10">Add</text><line x1="147" y1="70" x2="93" y2="70" stroke="#dc2626" stroke-width="2" marker-end="url(#ab)"/><text x="120" y="88" text-anchor="middle" fill="#dc2626" font-size="10">Rem</text><line x1="213" y1="50" x2="267" y2="50" stroke="#16a34a" stroke-width="2" marker-end="url(#ab)"/><text x="240" y="43" text-anchor="middle" fill="#16a34a" font-size="10">Add</text><line x1="267" y1="70" x2="213" y2="70" stroke="#dc2626" stroke-width="2" marker-end="url(#ab)"/><text x="240" y="88" text-anchor="middle" fill="#dc2626" font-size="10">Rem</text><line x1="333" y1="50" x2="387" y2="50" stroke="#16a34a" stroke-width="2" marker-end="url(#ab)"/><text x="360" y="43" text-anchor="middle" fill="#16a34a" font-size="10">Add</text><line x1="387" y1="70" x2="333" y2="70" stroke="#dc2626" stroke-width="2" marker-end="url(#ab)"/><text x="360" y="88" text-anchor="middle" fill="#dc2626" font-size="10">Rem</text><defs><marker id="ab" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#334155"/></marker></defs></svg><br>7 transitions valides : N=0→N=1, N=1→N=0, N=1→N=2, N=2→N=1, N=2→N=3, N=3→N=2, plus les evenements ignores aux limites.',
+q:"Lequel des cas de test (sequences d'evenements) atteint le plus haut niveau de couverture des transitions valides ?",
 options:["Add, Remove, Add, Add, Add","Add, Add, Add, Add, Remove, Remove","Add, Add, Add, Remove, Remove","Add, Add, Add, Remove, Add"],
 correct:[2],
 justification:"c) Correct. Cette sequence couvre le plus grand nombre de transitions valides dans le diagramme d'etats."},
@@ -2391,7 +2402,8 @@ correct:[0],
 justification:"a) Correct. L'analyse statique sans avertissement de haute severite est un critere d'entree raisonnable pour la soumission du code."},
 
 {id:"B-31",exam:"B",lo:"FL-5.1.4",kl:"K3",pts:1,multi:false,chapter:5,
-q:"Vous estimez l'effort de test en utilisant les ratios. Donnees historiques :\nP1: Dev=800k, Test=40k\nP2: Dev=1200k, Test=130k\nP3: Dev=600k, Test=70k\nP4: Dev=1000k, Test=120k\nL'effort de developpement estime pour le nouveau projet est de 800k$. Quelle est votre estimation de l'effort de test ?",
+scenario:'Vous estimez l\'effort de test en utilisant les ratios. Donnees historiques :<br><br><table class="q-table"><tr><th>Projet</th><th>Effort Dev ($)</th><th>Effort Test ($)</th></tr><tr><td>P1</td><td>800 000</td><td>40 000</td></tr><tr><td>P2</td><td>1 200 000</td><td>130 000</td></tr><tr><td>P3</td><td>600 000</td><td>70 000</td></tr><tr><td>P4</td><td>1 000 000</td><td>120 000</td></tr></table><br>L\'effort de developpement estime pour le nouveau projet est de 800 000$.',
+q:"Quelle est votre estimation de l'effort de test ?",
 options:["40 000$","80 000$","81 250$","82 500$"],
 correct:[1],
 justification:"b) Correct. Ratio moyen = (40+130+70+120)/(800+1200+600+1000) = 360/3600 = 0.10. Estimation = 800k * 0.10 = 80k$."},
@@ -2578,19 +2590,22 @@ correct:[3],
 justification:"d) Correct. Valeurs limites : 100/101 et 199/200. L'ensemble 101, 150, 199, 200 couvre les 4 valeurs limites critiques (100% BVA 2 valeurs)."},
 
 {id:"C-22",exam:"C",lo:"FL-4.2.3",kl:"K3",pts:1,multi:false,chapter:4,
-q:"Table de decision pour les resultats du permis de conduire :\nR1: 1er essai=-, Theorie=Reussi, Pratique=Reussi -> Permis\nR2: 1er essai=-, Theorie=Echec, Pratique=- -> Lecons supplementaires\nR3: 1er essai=Non, Theorie=-, Pratique=Echec -> Repasser l'examen\nQuelles donnees de test montrent des regles contradictoires ?",
+scenario:'Systeme d\'analyse des resultats du permis de conduire :<br><br><table class="q-table"><tr><th></th><th>R1</th><th>R2</th><th>R3</th></tr><tr><td>C1: 1er essai ?</td><td>-</td><td>-</td><td>F</td></tr><tr><td>C2: Theorie reussie ?</td><td>V</td><td>F</td><td>-</td></tr><tr><td>C3: Pratique reussie ?</td><td>V</td><td>-</td><td>F</td></tr><tr><th>Actions</th><th></th><th></th><th></th></tr><tr><td>Delivrer le permis</td><td>X</td><td></td><td></td></tr><tr><td>Lecons supplementaires</td><td></td><td>X</td><td></td></tr><tr><td>Repasser l\'examen</td><td></td><td></td><td>X</td></tr></table>',
+q:"Quelles donnees de test montrent des regles contradictoires ?",
 options:["C1=Oui, C2=Oui, C3=Echec","C1=Oui, C2=Echec, C3=Reussi","C1=Oui, C2=Oui, C3=Oui et C1=Non, C2=Oui, C3=Oui","C1=Non, C2=Echec, C3=Echec"],
 correct:[3],
 justification:"d) Correct. C1=Non, C2=Echec, C3=Echec satisfait a la fois R2 (theorie echouee) et R3 (pas 1er essai, pratique echouee), montrant une contradiction."},
 
 {id:"C-23",exam:"C",lo:"FL-4.2.4",kl:"K3",pts:1,multi:false,chapter:4,
-q:"Vous concevez des cas de test bases sur un diagramme de transition d'etats. Quel est le nombre MINIMUM de cas de test pour atteindre 100% de couverture des transitions valides ?",
+scenario:'<em>Note : cette question fait reference a un diagramme de transition d\'etats du PDF source (Sample Exam C, Q23).</em><br><br>Le diagramme contient plusieurs etats et transitions. Pour trouver le nombre minimum de cas de test, il faut identifier toutes les transitions valides, puis trouver le nombre minimum de chemins partant de l\'etat initial qui couvrent l\'ensemble des transitions.',
+q:"Quel est le nombre MINIMUM de cas de test pour atteindre 100% de couverture des transitions valides ?",
 options:["3","2","5","6"],
 correct:[0],
 justification:"a) Correct. 3 cas de test sont necessaires pour couvrir toutes les transitions valides du diagramme."},
 
 {id:"C-24",exam:"C",lo:"FL-4.3.2",kl:"K2",pts:1,multi:false,chapter:4,
-q:"Vous voulez appliquer le test des branches a un graphe de flux de controle. Combien d'elements de couverture devez-vous tester ?",
+scenario:'<em>Note : cette question fait reference a un graphe de flux de controle du PDF source (Sample Exam C, Q24).</em><br><br>Le graphe contient des noeuds de decision avec des branches. Le nombre d\'elements de couverture pour le test des branches correspond au nombre total de resultats de decision (branches sortantes de chaque noeud de decision).',
+q:"Combien d'elements de couverture devez-vous tester ?",
 options:["2","4","8","7"],
 correct:[2],
 justification:"c) Correct. 8 elements de couverture (branches/resultats de decision) doivent etre testes dans le graphe de flux de controle."},
@@ -2632,13 +2647,15 @@ correct:[0],
 justification:"a) Correct. Definir les donnees de test et les resultats attendus pour les cas de test individuels n'est pas un objectif du plan de test."},
 
 {id:"C-31",exam:"C",lo:"FL-5.1.4",kl:"K3",pts:1,multi:false,chapter:5,
-q:"A chaque debut d'iteration, l'equipe estime le travail. Modele d'extrapolation : E(n) = (3*A(n-1) + A(n-2)) / 4\nDonnees des iterations precedentes montrees dans un graphique. Quelle est l'estimation pour l'iteration #5 ?",
+scenario:'Modele d\'extrapolation : E(n) = (3 × A(n-1) + A(n-2)) / 4<br><br>Donnees des iterations precedentes :<br><br><svg viewBox="0 0 420 200" xmlns="http://www.w3.org/2000/svg" style="max-width:420px;font-family:sans-serif;font-size:11px"><rect x="40" y="0" width="370" height="180" fill="#f8fafc" rx="4"/><line x1="60" y1="160" x2="390" y2="160" stroke="#cbd5e1" stroke-width="1"/><text x="35" y="25" text-anchor="end" fill="#64748b" font-size="10">13</text><line x1="40" y1="22" x2="390" y2="22" stroke="#e2e8f0" stroke-width="0.5"/><text x="35" y="55" text-anchor="end" fill="#64748b" font-size="10">10</text><line x1="40" y1="52" x2="390" y2="52" stroke="#e2e8f0" stroke-width="0.5"/><text x="35" y="95" text-anchor="end" fill="#64748b" font-size="10">6</text><line x1="40" y1="92" x2="390" y2="92" stroke="#e2e8f0" stroke-width="0.5"/><text x="35" y="125" text-anchor="end" fill="#64748b" font-size="10">3</text><line x1="40" y1="122" x2="390" y2="122" stroke="#e2e8f0" stroke-width="0.5"/><text x="35" y="163" text-anchor="end" fill="#64748b" font-size="10">0</text><rect x="70" y="52" width="28" height="108" fill="#2563eb" rx="3"/><text x="84" y="47" text-anchor="middle" fill="#2563eb" font-size="10" font-weight="bold">10</text><rect x="102" y="22" width="28" height="138" fill="#94a3b8" rx="3"/><text x="116" y="17" text-anchor="middle" fill="#64748b" font-size="10" font-weight="bold">13</text><text x="98" y="190" text-anchor="middle" fill="#334155" font-weight="bold">It. 1</text><rect x="160" y="22" width="28" height="138" fill="#2563eb" rx="3"/><text x="174" y="17" text-anchor="middle" fill="#2563eb" font-size="10" font-weight="bold">13</text><rect x="192" y="52" width="28" height="108" fill="#94a3b8" rx="3"/><text x="206" y="47" text-anchor="middle" fill="#64748b" font-size="10" font-weight="bold">10</text><text x="188" y="190" text-anchor="middle" fill="#334155" font-weight="bold">It. 2</text><rect x="250" y="72" width="28" height="88" fill="#2563eb" rx="3"/><text x="264" y="67" text-anchor="middle" fill="#2563eb" font-size="10" font-weight="bold">8</text><rect x="282" y="92" width="28" height="68" fill="#94a3b8" rx="3"/><text x="296" y="87" text-anchor="middle" fill="#64748b" font-size="10" font-weight="bold">8</text><text x="278" y="190" text-anchor="middle" fill="#334155" font-weight="bold">It. 3</text><rect x="340" y="82" width="28" height="78" fill="#2563eb" rx="3"/><text x="354" y="77" text-anchor="middle" fill="#2563eb" font-size="10" font-weight="bold">7</text><rect x="372" y="97" width="28" height="63" fill="#94a3b8" rx="3"/><text x="386" y="92" text-anchor="middle" fill="#64748b" font-size="10" font-weight="bold">6</text><text x="368" y="190" text-anchor="middle" fill="#334155" font-weight="bold">It. 4</text><rect x="70" y="0" width="12" height="8" fill="#2563eb" rx="2"/><text x="86" y="7" fill="#334155" font-size="9">Estime (E)</text><rect x="140" y="0" width="12" height="8" fill="#94a3b8" rx="2"/><text x="156" y="7" fill="#334155" font-size="9">Reel (A)</text></svg>',
+q:"Quelle est l'estimation pour l'iteration #5 ?",
 options:["10.5 jours-personne","8.25 jours-personne","6.5 jours-personne","9.4 jours-personne"],
 correct:[0],
 justification:"c) Correct. En appliquant le modele d'extrapolation avec les donnees reelles des iterations precedentes."},
 
 {id:"C-32",exam:"C",lo:"FL-5.1.5",kl:"K3",pts:1,multi:false,chapter:5,
-q:"Vous preparez un planning d'execution pour 7 cas de test (TC1-TC7) avec priorites et dependances.\nQuel cas de test doit etre execute en sixieme ?",
+scenario:'Vous preparez un planning d\'execution pour 7 cas de test avec priorites et dependances :<br><br><table class="q-table"><tr><th>Cas de test</th><th>Priorite</th><th>Depend de</th></tr><tr><td>TC1</td><td>2</td><td>-</td></tr><tr><td>TC2</td><td>3</td><td>TC1</td></tr><tr><td>TC3</td><td>2</td><td>-</td></tr><tr><td>TC4</td><td>2</td><td>-</td></tr><tr><td>TC5</td><td>1</td><td>TC4, TC2</td></tr><tr><td>TC6</td><td>3</td><td>-</td></tr><tr><td>TC7</td><td>1</td><td>TC4</td></tr></table><br><em>Priorite 1 = la plus haute, 3 = la plus basse.</em>',
+q:"Quel cas de test doit etre execute en sixieme ?",
 options:["TC 3","TC 5","TC 6","TC 2"],
 correct:[0],
 justification:"a) Correct. En suivant les priorites et dependances, TC3 est le 6e cas de test a executer."},
@@ -2819,7 +2836,8 @@ correct:[2],
 justification:"c) Correct. BVA 2 valeurs : les limites sont -1/0 et 2/3. L'ensemble {-1, 0, 2, 3} couvre toutes les valeurs limites (100% BVA 2 valeurs)."},
 
 {id:"D-22",exam:"D",lo:"FL-4.2.3",kl:"K3",pts:1,multi:false,chapter:4,
-q:"Table de decision avec 7 regles basees sur Age, Experience et Enregistrement.\nCas de test existants : TC1(19 ans, non enr., 0 exp)=A, TC2(65 ans, non enr., 5 ans)=B, TC3(66 ans, enr., 0 exp)=C, TC4(65 ans, enr., 4 ans)=D\nQuel cas de test augmentera la couverture ?",
+scenario:'Table de decision avec 7 regles :<br><br><table class="q-table"><tr><th>Conditions</th><th>R1</th><th>R2</th><th>R3</th><th>R4</th><th>R5</th><th>R6</th><th>R7</th></tr><tr><td>Age</td><td>0-18</td><td>19-65</td><td>19-65</td><td>&gt;65</td><td>0-18</td><td>19-65</td><td>&gt;65</td></tr><tr><td>Experience (annees)</td><td>-</td><td>0-4</td><td>&gt;4</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>Enregistre</td><td>Non</td><td>Non</td><td>Non</td><td>Non</td><td>Oui</td><td>Oui</td><td>Oui</td></tr><tr><th>Categorie</th><th>A</th><th>A</th><th>B</th><th>B</th><th>B</th><th>D</th><th>C</th></tr></table><br>Cas de test existants :<br>TC1: 19 ans, non enregistre, 0 exp → Cat. A<br>TC2: 65 ans, non enregistre, 5 ans → Cat. B<br>TC3: 66 ans, enregistre, 0 exp → Cat. C<br>TC4: 65 ans, enregistre, 4 ans → Cat. D',
+q:"Quel cas de test supplementaire augmentera la couverture de la table de decision ?",
 options:["66 ans, non enregistre, 0 exp -> B","55 ans, non enregistre, 2 ans exp -> A","19 ans, enregistre, 5 ans exp -> D","Aucun cas de test supplementaire ne peut augmenter la couverture"],
 correct:[0],
 justification:"a) Correct. 66 ans, non enregistre couvre la regle R4 (>65, non enregistre) qui n'etait pas encore couverte."},
@@ -2879,7 +2897,8 @@ correct:[0],
 justification:"a) Correct. E = (1 + 4*3 + 8) / 6 = 21/6 = 3.5h par cas de test. Pour 4 cas : 3.5 * 4 = 14 heures."},
 
 {id:"D-32",exam:"D",lo:"FL-5.1.5",kl:"K3",pts:1,multi:false,chapter:5,
-q:"Matrice de tracabilite des cas de test aux exigences. Vous voulez prioriser avec la technique de couverture additionnelle.\nQuel cas de test doit etre execute en DERNIER ?",
+scenario:'Matrice de tracabilite des cas de test aux exigences :<br><br><table class="q-table"><tr><th></th><th>Req1</th><th>Req2</th><th>Req3</th><th>Req4</th><th>Req5</th><th>Req6</th><th>Req7</th></tr><tr><td>TC1</td><td>X</td><td></td><td>X</td><td>X</td><td></td><td></td><td>X</td></tr><tr><td>TC2</td><td></td><td>X</td><td>X</td><td></td><td></td><td></td><td></td></tr><tr><td>TC3</td><td></td><td></td><td></td><td></td><td>X</td><td>X</td><td></td></tr><tr><td>TC4</td><td></td><td>X</td><td></td><td></td><td></td><td></td><td></td></tr></table><br>Vous voulez prioriser avec la technique de couverture additionnelle.',
+q:"Quel cas de test doit etre execute en DERNIER ?",
 options:["TC1","TC2","TC3","TC4"],
 correct:[1],
 justification:"b) Correct. Avec la priorisation par couverture additionnelle, TC2 est le dernier car il ne couvre que des exigences deja couvertes."},
