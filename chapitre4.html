@@ -37,6 +37,32 @@
   <p><strong>Les techniques de test boite noire</strong> (egalement appelees techniques basees sur les specifications) reposent sur une analyse du comportement specifie de l'objet de test sans reference a sa structure interne. Par consequent, les cas de test sont independants de la facon dont le logiciel est implemente. En consequence, si l'implementation change mais que le comportement requis reste le meme, les cas de test restent utiles.</p>
   <p><strong>Les techniques de test boite blanche</strong> (egalement appelees techniques basees sur la structure) reposent sur une analyse de la structure interne et du traitement de l'objet de test. Comme les cas de test dependent de la conception du logiciel, ils ne peuvent etre crees qu'apres la conception ou l'implementation de l'objet de test.</p>
   <p><strong>Les techniques de test basees sur l'experience</strong> utilisent efficacement les connaissances et l'experience des testeurs pour la conception et l'implementation des cas de test. L'efficacite de ces techniques depend fortement des competences du testeur. Les techniques basees sur l'experience peuvent detecter des defauts qui pourraient etre manques par les techniques boite noire et boite blanche. Ainsi, les techniques basees sur l'experience sont complementaires aux techniques boite noire et boite blanche.</p>
+
+  <div class="syllabus-diagram">
+    <svg viewBox="0 0 660 180" xmlns="http://www.w3.org/2000/svg" style="max-width:660px;">
+      <!-- Boite noire -->
+      <rect x="10" y="20" width="190" height="140" rx="14" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+      <text x="105" y="55" text-anchor="middle" font-size="15" font-weight="bold" fill="#1e40af">Boite noire</text>
+      <text x="105" y="80" text-anchor="middle" font-size="11" fill="#1e3a5f">Basee sur les</text>
+      <text x="105" y="96" text-anchor="middle" font-size="11" fill="#1e3a5f">specifications</text>
+      <text x="105" y="125" text-anchor="middle" font-size="10" fill="#64748b">EP, BVA, Tables de</text>
+      <text x="105" y="140" text-anchor="middle" font-size="10" fill="#64748b">decision, Transitions</text>
+      <!-- Boite blanche -->
+      <rect x="235" y="20" width="190" height="140" rx="14" fill="#f1f5f9" stroke="#64748b" stroke-width="2"/>
+      <text x="330" y="55" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">Boite blanche</text>
+      <text x="330" y="80" text-anchor="middle" font-size="11" fill="#475569">Basee sur le</text>
+      <text x="330" y="96" text-anchor="middle" font-size="11" fill="#475569">code source</text>
+      <text x="330" y="125" text-anchor="middle" font-size="10" fill="#64748b">Instructions,</text>
+      <text x="330" y="140" text-anchor="middle" font-size="10" fill="#64748b">Branches</text>
+      <!-- Experience -->
+      <rect x="460" y="20" width="190" height="140" rx="14" fill="#fff7ed" stroke="#f59e0b" stroke-width="2"/>
+      <text x="555" y="55" text-anchor="middle" font-size="15" font-weight="bold" fill="#b45309">Experience</text>
+      <text x="555" y="80" text-anchor="middle" font-size="11" fill="#92400e">Basee sur les</text>
+      <text x="555" y="96" text-anchor="middle" font-size="11" fill="#92400e">connaissances</text>
+      <text x="555" y="125" text-anchor="middle" font-size="10" fill="#64748b">Error guessing,</text>
+      <text x="555" y="140" text-anchor="middle" font-size="10" fill="#64748b">Exploratoire, Checklists</text>
+    </svg>
+  </div>
 </div>
 
 <div class="question-card" style="margin-bottom:20px;">
@@ -64,6 +90,47 @@
   <p>En EP, les elements de couverture sont les partitions d'equivalence. Pour atteindre 100% de couverture avec cette technique, les cas de test doivent exercer toutes les partitions identifiees (y compris les partitions invalides) en couvrant chaque partition au moins une fois. La couverture est mesuree comme le nombre de partitions exercees par au moins un cas de test, divise par le nombre total de partitions identifiees, et est exprimee en pourcentage.</p>
   <p>De nombreux elements de test incluent plusieurs ensembles de partitions (par exemple, des elements de test avec plus d'un parametre d'entree), ce qui signifie qu'un cas de test couvrira des partitions de differents ensembles de partitions. Le critere de couverture le plus simple dans le cas de plusieurs ensembles de partitions est appele couverture Each Choice (Ammann 2016). La couverture Each Choice exige que les cas de test exercent chaque partition de chaque ensemble de partitions au moins une fois. La couverture Each Choice ne prend pas en compte les combinaisons de partitions.</p>
 
+  <div class="syllabus-diagram">
+    <svg viewBox="0 0 600 120" xmlns="http://www.w3.org/2000/svg" style="max-width:600px;">
+      <!-- Axe -->
+      <line x1="30" y1="60" x2="570" y2="60" stroke="#334155" stroke-width="2"/>
+      <!-- Zone invalide gauche -->
+      <rect x="30" y="35" width="140" height="50" rx="6" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+      <text x="100" y="57" text-anchor="middle" font-size="11" fill="#991b1b" font-weight="bold">&lt; 18 (invalide)</text>
+      <text x="100" y="73" text-anchor="middle" font-size="10" fill="#991b1b">Enfant</text>
+      <!-- Zone valide -->
+      <rect x="175" y="35" width="250" height="50" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+      <text x="300" y="57" text-anchor="middle" font-size="11" fill="#166534" font-weight="bold">18 - 65 (valide)</text>
+      <text x="300" y="73" text-anchor="middle" font-size="10" fill="#166534">Adulte</text>
+      <!-- Zone invalide droite -->
+      <rect x="430" y="35" width="140" height="50" rx="6" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+      <text x="500" y="57" text-anchor="middle" font-size="11" fill="#991b1b" font-weight="bold">&gt; 65 (invalide)</text>
+      <text x="500" y="73" text-anchor="middle" font-size="10" fill="#991b1b">Senior</text>
+      <!-- Representants (1 point par partition) -->
+      <circle cx="100" cy="100" r="5" fill="#dc2626"/>
+      <text x="100" y="115" text-anchor="middle" font-size="9" fill="#991b1b">ex: 10</text>
+      <circle cx="300" cy="100" r="5" fill="#16a34a"/>
+      <text x="300" y="115" text-anchor="middle" font-size="9" fill="#166534">ex: 30</text>
+      <circle cx="500" cy="100" r="5" fill="#dc2626"/>
+      <text x="500" y="115" text-anchor="middle" font-size="9" fill="#991b1b">ex: 80</text>
+      <!-- Frontieres -->
+      <line x1="175" y1="30" x2="175" y2="90" stroke="#334155" stroke-width="2" stroke-dasharray="4,3"/>
+      <text x="175" y="25" text-anchor="middle" font-size="9" fill="#334155">18</text>
+      <line x1="430" y1="30" x2="430" y2="90" stroke="#334155" stroke-width="2" stroke-dasharray="4,3"/>
+      <text x="430" y="25" text-anchor="middle" font-size="9" fill="#334155">65</text>
+    </svg>
+  </div>
+
+  <div class="syllabus-example">
+    <strong>Exemple concret</strong>
+    <p>Champ age : &lt;18 (enfant), 18-65 (adulte), &gt;65 (senior). 3 partitions identifiees. Couverture EP = partitions testees / 3. Un seul representant par partition suffit (ex : 10, 30, 80).</p>
+  </div>
+
+  <div class="syllabus-exam-warning">
+    <strong>Attention examen</strong>
+    <p>Chaque valeur appartient a exactement UNE partition. Les partitions ne se chevauchent jamais et doivent etre des ensembles non vides.</p>
+  </div>
+
   <h4>4.2.2. Analyse des valeurs limites</h4>
   <p>L'analyse des valeurs limites (BVA) est une technique de test basee sur l'exercice des limites des partitions d'equivalence. Par consequent, la BVA ne peut etre utilisee que pour des partitions ordonnees. Les valeurs minimale et maximale d'une partition sont ses valeurs limites. Dans le cas de la BVA, si deux elements appartiennent a la meme partition, tous les elements entre eux doivent egalement appartenir a cette partition.</p>
   <p>La BVA se concentre sur les valeurs limites des partitions car les developpeurs sont plus susceptibles de faire des erreurs avec ces valeurs limites. Les defauts typiques trouves par la BVA sont situes la ou les limites implementees sont deplacees au-dessus ou en dessous de leurs positions prevues ou sont completement omises.</p>
@@ -72,6 +139,64 @@
   <p>En <strong>BVA a 3 valeurs</strong> (Koomen 2006, O'Regan 2019), pour chaque valeur limite il y a trois elements de couverture : cette valeur limite et ses deux voisins. Par consequent, en BVA a 3 valeurs, certains des elements de couverture peuvent ne pas etre des valeurs limites. Pour atteindre 100% de couverture avec la BVA a 3 valeurs, les cas de test doivent exercer tous les elements de couverture, c'est-a-dire les valeurs limites identifiees et leurs voisins. La couverture est mesuree comme le nombre de valeurs limites et de voisins exerces, divise par le nombre total de valeurs limites et de voisins identifies, et est exprimee en pourcentage.</p>
   <p>La BVA a 3 valeurs est plus rigoureuse que la BVA a 2 valeurs car elle peut detecter des defauts negliges par la BVA a 2 valeurs. Par exemple, si la decision "if (x &le; 10) ..." est incorrectement implementee comme "if (x = 10) ...", aucune donnee de test derivee de la BVA a 2 valeurs (x = 10, x = 11) ne peut detecter le defaut. Cependant, x = 9, derive de la BVA a 3 valeurs, est susceptible de le detecter.</p>
 
+  <div class="syllabus-diagram">
+    <svg viewBox="0 0 600 100" xmlns="http://www.w3.org/2000/svg" style="max-width:600px;">
+      <text x="300" y="15" text-anchor="middle" font-size="12" font-weight="bold" fill="#1e40af">BVA 2-valeurs = 4 points de test</text>
+      <!-- Axe -->
+      <line x1="50" y1="50" x2="550" y2="50" stroke="#94a3b8" stroke-width="1.5"/>
+      <!-- Zones -->
+      <rect x="50" y="38" width="150" height="24" rx="4" fill="#fee2e2" opacity="0.5"/>
+      <rect x="205" y="38" width="190" height="24" rx="4" fill="#dcfce7" opacity="0.5"/>
+      <rect x="400" y="38" width="150" height="24" rx="4" fill="#fee2e2" opacity="0.5"/>
+      <!-- Points BVA 2-valeurs -->
+      <circle cx="195" cy="50" r="7" fill="#dc2626"/>
+      <text x="195" y="80" text-anchor="middle" font-size="10" fill="#dc2626" font-weight="bold">17</text>
+      <circle cx="215" cy="50" r="7" fill="#16a34a"/>
+      <text x="215" y="80" text-anchor="middle" font-size="10" fill="#16a34a" font-weight="bold">18</text>
+      <circle cx="390" cy="50" r="7" fill="#16a34a"/>
+      <text x="390" y="80" text-anchor="middle" font-size="10" fill="#16a34a" font-weight="bold">65</text>
+      <circle cx="410" cy="50" r="7" fill="#dc2626"/>
+      <text x="410" y="80" text-anchor="middle" font-size="10" fill="#dc2626" font-weight="bold">66</text>
+      <!-- Accolades frontieres -->
+      <text x="205" y="95" text-anchor="middle" font-size="9" fill="#64748b">frontiere 1</text>
+      <text x="400" y="95" text-anchor="middle" font-size="9" fill="#64748b">frontiere 2</text>
+    </svg>
+  </div>
+
+  <div class="syllabus-diagram">
+    <svg viewBox="0 0 600 100" xmlns="http://www.w3.org/2000/svg" style="max-width:600px;">
+      <text x="300" y="15" text-anchor="middle" font-size="12" font-weight="bold" fill="#7c3aed">BVA 3-valeurs = 6 points de test</text>
+      <!-- Axe -->
+      <line x1="50" y1="50" x2="550" y2="50" stroke="#94a3b8" stroke-width="1.5"/>
+      <!-- Zones -->
+      <rect x="50" y="38" width="145" height="24" rx="4" fill="#fee2e2" opacity="0.5"/>
+      <rect x="200" y="38" width="200" height="24" rx="4" fill="#dcfce7" opacity="0.5"/>
+      <rect x="405" y="38" width="145" height="24" rx="4" fill="#fee2e2" opacity="0.5"/>
+      <!-- Points BVA 3-valeurs frontiere 1 -->
+      <circle cx="185" cy="50" r="7" fill="#dc2626"/>
+      <text x="185" y="80" text-anchor="middle" font-size="10" fill="#dc2626" font-weight="bold">17</text>
+      <circle cx="210" cy="50" r="7" fill="#16a34a"/>
+      <text x="210" y="80" text-anchor="middle" font-size="10" fill="#16a34a" font-weight="bold">18</text>
+      <circle cx="235" cy="50" r="7" fill="#16a34a"/>
+      <text x="235" y="80" text-anchor="middle" font-size="10" fill="#16a34a" font-weight="bold">19</text>
+      <!-- Points BVA 3-valeurs frontiere 2 -->
+      <circle cx="375" cy="50" r="7" fill="#16a34a"/>
+      <text x="375" y="80" text-anchor="middle" font-size="10" fill="#16a34a" font-weight="bold">64</text>
+      <circle cx="400" cy="50" r="7" fill="#16a34a"/>
+      <text x="400" y="80" text-anchor="middle" font-size="10" fill="#16a34a" font-weight="bold">65</text>
+      <circle cx="425" cy="50" r="7" fill="#dc2626"/>
+      <text x="425" y="80" text-anchor="middle" font-size="10" fill="#dc2626" font-weight="bold">66</text>
+      <!-- Labels -->
+      <text x="210" y="95" text-anchor="middle" font-size="9" fill="#64748b">frontiere 1</text>
+      <text x="400" y="95" text-anchor="middle" font-size="9" fill="#64748b">frontiere 2</text>
+    </svg>
+  </div>
+
+  <div class="syllabus-exam-warning">
+    <strong>Attention examen</strong>
+    <p>Le syllabus utilise BVA 2-valeurs par defaut. Si la question dit "two-value BVA", c'est 2 valeurs par frontiere (la frontiere + son voisin adjacent). Comptez le nombre de frontieres, puis multipliez par 2 (ou 3 pour BVA 3-valeurs).</p>
+  </div>
+
   <h4>4.2.3. Test par table de decision</h4>
   <p>Les tables de decision sont utilisees pour tester l'implementation d'exigences qui specifient comment differentes combinaisons de conditions produisent differents resultats. Les tables de decision sont un moyen efficace d'enregistrer une logique complexe, comme les regles metier.</p>
   <p>Lors de la creation de tables de decision, les conditions et les actions resultantes du systeme sont definies. Celles-ci forment les lignes de la table. Chaque colonne correspond a une regle de decision qui definit une combinaison unique de conditions, accompagnee des actions associees. Dans les tables de decision a entrees limitees, toutes les valeurs des conditions et des actions (sauf celles qui sont non pertinentes ou infaisables ; voir ci-dessous) sont representees comme des valeurs booleennes (vrai ou faux). Alternativement, dans les tables de decision a entrees etendues, certaines ou toutes les conditions et actions peuvent egalement prendre plusieurs valeurs (par exemple, des plages de nombres, des partitions d'equivalence, des valeurs discretes).</p>
@@ -79,6 +204,77 @@
   <p>Une table de decision complete a suffisamment de colonnes pour couvrir chaque combinaison de conditions. La table peut etre simplifiee en supprimant les colonnes contenant des combinaisons infaisables de conditions. La table peut egalement etre minimisee en fusionnant les colonnes dans lesquelles certaines conditions n'affectent pas le resultat en une seule colonne. Les algorithmes de minimisation des tables de decision sont hors du perimetre de ce syllabus.</p>
   <p>Dans le test par table de decision, les elements de couverture sont les colonnes contenant des combinaisons faisables de conditions. Pour atteindre 100% de couverture avec cette technique, les cas de test doivent exercer toutes ces colonnes. La couverture est mesuree comme le nombre de colonnes exercees, divise par le nombre total de colonnes faisables, et est exprimee en pourcentage.</p>
   <p>La force du test par table de decision est qu'il fournit une approche systematique pour identifier toutes les combinaisons de conditions, dont certaines pourraient autrement etre negligees. Il aide egalement a trouver les lacunes ou contradictions dans les exigences. S'il y a de nombreuses conditions, exercer toutes les regles de decision peut etre chronophage, car le nombre de regles croit exponentiellement avec le nombre de conditions. Dans ce cas, pour reduire le nombre de regles a exercer, une table de decision minimisee ou une approche basee sur les risques peut etre utilisee.</p>
+
+  <div class="syllabus-diagram">
+    <svg viewBox="0 0 500 200" xmlns="http://www.w3.org/2000/svg" style="max-width:500px;">
+      <!-- En-tete -->
+      <rect x="10" y="10" width="120" height="30" rx="4" fill="#e2e8f0" stroke="#94a3b8"/>
+      <rect x="135" y="10" width="80" height="30" rx="4" fill="#2563eb"/>
+      <text x="175" y="30" text-anchor="middle" font-size="11" fill="white" font-weight="bold">R1</text>
+      <rect x="220" y="10" width="80" height="30" rx="4" fill="#2563eb"/>
+      <text x="260" y="30" text-anchor="middle" font-size="11" fill="white" font-weight="bold">R2</text>
+      <rect x="305" y="10" width="80" height="30" rx="4" fill="#2563eb"/>
+      <text x="345" y="30" text-anchor="middle" font-size="11" fill="white" font-weight="bold">R3</text>
+      <rect x="390" y="10" width="80" height="30" rx="4" fill="#2563eb"/>
+      <text x="430" y="30" text-anchor="middle" font-size="11" fill="white" font-weight="bold">R4</text>
+      <!-- Conditions -->
+      <rect x="10" y="45" width="120" height="25" fill="#f8fafc" stroke="#e2e8f0"/>
+      <text x="70" y="62" text-anchor="middle" font-size="10" fill="#334155">Membre ?</text>
+      <rect x="135" y="45" width="80" height="25" fill="#f8fafc" stroke="#e2e8f0"/>
+      <text x="175" y="62" text-anchor="middle" font-size="11" fill="#334155">T</text>
+      <rect x="220" y="45" width="80" height="25" fill="#f8fafc" stroke="#e2e8f0"/>
+      <text x="260" y="62" text-anchor="middle" font-size="11" fill="#334155">T</text>
+      <rect x="305" y="45" width="80" height="25" fill="#f8fafc" stroke="#e2e8f0"/>
+      <text x="345" y="62" text-anchor="middle" font-size="11" fill="#334155">F</text>
+      <rect x="390" y="45" width="80" height="25" fill="#f8fafc" stroke="#e2e8f0"/>
+      <text x="430" y="62" text-anchor="middle" font-size="11" fill="#334155">F</text>
+      <rect x="10" y="75" width="120" height="25" fill="#f8fafc" stroke="#e2e8f0"/>
+      <text x="70" y="92" text-anchor="middle" font-size="10" fill="#334155">Commande &gt;50&#8364; ?</text>
+      <rect x="135" y="75" width="80" height="25" fill="#f8fafc" stroke="#e2e8f0"/>
+      <text x="175" y="92" text-anchor="middle" font-size="11" fill="#334155">T</text>
+      <rect x="220" y="75" width="80" height="25" fill="#f8fafc" stroke="#e2e8f0"/>
+      <text x="260" y="92" text-anchor="middle" font-size="11" fill="#334155">F</text>
+      <rect x="305" y="75" width="80" height="25" fill="#f8fafc" stroke="#e2e8f0"/>
+      <text x="345" y="92" text-anchor="middle" font-size="11" fill="#334155">T</text>
+      <rect x="390" y="75" width="80" height="25" fill="#f8fafc" stroke="#e2e8f0"/>
+      <text x="430" y="92" text-anchor="middle" font-size="11" fill="#334155">F</text>
+      <!-- Separator -->
+      <line x1="10" y1="108" x2="470" y2="108" stroke="#2563eb" stroke-width="2"/>
+      <!-- Actions -->
+      <rect x="10" y="113" width="120" height="25" fill="#eff6ff" stroke="#e2e8f0"/>
+      <text x="70" y="130" text-anchor="middle" font-size="10" fill="#1e40af">Reduction 20%</text>
+      <rect x="135" y="113" width="80" height="25" fill="#eff6ff" stroke="#e2e8f0"/>
+      <text x="175" y="130" text-anchor="middle" font-size="13" fill="#16a34a" font-weight="bold">X</text>
+      <rect x="220" y="113" width="80" height="25" fill="#eff6ff" stroke="#e2e8f0"/>
+      <rect x="305" y="113" width="80" height="25" fill="#eff6ff" stroke="#e2e8f0"/>
+      <rect x="390" y="113" width="80" height="25" fill="#eff6ff" stroke="#e2e8f0"/>
+      <rect x="10" y="143" width="120" height="25" fill="#eff6ff" stroke="#e2e8f0"/>
+      <text x="70" y="160" text-anchor="middle" font-size="10" fill="#1e40af">Reduction 10%</text>
+      <rect x="135" y="143" width="80" height="25" fill="#eff6ff" stroke="#e2e8f0"/>
+      <rect x="220" y="143" width="80" height="25" fill="#eff6ff" stroke="#e2e8f0"/>
+      <text x="260" y="160" text-anchor="middle" font-size="13" fill="#16a34a" font-weight="bold">X</text>
+      <rect x="305" y="143" width="80" height="25" fill="#eff6ff" stroke="#e2e8f0"/>
+      <text x="345" y="160" text-anchor="middle" font-size="13" fill="#16a34a" font-weight="bold">X</text>
+      <rect x="390" y="143" width="80" height="25" fill="#eff6ff" stroke="#e2e8f0"/>
+      <rect x="10" y="173" width="120" height="25" fill="#eff6ff" stroke="#e2e8f0"/>
+      <text x="70" y="190" text-anchor="middle" font-size="10" fill="#1e40af">Pas de reduction</text>
+      <rect x="135" y="173" width="80" height="25" fill="#eff6ff" stroke="#e2e8f0"/>
+      <rect x="220" y="173" width="80" height="25" fill="#eff6ff" stroke="#e2e8f0"/>
+      <rect x="305" y="173" width="80" height="25" fill="#eff6ff" stroke="#e2e8f0"/>
+      <rect x="390" y="173" width="80" height="25" fill="#eff6ff" stroke="#e2e8f0"/>
+      <text x="430" y="190" text-anchor="middle" font-size="13" fill="#16a34a" font-weight="bold">X</text>
+    </svg>
+  </div>
+
+  <div class="syllabus-example">
+    <strong>Exemple concret</strong>
+    <p>Membre=Oui, Commande&gt;50&#8364;=Non &rarr; R2 &rarr; Reduction 10%. On cherche la colonne ou TOUTES les conditions correspondent au cas de test. Couverture = colonnes testees / nombre total de colonnes faisables.</p>
+  </div>
+
+  <div class="syllabus-exam-warning">
+    <strong>Attention examen</strong>
+    <p>Pour trouver quelle regle couvre un cas de test : mapper chaque condition du cas de test a la valeur (T/F) dans chaque colonne. La regle est la colonne ou toutes les conditions correspondent simultanement.</p>
+  </div>
 
   <h4>4.2.4. Test de transition d'etat</h4>
   <p>Un diagramme d'etat modelise le comportement d'un systeme en montrant ses etats possibles et les transitions d'etat valides. Une transition est initiee par un evenement, qui peut etre en plus qualifie par une condition de garde. Les transitions sont supposees etre instantanees et peuvent parfois entrainer une action du logiciel. La syntaxe courante d'etiquetage des transitions est la suivante : "evenement [condition de garde] / action". Les conditions de garde et les actions peuvent etre omises si elles n'existent pas ou ne sont pas pertinentes pour le testeur.</p>
@@ -89,6 +285,51 @@
   <p>En <strong>couverture des transitions valides</strong> (egalement appelee couverture 0-switch), les elements de couverture sont les transitions valides individuelles. Pour atteindre 100% de couverture des transitions valides, les cas de test doivent exercer toutes les transitions valides. La couverture est mesuree comme le nombre de transitions valides exercees divise par le nombre total de transitions valides et est exprimee en pourcentage.</p>
   <p>En <strong>couverture de toutes les transitions</strong>, les elements de couverture sont toutes les transitions figurant dans une table d'etat. Pour atteindre 100% de couverture de toutes les transitions, les cas de test doivent exercer toutes les transitions valides et tenter d'executer les transitions invalides. Tester une seule transition invalide par cas de test permet d'eviter le masquage de defauts, c'est-a-dire une situation dans laquelle un defaut empeche la detection d'un autre. La couverture est mesuree comme le nombre de transitions valides et invalides exercees ou tentees par les cas de test executes, divise par le nombre total de transitions valides et invalides, et est exprimee en pourcentage.</p>
   <p>La couverture de tous les etats est plus faible que la couverture des transitions valides, car elle peut generalement etre atteinte sans exercer toutes les transitions. La couverture des transitions valides est le critere de couverture le plus largement utilise. Atteindre une couverture complete des transitions valides garantit une couverture complete de tous les etats. Atteindre une couverture complete de toutes les transitions garantit a la fois la couverture complete de tous les etats et la couverture complete des transitions valides, et devrait etre une exigence minimale pour les logiciels critiques en termes de mission et de securite.</p>
+
+  <div class="syllabus-diagram">
+    <svg viewBox="0 0 520 220" xmlns="http://www.w3.org/2000/svg" style="max-width:520px;">
+      <!-- Etat Inactif -->
+      <circle cx="90" cy="110" r="45" fill="#e2e8f0" stroke="#64748b" stroke-width="2"/>
+      <text x="90" y="115" text-anchor="middle" font-size="12" font-weight="bold" fill="#334155">Inactif</text>
+      <!-- Etat Actif -->
+      <circle cx="270" cy="110" r="45" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+      <text x="270" y="115" text-anchor="middle" font-size="12" font-weight="bold" fill="#166534">Actif</text>
+      <!-- Etat Termine -->
+      <circle cx="440" cy="110" r="45" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+      <text x="440" y="115" text-anchor="middle" font-size="12" font-weight="bold" fill="#991b1b">Termine</text>
+      <!-- Fleche Inactif -> Actif (Demarrer) -->
+      <line x1="137" y1="100" x2="220" y2="100" stroke="#2563eb" stroke-width="2" marker-end="url(#arrowBlue4)"/>
+      <text x="178" y="92" text-anchor="middle" font-size="10" fill="#2563eb" font-weight="bold">Demarrer</text>
+      <!-- Fleche boucle Actif -> Actif (Modifier) -->
+      <path d="M255,65 C240,20 300,20 285,65" fill="none" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrowOrange4)"/>
+      <text x="270" y="30" text-anchor="middle" font-size="10" fill="#b45309" font-weight="bold">Modifier</text>
+      <!-- Fleche Actif -> Termine (Fermer) -->
+      <line x1="317" y1="100" x2="392" y2="100" stroke="#dc2626" stroke-width="2" marker-end="url(#arrowRed4)"/>
+      <text x="355" y="92" text-anchor="middle" font-size="10" fill="#dc2626" font-weight="bold">Fermer</text>
+      <!-- Fleche Actif -> Inactif (Annuler) -->
+      <line x1="225" y1="130" x2="137" y2="130" stroke="#7c3aed" stroke-width="2" marker-end="url(#arrowPurple4)"/>
+      <text x="178" y="148" text-anchor="middle" font-size="10" fill="#7c3aed" font-weight="bold">Annuler</text>
+      <!-- Marqueurs fleches -->
+      <defs>
+        <marker id="arrowBlue4" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#2563eb"/></marker>
+        <marker id="arrowOrange4" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#f59e0b"/></marker>
+        <marker id="arrowRed4" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#dc2626"/></marker>
+        <marker id="arrowPurple4" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#7c3aed"/></marker>
+      </defs>
+      <!-- Legende -->
+      <text x="260" y="200" text-anchor="middle" font-size="10" fill="#64748b">3 etats, 4 transitions valides</text>
+    </svg>
+  </div>
+
+  <div class="syllabus-example">
+    <strong>Exemple concret</strong>
+    <p>Sequence "Demarrer, Modifier, Fermer" = 3 transitions : Inactif&rarr;Actif, Actif&rarr;Actif, Actif&rarr;Termine. Couverture transitions = 3/4 = 75% (la transition "Annuler" n'a pas ete exercee).</p>
+  </div>
+
+  <div class="syllabus-exam-warning">
+    <strong>Attention examen</strong>
+    <p>Un meme evenement depuis des etats differents = des transitions DIFFERENTES. "Annuler" depuis Actif et "Annuler" depuis un autre etat sont deux transitions distinctes a compter separement.</p>
+  </div>
 </div>
 
 <div class="question-card" style="margin-bottom:20px;">
@@ -120,6 +361,48 @@
   <p>Une force fondamentale que toutes les techniques de test boite blanche partagent est que l'ensemble de l'implementation logicielle est prise en compte pendant les tests, ce qui facilite la detection des defauts meme lorsque la specification du logiciel est vague, obsolete ou incomplete. Une faiblesse correspondante est que si le logiciel n'implemente pas une ou plusieurs exigences, le test boite blanche peut ne pas detecter les defauts d'omission resultants (Watson 1996).</p>
   <p>Les techniques de test boite blanche peuvent etre utilisees en test statique (par exemple, lors de revues a sec du code). Elles sont bien adaptees a la revue de code pas encore pret pour l'execution (Hetzel 1988), de pseudocode et d'autres logiques de haut niveau ou descendantes pouvant etre modelisees avec un graphe de flux de controle.</p>
   <p>Effectuer uniquement du test boite noire ne fournit pas de mesure de la couverture reelle du code. Les mesures de couverture boite blanche fournissent une mesure objective de la couverture et les informations necessaires pour permettre la generation de tests supplementaires afin d'augmenter cette couverture, et par consequent renforcer la confiance dans le code.</p>
+
+  <div class="syllabus-diagram">
+    <svg viewBox="0 0 520 280" xmlns="http://www.w3.org/2000/svg" style="max-width:520px;">
+      <!-- Start -->
+      <rect x="200" y="10" width="120" height="30" rx="15" fill="#e2e8f0" stroke="#64748b" stroke-width="1.5"/>
+      <text x="260" y="30" text-anchor="middle" font-size="11" fill="#334155">Debut</text>
+      <line x1="260" y1="40" x2="260" y2="60" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrowGray4)"/>
+      <!-- Decision -->
+      <polygon points="260,60 340,95 260,130 180,95" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+      <text x="260" y="99" text-anchor="middle" font-size="11" fill="#1e40af" font-weight="bold">x &gt; 0 ?</text>
+      <!-- True branch -->
+      <line x1="340" y1="95" x2="410" y2="95" stroke="#16a34a" stroke-width="1.5" marker-end="url(#arrowGreen4)"/>
+      <text x="370" y="87" font-size="10" fill="#16a34a" font-weight="bold">Vrai</text>
+      <rect x="410" y="78" width="100" height="34" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+      <text x="460" y="100" text-anchor="middle" font-size="11" fill="#166534">A = x + 1</text>
+      <line x1="460" y1="112" x2="460" y2="160" stroke="#64748b" stroke-width="1.5"/>
+      <line x1="460" y1="160" x2="260" y2="160" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrowGray4)"/>
+      <!-- False branch -->
+      <line x1="180" y1="95" x2="110" y2="95" stroke="#dc2626" stroke-width="1.5"/>
+      <text x="150" y="87" font-size="10" fill="#dc2626" font-weight="bold">Faux</text>
+      <text x="80" y="99" text-anchor="middle" font-size="10" fill="#94a3b8">(rien)</text>
+      <line x1="110" y1="95" x2="110" y2="160" stroke="#64748b" stroke-width="1.5"/>
+      <line x1="110" y1="160" x2="255" y2="160" stroke="#64748b" stroke-width="1.5"/>
+      <!-- End -->
+      <rect x="200" y="165" width="120" height="30" rx="15" fill="#e2e8f0" stroke="#64748b" stroke-width="1.5"/>
+      <text x="260" y="185" text-anchor="middle" font-size="11" fill="#334155">Fin</text>
+      <!-- Annotations -->
+      <rect x="20" y="210" width="480" height="60" rx="8" fill="#fffbeb" stroke="#f59e0b" stroke-width="1"/>
+      <text x="260" y="230" text-anchor="middle" font-size="11" fill="#92400e" font-weight="bold">Test x=1 : 100% instructions (A=x+1 executee)</text>
+      <text x="260" y="248" text-anchor="middle" font-size="11" fill="#92400e">mais seulement 50% branches (branche Faux non prise)</text>
+      <text x="260" y="264" text-anchor="middle" font-size="10" fill="#b45309">Il faut ajouter x=-1 pour atteindre 100% branches</text>
+      <defs>
+        <marker id="arrowGray4" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#64748b"/></marker>
+        <marker id="arrowGreen4" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#16a34a"/></marker>
+      </defs>
+    </svg>
+  </div>
+
+  <div class="syllabus-exam-warning">
+    <strong>Attention examen</strong>
+    <p>100% couverture des branches &rarr; 100% couverture des instructions (GARANTI). 100% couverture des instructions &rarr; 100% couverture des branches (PAS garanti). Un IF sans ELSE a quand meme 2 branches (la branche Vrai et la branche Faux qui "saute" le bloc).</p>
+  </div>
 </div>
 
 <div class="question-card" style="margin-bottom:20px;">
@@ -147,11 +430,21 @@
   <p>En general, les erreurs, defauts et defaillances peuvent etre lies a : l'entree (par exemple, une entree correcte non acceptee, des parametres errones ou manquants), la sortie (par exemple, un format errone, un resultat errone), la logique (par exemple, des cas manquants, un operateur errone), le calcul (par exemple, un operande incorrect, un calcul errone), les interfaces (par exemple, une incompatibilite de parametres, des types incompatibles), ou les donnees (par exemple, une initialisation incorrecte, un type errone).</p>
   <p>Les attaques par fautes sont une maniere d'implementer la prediction d'erreurs. Cette technique de test exige que le testeur cree ou acquiere une liste d'erreurs, de defauts et de defaillances possibles, et concoive des tests qui identifieront les defauts associes aux erreurs, exposeront les defauts ou provoqueront les defaillances. Ces listes peuvent etre construites a partir de l'experience, des donnees de defauts et de defaillances, ou des connaissances generales sur les raisons pour lesquelles les logiciels echouent.</p>
 
+  <div class="syllabus-exam-warning">
+    <strong>Attention examen</strong>
+    <p>La prediction d'erreurs (error guessing) anticipe des erreurs, des defauts et des defaillances — PAS des causes racines. C'est une technique basee sur l'experience du testeur.</p>
+  </div>
+
   <h4>4.4.2. Test exploratoire</h4>
   <p>Dans le test exploratoire, les tests sont simultanement concus, executes et evalues pendant que le testeur decouvre l'objet de test. Le test est utilise pour en apprendre davantage sur l'objet de test, pour l'explorer plus en profondeur avec des tests cibles, et pour creer des tests pour les zones non testees.</p>
   <p>Le test exploratoire est parfois realise en utilisant le test base sur des sessions pour structurer les tests. Dans une approche basee sur des sessions, le test exploratoire est effectue dans un cadre temporel defini. Le testeur utilise une charte de test contenant les objectifs de test pour guider les tests. La session de test est generalement suivie d'un debriefing impliquant une discussion entre le testeur et les parties prenantes interessees par les resultats de la session de test. Dans cette approche, les objectifs de test peuvent etre traites comme des conditions de test de haut niveau. Les elements de couverture sont identifies et exerces pendant la session de test. Le testeur peut utiliser des fiches de session de test pour documenter les etapes suivies et les decouvertes faites.</p>
   <p>Le test exploratoire est utile lorsqu'il y a peu ou pas de specifications adequates ou lorsqu'il y a une pression temporelle importante sur les tests. Le test exploratoire est egalement utile pour completer d'autres techniques de test plus formelles. Le test exploratoire sera plus efficace si le testeur est experimente, possede une connaissance du domaine et un haut degre de competences essentielles, comme les capacites analytiques, la curiosite et la creativite (voir section 1.5.1).</p>
   <p>Le test exploratoire peut incorporer l'utilisation d'autres techniques de test (par exemple, les partitions d'equivalence). Plus d'informations sur le test exploratoire se trouvent dans (Kaner 1999, Whittaker 2009, Hendrickson 2013).</p>
+
+  <div class="syllabus-exam-warning">
+    <strong>Attention examen</strong>
+    <p>Le test exploratoire ne permet PAS de predire le nombre de defauts restants. Il est utile quand les specifications sont peu ou pas disponibles, et il est complementaire aux techniques formelles.</p>
+  </div>
 
   <h4>4.4.3. Test base sur des checklists</h4>
   <p>Dans le test base sur des checklists, un testeur concoit, implemente et execute des tests pour couvrir les conditions de test a partir d'une checklist. Les checklists peuvent etre construites a partir de l'experience, de la connaissance de ce qui est important pour l'utilisateur, ou d'une comprehension de pourquoi et comment les logiciels echouent. Les checklists ne doivent pas contenir d'elements pouvant etre verifies automatiquement, d'elements mieux adaptes comme criteres d'entree ou de sortie, ou d'elements trop generaux (Brykczynski 1999).</p>
@@ -178,6 +471,40 @@
     <li><strong>Confirmation</strong> – les criteres d'acceptation (voir section 4.5.2)</li>
   </ul>
   <p>Le format le plus courant pour une user story est "En tant que [role], je veux [objectif a accomplir], afin de [valeur metier resultante pour le role]", suivi des criteres d'acceptation.</p>
+
+  <div class="syllabus-diagram">
+    <svg viewBox="0 0 600 130" xmlns="http://www.w3.org/2000/svg" style="max-width:600px;">
+      <!-- Card -->
+      <rect x="20" y="20" width="160" height="80" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+      <text x="100" y="50" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e40af">Card</text>
+      <text x="100" y="70" text-anchor="middle" font-size="10" fill="#1e3a5f">Le support physique</text>
+      <text x="100" y="84" text-anchor="middle" font-size="10" fill="#1e3a5f">(fiche, ticket)</text>
+      <!-- Arrow 1 -->
+      <line x1="185" y1="60" x2="215" y2="60" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrowGray45)"/>
+      <!-- Conversation (bulle) -->
+      <rect x="220" y="20" width="160" height="80" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+      <text x="300" y="50" text-anchor="middle" font-size="14" font-weight="bold" fill="#166534">Conversation</text>
+      <text x="300" y="70" text-anchor="middle" font-size="10" fill="#166534">Discussion des</text>
+      <text x="300" y="84" text-anchor="middle" font-size="10" fill="#166534">details (verbale/ecrite)</text>
+      <!-- Arrow 2 -->
+      <line x1="385" y1="60" x2="415" y2="60" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrowGray45)"/>
+      <!-- Confirmation -->
+      <rect x="420" y="20" width="160" height="80" rx="10" fill="#fff7ed" stroke="#f59e0b" stroke-width="2"/>
+      <text x="500" y="50" text-anchor="middle" font-size="14" font-weight="bold" fill="#b45309">Confirmation</text>
+      <text x="500" y="70" text-anchor="middle" font-size="10" fill="#92400e">Criteres</text>
+      <text x="500" y="84" text-anchor="middle" font-size="10" fill="#92400e">d'acceptation</text>
+      <!-- Label -->
+      <text x="300" y="125" text-anchor="middle" font-size="12" fill="#64748b" font-weight="bold">Les 3 C d'une User Story</text>
+      <defs>
+        <marker id="arrowGray45" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#94a3b8"/></marker>
+      </defs>
+    </svg>
+  </div>
+
+  <div class="syllabus-example">
+    <strong>Exemple concret</strong>
+    <p>User story : "En tant que client, je veux filtrer par prix." Card = le support (ticket Jira). Conversation = l'equipe discute des filtres (prix min/max, devises). Confirmation = criteres d'acceptation (ex : le filtre affiche uniquement les produits dans la plage).</p>
+  </div>
   <p>La redaction collaborative de la user story peut utiliser des techniques telles que le brainstorming et le mind mapping. La collaboration permet a l'equipe d'obtenir une vision partagee de ce qui doit etre livre, en tenant compte de trois perspectives : metier, developpement et test.</p>
   <p>Les bonnes user stories doivent etre : Independantes, Negociables, ayant de la Valeur, Estimables, de petite taille (Small) et Testables (INVEST). Si une partie prenante ne sait pas comment tester une user story, cela peut indiquer que la user story n'est pas assez claire, qu'elle ne reflete pas quelque chose de valeur pour elle, ou que la partie prenante a simplement besoin d'aide pour les tests (Wake 2003).</p>
 

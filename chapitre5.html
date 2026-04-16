@@ -80,6 +80,39 @@
   <p><strong>Wideband Delphi.</strong> Dans cette technique iterative basee sur les experts, les experts font des estimations basees sur l'experience. Chaque expert, de maniere isolee, estime l'effort. Les resultats sont collectes et si les ecarts de l'estimation d'un expert sont en dehors des limites convenues, les experts discutent de leurs estimations actuelles. Chaque expert est ensuite invite a faire une nouvelle estimation basee sur ce retour, a nouveau de maniere isolee. Ce processus est repete jusqu'a ce qu'un consensus soit atteint. Le Planning Poker est une variante du Wideband Delphi, couramment utilisee dans le developpement logiciel Agile. Dans le Planning Poker, les estimations sont generalement faites a l'aide de cartes avec des nombres representant la taille de l'effort.</p>
   <p><strong>Estimation a trois points.</strong> Dans cette technique basee sur les experts, trois estimations sont faites par les experts : l'estimation la plus optimiste (a), l'estimation la plus probable (m) et l'estimation la plus pessimiste (b). L'estimation finale (E) est leur moyenne arithmetique ponderee. Dans la version la plus populaire de cette technique, l'estimation est calculee comme E = (a + 4*m + b) / 6. L'avantage de cette technique est qu'elle permet aux experts de calculer l'erreur de mesure : SD = (b &ndash; a) / 6. Par exemple, si les estimations (en heures-personnes) sont : a=6, m=9 et b=18, alors l'estimation finale est de 10&plusmn;2 heures-personnes (c'est-a-dire entre 8 et 12 heures-personnes), car E = (6 + 4*9 + 18) / 6 = 10 et SD = (18 &ndash; 6) / 6 = 2.</p>
 
+  <div class="syllabus-diagram">
+    <svg viewBox="0 0 520 160" xmlns="http://www.w3.org/2000/svg" style="max-width:520px;">
+      <!-- Formule -->
+      <rect x="110" y="10" width="300" height="50" rx="12" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+      <text x="260" y="42" text-anchor="middle" font-size="18" font-weight="bold" fill="#1e40af">E = (a + 4m + b) / 6</text>
+      <!-- Courbe en cloche -->
+      <path d="M60,140 Q120,140 180,130 Q220,110 260,70 Q300,110 340,130 Q400,140 460,140" fill="none" stroke="#2563eb" stroke-width="2.5"/>
+      <line x1="60" y1="140" x2="460" y2="140" stroke="#94a3b8" stroke-width="1"/>
+      <!-- a (optimiste) -->
+      <line x1="120" y1="135" x2="120" y2="145" stroke="#16a34a" stroke-width="2"/>
+      <circle cx="120" cy="137" r="4" fill="#16a34a"/>
+      <text x="120" y="158" text-anchor="middle" font-size="10" fill="#16a34a" font-weight="bold">a (optimiste)</text>
+      <!-- m (probable) -->
+      <line x1="260" y1="70" x2="260" y2="145" stroke="#2563eb" stroke-width="1" stroke-dasharray="4,3"/>
+      <circle cx="260" cy="70" r="4" fill="#2563eb"/>
+      <text x="260" y="158" text-anchor="middle" font-size="10" fill="#2563eb" font-weight="bold">m (probable)</text>
+      <!-- b (pessimiste) -->
+      <line x1="400" y1="135" x2="400" y2="145" stroke="#dc2626" stroke-width="2"/>
+      <circle cx="400" cy="137" r="4" fill="#dc2626"/>
+      <text x="400" y="158" text-anchor="middle" font-size="10" fill="#dc2626" font-weight="bold">b (pessimiste)</text>
+    </svg>
+  </div>
+
+  <div class="syllabus-example">
+    <strong>Exemple concret</strong>
+    <p>Optimiste=1h, Probable=3h, Pessimiste=8h. E = (1 + 4&times;3 + 8) / 6 = 21/6 = 3,5h par element. Pour 4 taches : 3,5 &times; 4 = 14h d'effort total estime.</p>
+  </div>
+
+  <div class="syllabus-exam-warning">
+    <strong>Attention examen</strong>
+    <p>N'oubliez pas de multiplier par le nombre d'elements ! L'erreur classique a l'examen est de donner le resultat pour un seul element au lieu de l'effort total.</p>
+  </div>
+
   <h4>5.1.5. Priorisation des cas de test</h4>
   <p>Une fois les cas de test et les procedures de test specifies et assembles en suites de test, ces suites de test peuvent etre organisees dans un calendrier d'execution des tests qui definit l'ordre dans lequel elles doivent etre executees. Lors de la priorisation des cas de test, differents facteurs peuvent etre pris en compte. Les strategies de priorisation des cas de test les plus couramment utilisees sont les suivantes :</p>
   <ul>
@@ -90,9 +123,39 @@
   <p>Idealement, les cas de test seraient ordonnes pour etre executes en fonction de leurs niveaux de priorite, en utilisant, par exemple, l'une des strategies de priorisation mentionnees ci-dessus. Cependant, cette pratique peut ne pas fonctionner si les cas de test ou les fonctionnalites testees ont des dependances. Si un cas de test de priorite superieure depend d'un cas de test de priorite inferieure, le cas de test de priorite inferieure doit etre execute en premier.</p>
   <p>L'ordre d'execution des tests doit egalement tenir compte de la disponibilite des ressources. Par exemple, les outils de test, les environnements de test ou les personnes necessaires qui peuvent n'etre disponibles que pendant une fenetre de temps specifique.</p>
 
+  <div class="syllabus-example">
+    <strong>Exemple concret — priorisation par couverture additionnelle</strong>
+    <p>TC1 couvre Req1, Req3, Req4, Req7 (4 exigences) &rarr; execute en 1er. TC3 couvre Req5, Req6 (2 exigences nouvelles) &rarr; execute en 2e. TC4 couvre Req2 (1 exigence nouvelle) &rarr; execute en 3e. TC2 ne couvre aucune exigence supplementaire &rarr; execute en dernier.</p>
+  </div>
+
   <h4>5.1.6. Pyramide de test</h4>
   <p>La pyramide de test est un modele montrant que differents tests peuvent avoir differentes granularites. Le modele de la pyramide de test aide l'equipe dans l'automatisation des tests et dans l'allocation de l'effort de test en montrant que differents objectifs de test sont supportes par differents niveaux d'automatisation des tests. Les couches de la pyramide representent des groupes de tests. Plus la couche est elevee, plus la granularite du test est faible, plus l'isolation du test est faible (c'est-a-dire le degre de dependance vis-a-vis d'autres elements du systeme) et plus le temps d'execution du test est eleve. Les tests de la couche inferieure sont petits, isoles, rapides et verifient une petite partie de la fonctionnalite, donc generalement un grand nombre d'entre eux est necessaire pour atteindre une couverture raisonnable. La couche superieure represente des tests complexes, de haut niveau, de bout en bout. Ces tests de haut niveau sont generalement plus lents que les tests des couches inferieures, et ils verifient typiquement une grande partie de la fonctionnalite, donc generalement seuls quelques-uns sont necessaires pour atteindre un niveau de couverture raisonnable.</p>
   <p>Le nombre et le nommage des couches peuvent differer. Par exemple, le modele original de la pyramide de test (Cohn 2009) definit trois couches : "tests unitaires", "tests de service" et "tests UI". Un autre modele populaire definit les tests unitaires (composants), les tests d'integration (integration de composants) et les tests de bout en bout. D'autres niveaux de test (voir section 2.2.1) peuvent egalement etre utilises.</p>
+
+  <div class="syllabus-diagram">
+    <svg viewBox="0 0 500 280" xmlns="http://www.w3.org/2000/svg" style="max-width:500px;">
+      <!-- Pyramide -->
+      <!-- Base - Tests composants -->
+      <polygon points="50,240 450,240 370,170 130,170" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+      <text x="250" y="215" text-anchor="middle" font-size="13" font-weight="bold" fill="#166534">Tests composants (unitaires)</text>
+      <!-- Milieu - Tests integration -->
+      <polygon points="130,170 370,170 310,100 190,100" fill="#fef9c3" stroke="#ca8a04" stroke-width="1.5"/>
+      <text x="250" y="145" text-anchor="middle" font-size="12" font-weight="bold" fill="#854d0e">Tests integration</text>
+      <!-- Sommet - Tests UI/E2E -->
+      <polygon points="190,100 310,100 260,40 240,40" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+      <text x="250" y="80" text-anchor="middle" font-size="11" font-weight="bold" fill="#991b1b">Tests UI/E2E</text>
+      <!-- Fleche gauche (vers le haut) -->
+      <line x1="30" y1="220" x2="30" y2="60" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrowUp5)"/>
+      <text x="20" y="130" text-anchor="middle" font-size="9" fill="#64748b" transform="rotate(-90,20,130)">Moins nombreux, plus lents</text>
+      <!-- Fleche droite (vers le bas) -->
+      <line x1="470" y1="60" x2="470" y2="220" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrowDown5)"/>
+      <text x="480" y="130" text-anchor="middle" font-size="9" fill="#64748b" transform="rotate(90,480,130)">Plus nombreux, plus rapides</text>
+      <defs>
+        <marker id="arrowUp5" markerWidth="8" markerHeight="6" refX="4" refY="3" orient="auto"><path d="M0,6 L4,0 L8,6 Z" fill="#64748b"/></marker>
+        <marker id="arrowDown5" markerWidth="8" markerHeight="6" refX="4" refY="3" orient="auto"><path d="M0,0 L4,6 L8,0 Z" fill="#64748b"/></marker>
+      </defs>
+    </svg>
+  </div>
 
   <h4>5.1.7. Quadrants de test</h4>
   <p>Les quadrants de test, definis par Brian Marick (Marick 2003, Crispin 2008), regroupent les niveaux de test avec les types de test, activites, techniques de test et produits d'activite appropries dans le developpement logiciel Agile. Le modele aide la gestion de test a les visualiser pour s'assurer que tous les types de test et niveaux de test appropries sont inclus dans le SDLC et a comprendre que certains types de test sont plus pertinents pour certains niveaux de test que d'autres. Ce modele fournit egalement un moyen de differencier et de decrire les types de test a toutes les parties prenantes, y compris les developpeurs, les testeurs et les representants metier.</p>
@@ -103,6 +166,43 @@
     <li><strong>Quadrant Q3</strong> (oriente metier, critique du produit). Ce quadrant contient les tests exploratoires, les tests d'utilisabilite, les tests d'acceptation utilisateur. Ces tests sont orientes utilisateur et souvent manuels.</li>
     <li><strong>Quadrant Q4</strong> (oriente technologie, critique du produit). Ce quadrant contient les tests de fumee et les tests non fonctionnels (sauf les tests d'utilisabilite). Ces tests sont souvent automatises.</li>
   </ul>
+
+  <div class="syllabus-diagram">
+    <svg viewBox="0 0 500 340" xmlns="http://www.w3.org/2000/svg" style="max-width:500px;">
+      <!-- Axes -->
+      <line x1="250" y1="30" x2="250" y2="310" stroke="#334155" stroke-width="2"/>
+      <line x1="40" y1="170" x2="460" y2="170" stroke="#334155" stroke-width="2"/>
+      <!-- Labels axes -->
+      <text x="250" y="20" text-anchor="middle" font-size="11" font-weight="bold" fill="#334155">Oriente metier</text>
+      <text x="250" y="330" text-anchor="middle" font-size="11" font-weight="bold" fill="#334155">Oriente technologie</text>
+      <text x="30" y="170" text-anchor="end" font-size="10" font-weight="bold" fill="#334155" transform="rotate(-90,25,170)">Soutien equipe</text>
+      <text x="470" y="170" text-anchor="start" font-size="10" font-weight="bold" fill="#334155" transform="rotate(90,475,170)">Critique produit</text>
+      <!-- Q1 - bas-gauche -->
+      <rect x="55" y="185" width="180" height="110" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+      <text x="145" y="215" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e40af">Q1</text>
+      <text x="145" y="235" text-anchor="middle" font-size="10" fill="#1e3a5f">Unitaire, Integration</text>
+      <text x="145" y="250" text-anchor="middle" font-size="9" fill="#64748b">Technologie + Equipe</text>
+      <text x="145" y="275" text-anchor="middle" font-size="9" fill="#64748b" font-style="italic">Automatises</text>
+      <!-- Q2 - haut-gauche -->
+      <rect x="55" y="45" width="180" height="110" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+      <text x="145" y="75" text-anchor="middle" font-size="13" font-weight="bold" fill="#166534">Q2</text>
+      <text x="145" y="95" text-anchor="middle" font-size="10" fill="#166534">Fonctionnel, User Story</text>
+      <text x="145" y="110" text-anchor="middle" font-size="9" fill="#64748b">Metier + Equipe</text>
+      <text x="145" y="135" text-anchor="middle" font-size="9" fill="#64748b" font-style="italic">Manuels ou automatises</text>
+      <!-- Q3 - haut-droite -->
+      <rect x="265" y="45" width="180" height="110" rx="10" fill="#fff7ed" stroke="#f59e0b" stroke-width="1.5"/>
+      <text x="355" y="75" text-anchor="middle" font-size="13" font-weight="bold" fill="#b45309">Q3</text>
+      <text x="355" y="95" text-anchor="middle" font-size="10" fill="#92400e">Exploratoire, Utilisabilite</text>
+      <text x="355" y="110" text-anchor="middle" font-size="9" fill="#64748b">Metier + Critique</text>
+      <text x="355" y="135" text-anchor="middle" font-size="9" fill="#64748b" font-style="italic">Souvent manuels</text>
+      <!-- Q4 - bas-droite -->
+      <rect x="265" y="185" width="180" height="110" rx="10" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+      <text x="355" y="215" text-anchor="middle" font-size="13" font-weight="bold" fill="#991b1b">Q4</text>
+      <text x="355" y="235" text-anchor="middle" font-size="10" fill="#991b1b">Performance, Securite</text>
+      <text x="355" y="250" text-anchor="middle" font-size="9" fill="#64748b">Technologie + Critique</text>
+      <text x="355" y="275" text-anchor="middle" font-size="9" fill="#64748b" font-style="italic">Souvent automatises</text>
+    </svg>
+  </div>
 </div>
 
 <div class="question-card" style="margin-bottom:20px;">
@@ -129,6 +229,29 @@
     <li>Impact du risque (prejudice) – les consequences de cette survenue</li>
   </ul>
   <p>Ces deux facteurs expriment le niveau de risque, qui est une mesure du risque. Plus le niveau de risque est eleve, plus son traitement est important.</p>
+
+  <div class="syllabus-diagram">
+    <svg viewBox="0 0 560 80" xmlns="http://www.w3.org/2000/svg" style="max-width:560px;">
+      <!-- Boite Risque -->
+      <rect x="10" y="15" width="140" height="50" rx="10" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+      <text x="80" y="46" text-anchor="middle" font-size="14" font-weight="bold" fill="#991b1b">Niveau de risque</text>
+      <!-- = -->
+      <text x="170" y="48" text-anchor="middle" font-size="20" font-weight="bold" fill="#334155">=</text>
+      <!-- Probabilite -->
+      <rect x="195" y="15" width="130" height="50" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+      <text x="260" y="46" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e40af">Probabilite</text>
+      <!-- x -->
+      <text x="345" y="48" text-anchor="middle" font-size="20" font-weight="bold" fill="#334155">&times;</text>
+      <!-- Impact -->
+      <rect x="370" y="15" width="130" height="50" rx="10" fill="#fff7ed" stroke="#f59e0b" stroke-width="2"/>
+      <text x="435" y="46" text-anchor="middle" font-size="13" font-weight="bold" fill="#b45309">Impact</text>
+    </svg>
+  </div>
+
+  <div class="syllabus-exam-warning">
+    <strong>Attention examen</strong>
+    <p>Risque produit = qualite du logiciel (mauvaise architecture, performance, securite). Risque projet = gestion du projet (retard, budget, turnover, competences). Ne confondez pas les deux categories !</p>
+  </div>
 
   <h4>5.2.2. Risques projet et risques produit</h4>
   <p>Dans le test logiciel, on est generalement concerne par deux types de risques : les risques projet et les risques produit.</p>
@@ -259,6 +382,11 @@
     <li>Toute la documentation identifiee et les elements logiciels sont references sans ambiguite dans le testware</li>
   </ul>
   <p>L'integration continue, la livraison continue, le deploiement continu et les tests associes sont typiquement implementes dans le cadre d'un pipeline DevOps automatise (voir section 2.1.4), dans lequel la CM automatisee est normalement incluse.</p>
+
+  <div class="syllabus-example">
+    <strong>Exemple concret</strong>
+    <p>Un utilisateur signale un bug en production. Grace a la gestion de configuration, l'equipe retrouve la version exacte du logiciel deployee, reconstitue l'environnement de test identique et reproduit le probleme pour le corriger.</p>
+  </div>
 </div>
 
 <div class="question-card" style="margin-bottom:20px;">
@@ -289,6 +417,11 @@
     <li>References (par ex., vers le cas de test)</li>
   </ul>
   <p>Certaines de ces donnees peuvent etre automatiquement incluses lors de l'utilisation d'outils de gestion des defauts (par ex., identifiant, date, auteur et statut initial). Des modeles de documents pour un rapport de defaut et des exemples de rapports de defaut peuvent etre trouves dans la norme ISO/IEC/IEEE 29119-3, qui fait reference aux rapports de defaut sous le nom de rapports d'incident.</p>
+
+  <div class="syllabus-exam-warning">
+    <strong>Attention examen</strong>
+    <p>Le rapport de defaut contient les etapes de reproduction, le resultat attendu vs le resultat reel, la severite et la priorite. Ce n'est PAS un rapport de test (qui resume l'avancement ou la completion des tests).</p>
+  </div>
 </div>
 
   </div>

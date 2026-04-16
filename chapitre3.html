@@ -68,6 +68,53 @@
     <li>Types specifiques de vulnerabilites de securite (par exemple, depassements de tampon)</li>
     <li>Lacunes ou inexactitudes dans la couverture de la base de test (par exemple, tests manquants pour un critere d'acceptation)</li>
   </ul>
+
+  <div class="syllabus-diagram">
+    <svg viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg">
+      <title>Test statique vs Test dynamique</title>
+      <!-- Left circle: Statique seul -->
+      <circle cx="200" cy="155" r="120" fill="rgba(37,99,235,0.12)" stroke="#2563eb" stroke-width="2"/>
+      <!-- Right circle: Dynamique seul -->
+      <circle cx="400" cy="155" r="120" fill="rgba(234,88,12,0.12)" stroke="#ea580c" stroke-width="2"/>
+      <!-- Labels -->
+      <text x="130" y="100" text-anchor="middle" font-size="12" font-weight="bold" fill="#1e40af">Test statique</text>
+      <text x="130" y="116" text-anchor="middle" font-size="12" font-weight="bold" fill="#1e40af">seul</text>
+      <text x="130" y="145" text-anchor="middle" font-size="9" fill="#1e40af">&#8226; Code mort</text>
+      <text x="130" y="160" text-anchor="middle" font-size="9" fill="#1e40af">&#8226; Ambiguites exigences</text>
+      <text x="130" y="175" text-anchor="middle" font-size="9" fill="#1e40af">&#8226; Ecarts standards</text>
+      <text x="130" y="190" text-anchor="middle" font-size="9" fill="#1e40af">&#8226; Variables non declarees</text>
+      <text x="130" y="205" text-anchor="middle" font-size="9" fill="#1e40af">&#8226; Maintenabilite</text>
+      <!-- Intersection -->
+      <text x="300" y="125" text-anchor="middle" font-size="11" font-weight="bold" fill="#475569">Les deux</text>
+      <text x="300" y="150" text-anchor="middle" font-size="9" fill="#475569">&#8226; Defauts de codage</text>
+      <text x="300" y="165" text-anchor="middle" font-size="9" fill="#475569">&#8226; Problemes interface</text>
+      <text x="300" y="180" text-anchor="middle" font-size="9" fill="#475569">&#8226; Lacunes couverture</text>
+      <!-- Right: Dynamique seul -->
+      <text x="470" y="100" text-anchor="middle" font-size="12" font-weight="bold" fill="#ea580c">Test dynamique</text>
+      <text x="470" y="116" text-anchor="middle" font-size="12" font-weight="bold" fill="#ea580c">seul</text>
+      <text x="470" y="145" text-anchor="middle" font-size="9" fill="#ea580c">&#8226; Performance</text>
+      <text x="470" y="160" text-anchor="middle" font-size="9" fill="#ea580c">&#8226; Fuites memoire</text>
+      <text x="470" y="175" text-anchor="middle" font-size="9" fill="#ea580c">&#8226; Defaillances execution</text>
+      <text x="470" y="190" text-anchor="middle" font-size="9" fill="#ea580c">&#8226; Comportements</text>
+      <text x="470" y="205" text-anchor="middle" font-size="9" fill="#ea580c">  inattendus</text>
+    </svg>
+  </div>
+
+  <div class="syllabus-exam-warning">
+    <strong>Attention examen</strong>
+    <p>Le code encrypte ou le code executable tiers NE PEUT PAS etre examine par test statique. Seuls les produits d'activite lisibles et comprehensibles peuvent etre revises. L'analyse statique necessite une structure formelle (code source, modeles).</p>
+  </div>
+
+  <div class="syllabus-summary">
+    <h5>A retenir</h5>
+    <ul>
+      <li>Le test statique ne necessite PAS l'execution du logiciel (revues + analyse statique)</li>
+      <li>Presque tout produit d'activite peut etre examine (specs, code, plans de test, contrats...)</li>
+      <li>Le test statique trouve les defauts directement, le dynamique provoque des defaillances</li>
+      <li>Le statique detecte des defauts impossibles a trouver en dynamique (code mort, ambiguites)</li>
+      <li>Meme si les revues coutent cher, elles reduisent le cout global du projet</li>
+    </ul>
+  </div>
 </div>
 
 <div class="question-card" style="margin-bottom:20px;">
@@ -97,6 +144,27 @@
     <li><strong>Correction et rapport.</strong> Pour chaque defaut, un rapport de defaut doit etre cree afin que les actions correctives puissent etre suivies. Une fois les criteres de sortie atteints, le produit d'activite peut etre accepte. Les resultats de la revue sont rapportes.</li>
   </ul>
 
+  <div class="syllabus-diagram">
+    <svg viewBox="0 0 800 100" xmlns="http://www.w3.org/2000/svg">
+      <title>Les 5 etapes du processus de revue</title>
+      <defs><marker id="arr-rev" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#64748b"/></marker></defs>
+      <rect x="5" y="15" width="130" height="50" rx="8" fill="#1e40af"/><text x="70" y="36" text-anchor="middle" fill="white" font-size="10" font-weight="bold">1. Planification</text><text x="70" y="52" text-anchor="middle" fill="#bfdbfe" font-size="8">Portee, criteres, roles</text>
+      <line x1="138" y1="40" x2="158" y2="40" stroke="#64748b" stroke-width="2" marker-end="url(#arr-rev)"/>
+      <rect x="162" y="15" width="130" height="50" rx="8" fill="#2563eb"/><text x="227" y="36" text-anchor="middle" fill="white" font-size="10" font-weight="bold">2. Initiation</text><text x="227" y="52" text-anchor="middle" fill="#bfdbfe" font-size="8">Distribuer, expliquer</text>
+      <line x1="295" y1="40" x2="315" y2="40" stroke="#64748b" stroke-width="2" marker-end="url(#arr-rev)"/>
+      <rect x="319" y="15" width="140" height="50" rx="8" fill="#3b82f6"/><text x="389" y="36" text-anchor="middle" fill="white" font-size="10" font-weight="bold">3. Revue individuelle</text><text x="389" y="52" text-anchor="middle" fill="#dbeafe" font-size="8">Examiner, noter defauts</text>
+      <line x1="462" y1="40" x2="482" y2="40" stroke="#64748b" stroke-width="2" marker-end="url(#arr-rev)"/>
+      <rect x="486" y="15" width="145" height="50" rx="8" fill="#60a5fa"/><text x="558" y="32" text-anchor="middle" fill="white" font-size="10" font-weight="bold">4. Communication</text><text x="558" y="46" text-anchor="middle" fill="white" font-size="10" font-weight="bold">&amp; Analyse</text><text x="558" y="60" text-anchor="middle" fill="#eff6ff" font-size="8">Discuter, decider</text>
+      <line x1="634" y1="40" x2="654" y2="40" stroke="#64748b" stroke-width="2" marker-end="url(#arr-rev)"/>
+      <rect x="658" y="15" width="135" height="50" rx="8" fill="#93c5fd"/><text x="725" y="32" text-anchor="middle" fill="#1e3a5f" font-size="10" font-weight="bold">5. Correction</text><text x="725" y="46" text-anchor="middle" fill="#1e3a5f" font-size="10" font-weight="bold">&amp; Rapport</text><text x="725" y="60" text-anchor="middle" fill="#475569" font-size="8">Corriger, rapporter</text>
+    </svg>
+  </div>
+
+  <div class="syllabus-exam-warning">
+    <strong>Attention examen</strong>
+    <p>Distribuer les documents aux reviseurs = Initiation (etape 2), PAS Planification (etape 1). La planification definit la portee et les criteres, l'initiation distribue les documents et prepare les participants. C'est un piege classique.</p>
+  </div>
+
   <h4>3.2.3. Roles et responsabilites dans les revues</h4>
   <p>Les revues impliquent differentes parties prenantes, qui peuvent assumer plusieurs roles. Les principaux roles et leurs responsabilites sont :</p>
   <ul>
@@ -119,6 +187,48 @@
     <li><strong>Revue technique.</strong> Une revue technique est realisee par des reviseurs techniquement qualifies et dirigee par un moderateur. Les objectifs d'une revue technique sont d'obtenir un consensus et de prendre des decisions concernant un probleme technique, mais aussi de detecter des anomalies, d'evaluer la qualite et de renforcer la confiance dans le produit d'activite, de generer de nouvelles idees et de motiver et permettre aux auteurs de s'ameliorer.</li>
     <li><strong>Inspection.</strong> Les inspections etant le type de revue le plus formel, elles suivent le processus generique complet (voir section 3.2.2). L'objectif principal est de trouver le nombre maximum d'anomalies. Les autres objectifs sont d'evaluer la qualite, de renforcer la confiance dans le produit d'activite et de motiver et permettre aux auteurs de s'ameliorer. Des metriques sont collectees et utilisees pour ameliorer le SDLC, y compris le processus d'inspection. Lors des inspections, l'auteur ne peut pas agir en tant que responsable de la revue ou scribe.</li>
   </ul>
+
+  <div class="syllabus-diagram">
+    <svg viewBox="0 0 700 170" xmlns="http://www.w3.org/2000/svg">
+      <title>Types de revue par formalite croissante</title>
+      <!-- Gradient arrow background -->
+      <defs>
+        <linearGradient id="grad-form" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" style="stop-color:#dbeafe;stop-opacity:1"/>
+          <stop offset="100%" style="stop-color:#1e3a5f;stop-opacity:1"/>
+        </linearGradient>
+      </defs>
+      <rect x="20" y="130" width="660" height="20" rx="10" fill="url(#grad-form)"/>
+      <text x="100" y="165" text-anchor="middle" font-size="9" fill="#93c5fd">Moins formel</text>
+      <text x="600" y="165" text-anchor="middle" font-size="9" fill="white">Plus formel</text>
+      <!-- Columns -->
+      <rect x="20" y="15" width="150" height="100" rx="10" fill="#dbeafe" stroke="#93c5fd" stroke-width="2"/>
+      <text x="95" y="40" text-anchor="middle" font-size="12" font-weight="bold" fill="#1e40af">Informelle</text>
+      <text x="95" y="58" text-anchor="middle" font-size="9" fill="#1e40af">Pas de processus</text>
+      <text x="95" y="72" text-anchor="middle" font-size="9" fill="#1e40af">Pas de sortie formelle</text>
+      <text x="95" y="90" text-anchor="middle" font-size="8" fill="#64748b">Ex: relecture par un pair</text>
+      <rect x="190" y="15" width="150" height="100" rx="10" fill="#93c5fd" stroke="#60a5fa" stroke-width="2"/>
+      <text x="265" y="40" text-anchor="middle" font-size="12" font-weight="bold" fill="#1e3a5f">Walkthrough</text>
+      <text x="265" y="58" text-anchor="middle" font-size="9" fill="#1e3a5f">Dirige par l'AUTEUR</text>
+      <text x="265" y="72" text-anchor="middle" font-size="9" fill="#1e3a5f">Former, consensus</text>
+      <text x="265" y="90" text-anchor="middle" font-size="8" fill="#475569">Revue individuelle optionnelle</text>
+      <rect x="360" y="15" width="150" height="100" rx="10" fill="#3b82f6" stroke="#2563eb" stroke-width="2"/>
+      <text x="435" y="40" text-anchor="middle" font-size="12" font-weight="bold" fill="white">Technique</text>
+      <text x="435" y="58" text-anchor="middle" font-size="9" fill="white">Dirige par MODERATEUR</text>
+      <text x="435" y="72" text-anchor="middle" font-size="9" fill="white">Consensus technique</text>
+      <text x="435" y="90" text-anchor="middle" font-size="8" fill="#bfdbfe">Reviseurs qualifies</text>
+      <rect x="530" y="15" width="150" height="100" rx="10" fill="#1e3a5f" stroke="#1e40af" stroke-width="2"/>
+      <text x="605" y="40" text-anchor="middle" font-size="12" font-weight="bold" fill="white">Inspection</text>
+      <text x="605" y="58" text-anchor="middle" font-size="9" fill="#93c5fd">Dirige par FACILITATEUR</text>
+      <text x="605" y="72" text-anchor="middle" font-size="9" fill="#93c5fd">forme, metriques</text>
+      <text x="605" y="90" text-anchor="middle" font-size="8" fill="#60a5fa">Auteur ≠ responsable/scribe</text>
+    </svg>
+  </div>
+
+  <div class="syllabus-exam-warning">
+    <strong>Attention examen</strong>
+    <p>Walkthrough = dirige par l'AUTEUR. Inspection = dirige par un FACILITATEUR forme. Lors d'une inspection, l'auteur ne peut PAS etre responsable de la revue ni scribe. Toujours se rappeler qui dirige chaque type de revue.</p>
+  </div>
 
   <h4>3.2.5. Facteurs de succes des revues</h4>
   <p>Plusieurs facteurs determinent le succes des revues, notamment :</p>

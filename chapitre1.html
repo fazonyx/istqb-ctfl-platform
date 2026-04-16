@@ -66,6 +66,52 @@
   </ul>
   <p>Le test de confirmation subsequent verifie si les corrections ont resolu le probleme. De preference, le test de confirmation est effectue par la meme personne qui a realise le test initial. Un test de regression subsequent peut egalement etre effectue pour verifier si les corrections ne causent pas de defaillances dans d'autres parties de l'objet de test (voir section 2.2.3 pour plus d'informations sur le test de confirmation et le test de regression).</p>
   <p>Lorsque le test statique identifie un defaut, le debogage consiste a le supprimer. Il n'y a pas besoin de reproduction ni de diagnostic, puisque le test statique trouve directement les defauts et ne peut pas provoquer de defaillances (voir chapitre 3).</p>
+
+  <div class="syllabus-diagram">
+    <svg viewBox="0 0 600 320" xmlns="http://www.w3.org/2000/svg">
+      <title>Diagramme de Venn : Test, QA, Debogage</title>
+      <!-- Circle Test -->
+      <circle cx="220" cy="160" r="120" fill="rgba(37,99,235,0.15)" stroke="#2563eb" stroke-width="2.5"/>
+      <!-- Circle QA -->
+      <circle cx="380" cy="160" r="120" fill="rgba(22,163,74,0.15)" stroke="#16a34a" stroke-width="2.5"/>
+      <!-- Circle Debogage -->
+      <circle cx="300" cy="260" r="120" fill="rgba(234,88,12,0.15)" stroke="#ea580c" stroke-width="2.5"/>
+      <!-- Labels -->
+      <text x="155" y="120" text-anchor="middle" font-size="15" font-weight="bold" fill="#1e40af">Test</text>
+      <text x="155" y="140" text-anchor="middle" font-size="11" fill="#1e40af">Detecte les</text>
+      <text x="155" y="155" text-anchor="middle" font-size="11" fill="#1e40af">defauts</text>
+      <text x="445" y="120" text-anchor="middle" font-size="15" font-weight="bold" fill="#166534">QA</text>
+      <text x="445" y="140" text-anchor="middle" font-size="11" fill="#166534">Ameliore les</text>
+      <text x="445" y="155" text-anchor="middle" font-size="11" fill="#166534">processus</text>
+      <text x="300" y="310" text-anchor="middle" font-size="15" font-weight="bold" fill="#ea580c">Debogage</text>
+      <text x="300" y="330" text-anchor="middle" font-size="11" fill="#ea580c">Corrige les defauts</text>
+      <!-- Intersection labels -->
+      <text x="300" y="135" text-anchor="middle" font-size="10" fill="#475569">Resultats de test</text>
+      <text x="300" y="148" text-anchor="middle" font-size="10" fill="#475569">utilises par QA</text>
+      <text x="235" y="230" text-anchor="middle" font-size="10" fill="#475569">Test trouve,</text>
+      <text x="235" y="243" text-anchor="middle" font-size="10" fill="#475569">debogage corrige</text>
+    </svg>
+  </div>
+
+  <div class="syllabus-example">
+    <strong>Exemple concret</strong>
+    <p>Un site e-commerce affiche un prix negatif. Le testeur detecte la defaillance (test), le developpeur trouve la condition inversee dans le code (debogage), l'equipe qualite revoit le processus de revue de code pour eviter ce type d'erreur a l'avenir (QA).</p>
+  </div>
+
+  <div class="syllabus-exam-warning">
+    <strong>Attention examen</strong>
+    <p>Le test detecte les defauts mais ne les corrige PAS. Corriger = debogage, pas test. Ne confondez jamais ces deux activites.</p>
+  </div>
+
+  <div class="syllabus-summary">
+    <h5>A retenir</h5>
+    <ul>
+      <li>Le test inclut des activites statiques (revues) et dynamiques (execution du logiciel)</li>
+      <li>Le test implique verification (exigences) ET validation (besoins utilisateurs)</li>
+      <li>Le test detecte les defauts, le debogage les corrige — ce sont des activites distinctes</li>
+      <li>Le test de confirmation verifie la correction, le test de regression verifie les effets de bord</li>
+    </ul>
+  </div>
 </div>
 
 <div class="question-card" style="margin-bottom:20px;">
@@ -95,6 +141,62 @@
   <p>Les defauts peuvent etre trouves dans la documentation, comme une specification d'exigences ou un script de test, dans le code source, ou dans un produit d'activite de support tel qu'un fichier de build. Les defauts dans les produits d'activite produits plus tot dans le SDLC, s'ils ne sont pas detectes, menent souvent a des produits d'activite defectueux plus tard dans le cycle de vie. Si un defaut dans le code est execute, le systeme peut ne pas faire ce qu'il devrait faire, ou faire quelque chose qu'il ne devrait pas, provoquant une defaillance. Certains defauts entraineront toujours une defaillance s'ils sont executes, tandis que d'autres n'entraineront une defaillance que dans des circonstances specifiques, et certains ne provoqueront jamais de defaillance.</p>
   <p>Les erreurs et les defauts ne sont pas la seule cause des defaillances. Les defaillances peuvent egalement etre causees par des conditions environnementales, comme lorsque des radiations ou des champs electromagnetiques provoquent des defauts dans le firmware.</p>
   <p>Une cause racine est une raison fondamentale de l'apparition d'un probleme (par exemple, une situation qui conduit a une erreur). Les causes racines sont identifiees par l'analyse des causes racines, qui est generalement effectuee lorsqu'une defaillance survient ou qu'un defaut est identifie. On considere que des defaillances ou defauts similaires peuvent etre evites ou leur frequence reduite en traitant la cause racine, par exemple en la supprimant.</p>
+
+  <div class="syllabus-diagram">
+    <svg viewBox="0 0 800 140" xmlns="http://www.w3.org/2000/svg">
+      <title>Chaine : Cause racine - Erreur - Defaut - Defaillance</title>
+      <defs><marker id="arr-syl1" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#64748b"/></marker></defs>
+      <!-- Cause racine -->
+      <rect x="5" y="15" width="170" height="65" rx="12" fill="#64748b"/>
+      <text x="90" y="42" text-anchor="middle" fill="white" font-size="14" font-weight="bold">Cause racine</text>
+      <text x="90" y="62" text-anchor="middle" fill="#cbd5e1" font-size="10">Fatigue, pression,</text>
+      <text x="90" y="74" text-anchor="middle" fill="#cbd5e1" font-size="10">manque de formation</text>
+      <!-- Arrow 1 -->
+      <line x1="180" y1="47" x2="210" y2="47" stroke="#64748b" stroke-width="2.5" marker-end="url(#arr-syl1)"/>
+      <!-- Erreur -->
+      <rect x="215" y="15" width="170" height="65" rx="12" fill="#f59e0b"/>
+      <text x="300" y="42" text-anchor="middle" fill="white" font-size="14" font-weight="bold">Erreur</text>
+      <text x="300" y="62" text-anchor="middle" fill="#fef3c7" font-size="10">Action humaine</text>
+      <text x="300" y="74" text-anchor="middle" fill="#fef3c7" font-size="10">produisant un resultat incorrect</text>
+      <!-- Arrow 2 -->
+      <line x1="390" y1="47" x2="420" y2="47" stroke="#64748b" stroke-width="2.5" marker-end="url(#arr-syl1)"/>
+      <!-- Defaut -->
+      <rect x="425" y="15" width="170" height="65" rx="12" fill="#dc2626"/>
+      <text x="510" y="42" text-anchor="middle" fill="white" font-size="14" font-weight="bold">Defaut (bug)</text>
+      <text x="510" y="62" text-anchor="middle" fill="#fecaca" font-size="10">Imperfection dans un</text>
+      <text x="510" y="74" text-anchor="middle" fill="#fecaca" font-size="10">produit d'activite</text>
+      <!-- Arrow 3 -->
+      <line x1="600" y1="47" x2="630" y2="47" stroke="#64748b" stroke-width="2.5" marker-end="url(#arr-syl1)"/>
+      <!-- Defaillance -->
+      <rect x="635" y="15" width="160" height="65" rx="12" fill="#991b1b"/>
+      <text x="715" y="42" text-anchor="middle" fill="white" font-size="14" font-weight="bold">Defaillance</text>
+      <text x="715" y="62" text-anchor="middle" fill="#fca5a5" font-size="10">Comportement incorrect</text>
+      <text x="715" y="74" text-anchor="middle" fill="#fca5a5" font-size="10">observable du systeme</text>
+      <!-- Note -->
+      <text x="510" y="110" text-anchor="middle" font-size="11" fill="#64748b" font-style="italic">Un defaut peut exister sans causer de defaillance (code mort, conditions non atteintes)</text>
+      <text x="510" y="128" text-anchor="middle" font-size="11" fill="#64748b" font-style="italic">Une defaillance peut survenir sans defaut dans le code (conditions environnementales)</text>
+    </svg>
+  </div>
+
+  <div class="syllabus-example">
+    <strong>Exemple concret</strong>
+    <p>Un developpeur fatigue (cause racine) ecrit <code>&gt;</code> au lieu de <code>&gt;=</code> (erreur). Le code contient <code>if(age &gt; 18)</code> au lieu de <code>if(age &gt;= 18)</code> (defaut). Un utilisateur de 18 ans est refuse alors qu'il devrait etre accepte (defaillance).</p>
+  </div>
+
+  <div class="syllabus-exam-warning">
+    <strong>Attention examen</strong>
+    <p>Un defaut ne cause PAS toujours une defaillance (ex : code mort jamais execute). Une defaillance peut survenir sans defaut dans le code (ex : condition environnementale comme une radiation). Ce sont deux pieges frequents a l'examen.</p>
+  </div>
+
+  <div class="syllabus-summary">
+    <h5>A retenir</h5>
+    <ul>
+      <li>Chaine causale : Cause racine &rarr; Erreur &rarr; Defaut &rarr; Defaillance</li>
+      <li>Le test est une forme de controle qualite (oriente produit), la QA est orientee processus</li>
+      <li>Les resultats de test servent a la fois au test (corriger defauts) et a la QA (ameliorer processus)</li>
+      <li>Les defaillances peuvent aussi venir de conditions environnementales (pas uniquement de defauts)</li>
+    </ul>
+  </div>
 </div>
 
 <div class="question-card" style="margin-bottom:20px;">
@@ -111,6 +213,61 @@
   <p><strong>5. Les tests s'usent.</strong> Si les memes tests sont repetes de nombreuses fois, ils deviennent de moins en moins efficaces pour detecter de nouveaux defauts (Beizer 1990). Pour surmonter cet effet, les tests existants et les donnees de test peuvent avoir besoin d'etre modifies, et de nouveaux tests peuvent devoir etre ecrits. Cependant, dans certains cas, repeter les memes tests peut avoir un resultat benefique, par exemple dans le test de regression automatise (voir section 2.2.3).</p>
   <p><strong>6. Le test depend du contexte.</strong> Il n'existe pas d'approche unique universellement applicable au test. Le test est realise differemment selon les contextes (Kaner 2011).</p>
   <p><strong>7. L'illusion de l'absence de defauts.</strong> C'est une illusion (c'est-a-dire une idee fausse) de s'attendre a ce que la verification du logiciel garantisse le succes d'un systeme. Tester minutieusement toutes les exigences specifiees et corriger tous les defauts trouves pourrait quand meme produire un systeme qui ne repond pas aux besoins et aux attentes des utilisateurs, qui n'aide pas a atteindre les objectifs metier du client, et qui est inferieur par rapport a d'autres systemes concurrents. En plus de la verification, la validation devrait egalement etre effectuee (Boehm 1981).</p>
+
+  <div class="syllabus-diagram">
+    <svg viewBox="0 0 520 400" xmlns="http://www.w3.org/2000/svg">
+      <title>Les 7 principes du test</title>
+      <!-- Central circle -->
+      <circle cx="260" cy="200" r="50" fill="#2563eb"/>
+      <text x="260" y="195" text-anchor="middle" fill="white" font-size="13" font-weight="bold">7</text>
+      <text x="260" y="212" text-anchor="middle" fill="white" font-size="12" font-weight="bold">Principes</text>
+      <!-- Lines to petals -->
+      <line x1="260" y1="200" x2="260" y2="55" stroke="#cbd5e1" stroke-width="1.5"/>
+      <line x1="260" y1="200" x2="400" y2="100" stroke="#cbd5e1" stroke-width="1.5"/>
+      <line x1="260" y1="200" x2="440" y2="230" stroke="#cbd5e1" stroke-width="1.5"/>
+      <line x1="260" y1="200" x2="360" y2="355" stroke="#cbd5e1" stroke-width="1.5"/>
+      <line x1="260" y1="200" x2="160" y2="355" stroke="#cbd5e1" stroke-width="1.5"/>
+      <line x1="260" y1="200" x2="80" y2="230" stroke="#cbd5e1" stroke-width="1.5"/>
+      <line x1="260" y1="200" x2="120" y2="100" stroke="#cbd5e1" stroke-width="1.5"/>
+      <!-- Petals -->
+      <ellipse cx="260" cy="45" rx="95" ry="30" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
+      <text x="260" y="42" text-anchor="middle" font-size="10" font-weight="bold" fill="#1e3a5f">1. Presence de</text>
+      <text x="260" y="55" text-anchor="middle" font-size="10" font-weight="bold" fill="#1e3a5f">defauts</text>
+      <ellipse cx="410" cy="100" rx="90" ry="30" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
+      <text x="410" y="97" text-anchor="middle" font-size="10" font-weight="bold" fill="#166534">2. Exhaustif</text>
+      <text x="410" y="110" text-anchor="middle" font-size="10" font-weight="bold" fill="#166534">impossible</text>
+      <ellipse cx="445" cy="230" rx="75" ry="30" fill="#fef3c7" stroke="#fcd34d" stroke-width="1.5"/>
+      <text x="445" y="227" text-anchor="middle" font-size="10" font-weight="bold" fill="#92400e">3. Tester</text>
+      <text x="445" y="240" text-anchor="middle" font-size="10" font-weight="bold" fill="#92400e">tot</text>
+      <ellipse cx="370" cy="355" rx="90" ry="30" fill="#ede9fe" stroke="#c4b5fd" stroke-width="1.5"/>
+      <text x="370" y="352" text-anchor="middle" font-size="10" font-weight="bold" fill="#5b21b6">4. Regroupement</text>
+      <text x="370" y="365" text-anchor="middle" font-size="10" font-weight="bold" fill="#5b21b6">des defauts</text>
+      <ellipse cx="155" cy="355" rx="85" ry="30" fill="#fce7f3" stroke="#f9a8d4" stroke-width="1.5"/>
+      <text x="155" y="352" text-anchor="middle" font-size="10" font-weight="bold" fill="#9d174d">5. Usure</text>
+      <text x="155" y="365" text-anchor="middle" font-size="10" font-weight="bold" fill="#9d174d">des tests</text>
+      <ellipse cx="75" cy="230" rx="75" ry="30" fill="#ccfbf1" stroke="#5eead4" stroke-width="1.5"/>
+      <text x="75" y="227" text-anchor="middle" font-size="10" font-weight="bold" fill="#134e4a">6. Contexte</text>
+      <text x="75" y="240" text-anchor="middle" font-size="10" font-weight="bold" fill="#134e4a">specifique</text>
+      <ellipse cx="115" cy="100" rx="90" ry="30" fill="#fff7ed" stroke="#fdba74" stroke-width="1.5"/>
+      <text x="115" y="97" text-anchor="middle" font-size="10" font-weight="bold" fill="#9a3412">7. Absence defauts</text>
+      <text x="115" y="110" text-anchor="middle" font-size="10" font-weight="bold" fill="#9a3412">&ne; qualite</text>
+    </svg>
+  </div>
+
+  <div class="syllabus-exam-warning">
+    <strong>Attention examen</strong>
+    <p>"Tests wear out" (usure des tests) = les tests s'usent, il faut varier les tests et les donnees. "Absence-of-defects fallacy" = 0 bug ne signifie pas succes, il faut aussi valider les besoins utilisateurs. Ce sont les 2 principes les plus confondus a l'examen.</p>
+  </div>
+
+  <div class="syllabus-summary">
+    <h5>A retenir</h5>
+    <ul>
+      <li>7 principes : presence defauts, exhaustif impossible, tester tot, regroupement, usure, contexte, absence defauts &ne; qualite</li>
+      <li>Le test ne prouve jamais l'absence de defauts, seulement leur presence</li>
+      <li>Le regroupement des defauts illustre le principe de Pareto (80/20)</li>
+      <li>La verification (conforme aux specs) ne suffit pas, il faut aussi la validation (repond aux besoins)</li>
+    </ul>
+  </div>
 </div>
 
 <div class="question-card" style="margin-bottom:20px;">
@@ -176,6 +333,68 @@
   <p>Le role de gestion des tests assume la responsabilite globale du processus de test, de l'equipe de test et de la direction des activites de test. Le role de gestion des tests est principalement axe sur les activites de planification des tests, de pilotage des tests, de controle des tests et de cloture des tests. La maniere dont le role de gestion des tests est exerce varie en fonction du contexte. Par exemple, dans le developpement logiciel Agile, certaines taches de gestion des tests peuvent etre prises en charge par l'equipe Agile. Les taches couvrant plusieurs equipes ou l'ensemble de l'organisation peuvent etre effectuees par des responsables de test en dehors de l'equipe de developpement.</p>
   <p>Le role de test assume la responsabilite globale de l'aspect ingenierie (technique) du test. Le role de test est principalement axe sur les activites d'analyse de test, de conception des tests, d'implementation des tests et d'execution des tests.</p>
   <p>Differentes personnes peuvent assumer ces roles a differents moments. Par exemple, le role de gestion des tests peut etre exerce par un chef d'equipe, un responsable de test, un responsable de developpement, etc. Il est egalement possible qu'une seule personne assume les roles de test et de gestion des tests en meme temps.</p>
+
+  <div class="syllabus-diagram">
+    <svg viewBox="0 0 850 160" xmlns="http://www.w3.org/2000/svg">
+      <title>Les 7 activites du processus de test</title>
+      <defs><marker id="arr-act" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2563eb"/></marker></defs>
+      <!-- Boxes -->
+      <rect x="5" y="10" width="100" height="55" rx="8" fill="#1e40af"/><text x="55" y="32" text-anchor="middle" fill="white" font-size="9" font-weight="bold">Planification</text><text x="55" y="52" text-anchor="middle" fill="#bfdbfe" font-size="7">Plan de test</text>
+      <line x1="108" y1="37" x2="120" y2="37" stroke="#2563eb" stroke-width="2" marker-end="url(#arr-act)"/>
+      <rect x="123" y="10" width="100" height="55" rx="8" fill="#1e40af"/><text x="173" y="28" text-anchor="middle" fill="white" font-size="9" font-weight="bold">Pilotage &amp;</text><text x="173" y="40" text-anchor="middle" fill="white" font-size="9" font-weight="bold">Controle</text><text x="173" y="55" text-anchor="middle" fill="#bfdbfe" font-size="7">Rapports</text>
+      <line x1="226" y1="37" x2="238" y2="37" stroke="#2563eb" stroke-width="2" marker-end="url(#arr-act)"/>
+      <rect x="241" y="10" width="100" height="55" rx="8" fill="#2563eb"/><text x="291" y="32" text-anchor="middle" fill="white" font-size="9" font-weight="bold">Analyse</text><text x="291" y="52" text-anchor="middle" fill="#bfdbfe" font-size="7">Conditions de test</text>
+      <line x1="344" y1="37" x2="356" y2="37" stroke="#2563eb" stroke-width="2" marker-end="url(#arr-act)"/>
+      <rect x="359" y="10" width="100" height="55" rx="8" fill="#2563eb"/><text x="409" y="32" text-anchor="middle" fill="white" font-size="9" font-weight="bold">Conception</text><text x="409" y="52" text-anchor="middle" fill="#bfdbfe" font-size="7">Cas de test</text>
+      <line x1="462" y1="37" x2="474" y2="37" stroke="#2563eb" stroke-width="2" marker-end="url(#arr-act)"/>
+      <rect x="477" y="10" width="110" height="55" rx="8" fill="#3b82f6"/><text x="532" y="28" text-anchor="middle" fill="white" font-size="9" font-weight="bold">Implemen-</text><text x="532" y="40" text-anchor="middle" fill="white" font-size="9" font-weight="bold">tation</text><text x="532" y="55" text-anchor="middle" fill="#dbeafe" font-size="7">Suites, scripts</text>
+      <line x1="590" y1="37" x2="602" y2="37" stroke="#2563eb" stroke-width="2" marker-end="url(#arr-act)"/>
+      <rect x="605" y="10" width="100" height="55" rx="8" fill="#3b82f6"/><text x="655" y="32" text-anchor="middle" fill="white" font-size="9" font-weight="bold">Execution</text><text x="655" y="52" text-anchor="middle" fill="#dbeafe" font-size="7">Journaux, defauts</text>
+      <line x1="708" y1="37" x2="720" y2="37" stroke="#2563eb" stroke-width="2" marker-end="url(#arr-act)"/>
+      <rect x="723" y="10" width="110" height="55" rx="8" fill="#60a5fa"/><text x="778" y="32" text-anchor="middle" fill="white" font-size="9" font-weight="bold">Cloture</text><text x="778" y="52" text-anchor="middle" fill="#eff6ff" font-size="7">Rapport final</text>
+      <!-- Note -->
+      <text x="425" y="95" text-anchor="middle" font-size="10" fill="#64748b" font-style="italic">Analyse = "Que tester ?" | Conception = "Comment tester ?"</text>
+      <text x="425" y="112" text-anchor="middle" font-size="10" fill="#64748b" font-style="italic">Ces activites sont souvent iteratives et peuvent se chevaucher</text>
+    </svg>
+  </div>
+
+  <div class="syllabus-diagram">
+    <svg viewBox="0 0 550 240" xmlns="http://www.w3.org/2000/svg">
+      <title>Testeur vs Gestionnaire de test</title>
+      <!-- Left column: Testeur -->
+      <rect x="10" y="10" width="250" height="220" rx="12" fill="#eff6ff" stroke="#93c5fd" stroke-width="2"/>
+      <rect x="10" y="10" width="250" height="35" rx="12" fill="#2563eb"/>
+      <rect x="10" y="30" width="250" height="15" fill="#2563eb"/>
+      <text x="135" y="33" text-anchor="middle" fill="white" font-size="14" font-weight="bold">Testeur</text>
+      <text x="30" y="70" font-size="11" fill="#1e3a5f">&#8226; Analyse de test</text>
+      <text x="30" y="92" font-size="11" fill="#1e3a5f">&#8226; Conception des tests</text>
+      <text x="30" y="114" font-size="11" fill="#1e3a5f">&#8226; Implementation des tests</text>
+      <text x="30" y="136" font-size="11" fill="#1e3a5f">&#8226; Execution des tests</text>
+      <text x="30" y="170" font-size="10" fill="#64748b" font-style="italic">Focus : aspect technique</text>
+      <text x="30" y="186" font-size="10" fill="#64748b" font-style="italic">(ingenierie du test)</text>
+      <!-- Right column: Gestionnaire -->
+      <rect x="290" y="10" width="250" height="220" rx="12" fill="#f0fdf4" stroke="#86efac" stroke-width="2"/>
+      <rect x="290" y="10" width="250" height="35" rx="12" fill="#16a34a"/>
+      <rect x="290" y="30" width="250" height="15" fill="#16a34a"/>
+      <text x="415" y="33" text-anchor="middle" fill="white" font-size="14" font-weight="bold">Gestionnaire de test</text>
+      <text x="310" y="70" font-size="11" fill="#166534">&#8226; Planification des tests</text>
+      <text x="310" y="92" font-size="11" fill="#166534">&#8226; Pilotage des tests</text>
+      <text x="310" y="114" font-size="11" fill="#166534">&#8226; Controle des tests</text>
+      <text x="310" y="136" font-size="11" fill="#166534">&#8226; Cloture des tests</text>
+      <text x="310" y="170" font-size="10" fill="#64748b" font-style="italic">Focus : aspect managérial</text>
+      <text x="310" y="186" font-size="10" fill="#64748b" font-style="italic">(direction du processus)</text>
+    </svg>
+  </div>
+
+  <div class="syllabus-summary">
+    <h5>A retenir</h5>
+    <ul>
+      <li>7 activites : Planification, Pilotage/Controle, Analyse ("que tester"), Conception ("comment tester"), Implementation, Execution, Cloture</li>
+      <li>Chaque activite produit du testware specifique (plan, conditions, cas de test, scripts, journaux, rapport)</li>
+      <li>La tracabilite relie base de test &rarr; testware &rarr; resultats &rarr; defauts</li>
+      <li>Deux roles : Testeur (technique) et Gestionnaire de test (management) — une personne peut cumuler les deux</li>
+    </ul>
+  </div>
 </div>
 
 <div class="question-card" style="margin-bottom:20px;">
@@ -211,6 +430,21 @@
   <p>Les produits d'activite peuvent etre testes par leur auteur (pas d'independance), par les pairs de l'auteur de la meme equipe (une certaine independance), par des testeurs exterieurs a l'equipe de l'auteur mais au sein de l'organisation (independance elevee), ou par des testeurs exterieurs a l'organisation (independance tres elevee). Pour la plupart des projets, il est generalement preferable d'effectuer les tests avec plusieurs niveaux d'independance (par exemple, les developpeurs effectuant les tests de composants et les tests d'integration de composants, l'equipe de test effectuant les tests systeme et les tests d'integration systeme, et les representants metier effectuant les tests d'acceptation).</p>
   <p>Le principal avantage de l'independance du test est que les testeurs independants sont susceptibles de reconnaitre differents types de defaillances et de defauts par rapport aux developpeurs en raison de leurs parcours, perspectives techniques et biais differents. De plus, un testeur independant peut verifier, remettre en question ou refuter les hypotheses formulees par les parties prenantes lors de la specification et de l'implementation du systeme.</p>
   <p>Cependant, il existe egalement certains inconvenients. Les testeurs independants peuvent etre isoles de l'equipe de developpement, ce qui peut entrainer un manque de collaboration, des problemes de communication ou une relation conflictuelle avec l'equipe de developpement. Les developpeurs peuvent perdre le sens de leur responsabilite en matiere de qualite. Les testeurs independants peuvent etre percus comme un goulot d'etranglement ou etre blames pour les retards de mise en production.</p>
+
+  <div class="syllabus-exam-warning">
+    <strong>Attention examen</strong>
+    <p>L'approche "equipe entiere" ne diminue PAS la responsabilite individuelle pour la qualite. Chaque membre reste responsable. L'independance du test a des avantages (biais differents) ET des inconvenients (isolation possible).</p>
+  </div>
+
+  <div class="syllabus-summary">
+    <h5>A retenir</h5>
+    <ul>
+      <li>Competences cles du testeur : rigueur, communication, pensee analytique, connaissances techniques et du domaine</li>
+      <li>Approche equipe entiere : tout le monde est responsable de la qualite, issue de l'Extreme Programming</li>
+      <li>4 niveaux d'independance : auteur, pairs, equipe externe, organisation externe</li>
+      <li>Avantage independance : perspectives et biais differents. Inconvenient : possible isolation de l'equipe</li>
+    </ul>
+  </div>
 </div>
 
   </div>

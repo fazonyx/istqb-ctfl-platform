@@ -3,6 +3,9 @@ exam_*_questions.txt
 exam_*_answers.txt
 syllabus_full.txt
 
+# PDFs officiels ISTQB (copyright ISTQB - non redistribuables)
+ISTQB_*.pdf
+
 # Fichiers de travail personnel
 1er_examen*.png
 exam_custom_quiz.html
