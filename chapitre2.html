@@ -187,6 +187,11 @@
     <p>TDD = test unitaire ecrit par le developpeur (red-green-refactor). ATDD = test d'acceptation defini par l'equipe a partir des criteres d'acceptation. BDD = langage naturel Given/When/Then compris par les parties prenantes. Ne les confondez pas.</p>
   </div>
 
+  <div class="syllabus-example">
+    <strong>Exemple concret</strong>
+    <p>Un developpeur veut ajouter la validation d'un champ email. En <strong>TDD</strong>, il ecrit d'abord le test : <code>assertFalse(isValid("abc"))</code>, puis l'implementation. En <strong>BDD</strong>, l'equipe ecrit : "<em>Given un formulaire d'inscription, When l'utilisateur saisit 'abc', Then un message d'erreur apparait</em>". En <strong>ATDD</strong>, l'equipe definit d'abord les criteres d'acceptation complets avec le client avant le code.</p>
+  </div>
+
   <h4>2.1.4. DevOps et test</h4>
   <p>DevOps est une approche organisationnelle visant a creer une synergie en faisant travailler ensemble le developpement (y compris le test) et les operations pour atteindre un ensemble d'objectifs communs. DevOps necessite un changement culturel au sein d'une organisation pour combler les ecarts entre le developpement (y compris le test) et les operations tout en traitant leurs fonctions avec une valeur egale. DevOps favorise l'autonomie des equipes, le retour rapide, les chaines d'outils integrees et les pratiques techniques comme l'integration continue (CI) et la livraison continue (CD). Cela permet aux equipes de construire, tester et livrer du code de haute qualite plus rapidement grace a un pipeline de livraison DevOps (Kim 2016).</p>
   <p>Du point de vue du test, certains des avantages de DevOps sont les suivants :</p>
@@ -370,6 +375,11 @@
   <div class="syllabus-exam-warning">
     <strong>Attention examen</strong>
     <p>Si TC1 echoue en execution 1 et est re-teste en execution 2, c'est de la confirmation. Si TC2 a reussi en execution 1 et est re-teste en execution 2 apres un changement, c'est de la regression. Le test de regression est un candidat ideal pour l'automatisation.</p>
+  </div>
+
+  <div class="syllabus-example">
+    <strong>Exemple concret</strong>
+    <p>Sur un site e-commerce, TC1 (panier) a echoue en execution 1 et TC2 (paiement) a reussi. Apres la correction du bug du panier : on re-teste TC1 (<strong>confirmation</strong> : le panier fonctionne-t-il apres correction ?) ET on re-teste TC2 (<strong>regression</strong> : la correction du panier n'a-t-elle pas casse le paiement ?).</p>
   </div>
 
   <div class="syllabus-summary">

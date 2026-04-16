@@ -63,6 +63,16 @@
       <text x="555" y="140" text-anchor="middle" font-size="10" fill="#64748b">Exploratoire, Checklists</text>
     </svg>
   </div>
+
+  <div class="syllabus-summary">
+    <h5>A retenir</h5>
+    <ul>
+      <li><strong>Boite noire</strong> : basee sur les specifications, sans voir le code (EP, BVA, tables de decision, transitions d'etat)</li>
+      <li><strong>Boite blanche</strong> : basee sur la structure interne du code (couverture d'instructions, de branches)</li>
+      <li><strong>Basee sur l'experience</strong> : utilise l'expertise du testeur (error guessing, exploratoire, checklist)</li>
+      <li>Les trois categories sont complementaires et souvent combinees</li>
+    </ul>
+  </div>
 </div>
 
 <div class="question-card" style="margin-bottom:20px;">
@@ -330,6 +340,17 @@
     <strong>Attention examen</strong>
     <p>Un meme evenement depuis des etats differents = des transitions DIFFERENTES. "Annuler" depuis Actif et "Annuler" depuis un autre etat sont deux transitions distinctes a compter separement.</p>
   </div>
+
+  <div class="syllabus-summary">
+    <h5>A retenir</h5>
+    <ul>
+      <li><strong>EP</strong> : diviser en groupes de comportement identique. 1 test par partition suffit.</li>
+      <li><strong>BVA 2-valeurs</strong> : tester les 2 valeurs autour de chaque frontiere. BVA 3-valeurs : 3 valeurs.</li>
+      <li><strong>Tables de decision</strong> : chaque regle = une combinaison de conditions + ses actions. Trouver la regle en mappant les conditions du cas de test.</li>
+      <li><strong>Transitions d'etat</strong> : etats + evenements + transitions. Compter les transitions VALIDES distinctes couvertes.</li>
+      <li>La formule de couverture = elements testes / total elements × 100%</li>
+    </ul>
+  </div>
 </div>
 
 <div class="question-card" style="margin-bottom:20px;">
@@ -403,6 +424,16 @@
     <strong>Attention examen</strong>
     <p>100% couverture des branches &rarr; 100% couverture des instructions (GARANTI). 100% couverture des instructions &rarr; 100% couverture des branches (PAS garanti). Un IF sans ELSE a quand meme 2 branches (la branche Vrai et la branche Faux qui "saute" le bloc).</p>
   </div>
+
+  <div class="syllabus-summary">
+    <h5>A retenir</h5>
+    <ul>
+      <li><strong>Couverture des instructions</strong> : chaque ligne de code executee au moins une fois</li>
+      <li><strong>Couverture des branches</strong> : chaque branche de chaque decision (Vrai ET Faux) prise au moins une fois</li>
+      <li>Branches est un critere plus fort que instructions : 100% branches implique 100% instructions</li>
+      <li>Boite blanche necessite de connaitre le code — souvent faite au niveau composant par les developpeurs</li>
+    </ul>
+  </div>
 </div>
 
 <div class="question-card" style="margin-bottom:20px;">
@@ -451,6 +482,16 @@
   <p>Les elements de checklist sont souvent formules sous forme de question. Il doit etre possible de verifier chaque element separement et directement. Ces elements peuvent se referer a des exigences, des proprietes d'interface graphique, des caracteristiques de qualite ou d'autres formes de conditions de test. Les checklists peuvent etre creees pour supporter differents types de tests, y compris les tests fonctionnels et non fonctionnels (par exemple, les 10 heuristiques pour les tests d'utilisabilite (Nielsen 1994)).</p>
   <p>Certains elements de checklist peuvent progressivement devenir moins efficaces au fil du temps car les developpeurs apprendront a eviter de commettre les memes erreurs. De nouveaux elements peuvent egalement devoir etre ajoutes pour refleter les defauts de haute severite nouvellement trouves. Par consequent, les checklists doivent etre regulierement mises a jour en fonction de l'analyse des defauts. Cependant, il faut veiller a ne pas laisser la checklist devenir trop longue (Gawande 2009).</p>
   <p>En l'absence de cas de test detailles, le test base sur des checklists peut fournir des lignes directrices et un certain degre de coherence pour les tests. Si les checklists sont de haut niveau, une certaine variabilite dans les tests reels est susceptible de se produire, entrainant potentiellement une couverture plus grande mais moins de repetabilite.</p>
+
+  <div class="syllabus-summary">
+    <h5>A retenir</h5>
+    <ul>
+      <li><strong>Error guessing</strong> : anticiper erreurs, defauts et defaillances (PAS les causes racines)</li>
+      <li><strong>Test exploratoire</strong> : conception + execution + evaluation simultanees, avec chartes de test</li>
+      <li><strong>Test par checklist</strong> : liste de points a verifier. Les checklists doivent evoluer au fil du temps.</li>
+      <li>Ces techniques sont complementaires aux techniques formelles, utiles quand les specs sont limitees</li>
+    </ul>
+  </div>
 </div>
 
 <div class="question-card" style="margin-bottom:20px;">
@@ -532,6 +573,16 @@
   <p>En general, les premiers cas de test sont positifs, confirmant le comportement correct sans exceptions ni conditions d'erreur, et comprenant la sequence d'activites executees si tout se passe comme prevu. Une fois les cas de test positifs termines, l'equipe devrait effectuer des tests negatifs. Enfin, l'equipe devrait couvrir les caracteristiques de qualite non fonctionnelles (par exemple, l'efficacite de performance, l'utilisabilite). Les cas de test doivent etre exprimes d'une maniere comprehensible pour les parties prenantes. En general, les cas de test contiennent des phrases en langage naturel impliquant les preconditions necessaires (le cas echeant), les entrees et les postconditions.</p>
   <p>Les cas de test doivent couvrir toutes les caracteristiques de la user story et ne doivent pas aller au-dela de la story. Cependant, les criteres d'acceptation peuvent detailler certains des aspects decrits dans la user story. De plus, deux cas de test ne doivent pas decrire les memes caracteristiques de la user story.</p>
   <p>Lorsqu'ils sont captures dans un format supporte par un framework d'automatisation des tests, les developpeurs peuvent automatiser les cas de test en ecrivant le code de support au fur et a mesure qu'ils implementent la fonctionnalite decrite par une user story. Les tests d'acceptation deviennent alors des exigences executables.</p>
+
+  <div class="syllabus-summary">
+    <h5>A retenir</h5>
+    <ul>
+      <li><strong>User story</strong> : les 3C - <em>Card</em> (support), <em>Conversation</em> (discussion), <em>Confirmation</em> (criteres d'acceptation)</li>
+      <li><strong>Criteres d'acceptation</strong> : formats scenario (Given/When/Then) ou orientes regles (listes de regles)</li>
+      <li><strong>ATDD</strong> : approche test-first, cas de test crees AVANT l'implementation a partir des criteres d'acceptation</li>
+      <li>Collaboration entre roles (metier, dev, test) pour eviter malentendus et ambiguites</li>
+    </ul>
+  </div>
 </div>
 
   </div>

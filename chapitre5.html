@@ -203,6 +203,16 @@
       <text x="355" y="275" text-anchor="middle" font-size="9" fill="#64748b" font-style="italic">Souvent automatises</text>
     </svg>
   </div>
+
+  <div class="syllabus-summary">
+    <h5>A retenir</h5>
+    <ul>
+      <li><strong>Plan de test</strong> : portee, ressources, calendrier, criteres d'entree/sortie, risques</li>
+      <li><strong>Criteres d'entree</strong> (avant) : environnement pret, donnees dispo. <strong>Sortie</strong> (apres) : couverture atteinte, defauts sous seuil.</li>
+      <li><strong>Estimation 3 points</strong> : E = (a + 4m + b) / 6. Ne pas oublier de multiplier par le nombre d'elements.</li>
+      <li><strong>Pyramide</strong> : beaucoup de tests unitaires (rapides), peu de tests UI (lents). <strong>Quadrants</strong> : 2 axes (metier/techno × support/critique produit).</li>
+    </ul>
+  </div>
 </div>
 
 <div class="question-card" style="margin-bottom:20px;">
@@ -298,6 +308,16 @@
     <li>Appliquer les types de test appropries traitant les caracteristiques de qualite affectees</li>
     <li>Effectuer des tests dynamiques, y compris des tests de regression</li>
   </ul>
+
+  <div class="syllabus-summary">
+    <h5>A retenir</h5>
+    <ul>
+      <li><strong>Risque</strong> = probabilite × impact. Si on connait le niveau et la probabilite, l'impact = niveau / probabilite.</li>
+      <li><strong>Risque produit</strong> : qualite du logiciel (mauvaise architecture, performance insuffisante, bugs)</li>
+      <li><strong>Risque projet</strong> : gestion du projet (retard, depassement de budget, turnover, problemes de communication)</li>
+      <li>L'analyse de risque produit guide la <strong>priorisation des tests</strong> : plus le risque est eleve, plus le test doit etre intensif</li>
+    </ul>
+  </div>
 </div>
 
 <div class="question-card" style="margin-bottom:20px;">
@@ -365,6 +385,16 @@
     <li>Rapports de test formels (voir section 5.3.2)</li>
   </ul>
   <p>Une ou plusieurs de ces options peuvent etre utilisees. Une communication plus formelle peut etre plus appropriee pour les equipes distribuees ou la communication directe en face a face n'est pas toujours possible en raison de la distance geographique ou des decalages horaires. Typiquement, differentes parties prenantes sont interessees par differents types d'informations, donc la communication doit etre adaptee en consequence.</p>
+
+  <div class="syllabus-summary">
+    <h5>A retenir</h5>
+    <ul>
+      <li><strong>Suivi</strong> : collecter des donnees pour evaluer l'etat d'avancement. <strong>Controle</strong> : utiliser ces donnees pour prendre des actions correctives.</li>
+      <li><strong>Metriques</strong> : couverture, defauts, execution, effort — a interpreter avec precaution (aucune metrique seule ne dit tout)</li>
+      <li><strong>Rapport d'avancement</strong> (pendant les tests) vs <strong>rapport de completion</strong> (fin des tests) vs <strong>rapport de defaut</strong> (par defaut)</li>
+      <li>La communication du statut depend du contexte : equipe distribuee &rarr; plus formel, equipe co-localisee &rarr; plus informel</li>
+    </ul>
+  </div>
 </div>
 
 <div class="question-card" style="margin-bottom:20px;">
@@ -386,6 +416,16 @@
   <div class="syllabus-example">
     <strong>Exemple concret</strong>
     <p>Un utilisateur signale un bug en production. Grace a la gestion de configuration, l'equipe retrouve la version exacte du logiciel deployee, reconstitue l'environnement de test identique et reproduit le probleme pour le corriger.</p>
+  </div>
+
+  <div class="syllabus-summary">
+    <h5>A retenir</h5>
+    <ul>
+      <li>La gestion de configuration identifie, controle et suit les elements de test (plan, cas, scripts, resultats, environnement)</li>
+      <li>Une <strong>ligne de base</strong> (baseline) est un ensemble approuve d'elements, modifiable uniquement par processus formel</li>
+      <li>Permet de <strong>reproduire</strong> un etat anterieur du systeme, utile pour analyser les bugs historiques</li>
+      <li>Souvent automatisee dans les pipelines DevOps / CI/CD</li>
+    </ul>
   </div>
 </div>
 
@@ -421,6 +461,16 @@
   <div class="syllabus-exam-warning">
     <strong>Attention examen</strong>
     <p>Le rapport de defaut contient les etapes de reproduction, le resultat attendu vs le resultat reel, la severite et la priorite. Ce n'est PAS un rapport de test (qui resume l'avancement ou la completion des tests).</p>
+  </div>
+
+  <div class="syllabus-summary">
+    <h5>A retenir</h5>
+    <ul>
+      <li>Un <strong>defaut</strong> doit etre documente pour etre analyse, corrige et suivi</li>
+      <li>Le rapport de defaut inclut : ID, titre, etapes de reproduction, resultat attendu vs reel, severite, priorite, statut</li>
+      <li><strong>Severite</strong> = impact technique. <strong>Priorite</strong> = urgence de correction. Les deux sont distincts.</li>
+      <li>Le workflow d'un defaut suit un cycle : detecte &rarr; analyse &rarr; corrige &rarr; verifie &rarr; ferme</li>
+    </ul>
   </div>
 </div>
 
