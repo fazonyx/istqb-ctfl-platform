@@ -1,0 +1,26 @@
+# Fichiers temporaires d'extraction PDF (utilises pour la construction)
+exam_*_questions.txt
+exam_*_answers.txt
+syllabus_full.txt
+
+# Fichiers de travail personnel
+1er_examen*.png
+exam_custom_quiz.html
+
+# Windows
+Thumbs.db
+desktop.ini
+*.lnk
+
+# Editeurs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+
+# Claude
+.claude/
