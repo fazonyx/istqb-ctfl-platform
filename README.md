@@ -26,9 +26,33 @@ Plateforme web d'entrainement a la certification **ISTQB Certified Tester Founda
 - **Mini-quiz** du chapitre
 - **Aide-memoire** transversal avec formules, tableaux de reference, astuces d'examen
 
-## Comment utiliser
+## Comment lancer le projet
 
-Ouvrez simplement `istqb_platform.html` dans votre navigateur. Aucune installation, aucune dependance externe.
+### Methode 1 — Double-clic (le plus simple)
+Double-cliquez sur `istqb_platform.html` dans l'explorateur de fichiers.
+
+### Methode 2 — Depuis le terminal Windows
+```bash
+start "" "C:/Users/Fabien/Documents/perso/formations/ISTQB/istqb_platform.html"
+```
+
+### Methode 3 — Cloner depuis GitHub et ouvrir
+```bash
+git clone https://github.com/fazonyx/istqb-ctfl-platform.git
+cd istqb-ctfl-platform
+start istqb_platform.html    # Windows
+open istqb_platform.html     # macOS
+xdg-open istqb_platform.html # Linux
+```
+
+### Methode 4 — Avec un serveur local (si le double-clic pose probleme)
+```bash
+cd "C:/Users/Fabien/Documents/perso/formations/ISTQB"
+npx serve -l 3456
+```
+Puis ouvrez : **http://localhost:3456/istqb_platform.html**
+
+Aucune installation necessaire pour les methodes 1-3. La methode 4 necessite Node.js.
 
 ## Structure du projet
 
